@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T08:40:45.547Z",
+  "generatedAt": "2026-08-24T08:42:21.232Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -49,11 +49,11 @@
     "Confirmed the Desktop DSH wrapper exists at the verified path."
   ],
   "recentImplementationChanges": [
-    "0413ed0 test: record final M01 touch feedback",
-    "64e6259 docs: finalize M01 FIX-04 checkpoint",
-    "6efab39 feat: complete M01 human-gate correction",
-    "711fcc5 test: record M01 human gate failures",
-    "e52731e docs: record M01 commissioning report"
+    "15fdd03 chore: restore product context sync layer",
+    "22f0631 docs: record FIX-05 checkpoint",
+    "210f15a chore: remove out-of-scope generated product sync",
+    "673e41e chore: add product context sync layer",
+    "c10d429 feat: finalize M01 handle hardening"
   ],
   "codexVerification": [
     {
@@ -109,7 +109,7 @@
     "awaiting final iPhone verification; FIX-05 automated correction passed independently"
   ],
   "decisionsMadeSinceLastSync": [
-    "Product-sync layer verified; builder restored to OX Alpha and no Gym Logger milestone was authorized by this integration."
+    "Final packet refresh after the isolated product-sync commit; no Gym Logger milestone was authorized by this integration."
   ],
   "recordedDecisions": [
     {
@@ -145,25 +145,11 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "0413ed0160296c5866f183124b51657a2890fa44",
+    "commit": "15fdd03aea7253b7bab5b45ac56a836edd4d0fb9",
     "branch": "master",
-    "workingTree": "## master\n M orchestration/evidence/M01.md\n M orchestration/reviews/M01-T01.md\n M orchestration/state/REQUIREMENTS_MATRIX.md\n M orchestration/state/STATE.md\n M package-lock.json\n M package.json\n M src/components/SessionView.tsx\n M src/domain/highlights.ts\n M src/styles.css\n M src/tests/rows.test.ts\n M src/tests/sessionInteraction.test.tsx\n?? orchestration/evidence/HUMAN-VERIFICATION-M01-FIX-05.md\n?? orchestration/product-sync/\n?? orchestration/reports/M01-T01-FIX-05-codex-review.md\n?? orchestration/reports/M01-T01-FIX-05.md",
+    "workingTree": "## master\n M orchestration/product-sync/generated/active-worker.patch.yml",
     "changedFiles": [
-      "orchestration/evidence/M01.md",
-      "orchestration/reviews/M01-T01.md",
-      "orchestration/state/REQUIREMENTS_MATRIX.md",
-      "orchestration/state/STATE.md",
-      "package-lock.json",
-      "package.json",
-      "src/components/SessionView.tsx",
-      "src/domain/highlights.ts",
-      "src/styles.css",
-      "src/tests/rows.test.ts",
-      "src/tests/sessionInteraction.test.tsx",
-      "orchestration/evidence/HUMAN-VERIFICATION-M01-FIX-05.md",
-      "orchestration/product-sync/",
-      "orchestration/reports/M01-T01-FIX-05-codex-review.md",
-      "orchestration/reports/M01-T01-FIX-05.md"
+      "orchestration/product-sync/generated/active-worker.patch.yml"
     ]
   },
   "builder": {
@@ -184,8 +170,8 @@
   "synchronization": {
     "lastEvent": {
       "name": "product-sync-commissioned",
-      "summary": "Product-sync layer verified; builder restored to OX Alpha and no Gym Logger milestone was authorized by this integration.",
-      "at": "2026-08-24T08:40:45.500Z"
+      "summary": "Final packet refresh after the isolated product-sync commit; no Gym Logger milestone was authorized by this integration.",
+      "at": "2026-08-24T08:42:21.180Z"
     },
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

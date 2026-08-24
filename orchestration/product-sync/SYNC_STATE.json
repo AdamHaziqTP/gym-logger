@@ -1,13 +1,18 @@
 {
   "schemaVersion": 1,
   "activeBuilder": "ox-alpha",
-  "lastPublishedAt": "2026-08-24T08:40:45.500Z",
+  "lastPublishedAt": "2026-08-24T08:42:21.181Z",
   "lastEvent": {
     "name": "product-sync-commissioned",
-    "summary": "Product-sync layer verified; builder restored to OX Alpha and no Gym Logger milestone was authorized by this integration.",
-    "at": "2026-08-24T08:40:45.500Z"
+    "summary": "Final packet refresh after the isolated product-sync commit; no Gym Logger milestone was authorized by this integration.",
+    "at": "2026-08-24T08:42:21.180Z"
   },
   "events": [
+    {
+      "name": "product-sync-commissioned",
+      "summary": "Final packet refresh after the isolated product-sync commit; no Gym Logger milestone was authorized by this integration.",
+      "at": "2026-08-24T08:42:21.180Z"
+    },
     {
       "name": "product-sync-commissioned",
       "summary": "Product-sync layer verified; builder restored to OX Alpha and no Gym Logger milestone was authorized by this integration.",
