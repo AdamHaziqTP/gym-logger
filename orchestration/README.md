@@ -39,6 +39,12 @@ Every task must be self-contained because a headless worker starts fresh. It mus
 
 Automatic correction is capped at two attempts per task. A repeated failure then requires root-cause analysis and, where product behavior is unresolved, an escalation under `escalations/`.
 
+### Compound-UI acceptance rule
+
+A broad capability is not accepted from a single representative control. For any compound interaction, the requirements matrix and tests must enumerate each user-visible command and its outcome. For the Gym Logger row interaction this means separately checking selection, selected-handle menu opening, Add Above, Add Below, Duplicate, Copy, Cut, meaningful Paste, Colour, Delete, and drag reorder, including data/position invariants. The same rule applies to lifecycle behavior: direct resume of an existing current session is distinct from merely showing a Continue button on Home.
+
+Human-gate failures that reveal a genuine, previously untested specification gap may open a bounded correction cycle after the original automated task cap, provided the failure is recorded, M02 remains blocked, and the correction is independently re-verified. This does not waive the two-attempt cap for repeated implementation failures.
+
 ## Evidence rules
 
 - Never accept a worker's prose as proof.

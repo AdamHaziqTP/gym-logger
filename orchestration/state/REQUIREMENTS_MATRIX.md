@@ -14,11 +14,11 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-008 | Skip remains plain text, is not auto-dimmed/deleted, and counts in totals. | Spec §8; D1-D5 | M01-M05 | PLANNED | — |
 | REQ-009 | Summary supports calculated values plus manual overrides including 40/39 fixture mismatch. | Spec §9; E1-E3 | M01-M02 | PLANNED | — |
 | REQ-010 | All five visible columns accept arbitrary strings without normalization. | Spec §§6.1-6.3, 27.6-27.7; B1-B5 | M01-M04 | VERIFIED (automated) | M01 evidence; 32/32 |
-| REQ-011 | Row-level color system: Arms orange, Back purple, Chest mint, Delts blue, Legs pink, None. | Spec §5; references/IMG_5550-5554 | M01-M04 | IN_PROGRESS | automated purple persistence; HV-04/HV-05 |
-| REQ-012 | Dark Notes-like presentation uses restrained background, subtle grid, readable colored text/highlights. | Spec §§5.2, 22; IMG_5501-5502 | M01-M04 | IN_PROGRESS | source/runtime inspected; HV-05 |
+| REQ-011 | Row-level color system: Arms orange, Back purple, Chest mint, Delts blue, Legs pink, None. | Spec §5; references/IMG_5550-5554 | M01-M04 | FAILED HUMAN GATE | colour control works; legend and visual treatment incomplete; M01 evidence |
+| REQ-012 | Dark Notes-like presentation uses restrained background, subtle grid, readable colored text/highlights. | Spec §§5.2, 22; IMG_5501-5502 | M01-M04 | FAILED HUMAN GATE | full-row treatment appears too heavy; M01 evidence |
 | REQ-013 | Tap cell edits immediately with normal text behavior. | Spec §7.1; C1 | M01 | VERIFIED (automated) | M01 evidence; App tests |
-| REQ-014 | Apple Notes-like row handle selects a row; selected treatment is clear. | Spec §7.2; C2-C3 | M04 | PLANNED | — |
-| REQ-015 | Selected row actions support add above/below, duplicate, copy/cut/paste, colour, delete. | Spec §§7.3-7.6; C4-C9 | M04 | PLANNED | — |
+| REQ-014 | Apple Notes-like row handle selects a row; selected treatment is clear. | Spec §7.2; C2-C3 | M01 human-gate correction / M04 | FAILED HUMAN GATE | selection seen; complete interaction incomplete |
+| REQ-015 | Selected row actions support add above/below, duplicate, copy/cut/paste, colour, delete. | Spec §§7.3-7.6; C4-C9 | M01 human-gate correction / M04 | FAILED HUMAN GATE | colour-only menu observed; command-level coverage missing |
 | REQ-016 | 40-row table remains responsive; target stress is 100 rows. | Spec §25; C10 | M01/M04/M06 | PLANNED | — |
 | REQ-017 | Notes area below table accepts arbitrary text and travels with export. | Spec §10 | M01/M04-M05 | PLANNED | — |
 | REQ-018 | History is reverse chronological, searchable locally, and old sessions editable. | Spec §11; F1-F5 | M02 | PLANNED | — |
@@ -39,8 +39,8 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-033 | Touch targets are comfortable, color is not the only selected/destructive signal, and keyboard does not hide edits. | Spec §26 | M04-M06 | PLANNED | — |
 | REQ-034 | Weird values, empty rows, spelling, date edits, duplicate starts, quota errors do not crash or silently mutate data. | Spec §27 | M01-M06 | PLANNED | — |
 | REQ-035 | No exercise identity system, autocomplete, analytics, or exercise-history dashboard in v1. | Spec §28, §32 | All | PLANNED | — |
-| REQ-036 | Every accepted task has a Codex review, actual diff inspection, tests/build/runtime evidence, and known-good git checkpoint. | orchestration/README | All | IN_PROGRESS | — |
+| REQ-036 | Every accepted task has a Codex review, actual diff inspection, tests/build/runtime evidence, and known-good git checkpoint. | orchestration/README | All | IN_PROGRESS | human gate exposed missing compound-UI coverage |
 
 ## Pilot disposition
 
-M01 is intentionally limited to REQ-010, REQ-011, REQ-012, REQ-013, REQ-016, REQ-020, REQ-021, REQ-022, REQ-029, and REQ-030. The automatable portions are green; REQ-011, REQ-012, REQ-016, REQ-020, and REQ-021 retain device/manual portions in `HUMAN-VERIFICATION-M01.md`. No later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation.
+M01 remains limited to its first-slice intent, but this human-gate correction explicitly closes the approved current-session resume, category legend, and Notes-style row interaction that the first automated review failed to exercise at command level. REQ-014/015 are temporarily pulled into the M01 correction gate by the user's observed acceptance failure; no M02 work is authorized. No later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation.

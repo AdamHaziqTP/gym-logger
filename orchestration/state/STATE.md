@@ -7,11 +7,12 @@ Updated: 2026-08-24
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M01 — offline foundation vertical slice
-- Current task: M01 human verification gate after M01-T01-FIX-03
-- Status: HUMAN_REVIEW_REQUIRED
+- Current task: M01-T01-FIX-04 — human-gate specification correction
+- Status: READY_FOR_OX
 - Automatic correction attempts used: 2 / 2
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
-- Human review gate: active; automated M01 verification passed, but M01 remains unaccepted
+- Human review gate: failed; HV-02/HV-03 passed, but HV-04/HV-05 and direct-current-session resume failed
+- Human-gate correction cycle: 0 / 2; this is a new, user-observed specification gap after the automated checkpoint
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
 ## Known-good checkpoints
@@ -34,13 +35,13 @@ Updated: 2026-08-24
 - M01-T01 has been independently audited.
 - Correction 1 repaired the evidenced latest-session sort failure and removed debug residue.
 - Correction 2 was blocked by DSH rate limiting before execution; this is being retried as `M01-T01-FIX-03` after the infrastructure condition was reported resolved.
-- Final decision: automated M01 gate passes; stop for human device/visual verification; do not start M02.
+- Final decision: human verification rejected M01; delegate FIX-04 and repeat independent verification; do not start M02.
 
 ## Deferred
 
 - Rich HTML/plain clipboard paste into Apple Notes on the target iPhone.
 - Faithful and Compact tall PNG export on the target iPhone.
-- Full history/search, row drag/menu, backup/restore, and polish milestones.
+- Full history/search, backup/restore, and polish milestones. Row drag/menu is temporarily pulled into the FIX-04 M01 correction gate because the human acceptance pass found the current row interaction incomplete.
 
 ## Escalations
 
