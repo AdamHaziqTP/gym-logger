@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t01-fix-02-checkpoint-pushed",
+      "summary": "FIX-02 known-good checkpoint f32548d pushed; 141/141 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone color retest.",
+      "at": "2026-08-24T15:18:49.340Z"
+    },
+    {
       "name": "m03-t01-fix-02-codex-verified",
       "summary": "OX FIX-02 completed and Codex independently verified 141/141 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes color retest is the remaining gate.",
       "at": "2026-08-24T15:18:09.239Z"
@@ -56,21 +61,16 @@
       "name": "m02-t02-accepted",
       "summary": "Codex independently accepted M02-T02 automated scope: 91/91 tests, build, and LAN runtime smoke; preparing M02-T03 deletion task.",
       "at": "2026-08-24T13:07:49.001Z"
-    },
-    {
-      "name": "m02-t02-rejected",
-      "summary": "M02-T02 initial worker timed out without report; Codex found 89/91 tests and prepared FIX-01.",
-      "at": "2026-08-24T13:00:29.556Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T15:18:09.240Z",
+  "lastPublishedAt": "2026-08-24T15:18:49.341Z",
   "lastEvent": {
-    "name": "m03-t01-fix-02-codex-verified",
-    "summary": "OX FIX-02 completed and Codex independently verified 141/141 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes color retest is the remaining gate.",
-    "at": "2026-08-24T15:18:09.239Z"
+    "name": "m03-t01-fix-02-checkpoint-pushed",
+    "summary": "FIX-02 known-good checkpoint f32548d pushed; 141/141 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone color retest.",
+    "at": "2026-08-24T15:18:49.340Z"
   },
-  "syncRevision": 20,
+  "syncRevision": 21,
   "openEscalations": [
     {
       "id": "E-002",
