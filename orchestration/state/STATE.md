@@ -23,6 +23,7 @@ Updated: 2026-08-25
 - M01 engineering checkpoint: independently green automated FIX-05 checkpoint; physical-device acceptance deferred, not passed
 - M02-T02/T03/T04: accepted automatically through Codex verification
 - M03-T01/FIX-03 engineering checkpoint: 153/153 tests, build, diff audit, and HTTPS runtime smoke accepted; Apple Notes color interoperability is escalated/resolved into a bounded feasibility route
+- M03-T01/E-003 engineering checkpoint: `75c7ba4` — isolated feasibility harness accepted by Codex at 33/33 focused tests, 186/186 full suite, build, diff audit, and HTTPS runtime smoke; target-iPhone route gate remains open
 
 ## Completed
 

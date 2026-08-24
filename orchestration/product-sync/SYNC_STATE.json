@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "e003-human-gate-ready",
+      "summary": "E-003 harness checkpoint 75c7ba4 is independently accepted; trusted HTTPS feasibility page is live; target iPhone 14 Pro Max route evidence is now the only active gate.",
+      "at": "2026-08-24T16:52:22.736Z"
+    },
+    {
       "name": "e003-engineering-review-complete",
       "summary": "E-003 bounded feasibility harness independently verified: 33/33 focused, 186/186 full suite, build, diff audit, HTTPS smoke pass; target iPhone route gate required; M03-T02 remains blocked.",
       "at": "2026-08-24T16:51:51.680Z"
@@ -56,21 +61,16 @@
       "name": "m03-t01-secure-color-failure",
       "summary": "Secure HTTPS retest passed editable table and values but lost category text/highlight colors; M03-T01-FIX-02 prepared.",
       "at": "2026-08-24T15:03:49.601Z"
-    },
-    {
-      "name": "secure-origin-prepared",
-      "summary": "Existing Gym Logger PWA now serves over local HTTPS at https://192.168.1.49:5173 with an installable public certificate; 140/140 tests and build remain green. Human rich-paste retest is next.",
-      "at": "2026-08-24T14:57:29.214Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T16:51:51.681Z",
+  "lastPublishedAt": "2026-08-24T16:52:22.737Z",
   "lastEvent": {
-    "name": "e003-engineering-review-complete",
-    "summary": "E-003 bounded feasibility harness independently verified: 33/33 focused, 186/186 full suite, build, diff audit, HTTPS smoke pass; target iPhone route gate required; M03-T02 remains blocked.",
-    "at": "2026-08-24T16:51:51.680Z"
+    "name": "e003-human-gate-ready",
+    "summary": "E-003 harness checkpoint 75c7ba4 is independently accepted; trusted HTTPS feasibility page is live; target iPhone 14 Pro Max route evidence is now the only active gate.",
+    "at": "2026-08-24T16:52:22.736Z"
   },
-  "syncRevision": 29,
+  "syncRevision": 30,
   "openEscalations": [
     {
       "id": "E-002",
