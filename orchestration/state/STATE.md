@@ -17,8 +17,8 @@ Updated: 2026-08-24
 
 - Handoff baseline: `db71546` — `chore: checkpoint gym logger handoff`
 - Orchestration bootstrap: `dd72762`
-- Last orchestration evidence checkpoint: pending commit for the automated M01 known-good checkpoint
-- M01 accepted checkpoint: none; automated known-good checkpoint is pending the commit below, while product acceptance remains gated by human verification
+- Last orchestration evidence checkpoint: `18f2501` — automated M01 known-good checkpoint
+- M01 accepted checkpoint: none; product acceptance remains gated by human verification
 
 ## Completed
 
