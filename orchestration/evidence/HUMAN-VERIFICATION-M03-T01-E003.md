@@ -1,53 +1,40 @@
 # HUMAN VERIFICATION — M03-T01-E003 Apple Notes colour feasibility
 
-**Status: REQUIRED — target-device gate.** The engineering spike is accepted;
-no route is marked successful until tested on the physical iPhone 14 Pro Max.
+**Status: CLOSED BY PRODUCT DECISION — feasibility harness not adopted for v1.**
+
+The engineering spike was accepted automatically, but no non-HTML route is being
+adopted into v1. The product owner is not required to continue probing auxiliary
+RTF/file/Shortcuts workflows.
 
 ## Preconditions
 
 - Device: **iPhone 14 Pro Max**.
-- Open the trusted URL: `https://192.168.1.49:5173/feasibility/`.
-- If Safari shows a certificate warning or the URL is unreachable, record the
-  gate as BLOCKED. Do not infer a Notes result.
-- Use a scratch Apple Note for probes, not the canonical Gym note.
+- Trusted feasibility URL prepared by engineering: `https://192.168.1.49:5173/feasibility/`.
+- The intended harness offered RTF clipboard, RTF file, HTML file and optional Shortcuts probes.
 
-## Required checklist
+## Recorded product-owner evidence — 2026-08-25
 
-Record PASS, FAIL, or BLOCKED for each item, with screenshots for failures:
+- Device: **iPhone 14 Pro Max**.
+- The owner reported that another Copy-to-Notes attempt still produced **no category colour** in Apple Notes.
+- The owner also reported that the additional feasibility instructions/routes were not understandable enough to be a reasonable personal-workflow requirement.
+- Existing trusted-HTTPS evidence remains authoritative for the standard app path: a real editable Apple Notes table and correct values/order are preserved, while category foreground/highlight colours are stripped.
+- The auxiliary RTF/file/Shortcuts routes were **not fully exercised**, so this record does not claim that every technically possible route failed.
+- Product conclusion: the extra setup/probing friction is itself outside the desired simple one-tap workflow. Do not require further human feasibility testing for v1.
 
-1. **Capability record:** capture the page's secure-context, Share Sheet,
-   file-sharing, ClipboardItem, and HTML-clipboard results.
-2. **RTF clipboard probe:** tap the RTF clipboard probe and record the exact
-   rejection or unexpected acceptance. Rejection is valid evidence, not a
-   product pass.
-3. **RTF file handoff:** download/share the `.rtf`; determine whether Notes
-   receives a real editable table, an attachment, or flattened content.
-4. **HTML file handoff:** share/download the `.html`; record whether Notes
-   receives editable table content or only an attachment.
-5. **Shortcut route (if willing):** create the page's free user-owned Shortcut,
-   run it from HTML source and/or Share Sheet input, and inspect the created
-   note.
-6. **Success test for the best route:** only PASS if all are true:
-   - real editable Apple Notes table, not an image or attachment;
-   - correct date, values, row order, weird values, multiline notes, and
-     summary override;
-   - foreground/highlight colours map Arms orange, Back purple, Chest mint,
-     Delts blue, Legs pink;
-   - `none/other` rows remain unhighlighted;
-   - readable in both Notes appearances;
-   - no paid Apple Developer subscription or recurring fragile installation.
+## Product disposition
 
-## Default if every route fails
+Accept the current standard PWA rich paste as the v1 behavior:
 
-Record the exact route outcomes and resolve E-003 through the product bridge as
-the approved fallback: keep the current editable rich table/data paste without
-colours as a documented iOS/Notes limitation, retain the plain-text fallback,
-and continue M03. Do not start another unbounded clipboard experiment.
+- **PASS:** editable Apple Notes table.
+- **PASS:** correct values and row order.
+- **PASS:** summary/data fidelity from the previously verified rich path.
+- **LIMITATION:** Apple Notes strips Arms/Back/Chest/Delts/Legs foreground/highlight colours from the cross-app paste.
+- **FALLBACK:** retain the working plain-text copy path for insecure/unsupported clipboard environments.
 
-## Evidence to return
+The app itself must continue preserving and displaying the five category colours. The colour loss applies only to the Apple Notes transfer.
 
-- iPhone model and iOS/Safari versions;
-- per-route PASS/FAIL/BLOCKED results;
-- exact status/error text;
-- screenshots for any failure or claimed success;
-- best-route friction and whether any paid/native dependency was required.
+Do not start another open-ended RTF/native/Shortcuts experiment for v1. A future route may be reconsidered only if it is materially simpler and can be proven without adding recurring setup, paid developer requirements, or a fragile install workflow.
+
+## Additional iPhone visual feedback captured during this gate
+
+The supplied iPhone screenshot shows the Home screen's **Copy Another Session** button visually clipping/overlapping the **History** button below it. Treat this as a genuine responsive-layout defect to fix before final product acceptance. It does not need to block M03 clipboard continuation.
