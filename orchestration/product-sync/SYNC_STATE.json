@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t01-e003-open",
+      "summary": "E-003 opened: after three independently verified HTML payload strategies, Apple Notes still strips both category foreground and text-highlight colors while preserving the editable table/data. Awaiting product/technical route decision.",
+      "at": "2026-08-24T15:51:18.169Z"
+    },
+    {
+      "name": "m03-t01-fix-03-human-color-failure-escalated",
+      "summary": "FIX-03 secure iPhone retest still has editable table/data pass but no foreground or text-highlight colors; three bounded HTML representations failed, so E-003 is open for a product/technical decision.",
+      "at": "2026-08-24T15:51:03.064Z"
+    },
+    {
       "name": "m03-t01-fix-03-checkpoint-pushed",
       "summary": "FIX-03 known-good checkpoint 44e959f pushed; 153/153 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone Apple Notes color retest.",
       "at": "2026-08-24T15:47:16.529Z"
@@ -51,26 +61,16 @@
       "name": "m03-t01-fix-01-human-retest",
       "summary": "FIX-01 automated correction passed 140/140; original iPhone clipboard failure remains open for focused plain-copy retest.",
       "at": "2026-08-24T14:44:16.013Z"
-    },
-    {
-      "name": "m03-t01-human-gate-failed",
-      "summary": "iPhone 14 Pro Max reached the app but Copy to Notes reported clipboard unavailable; HV-M03-3 failed and FIX-01 prepared.",
-      "at": "2026-08-24T14:24:45.417Z"
-    },
-    {
-      "name": "m03-t01-human-gate-open",
-      "summary": "Codex accepted M03-T01 automated clipboard scope: 125/125 tests, build, and LAN runtime smoke; stopped for explicit iPhone Safari to Apple Notes human gate.",
-      "at": "2026-08-24T14:03:54.160Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T15:47:16.529Z",
+  "lastPublishedAt": "2026-08-24T15:51:18.170Z",
   "lastEvent": {
-    "name": "m03-t01-fix-03-checkpoint-pushed",
-    "summary": "FIX-03 known-good checkpoint 44e959f pushed; 153/153 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone Apple Notes color retest.",
-    "at": "2026-08-24T15:47:16.529Z"
+    "name": "m03-t01-e003-open",
+    "summary": "E-003 opened: after three independently verified HTML payload strategies, Apple Notes still strips both category foreground and text-highlight colors while preserving the editable table/data. Awaiting product/technical route decision.",
+    "at": "2026-08-24T15:51:18.169Z"
   },
-  "syncRevision": 24,
+  "syncRevision": 26,
   "openEscalations": [
     {
       "id": "E-002",
@@ -87,6 +87,22 @@
       ],
       "status": "open",
       "openedAt": "2026-08-24T14:48:03.120Z"
+    },
+    {
+      "id": "E-003",
+      "summary": "Trusted HTTPS iPhone retests preserve the editable Apple Notes table and values but strip both category foreground and text-highlight colors after three bounded HTML representations. Choose a native/RTF/Shortcuts feasibility spike, accept uncolored rich paste as a limitation, or provide another explicitly approved route.",
+      "scope": {
+        "level": "product-technical",
+        "id": "E-003"
+      },
+      "allowedActions": [
+        "choose",
+        "approve",
+        "reject",
+        "clarify"
+      ],
+      "status": "open",
+      "openedAt": "2026-08-24T15:50:00.000Z"
     }
   ],
   "chatNotifications": [

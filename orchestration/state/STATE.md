@@ -8,10 +8,10 @@ Updated: 2026-08-24
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes clipboard integration
 - Current task: M03-T01 — secure-origin rich Apple Notes verification after FIX-03
-- Status: HUMAN_REVIEW_REQUIRED (M03-T01-FIX-03 secure iPhone color retest)
+- Status: ESCALATED (M03-T01 Apple Notes color interoperability)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: FIX-03 engineering verification is complete; FIX-03 secure iPhone retest must confirm foreground and text-highlight colors; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance
+- Human review gate: FIX-03 secure iPhone retest still has table/data PASS but foreground and text-highlight colors FAIL; product/technical decision E-003 is required; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -22,7 +22,7 @@ Updated: 2026-08-24
 - Last orchestration evidence checkpoint: `c10d429` — FIX-05 automated known-good checkpoint candidate
 - M01 engineering checkpoint: independently green automated FIX-05 checkpoint; physical-device acceptance deferred, not passed
 - M02-T02/T03/T04: accepted automatically through Codex verification
-- M03-T01/FIX-02 engineering checkpoint: 141/141 tests, build, diff audit, and HTTPS runtime smoke accepted; Apple Notes color survival remains human-only
+- M03-T01/FIX-03 engineering checkpoint: 153/153 tests, build, diff audit, and HTTPS runtime smoke accepted; Apple Notes color interoperability is escalated
 
 ## Completed
 
@@ -45,22 +45,23 @@ Updated: 2026-08-24
 - Completed Codex independent FIX-02 verification: 141/141 tests, build, diff audit, and HTTPS runtime smoke passed.
 - Recorded the FIX-02 iPhone result: table/data remain correct, but Apple Notes still strips both category foreground and text-highlight colors; prepared FIX-03 for opaque/legacy-compatible text-run markup.
 - Completed OX M03-T01-FIX-03 and Codex independent verification: 153/153 tests, build, diff audit, and HTTPS runtime smoke passed.
+- Recorded the FIX-03 iPhone result: no category foreground or text-highlight colors survived; opened E-003 as platform interoperability evidence after three bounded HTML representations.
 
 ## Final disposition
 
 - M01/FIX-05 automated verification remains the engineering baseline for continuation; its deferred physical-iPhone checks are not reclassified as PASS.
 - Product owner has authorized full-auto continuation through bounded milestones except where a genuinely unavoidable product/human gate exists.
 - M03-T01 is currently such a gate because the authoritative spec makes Copy to Notes a core v1 criterion and requires target-iPhone verification of the rich path.
-- E-002 is resolved: trusted HTTPS verification was performed; the remaining color issue is routed through FIX-02 and is not being accepted as a product limitation yet.
+- E-002 is resolved: trusted HTTPS verification was performed; the remaining Apple Notes color issue is escalated as E-003 and is not being accepted as a product limitation without a product decision.
 - Preserve the HTTP synchronous plain-text fallback as a resilience path.
-- Do not authorize a native rewrite, RTF strategy, or Shortcuts redesign unless the secure HTTPS test first demonstrates that the web rich path cannot satisfy the product requirement.
-- Do not dispatch M03-T02 or claim M03 complete until the secure-origin human result is recorded and, if necessary, a subsequent product decision is made.
+- Do not authorize a native rewrite, RTF strategy, or Shortcuts redesign without the E-003 product/technical decision and a bounded feasibility task.
+- Do not dispatch M03-T02 or claim M03 complete until E-003 is resolved and the resulting route is verified.
 - Do not declare the project complete until all deferred real-iPhone acceptance items, including Notes interoperability, PNG export, offline/installability, and the deferred M01 touch/legend checks, have been physically verified.
 
 ## Deferred
 
 - M01 FIX-05 physical-iPhone HV-01 through HV-05: BLOCKED/DEFERRED due unreachable temporary LAN/local-host runtime; final acceptance still required later.
-- Rich HTML/table paste is confirmed by the user on trusted HTTPS; category foreground/text-highlight color survival failed after FIX-02 and FIX-03 is now ready for the next secure iPhone retest.
+- Rich HTML/table paste is confirmed by the user on trusted HTTPS; category foreground/text-highlight color survival failed after FIX-03 and is escalated as E-003 platform interoperability evidence.
 - Faithful and Compact tall PNG export on the target iPhone.
 - Full history/search, backup/restore, polish, and subsequent milestones according to the existing implementation plan.
 
@@ -68,7 +69,7 @@ Updated: 2026-08-24
 
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: use a trusted HTTPS build/origin and retest the existing rich clipboard path before considering a product downgrade or native/RTF alternative.
-- No unresolved product decision is currently blocking FIX-03 implementation and Codex verification; the next iPhone retest remains required afterward.
+- E-003 is OPEN: choose a bounded native/RTF/Shortcuts feasibility route, accept uncolored rich paste as a limitation, or provide another explicitly approved Apple Notes route.
 
 ## Active task checkpoint
 
@@ -94,7 +95,7 @@ Updated: 2026-08-24
 
 ## Active correction checkpoint
 
-- Active task: `orchestration/tasks/M03-T01-FIX-03.md`
+- Active task: `orchestration/escalations/E-003-apple-notes-colors-platform-limit.md`
 - Base implementation checkpoint: M03-T01-FIX-01 accepted engineering checkpoint (`6cb1b3a`), with human plain-fallback evidence recorded in `610f288`
 - Worker disposition: trusted HTTPS path is established; table/data pass, color survival failed after FIX-02; OX FIX-03 completed and Codex independently accepted the automatable scope.
-- Next action: repeat the secure HTTPS iPhone paste gate. Do not dispatch M03-T02 until category color survival is resolved or a new product decision is recorded.
+- Next action: wait for the E-003 product/technical decision. Do not dispatch M03-T02 or another color patch until that decision is recorded.

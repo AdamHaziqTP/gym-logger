@@ -154,6 +154,22 @@ Use the trusted HTTPS URL on the iPhone 14 Pro Max, copy once, and paste once:
 If either color channel still fails, record foreground and background
 separately and keep M03-T02 blocked for the next product/technical decision.
 
+## Recorded FIX-03 iPhone retest result — 2026-08-24
+
+- Device: **iPhone 14 Pro Max**, trusted HTTPS build.
+- User result: **no category color appeared** after the FIX-03 retest.
+- **Editable table/data: PASS as previously reported.**
+- **Foreground text colors: FAIL.**
+- **Text highlight/background colors: FAIL.**
+- FIX-03 is now recorded as platform interoperability evidence, not another
+  unverified implementation defect. Three bounded HTML representations have
+  been independently tested: row-level CSS, per-cell/text-wrapper CSS, and
+  opaque legacy-compatible text-run/cell markup.
+- Open escalation: `orchestration/escalations/E-003-apple-notes-colors-platform-limit.md`.
+  M03-T02 remains blocked pending a product/technical decision about a
+  native/RTF/Shortcuts spike, accepting the color limitation, or another
+  explicitly approved route.
+
 ## Recorded FIX-02 iPhone retest result — 2026-08-24
 
 - Device: **iPhone 14 Pro Max** on the trusted HTTPS build.

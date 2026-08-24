@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T15:47:16.591Z",
+  "generatedAt": "2026-08-24T15:51:18.222Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -37,9 +37,9 @@
   "current": {
     "milestone": "M03 — Apple Notes clipboard integration",
     "task": "M03-T01 — secure-origin rich Apple Notes verification after FIX-03",
-    "status": "HUMAN_REVIEW_REQUIRED (M03-T01-FIX-03 secure iPhone color retest)",
-    "humanReviewGate": "FIX-03 engineering verification is complete; FIX-03 secure iPhone retest must confirm foreground and text-highlight colors; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance",
-    "nextAction": "FIX-03 engineering verification is complete; FIX-03 secure iPhone retest must confirm foreground and text-highlight colors; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance"
+    "status": "ESCALATED (M03-T01 Apple Notes color interoperability)",
+    "humanReviewGate": "FIX-03 secure iPhone retest still has table/data PASS but foreground and text-highlight colors FAIL; product/technical decision E-003 is required; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance",
+    "nextAction": "M01/FIX-05 automated verification remains the engineering baseline for continuation; its deferred physical-iPhone checks are not reclassified as PASS."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "026a7fd docs: publish notes color retest gate",
     "44e959f fix: preserve notes highlight colors",
     "70995cd docs: publish M03 color retest gate",
     "f32548d fix: improve notes color paste compatibility",
-    "7246631 chore: prepare trusted https rich paste test",
-    "433f1c5 docs: resume M03 with trusted HTTPS rich-paste gate"
+    "7246631 chore: prepare trusted https rich paste test"
   ],
   "codexVerification": [
     {
@@ -139,18 +139,18 @@
   ],
   "unresolvedDefects": [
     "M01 FIX-05 physical-iPhone HV-01 through HV-05: BLOCKED/DEFERRED due unreachable temporary LAN/local-host runtime; final acceptance still required later.",
-    "Rich HTML/table paste is confirmed by the user on trusted HTTPS; category foreground/text-highlight color survival failed after FIX-02 and FIX-03 is now ready for the next secure iPhone retest.",
+    "Rich HTML/table paste is confirmed by the user on trusted HTTPS; category foreground/text-highlight color survival failed after FIX-03 and is escalated as E-003 platform interoperability evidence.",
     "Faithful and Compact tall PNG export on the target iPhone.",
     "Full history/search, backup/restore, polish, and subsequent milestones according to the existing implementation plan."
   ],
   "activeEscalationsAndProductDecisionsNeeded": [
     "E-001 historical DSH rate-limit condition is no longer the current blocker.",
     "E-002 is RESOLVED: use a trusted HTTPS build/origin and retest the existing rich clipboard path before considering a product downgrade or native/RTF alternative.",
-    "No unresolved product decision is currently blocking FIX-03 implementation and Codex verification; the next iPhone retest remains required afterward.",
-    "FIX-03 engineering verification is complete; FIX-03 secure iPhone retest must confirm foreground and text-highlight colors; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance"
+    "E-003 is OPEN: choose a bounded native/RTF/Shortcuts feasibility route, accept uncolored rich paste as a limitation, or provide another explicitly approved Apple Notes route.",
+    "FIX-03 secure iPhone retest still has table/data PASS but foreground and text-highlight colors FAIL; product/technical decision E-003 is required; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance"
   ],
   "decisionsMadeSinceLastSync": [
-    "FIX-03 known-good checkpoint 44e959f pushed; 153/153 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone Apple Notes color retest."
+    "E-003 opened: after three independently verified HTML payload strategies, Apple Notes still strips both category foreground and text-highlight colors while preserving the editable table/data. Awaiting product/technical route decision."
   ],
   "recordedDecisions": [
     {
@@ -195,10 +195,17 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "44e959ff19190e2027a630e35e5ed9b7ddc95900",
+    "commit": "026a7fdf4a618134e3b47ea391c0bae9e530e92e",
     "branch": "main",
-    "workingTree": "## main...origin/main",
-    "changedFiles": []
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n?? orchestration/escalations/E-003-apple-notes-colors-platform-limit.md",
+    "changedFiles": [
+      "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/STATE.md",
+      "orchestration/escalations/E-003-apple-notes-colors-platform-limit.md"
+    ]
   },
   "builder": {
     "id": "ox-alpha",
@@ -217,11 +224,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t01-fix-03-checkpoint-pushed",
-      "summary": "FIX-03 known-good checkpoint 44e959f pushed; 153/153 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone Apple Notes color retest.",
-      "at": "2026-08-24T15:47:16.529Z"
+      "name": "m03-t01-e003-open",
+      "summary": "E-003 opened: after three independently verified HTML payload strategies, Apple Notes still strips both category foreground and text-highlight colors while preserving the editable table/data. Awaiting product/technical route decision.",
+      "at": "2026-08-24T15:51:18.169Z"
     },
-    "contextRevision": 24,
+    "contextRevision": 26,
     "openEscalations": [
       {
         "id": "E-002",
@@ -238,6 +245,22 @@
         ],
         "status": "open",
         "openedAt": "2026-08-24T14:48:03.120Z"
+      },
+      {
+        "id": "E-003",
+        "summary": "Trusted HTTPS iPhone retests preserve the editable Apple Notes table and values but strip both category foreground and text-highlight colors after three bounded HTML representations. Choose a native/RTF/Shortcuts feasibility spike, accept uncolored rich paste as a limitation, or provide another explicitly approved route.",
+        "scope": {
+          "level": "product-technical",
+          "id": "E-003"
+        },
+        "allowedActions": [
+          "choose",
+          "approve",
+          "reject",
+          "clarify"
+        ],
+        "status": "open",
+        "openedAt": "2026-08-24T15:50:00.000Z"
       }
     ],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
