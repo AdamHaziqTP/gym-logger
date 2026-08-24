@@ -1,12 +1,23 @@
 import { useEffect, useMemo, useState } from "react";
 import { Home } from "./components/Home";
+import { History } from "./components/History";
 import { SessionView } from "./components/SessionView";
 import type { GymLogDB } from "./data/db";
 import { createDb, sortSessionsNewestFirst } from "./data/db";
 import { ensureSeeded } from "./data/seed";
 import { todayLocalDate } from "./domain/dates";
 
-type View = { name: "home" } | { name: "session"; sessionId: string };
+/**
+ * Where a session was opened from, so `‹ Gym Log` returns to the right list
+ * (M02-T01): Home → History → Session → back reopens the History screen;
+ * a session opened/resumed from Home goes straight back Home. The History
+ * search text itself is component-local state and resets on that remount;
+ * spec §11 requires no filter persistence.
+ */
+type View =
+  | { name: "home" }
+  | { name: "history" }
+  | { name: "session"; sessionId: string; from: "home" | "history" };
 
 interface AppProps {
   db: GymLogDB;
@@ -42,7 +53,7 @@ export function App({ db, todayLocal }: AppProps) {
           await db.sessions.where("dateLocal").equals(today).toArray(),
         );
         if (!cancelled && todays[0]) {
-          setView({ name: "session", sessionId: todays[0].id });
+          setView({ name: "session", sessionId: todays[0].id, from: "home" });
         }
       } catch (error) {
         console.error("Gym Logger: seeding failed", error);
@@ -76,14 +87,27 @@ export function App({ db, todayLocal }: AppProps) {
   return view.name === "home" ? (
     <Home
       db={db}
-      onOpenSession={(sessionId) => setView({ name: "session", sessionId })}
+      onOpenSession={(sessionId) =>
+        setView({ name: "session", sessionId, from: "home" })
+      }
+      onOpenHistory={() => setView({ name: "history" })}
       todayLocal={todayLocal}
+    />
+  ) : view.name === "history" ? (
+    <History
+      db={db}
+      onBack={() => setView({ name: "home" })}
+      onOpenSession={(sessionId) =>
+        setView({ name: "session", sessionId, from: "history" })
+      }
     />
   ) : (
     <SessionView
       db={db}
       sessionId={view.sessionId}
-      onBack={() => setView({ name: "home" })}
+      onBack={() =>
+        setView(view.from === "history" ? { name: "history" } : { name: "home" })
+      }
     />
   );
 }

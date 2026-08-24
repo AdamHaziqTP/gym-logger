@@ -8,7 +8,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-002 | Apple Notes remains canonical; app is a local convenience copy. | Spec §2.2 | M01-M06 | PLANNED | — |
 | REQ-003 | No account, backend, cloud sync, analytics, AI, timers, checklists, programs, streaks, or fitness-platform features. | Spec §§2.3, 32 | All | PLANNED | — |
 | REQ-004 | iPhone-first installable PWA with native pivot only for a proven blocked capability. | Spec §3 | M01/M06 | PLANNED | — |
-| REQ-005 | Home shows Today, Last Workout, Start/Continue, Copy Another, History, Settings. | Spec §§4.1, 13 | M02 | PLANNED | — |
+| REQ-005 | Home shows Today, Last Workout, Start/Continue, Copy Another, History, Settings. | Spec §§4.1, 13 | M02 | IN_PROGRESS | History entry delivered; Copy Another and Settings remain planned |
 | REQ-006 | Start today's session uses local phone date and creates exactly one session. | Spec §§4.2, 27.1-27.3; A1-A4 | M01-M02 | PLANNED | — |
 | REQ-007 | Clone rows, order, text, and highlights; do not blank Reps/Weight. | Spec §§4.2, 12.3; A2 | M01-M02 | PLANNED | — |
 | REQ-008 | Skip remains plain text, is not auto-dimmed/deleted, and counts in totals. | Spec §8; D1-D5 | M01-M05 | PLANNED | — |
@@ -21,7 +21,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-015 | Selected row actions support add above/below, duplicate, copy/cut/paste, colour, delete. | Spec §§7.3-7.6; C4-C9 | M01 human-gate correction / M04 | VERIFIED (automated; device pending) | FIX-04 command-level tests; HV-04 |
 | REQ-016 | 40-row table remains responsive; target stress is 100 rows. | Spec §25; C10 | M01/M04/M06 | PLANNED | — |
 | REQ-017 | Notes area below table accepts arbitrary text and travels with export. | Spec §10 | M01/M04-M05 | PLANNED | — |
-| REQ-018 | History is reverse chronological, searchable locally, and old sessions editable. | Spec §11; F1-F5 | M02 | PLANNED | — |
+| REQ-018 | History is reverse chronological, searchable locally, and old sessions editable. | Spec §11; F1-F5 | M02 | VERIFIED (automated; device pending) | M02-T01-FIX-01 review; 81/81 tests |
 | REQ-019 | Deleting an app session confirms and explicitly says Apple Notes is unaffected. | Spec §11.4; F6 | M02 | PLANNED | — |
 | REQ-020 | IndexedDB persistence with immediate/debounced autosave survives termination/reopen. | Spec §§17.2-17.4; B6, G2 | M01 | VERIFIED (automated; device pending) | remount test; HV-02/HV-03 |
 | REQ-021 | Offline shell is cached and core use does not require network. | Spec §17; G1-G5 | M01/M06 | IN_PROGRESS | runtime smoke; HV-01 |
@@ -43,4 +43,4 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 
 ## Pilot disposition
 
-M01 remains limited to its first-slice intent, but this human-gate correction explicitly closes the approved current-session resume, category legend, and Notes-style row interaction that the first automated review failed to exercise at command level. REQ-014/015 are temporarily pulled into the M01 correction gate by the user's observed acceptance failure; no M02 work is authorized. No later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation.
+M01 remains limited to its first-slice intent, with FIX-05 physical checks explicitly deferred rather than passed. M02-T01 now covers History/search/editable historical sessions for automated scope; no later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation. Copy Another Session is the next bounded M02 task.

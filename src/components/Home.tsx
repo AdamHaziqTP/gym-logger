@@ -9,12 +9,14 @@ import { displaySummary } from "../domain/summary";
 interface HomeProps {
   db: GymLogDB;
   onOpenSession: (sessionId: string) => void;
+  /** Opens the History screen (spec §4.1 additional navigation; M02-T01). */
+  onOpenHistory: () => void;
   /** Overrides today's local date (tests); defaults to the device date. */
   todayLocal?: string;
 }
 
 /** Sparse Home screen (spec §4.1, §13). No analytics cards, no gamification. */
-export function Home({ db, onOpenSession, todayLocal }: HomeProps) {
+export function Home({ db, onOpenSession, onOpenHistory, todayLocal }: HomeProps) {
   const sessions = useLiveQuery(() => db.sessions.toArray(), []) ?? [];
   const [starting, setStarting] = useState(false);
 
@@ -91,8 +93,16 @@ export function Home({ db, onOpenSession, todayLocal }: HomeProps) {
         </section>
       )}
 
+      <button
+        type="button"
+        className="btn btn-secondary"
+        onClick={onOpenHistory}
+      >
+        History
+      </button>
+
       <footer className="footnote">
-        Copy Another Session, History and Settings arrive in later milestones.
+        Copy Another Session and Settings arrive in later milestones.
         Your Apple Notes archive remains canonical.
       </footer>
     </main>
