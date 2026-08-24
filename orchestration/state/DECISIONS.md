@@ -92,3 +92,19 @@ M03-T02 is now unblocked for Codex to continue automatically.
 The product owner supplied an iPhone 14 Pro Max screenshot showing **Copy Another Session** visually clipping/overlapping the **History** button beneath it on the Home screen. This is a genuine responsive-layout defect, not a product ambiguity.
 
 Codex should route a bounded correction before final acceptance. The fix must preserve the sparse Home layout and should not redesign the navigation. This defect does not block M03 clipboard continuation.
+
+## Batch human verification / overnight full-auto policy — 2026-08-25
+
+The product owner is unavailable for repeated device checks for the remainder of the current work period and explicitly authorizes Codex to maximize autonomous progress before asking for more human testing.
+
+Operational rule:
+
+- Continue full-auto through every bounded implementation milestone, correction, automated test, build check, runtime check, code review, and non-human acceptance step that can be completed from the authoritative product sources.
+- **Do not stop at a human-only iPhone/visual gate if that gate can be safely deferred without creating architectural ambiguity or risking destructive work.** Record it as DEFERRED/PENDING and continue with independent branches/milestones.
+- Accumulate deferred device/visual checks into **one consolidated final iPhone acceptance pass** once the app is as complete, polished, reachable/installable, and internally verified as possible.
+- The final consolidated pass should include the already-deferred M01 touch/legend checks, Home overlap correction, offline/installability, Faithful/Compact PNG export, final Notes copy behavior, and any other human-only iPhone checks accumulated later.
+- Only interrupt the product owner before that final pass for a genuinely blocking product decision that the spec/references/recorded decisions cannot resolve, required secrets/credentials, destructive/high-impact approval, or a human-only result whose outcome determines the architecture of subsequent work and therefore cannot reasonably be deferred.
+- Do not mark deferred human checks PASS from automation. Preserve them as unresolved evidence until the final physical-device pass.
+- If a later task is technically dependent on a human gate but can be built behind an isolated assumption without irreversible work, proceed with the lowest-risk spec-consistent assumption and record it for the consolidated acceptance pass rather than waking the product owner immediately.
+
+This policy is intended to let Codex/OX finish as much of v1 as possible unattended and then present the product owner with one concise final test checklist rather than a sequence of small interruptions.
