@@ -7,19 +7,19 @@ Updated: 2026-08-24
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M01 — offline foundation vertical slice
-- Current task: M01-T01-FIX-04 — human-gate specification correction
-- Status: READY_FOR_OX
+- Current task: M01 repeat human verification after M01-T01-FIX-04
+- Status: HUMAN_REVIEW_REQUIRED
 - Automatic correction attempts used: 2 / 2
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
-- Human review gate: failed; HV-02/HV-03 passed, but HV-04/HV-05 and direct-current-session resume failed
-- Human-gate correction cycle: 0 / 2; this is a new, user-observed specification gap after the automated checkpoint
+- Human review gate: awaiting repeat iPhone verification; FIX-04 automated correction passed independently
+- Human-gate correction cycle: 1 / 2; the original human-gate specification gap has been corrected and awaits device confirmation
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
 ## Known-good checkpoints
 
 - Handoff baseline: `db71546` — `chore: checkpoint gym logger handoff`
 - Orchestration bootstrap: `dd72762`
-- Last orchestration evidence checkpoint: `18f2501` — automated M01 known-good checkpoint
+- Last orchestration evidence checkpoint: pending FIX-04 automated checkpoint commit
 - M01 accepted checkpoint: none; product acceptance remains gated by human verification
 
 ## Completed
@@ -35,7 +35,7 @@ Updated: 2026-08-24
 - M01-T01 has been independently audited.
 - Correction 1 repaired the evidenced latest-session sort failure and removed debug residue.
 - Correction 2 was blocked by DSH rate limiting before execution; this is being retried as `M01-T01-FIX-03` after the infrastructure condition was reported resolved.
-- Final decision: human verification rejected M01; delegate FIX-04 and repeat independent verification; do not start M02.
+- Final decision: FIX-04 automated verification passed; return M01 to human iPhone/visual verification; do not start M02.
 
 ## Deferred
 

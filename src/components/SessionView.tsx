@@ -2,26 +2,42 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import {
+  duplicateRowById,
+  insertBlankRowAtIndex,
+  insertRowCopyAtIndex,
+  removeRowById,
+  replaceRows,
   setNotes as persistNotes,
   setRowHighlight as persistRowHighlight,
   setSummaryOverride as persistSummaryOverride,
   updateRowField,
   type EditableRowField,
+  type GymLogDB,
 } from "../data/db";
-import type { GymLogDB } from "../data/db";
 import { formatDateDisplay } from "../domain/dates";
 import {
+  CATEGORY_LEGEND,
   HIGHLIGHT_OPTIONS,
   HIGHLIGHT_TOKENS,
 } from "../domain/highlights";
+import {
+  copyRowToClipboard,
+  hasCopiedRow,
+  peekRowClipboard,
+} from "../domain/rowClipboard";
+import { orderedRows } from "../domain/rows";
 import type {
   Highlight,
   SessionSummaryOverride,
+  WorkoutRow,
   WorkoutSession,
 } from "../domain/types";
 import { calculateSummary, displaySummary } from "../domain/summary";
 
 const AUTOSAVE_DELAY_MS = 300;
+const UNDO_TOAST_MS = 5000;
+/** Pointer travel before a handle press becomes a drag instead of a tap. */
+const DRAG_THRESHOLD_PX = 8;
 
 const COLUMN_ORDER: EditableRowField[] = [
   "exercise",
@@ -48,7 +64,8 @@ interface SessionViewProps {
 /**
  * The session editor: a dark, restrained, Notes-like fixed five-column table
  * (spec §6, §22). Every cell is free-form text with debounced local autosave
- * (spec §6.2, §17.2, §17.4).
+ * (spec §6.2, §17.2, §17.4). Header content order follows the approved rule:
+ * date → category legend → sets/exercises summary → table (spec §14.2).
  */
 export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
   const session = useLiveQuery(
@@ -57,13 +74,40 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
   );
 
   const [selectedRowId, setSelectedRowId] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [colourOpen, setColourOpen] = useState(false);
   const [editingSummary, setEditingSummary] = useState(false);
+  const [undoSnapshotRows, setUndoSnapshotRows] = useState<WorkoutRow[] | null>(
+    null,
+  );
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved">("idle");
+
+  // Drag-reorder state (spec §§7.2, 7.5): press on the SELECTED handle arms a
+  // potential drag; movement past the threshold drags, release without it is
+  // the tap that opens the row menu.
+  const [draggingRowId, setDraggingRowId] = useState<string | null>(null);
+  const [previewOrderIds, setPreviewOrderIds] = useState<string[] | null>(null);
 
   const pendingSaves = useRef(
     new Map<string, { timer: ReturnType<typeof setTimeout>; operation: () => Promise<void> }>(),
   );
   const savedResetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const undoToastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const armedHandle = useRef<{
+    rowId: string;
+    startX: number;
+    startY: number;
+    wasSelected: boolean;
+  } | null>(null);
+  const suppressClickRef = useRef(false);
+
+  // Refs mirroring render state so window-level drag listeners never act on a
+  // stale closure (the handlers are attached once).
+  const selectedRowIdRef = useRef<string | null>(null);
+  const draggingRowIdRef = useRef<string | null>(null);
+  const previewIdsRef = useRef<string[] | null>(null);
+  const displayIdsRef = useRef<string[]>([]);
+  const rowsByIdRef = useRef<Record<string, WorkoutRow>>({});
 
   const runSave = useCallback(async (operation: () => Promise<void>) => {
     setSaveState("saving");
@@ -120,12 +164,120 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
       window.removeEventListener("pagehide", handleHide);
       window.removeEventListener("beforeunload", handleHide);
       flushSaves();
+      if (undoToastTimer.current) clearTimeout(undoToastTimer.current);
     };
   }, [flushSaves]);
 
+  const sortedRows = orderedRows(session?.rows ?? []);
+
+  // Keep the drag mirrors in sync with the latest render.
+  selectedRowIdRef.current = selectedRowId;
+  draggingRowIdRef.current = draggingRowId;
+  previewIdsRef.current = previewOrderIds;
+  displayIdsRef.current = previewOrderIds ?? sortedRows.map((row) => row.id);
+  rowsByIdRef.current = Object.fromEntries(
+    sortedRows.map((row) => [row.id, row]),
+  );
+
+  /**
+   * Tap behavior for a row handle (spec §7.2): first tap selects the whole
+   * row; tapping the already-selected handle opens the row menu.
+   */
+  const activateHandleTap = useCallback((rowId: string) => {
+    setColourOpen(false);
+    if (selectedRowIdRef.current === rowId) {
+      setMenuOpen(true);
+    } else {
+      setSelectedRowId(rowId);
+      setMenuOpen(false);
+    }
+  }, []);
+
+  /* ---------------- Drag reorder machinery (§§7.2, 7.5) ---------------- */
+
+  useEffect(() => {
+    const beginDragIfArmed = (event: PointerEvent) => {
+      const armed = armedHandle.current;
+      if (!armed || !armed.wasSelected || draggingRowIdRef.current) return false;
+      const distance = Math.hypot(
+        event.clientX - armed.startX,
+        event.clientY - armed.startY,
+      );
+      if (distance <= DRAG_THRESHOLD_PX) return false;
+      setDraggingRowId(armed.rowId);
+      setPreviewOrderIds(displayIdsRef.current.slice());
+      return true;
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const active =
+        draggingRowIdRef.current ??
+        (beginDragIfArmed(event) ? armedHandle.current?.rowId ?? null : null);
+      if (!active) return;
+
+      event.preventDefault();
+      const ids = previewIdsRef.current ?? displayIdsRef.current;
+      const currentIndex = ids.indexOf(active);
+      if (currentIndex === -1) return;
+
+      const target = dropIndexFromClientY(event.clientY, ids.length);
+      if (target !== currentIndex) {
+        setPreviewOrderIds(moveIdInList(ids, active, target));
+      }
+    };
+
+    const commitDrag = () => {
+      const armed = armedHandle.current;
+      const activeId = draggingRowIdRef.current;
+      armedHandle.current = null;
+
+      if (activeId) {
+        const ids = previewIdsRef.current;
+        const byId = rowsByIdRef.current;
+        setDraggingRowId(null);
+        setPreviewOrderIds(null);
+        suppressClickRef.current = true;
+        if (ids && byId) {
+          const reordered = ids.flatMap((id) => (byId[id] ? [byId[id]] : []));
+          void runSave(() => replaceRows(db, sessionId, reordered));
+        }
+        return;
+      }
+
+      if (armed) {
+        // No meaningful movement: this pointer gesture was a tap.
+        suppressClickRef.current = true;
+        activateHandleTap(armed.rowId);
+      }
+    };
+
+    const cancelDrag = () => {
+      armedHandle.current = null;
+      if (draggingRowIdRef.current) {
+        // Revert the visual preview; nothing has been persisted yet.
+        setDraggingRowId(null);
+        setPreviewOrderIds(null);
+      }
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", commitDrag);
+    window.addEventListener("pointercancel", cancelDrag);
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", commitDrag);
+      window.removeEventListener("pointercancel", cancelDrag);
+    };
+  }, [db, sessionId, runSave, activateHandleTap]);
+
+  /* --------------------------- Save helpers ---------------------------- */
+
   if (!session) return <div className="boot" role="status" aria-label="Loading" />;
 
-  const rows = [...session.rows].sort((a, b) => a.position - b.position);
+  const rowsById = rowsByIdRef.current;
+  const displayRows: WorkoutRow[] = previewOrderIds
+    ? previewOrderIds.flatMap((id) => (rowsById[id] ? [rowsById[id]] : []))
+    : sortedRows;
 
   const handleCellChange = (
     rowId: string,
@@ -154,6 +306,94 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
     void runSave(() => persistRowHighlight(db, sessionId, rowId, highlight));
   };
 
+  /* ------------------------ Row menu commands -------------------------- */
+
+  const closeMenu = () => setMenuOpen(false);
+
+  const showUndoToast = (previousRows: WorkoutRow[]) => {
+    setUndoSnapshotRows(previousRows.map((row) => ({ ...row })));
+    if (undoToastTimer.current) clearTimeout(undoToastTimer.current);
+    undoToastTimer.current = setTimeout(
+      () => setUndoSnapshotRows(null),
+      UNDO_TOAST_MS,
+    );
+  };
+
+  const dismissUndoToast = () => {
+    setUndoSnapshotRows(null);
+    if (undoToastTimer.current) clearTimeout(undoToastTimer.current);
+  };
+
+  const handleUndo = () => {
+    const snapshot = undoSnapshotRows;
+    if (!snapshot) return;
+    dismissUndoToast();
+    void runSave(() => replaceRows(db, sessionId, snapshot));
+  };
+
+  const commandAddAbove = async () => {
+    if (!selectedRowId) return;
+    const index = sortedRows.findIndex((row) => row.id === selectedRowId);
+    const newRowId = await insertBlankRowAtIndex(db, sessionId, index);
+    closeMenu();
+    if (newRowId) setSelectedRowId(newRowId);
+  };
+
+  const commandAddBelow = async () => {
+    if (!selectedRowId) return;
+    const index = sortedRows.findIndex((row) => row.id === selectedRowId);
+    const newRowId = await insertBlankRowAtIndex(db, sessionId, index + 1);
+    closeMenu();
+    if (newRowId) setSelectedRowId(newRowId);
+  };
+
+  const commandDuplicate = async () => {
+    if (!selectedRowId) return;
+    const copyId = await duplicateRowById(db, sessionId, selectedRowId);
+    closeMenu();
+    if (copyId) setSelectedRowId(copyId);
+  };
+
+  const commandCopy = () => {
+    const row = sortedRows.find((item) => item.id === selectedRowId);
+    if (row) copyRowToClipboard(row);
+    closeMenu();
+  };
+
+  const commandCut = async () => {
+    const row = sortedRows.find((item) => item.id === selectedRowId);
+    if (!row) return;
+    copyRowToClipboard(row); // Cut keeps the copied data (task FIX-04 §1).
+    const removal = await removeRowById(db, sessionId, row.id);
+    setSelectedRowId(null);
+    closeMenu();
+    if (removal) showUndoToast(removal.previousRows);
+  };
+
+  const commandPaste = async () => {
+    const copied = peekRowClipboard();
+    if (!copied || !selectedRowId) return;
+    const index = sortedRows.findIndex((row) => row.id === selectedRowId);
+    const pastedId = await insertRowCopyAtIndex(db, sessionId, index + 1, copied);
+    closeMenu();
+    if (pastedId) setSelectedRowId(pastedId);
+  };
+
+  const commandColour = () => {
+    setMenuOpen(false);
+    setColourOpen(true);
+  };
+
+  const commandDelete = async () => {
+    if (!selectedRowId) return;
+    const removal = await removeRowById(db, sessionId, selectedRowId);
+    setSelectedRowId(null);
+    closeMenu();
+    if (removal) showUndoToast(removal.previousRows);
+  };
+
+  const selectedRow = sortedRows.find((row) => row.id === selectedRowId) ?? null;
+
   const saveLabel =
     saveState === "saving" ? "Saving…" : saveState === "saved" ? "Saved" : "";
 
@@ -169,6 +409,8 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
       </header>
 
       <h1 className="session-title">{formatDateDisplay(session.dateLocal)}</h1>
+
+      <CategoryLegend />
 
       {editingSummary ? (
         <SummaryEditor
@@ -208,10 +450,11 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
               <th scope="col">Skip</th>
             </tr>
           </thead>
-          <tbody>
-            {rows.map((row) => {
+          <tbody id="workout-tbody">
+            {displayRows.map((row, index) => {
               const tokens = HIGHLIGHT_TOKENS[row.highlight];
               const selected = row.id === selectedRowId;
+              const dragging = row.id === draggingRowId;
               const rowStyle = {
                 "--row-fg": tokens.fg,
                 "--row-bg": tokens.bg,
@@ -219,7 +462,16 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
               return (
                 <tr
                   key={row.id}
-                  className={selected ? "selected" : undefined}
+                  data-row-id={row.id}
+                  className={
+                    selected && dragging
+                      ? "selected dragging"
+                      : selected
+                        ? "selected"
+                        : dragging
+                          ? "dragging"
+                          : undefined
+                  }
                   style={rowStyle}
                 >
                   <td className="handle-cell">
@@ -228,11 +480,25 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
                       className={
                         selected ? "row-handle active" : "row-handle"
                       }
-                      aria-label={`Select row ${row.position + 1}`}
+                      aria-label={`Select row ${index + 1}`}
                       aria-pressed={selected}
-                      onClick={() =>
-                        setSelectedRowId(selected ? null : row.id)
-                      }
+                      onPointerDown={(event) => {
+                        armedHandle.current = {
+                          rowId: row.id,
+                          startX: event.clientX,
+                          startY: event.clientY,
+                          wasSelected: selected,
+                        };
+                      }}
+                      onClick={() => {
+                        // Mouse/touch taps are handled by the pointerup path;
+                        // this branch serves keyboard activation only.
+                        if (suppressClickRef.current) {
+                          suppressClickRef.current = false;
+                          return;
+                        }
+                        activateHandleTap(row.id);
+                      }}
                     >
                       ⋮
                     </button>
@@ -243,7 +509,7 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
                         type="text"
                         className="cell-input"
                         defaultValue={row[field]}
-                        aria-label={`${COLUMN_LABELS[field]} row ${row.position + 1}`}
+                        aria-label={`${COLUMN_LABELS[field]} row ${index + 1}`}
                         spellCheck={false}
                         autoCapitalize="off"
                         autoComplete="off"
@@ -283,16 +549,142 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
         />
       </section>
 
-      {selectedRowId && (
+      {menuOpen && selectedRow && (
+        <>
+          <div className="menu-backdrop" onClick={closeMenu} aria-hidden="true" />
+          <RowMenu
+            pasteEnabled={hasCopiedRow()}
+            onAddAbove={() => void commandAddAbove()}
+            onAddBelow={() => void commandAddBelow()}
+            onDuplicate={() => void commandDuplicate()}
+            onCopy={commandCopy}
+            onCut={() => void commandCut()}
+            onPaste={() => void commandPaste()}
+            onColour={commandColour}
+            onDelete={() => void commandDelete()}
+          />
+        </>
+      )}
+
+      {colourOpen && selectedRow && (
         <ColourBar
-          current={
-            rows.find((row) => row.id === selectedRowId)?.highlight ?? "none"
-          }
+          current={selectedRow.highlight}
           onPick={handleHighlightPick}
-          onClose={() => setSelectedRowId(null)}
+          onClose={() => setColourOpen(false)}
         />
       )}
+
+      {undoSnapshotRows && (
+        <div className="undo-toast" role="status">
+          <span className="undo-message">Row deleted</span>
+          <button type="button" className="btn btn-secondary btn-small" onClick={handleUndo}>
+            Undo
+          </button>
+        </div>
+      )}
     </main>
+  );
+}
+
+/**
+ * Drop target index from a pointer Y position: the first displayed row whose
+ * vertical midpoint the pointer has crossed. Rows are queried in display
+ * order, so indices align with the preview id list.
+ */
+function dropIndexFromClientY(clientY: number, count: number): number {
+  const trs = document.querySelectorAll<HTMLTableRowElement>(
+    "#workout-tbody tr[data-row-id]",
+  );
+  for (let index = 0; index < count && index < trs.length; index += 1) {
+    const rect = trs[index].getBoundingClientRect();
+    if (clientY < rect.top + rect.height / 2) return index;
+  }
+  return Math.max(0, count - 1);
+}
+
+function moveIdInList(ids: string[], id: string, toIndex: number): string[] {
+  const fromIndex = ids.indexOf(id);
+  if (fromIndex === -1) return ids;
+  const clamped = Math.max(0, Math.min(toIndex, ids.length - 1));
+  if (clamped === fromIndex) return ids;
+  const next = [...ids];
+  next.splice(fromIndex, 1);
+  next.splice(clamped, 0, id);
+  return next;
+}
+
+/** Approved category legend (spec §5.1, §14.2; locked colour mapping). */
+function CategoryLegend() {
+  return (
+    <ul className="category-legend" aria-label="Category legend">
+      {CATEGORY_LEGEND.map(({ value, label }) => (
+        <li key={label} className="legend-item" data-highlight={value}>
+          <span
+            className={
+              value === "none" ? "legend-dot legend-dot-none" : "legend-dot"
+            }
+            style={{ backgroundColor: HIGHLIGHT_TOKENS[value].fg }}
+            aria-hidden="true"
+          />
+          <span className="legend-label">{label}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+interface RowMenuProps {
+  pasteEnabled: boolean;
+  onAddAbove: () => void;
+  onAddBelow: () => void;
+  onDuplicate: () => void;
+  onCopy: () => void;
+  onCut: () => void;
+  onPaste: () => void;
+  onColour: () => void;
+  onDelete: () => void;
+}
+
+/** The Apple Notes-style row menu (spec §7.3). No permanent per-row buttons. */
+function RowMenu(props: RowMenuProps) {
+  return (
+    <div className="row-menu" role="menu" aria-label="Row actions">
+      <button type="button" role="menuitem" className="row-menu-item" onClick={props.onAddAbove}>
+        Add Row Above
+      </button>
+      <button type="button" role="menuitem" className="row-menu-item" onClick={props.onAddBelow}>
+        Add Row Below
+      </button>
+      <button type="button" role="menuitem" className="row-menu-item" onClick={props.onDuplicate}>
+        Duplicate Row
+      </button>
+      <button type="button" role="menuitem" className="row-menu-item" onClick={props.onCopy}>
+        Copy
+      </button>
+      <button type="button" role="menuitem" className="row-menu-item" onClick={props.onCut}>
+        Cut
+      </button>
+      <button
+        type="button"
+        role="menuitem"
+        className="row-menu-item"
+        disabled={!props.pasteEnabled}
+        onClick={props.onPaste}
+      >
+        Paste
+      </button>
+      <button type="button" role="menuitem" className="row-menu-item" onClick={props.onColour}>
+        Colour
+      </button>
+      <button
+        type="button"
+        role="menuitem"
+        className="row-menu-item destructive"
+        onClick={props.onDelete}
+      >
+        Delete Row
+      </button>
+    </div>
   );
 }
 
@@ -377,9 +769,9 @@ function SummaryEditor({ db, session, onDone }: SummaryEditorProps) {
 }
 
 /**
- * Compact row-level colour control (task item 8): the full Apple Notes row
- * menu is out of scope for M01; this applies one category across the whole row
- * in one tap (spec §5.3).
+ * Compact row-level colour control opened through the row menu's `Colour`
+ * command: applies one category across the whole row in one tap and keeps the
+ * locked Arms/Back/Chest/Delts/Legs/None mapping (spec §5.3).
  */
 function ColourBar(props: {
   current: Highlight;

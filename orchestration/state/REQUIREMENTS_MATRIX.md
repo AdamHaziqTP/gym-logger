@@ -14,11 +14,11 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-008 | Skip remains plain text, is not auto-dimmed/deleted, and counts in totals. | Spec §8; D1-D5 | M01-M05 | PLANNED | — |
 | REQ-009 | Summary supports calculated values plus manual overrides including 40/39 fixture mismatch. | Spec §9; E1-E3 | M01-M02 | PLANNED | — |
 | REQ-010 | All five visible columns accept arbitrary strings without normalization. | Spec §§6.1-6.3, 27.6-27.7; B1-B5 | M01-M04 | VERIFIED (automated) | M01 evidence; 32/32 |
-| REQ-011 | Row-level color system: Arms orange, Back purple, Chest mint, Delts blue, Legs pink, None. | Spec §5; references/IMG_5550-5554 | M01-M04 | FAILED HUMAN GATE | colour control works; legend and visual treatment incomplete; M01 evidence |
-| REQ-012 | Dark Notes-like presentation uses restrained background, subtle grid, readable colored text/highlights. | Spec §§5.2, 22; IMG_5501-5502 | M01-M04 | FAILED HUMAN GATE | full-row treatment appears too heavy; M01 evidence |
+| REQ-011 | Row-level color system: Arms orange, Back purple, Chest mint, Delts blue, Legs pink, None. | Spec §5; references/IMG_5550-5554 | M01-M04 | VERIFIED (automated; device pending) | FIX-04 tests; HV-06 |
+| REQ-012 | Dark Notes-like presentation uses restrained background, subtle grid, readable colored text/highlights. | Spec §§5.2, 22; IMG_5501-5502 | M01-M04 | VERIFIED (automated; device pending) | FIX-04 source audit; HV-06/HV-07 |
 | REQ-013 | Tap cell edits immediately with normal text behavior. | Spec §7.1; C1 | M01 | VERIFIED (automated) | M01 evidence; App tests |
-| REQ-014 | Apple Notes-like row handle selects a row; selected treatment is clear. | Spec §7.2; C2-C3 | M01 human-gate correction / M04 | FAILED HUMAN GATE | selection seen; complete interaction incomplete |
-| REQ-015 | Selected row actions support add above/below, duplicate, copy/cut/paste, colour, delete. | Spec §§7.3-7.6; C4-C9 | M01 human-gate correction / M04 | FAILED HUMAN GATE | colour-only menu observed; command-level coverage missing |
+| REQ-014 | Apple Notes-like row handle selects a row; selected treatment is clear. | Spec §7.2; C2-C3 | M01 human-gate correction / M04 | VERIFIED (automated; device pending) | FIX-04 tests; HV-04/HV-05 |
+| REQ-015 | Selected row actions support add above/below, duplicate, copy/cut/paste, colour, delete. | Spec §§7.3-7.6; C4-C9 | M01 human-gate correction / M04 | VERIFIED (automated; device pending) | FIX-04 command-level tests; HV-04 |
 | REQ-016 | 40-row table remains responsive; target stress is 100 rows. | Spec §25; C10 | M01/M04/M06 | PLANNED | — |
 | REQ-017 | Notes area below table accepts arbitrary text and travels with export. | Spec §10 | M01/M04-M05 | PLANNED | — |
 | REQ-018 | History is reverse chronological, searchable locally, and old sessions editable. | Spec §11; F1-F5 | M02 | PLANNED | — |

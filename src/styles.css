@@ -176,7 +176,41 @@ body {
 .session-title {
   font-size: 26px;
   font-weight: 700;
-  margin: 4px 0 2px;
+  margin: 4px 0 6px;
+}
+
+/* Category legend: date → legend → summary → table (spec §§5.1, 14.2). */
+
+.category-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot-none {
+  background: transparent !important;
+  border: 1.5px dashed var(--text-dim);
+}
+
+.legend-label {
+  color: var(--text-dim);
+  font-size: 13px;
 }
 
 /* ---------- Summary editor ---------- */
@@ -294,13 +328,23 @@ body {
   touch-action: none;
 }
 
+/* Subtle idle dots, reliable hit target (spec §§7.2, 26). */
 .row-handle.active {
   color: var(--accent);
 }
 
+/*
+ * Category treatment (spec §5.2): bright category-colored foreground text
+ * with a subtle translucent highlight behind the text of each cell — never a
+ * large bright solid full-row fill. Cell padding keeps dark gutters between
+ * the highlight blocks so a colored row still reads as Notes-style text
+ * highlighting on the dark table.
+ */
+
 .cell {
   color: var(--row-fg, var(--text));
-  background-color: var(--row-bg, transparent);
+  background-color: transparent;
+  padding: 3px 4px;
 }
 
 .cell-input {
@@ -308,8 +352,9 @@ body {
   width: 100%;
   min-width: 60px;
   min-height: 42px;
-  background: transparent;
+  background-color: var(--row-bg, transparent);
   border: none;
+  border-radius: 6px;
   color: inherit;
   font: inherit;
   font-size: 15px;
@@ -321,16 +366,18 @@ body {
 }
 
 tr:focus-within .cell-input {
-  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
-tr.selected > td.cell {
-  box-shadow: inset 2px 0 0 var(--accent);
-  filter: brightness(1.25);
+/* Selected row: clear non-colour selection treatment (spec §7.2, C3). */
+.workout-table tr.selected {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
-tr.selected > td.handle-cell {
-  box-shadow: inset 2px 0 0 var(--accent);
+/* Dragged row previews at reduced weight until the reorder commits. */
+.workout-table tr.dragging {
+  opacity: 0.35;
 }
 
 /* ---------- Notes ---------- */
@@ -427,4 +474,79 @@ tr.selected > td.handle-cell {
 .swatch-label {
   color: var(--text-dim);
   font-size: 11px;
+}
+
+/* ---------- Row menu (spec §7.3) ---------- */
+
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.row-menu {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px calc(12px + env(safe-area-inset-bottom));
+  background: #161618;
+  border-top: 1px solid var(--grid-strong);
+  border-radius: 14px 14px 0 0;
+}
+
+.row-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 9px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 17px;
+  padding: 13px 14px;
+  cursor: pointer;
+}
+
+.row-menu-item + .row-menu-item {
+  margin-top: 2px;
+}
+
+.row-menu-item:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.row-menu-item.destructive {
+  color: #ff453a;
+}
+
+/* ---------- Undo toast (spec §7.4) ---------- */
+
+.undo-toast {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 8px 8px 16px;
+  background: #2c2c2e;
+  border: 1px solid var(--grid-strong);
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
+.undo-message {
+  color: var(--text);
+  font-size: 14px;
 }

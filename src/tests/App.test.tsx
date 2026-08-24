@@ -6,6 +6,8 @@ import { App } from "../App";
 import { createDb, type GymLogDB } from "../data/db";
 
 const DB_NAME = "gym-logger";
+/** Fixed local date for deterministic tests (device clock is never trusted). */
+const TODAY = "2026-08-24";
 
 let db: GymLogDB;
 
@@ -21,7 +23,7 @@ afterEach(() => {
 
 describe("App — seed → start → edit → reload", () => {
   it("seeds on first launch and shows the fixture summary override", async () => {
-    render(<App db={db} />);
+    render(<App db={db} todayLocal={TODAY} />);
 
     expect(await screen.findByText("Gym Log")).toBeTruthy();
     // Last Workout card reflects the seeded fixture's manual 40/39 override.
@@ -35,8 +37,8 @@ describe("App — seed → start → edit → reload", () => {
     ).toBeNull();
   });
 
-  it("starts a session with all 40 cloned rows, accepts free-form edits, and persists across remount", async () => {
-    const first = render(<App db={db} />);
+  it("starts a session with all 40 cloned rows, accepts free-form edits, and resumes directly on remount", async () => {
+    const first = render(<App db={db} todayLocal={TODAY} />);
     await screen.findByText(/40 sets · 39 exercises/);
 
     fireEvent.click(
@@ -69,16 +71,10 @@ describe("App — seed → start → edit → reload", () => {
 
     first.unmount();
 
-    // "Reload": fresh mount against the same IndexedDB.
-    render(<App db={db} />);
-    expect(
-      await screen.findByRole("button", { name: /Continue Today's Session/ }),
-    ).toBeTruthy();
-
-    fireEvent.click(
-      screen.getByRole("button", { name: /Continue Today's Session/ }),
-    );
-
+    // "Reload": fresh mount against the same IndexedDB. A current session
+    // must resume DIRECTLY instead of resetting the view to Home (M01
+    // human-gate correction; spec §27.1).
+    render(<App db={db} todayLocal={TODAY} />);
     expect(
       await screen.findByDisplayValue("Recline curl bench 30° IR uni edited"),
     ).toBeTruthy();
@@ -98,10 +94,26 @@ describe("App — seed → start → edit → reload", () => {
 
     // Cloned values elsewhere are untouched.
     expect(screen.getByDisplayValue("82.5kg")).toBeTruthy();
+
+    // All 40 rows survived the reload.
+    expect(document.querySelectorAll("table tbody tr")).toHaveLength(40);
+
+    // The deliberate Gym Log back control remains available and Home still
+    // offers Continue for the existing current session.
+    fireEvent.click(screen.getByRole("button", { name: "‹ Gym Log" }));
+    expect(
+      await screen.findByRole("button", { name: /Continue Today's Session/ }),
+    ).toBeTruthy();
+    fireEvent.click(
+      screen.getByRole("button", { name: /Continue Today's Session/ }),
+    );
+    expect(
+      await screen.findByDisplayValue("Recline curl bench 30° IR uni edited"),
+    ).toBeTruthy();
   });
 
-  it("applies a row-level highlight through the compact colour control", async () => {
-    render(<App db={db} />);
+  it("applies a row-level highlight through the row menu's Colour control", async () => {
+    render(<App db={db} todayLocal={TODAY} />);
     await screen.findByText(/40 sets · 39 exercises/);
     fireEvent.click(
       screen.getByRole("button", { name: "Start Today's Session" }),
@@ -109,12 +121,15 @@ describe("App — seed → start → edit → reload", () => {
 
     await screen.findByDisplayValue("Chest Press Neutral 5");
 
-    // Select row 6 via its handle, then pick Back/purple.
+    // First tap selects row 6; tapping the selected handle opens the row menu;
+    // Colour opens the locked palette (spec §§7.2-7.3, 5.1).
     fireEvent.click(screen.getByRole("button", { name: "Select row 6" }));
-    fireEvent.click(screen.getByRole("button", { name: /Back/ }));
+    fireEvent.click(screen.getByRole("button", { name: "Select row 6" }));
+    fireEvent.click(await screen.findByRole("menuitem", { name: "Colour" }));
 
     // Selection stays available until Done.
     expect(screen.getByText("Row colour")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: /Back/ }));
     fireEvent.click(screen.getByRole("button", { name: "Done" }));
 
     // Highlight persists asynchronously: await the observable persisted value
@@ -130,7 +145,7 @@ describe("App — seed → start → edit → reload", () => {
   });
 
   it("does not duplicate today's session when Start is pressed twice quickly", async () => {
-    render(<App db={db} />);
+    render(<App db={db} todayLocal={TODAY} />);
     await screen.findByText(/40 sets · 39 exercises/);
 
     const startButton = () =>
@@ -148,5 +163,17 @@ describe("App — seed → start → edit → reload", () => {
       (session) => session.sourceSessionId === "fixture-sunday-23-aug",
     );
     expect(todaysSessions).toHaveLength(1);
+  });
+
+  it("keeps the Home/Start flow when no current session exists", async () => {
+    // A date with no session: the seed is dated 2026-08-23, so nothing resumes.
+    render(<App db={db} todayLocal="2026-09-01" />);
+
+    expect(await screen.findByText("Gym Log")).toBeTruthy();
+    expect(
+      await screen.findByRole("button", { name: "Start Today's Session" }),
+    ).toBeTruthy();
+    // The seed did NOT auto-open as a current session.
+    expect(screen.queryByDisplayValue("Recline curl bench 30° IR uni")).toBeNull();
   });
 });

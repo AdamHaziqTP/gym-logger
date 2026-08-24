@@ -2,12 +2,28 @@ import { useEffect, useMemo, useState } from "react";
 import { Home } from "./components/Home";
 import { SessionView } from "./components/SessionView";
 import type { GymLogDB } from "./data/db";
-import { createDb } from "./data/db";
+import { createDb, sortSessionsNewestFirst } from "./data/db";
 import { ensureSeeded } from "./data/seed";
+import { todayLocalDate } from "./domain/dates";
 
 type View = { name: "home" } | { name: "session"; sessionId: string };
 
-export function App({ db }: { db: GymLogDB }) {
+interface AppProps {
+  db: GymLogDB;
+  /**
+   * Overrides today's local date (tests). Defaults to the device local date.
+   * The device clock is never touched by production code paths.
+   */
+  todayLocal?: string;
+}
+
+/**
+ * App shell. On launch/remount, if a session already exists for today's local
+ * date it opens that session DIRECTLY (M01 human-gate correction; spec §27.1)
+ * — the `Gym Log` back control in SessionView stays available for deliberate
+ * navigation Home. Without a current session the sparse Home/Start flow shows.
+ */
+export function App({ db, todayLocal }: AppProps) {
   const [ready, setReady] = useState(false);
   const [view, setView] = useState<View>({ name: "home" });
 
@@ -18,6 +34,16 @@ export function App({ db }: { db: GymLogDB }) {
         // Open on first mount; also covers an externally closed connection.
         if (!db.isOpen()) await db.open();
         await ensureSeeded(db);
+
+        // Direct resume: a current session reopens itself instead of landing
+        // on Home. One session per local date (spec §4.1).
+        const today = todayLocal ?? todayLocalDate();
+        const todays = sortSessionsNewestFirst(
+          await db.sessions.where("dateLocal").equals(today).toArray(),
+        );
+        if (!cancelled && todays[0]) {
+          setView({ name: "session", sessionId: todays[0].id });
+        }
       } catch (error) {
         console.error("Gym Logger: seeding failed", error);
       } finally {
@@ -41,7 +67,7 @@ export function App({ db }: { db: GymLogDB }) {
     return () => {
       cancelled = true;
     };
-  }, [db]);
+  }, [db, todayLocal]);
 
   if (!ready) {
     return <div className="boot" role="status" aria-label="Loading" />;
@@ -51,6 +77,7 @@ export function App({ db }: { db: GymLogDB }) {
     <Home
       db={db}
       onOpenSession={(sessionId) => setView({ name: "session", sessionId })}
+      todayLocal={todayLocal}
     />
   ) : (
     <SessionView

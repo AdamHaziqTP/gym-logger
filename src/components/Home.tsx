@@ -9,14 +9,16 @@ import { displaySummary } from "../domain/summary";
 interface HomeProps {
   db: GymLogDB;
   onOpenSession: (sessionId: string) => void;
+  /** Overrides today's local date (tests); defaults to the device date. */
+  todayLocal?: string;
 }
 
 /** Sparse Home screen (spec §4.1, §13). No analytics cards, no gamification. */
-export function Home({ db, onOpenSession }: HomeProps) {
+export function Home({ db, onOpenSession, todayLocal }: HomeProps) {
   const sessions = useLiveQuery(() => db.sessions.toArray(), []) ?? [];
   const [starting, setStarting] = useState(false);
 
-  const today = todayLocalDate();
+  const today = todayLocal ?? todayLocalDate();
   const todaySession = sortSessionsNewestFirst(
     sessions.filter((session) => session.dateLocal === today),
   )[0];

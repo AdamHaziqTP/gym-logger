@@ -35,3 +35,20 @@ export const HIGHLIGHT_OPTIONS: ReadonlyArray<{
   { value: "blue", label: "Delts" },
   { value: "pink", label: "Legs" },
 ];
+
+/**
+ * Approved session-header legend in the finalized content order
+ * date → category legend → summary (spec §14.2; M01 human-gate correction):
+ * Arms orange, Back purple, Chest mint, Delts blue, Legs pink, Other white.
+ */
+export const CATEGORY_LEGEND: ReadonlyArray<{
+  value: Highlight;
+  label: string;
+}> = [
+  { value: "orange", label: "Arms" },
+  { value: "purple", label: "Back" },
+  { value: "mint", label: "Chest" },
+  { value: "blue", label: "Delts" },
+  { value: "pink", label: "Legs" },
+  { value: "none", label: "Other" },
+];
