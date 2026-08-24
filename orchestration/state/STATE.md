@@ -92,4 +92,4 @@ Updated: 2026-08-24
 - Active task: M03-T01 secure-origin verification preparation and human retest
 - Base implementation checkpoint: M03-T01-FIX-01 accepted engineering checkpoint (`6cb1b3a`), with human plain-fallback evidence recorded in `610f288`
 - Worker disposition: no product-code rewrite is authorized solely to obtain HTTPS; Codex may use the simplest safe infrastructure/deployment route to expose the existing build securely
-- Next action: provide a trusted HTTPS URL/build to the product owner, then repeat Copy to Notes → Apple Notes paste and record exactly what survives (data, editable table structure, row order, legend, highlights/colors, summary override, multiline notes). M03-T02 remains blocked until this result is recorded.
+- Next action: use `orchestration/evidence/HTTPS-RICH-PASTE-SETUP.md` to install the local public certificate and repeat Copy to Notes → Apple Notes paste at `https://192.168.1.49:5173`. Record exactly what survives (data, editable table structure, row order, legend, highlights/colors, summary override, multiline notes). M03-T02 remains blocked until this result is recorded.

@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "secure-origin-prepared",
+      "summary": "Existing Gym Logger PWA now serves over local HTTPS at https://192.168.1.49:5173 with an installable public certificate; 140/140 tests and build remain green. Human rich-paste retest is next.",
+      "at": "2026-08-24T14:57:29.214Z"
+    },
+    {
       "name": "m03-t01-rich-gate-recorded",
       "summary": "iPhone plain fallback now passes text fidelity, while HTTP rich table/colors remain unavailable; E-002 opened for HTTPS versus plain-only product decision.",
       "at": "2026-08-24T14:48:13.524Z"
@@ -56,21 +61,16 @@
       "name": "correction-task-prepared",
       "summary": "M02-T01 implementation was independently green but OX timed out without its report and component navigation coverage; FIX-01 correction dispatched within the two-attempt cap.",
       "at": "2026-08-24T12:21:48.812Z"
-    },
-    {
-      "name": "task-prepared",
-      "summary": "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution.",
-      "at": "2026-08-24T11:58:34.480Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T14:48:13.525Z",
+  "lastPublishedAt": "2026-08-24T14:57:29.214Z",
   "lastEvent": {
-    "name": "m03-t01-rich-gate-recorded",
-    "summary": "iPhone plain fallback now passes text fidelity, while HTTP rich table/colors remain unavailable; E-002 opened for HTTPS versus plain-only product decision.",
-    "at": "2026-08-24T14:48:13.524Z"
+    "name": "secure-origin-prepared",
+    "summary": "Existing Gym Logger PWA now serves over local HTTPS at https://192.168.1.49:5173 with an installable public certificate; 140/140 tests and build remain green. Human rich-paste retest is next.",
+    "at": "2026-08-24T14:57:29.214Z"
   },
-  "syncRevision": 17,
+  "syncRevision": 18,
   "openEscalations": [
     {
       "id": "E-002",

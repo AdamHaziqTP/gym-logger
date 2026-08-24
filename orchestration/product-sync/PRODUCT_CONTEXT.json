@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T14:48:13.575Z",
+  "generatedAt": "2026-08-24T14:57:29.266Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -35,11 +35,11 @@
     "precedenceRule": "Lower precedence numbers win. Worker reports are observations; Codex verification and human evidence control acceptance."
   },
   "current": {
-    "milestone": "M02 — next bounded implementation milestone after M01 foundation",
-    "task": "M02-T02 — Copy Another Session preview and clone flow",
-    "status": "ESCALATION_OPEN (M03-T01 rich-format gate)",
-    "humanReviewGate": "M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance",
-    "nextAction": "M01/FIX-05 automated verification is the engineering baseline for continuation."
+    "milestone": "M03 — Apple Notes clipboard integration",
+    "task": "M03-T01 — secure-origin rich Apple Notes verification after FIX-01",
+    "status": "READY_FOR_CODEX (E-002 RESOLVED — TRUSTED HTTPS VERIFICATION REQUIRED)",
+    "humanReviewGate": "M03-T01 rich-paste verification is pending a trusted HTTPS build on the iPhone 14 Pro Max; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance",
+    "nextAction": "M01/FIX-05 automated verification remains the engineering baseline for continuation; its deferred physical-iPhone checks are not reclassified as PASS."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -49,14 +49,18 @@
     "Confirmed the Desktop DSH wrapper exists at the verified path.",
     "Completed independent automated verification of the M01/FIX-05 correction checkpoint.",
     "Recorded the product owner's iPhone 14 Pro Max result: temporary LAN/local-host runtime was unreachable, so HV-01 through HV-05 are BLOCKED/DEFERRED rather than passed.",
-    "Recorded product authorization to continue in full-auto mode through bounded milestones and defer low-risk M01 physical-device checks to the final reachable/installable-build acceptance pass."
+    "Recorded product authorization to continue in full-auto mode through bounded milestones and defer low-risk M01 physical-device checks to the final reachable/installable-build acceptance pass.",
+    "Accepted M02-T02 Copy Another Session automatically.",
+    "Accepted M02-T03 whole-session deletion automatically.",
+    "Accepted M02-T04 summary overrides automatically.",
+    "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "433f1c5 docs: resume M03 with trusted HTTPS rich-paste gate",
+    "73e79a5 docs: resolve E-002 in favor of trusted HTTPS rich-paste verification",
+    "610f288 docs: record notes plain fallback gate",
     "6cb1b3a fix: add insecure-origin clipboard fallback",
-    "ce95e4d feat: add notes clipboard spike",
-    "a01c228 feat: harden summary override editing",
-    "8d8c2dc feat: add session deletion confirmation",
-    "912fcba feat: accept M02 copy session flow"
+    "ce95e4d feat: add notes clipboard spike"
   ],
   "codexVerification": [
     {
@@ -117,17 +121,18 @@
   ],
   "unresolvedDefects": [
     "M01 FIX-05 physical-iPhone HV-01 through HV-05: BLOCKED/DEFERRED due unreachable temporary LAN/local-host runtime; final acceptance still required later.",
-    "Rich HTML/plain clipboard paste into Apple Notes on the target iPhone.",
+    "Rich HTML/table/color clipboard paste into Apple Notes on the target iPhone: pending trusted HTTPS retest.",
     "Faithful and Compact tall PNG export on the target iPhone.",
     "Full history/search, backup/restore, polish, and subsequent milestones according to the existing implementation plan."
   ],
   "activeEscalationsAndProductDecisionsNeeded": [
-    "No active product escalation blocks Codex from continuing.",
     "E-001 historical DSH rate-limit condition is no longer the current blocker.",
-    "M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance"
+    "E-002 is RESOLVED: use a trusted HTTPS build/origin and retest the existing rich clipboard path before considering a product downgrade or native/RTF alternative.",
+    "No unresolved product decision is currently blocking Codex from preparing the HTTPS verification path.",
+    "M03-T01 rich-paste verification is pending a trusted HTTPS build on the iPhone 14 Pro Max; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance"
   ],
   "decisionsMadeSinceLastSync": [
-    "iPhone plain fallback now passes text fidelity, while HTTP rich table/colors remain unavailable; E-002 opened for HTTPS versus plain-only product decision."
+    "Existing Gym Logger PWA now serves over local HTTPS at https://192.168.1.49:5173 with an installable public certificate; 140/140 tests and build remain green. Human rich-paste retest is next."
   ],
   "recordedDecisions": [
     {
@@ -153,6 +158,10 @@
     {
       "title": "Human-gate deferral / full-auto authorization — 2026-08-24",
       "detail": ""
+    },
+    {
+      "title": "E-002 rich Apple Notes paste decision — 2026-08-24",
+      "detail": ""
     }
   ],
   "relevantEvidence": [
@@ -168,15 +177,15 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "6cb1b3af87ef11bccf5b64ac1aa7e8b2d76b5c9a",
+    "commit": "433f1c5e6ddb8b864de0c5fda67435bf5877ebdd",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md",
+    "workingTree": "## main...origin/main\n M .gitignore\n M orchestration/state/STATE.md\n M vite.config.ts\n?? orchestration/evidence/HTTPS-RICH-PASTE-SETUP.md\n?? public/",
     "changedFiles": [
-      "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/state/STATE.md"
+      ".gitignore",
+      "orchestration/state/STATE.md",
+      "vite.config.ts",
+      "orchestration/evidence/HTTPS-RICH-PASTE-SETUP.md",
+      "public/"
     ]
   },
   "builder": {
@@ -196,11 +205,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t01-rich-gate-recorded",
-      "summary": "iPhone plain fallback now passes text fidelity, while HTTP rich table/colors remain unavailable; E-002 opened for HTTPS versus plain-only product decision.",
-      "at": "2026-08-24T14:48:13.524Z"
+      "name": "secure-origin-prepared",
+      "summary": "Existing Gym Logger PWA now serves over local HTTPS at https://192.168.1.49:5173 with an installable public certificate; 140/140 tests and build remain green. Human rich-paste retest is next.",
+      "at": "2026-08-24T14:57:29.214Z"
     },
-    "contextRevision": 17,
+    "contextRevision": 18,
     "openEscalations": [
       {
         "id": "E-002",
