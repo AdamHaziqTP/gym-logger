@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { publishContext, setBuilder } from "./publish.mjs";
+import { applyDecision, openEscalation, pollDecisions, publishContext, setBuilder, writeDecision } from "./publish.mjs";
 
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), "product-sync-"));
@@ -38,5 +38,30 @@ test("builder switching is safe and unavailable selections do not mutate state",
   assert.equal(JSON.parse(await readFile(join(root, "orchestration/product-sync/SYNC_STATE.json"), "utf8")).activeBuilder, "two");
   assert.match(await readFile(join(root, "orchestration/product-sync/generated/active-worker.patch.yml"), "utf8"), /model: model-two/);
   await assert.rejects(setBuilder({ root, builderId: "missing" }), /unavailable.*active builder remains 'two'/i);
+  assert.equal(JSON.parse(await readFile(join(root, "orchestration/product-sync/SYNC_STATE.json"), "utf8")).activeBuilder, "two");
+});
+
+test("the reverse channel accepts one current decision, rejects replay, and rejects stale context", async () => {
+  const root = await fixture();
+  const opened = await openEscalation({ root, id: "SYN-001", summary: "Choose the harmless synthetic option.", scope: "task", allowedActions: ["choose"] });
+  const decision = { schemaVersion: 1, type: "product-sync-decision", decisionId: "PD-SYN-001", projectId: "pilot", correlationId: "SYN-001", expectedSyncRevision: opened.synchronization.contextRevision, authority: "product-owner-chat", createdAt: new Date().toISOString(), scope: { level: "task", id: "SYN-001" }, action: "choose", payload: { choice: "synthetic-option-a", rationale: "Commissioning only; no build is authorized." } };
+  await writeDecision({ root, decision });
+  assert.deepEqual((await pollDecisions({ root })).map((item) => item.status), ["accepted"]);
+  assert.match(await readFile(join(root, "orchestration/state/DECISIONS.md"), "utf8"), /Product decision PD-SYN-001/);
+  assert.equal((await applyDecision({ root, decision })).status, "duplicate");
+
+  const openedAgain = await openEscalation({ root, id: "SYN-002", summary: "Choose another harmless option.", scope: "task", allowedActions: ["choose"] });
+  const stale = { ...decision, decisionId: "PD-SYN-002", correlationId: "SYN-002", expectedSyncRevision: openedAgain.synchronization.contextRevision - 1, scope: { level: "task", id: "SYN-002" } };
+  assert.equal((await applyDecision({ root, decision: stale })).status, "rejected");
+  assert.match((await readFile(join(root, "orchestration/product-sync/ACKNOWLEDGEMENTS.jsonl"), "utf8")), /stale-context-revision/);
+
+  const builderEscalation = await openEscalation({ root, id: "SYN-BUILDER", summary: "Select the configured test builder.", scope: "project", allowedActions: ["builder-switch-request"] });
+  const builderDecision = { schemaVersion: 1, type: "product-sync-decision", decisionId: "PD-SYN-BUILDER", projectId: "pilot", correlationId: "SYN-BUILDER", expectedSyncRevision: builderEscalation.synchronization.contextRevision, authority: "product-owner-chat", createdAt: new Date().toISOString(), scope: { level: "project", id: "SYN-BUILDER" }, action: "builder-switch-request", payload: { builderId: "two", reason: "Synthetic validation only; do not start a worker." } };
+  assert.equal((await applyDecision({ root, decision: builderDecision })).status, "accepted");
+  assert.equal(JSON.parse(await readFile(join(root, "orchestration/product-sync/SYNC_STATE.json"), "utf8")).activeBuilder, "two");
+
+  const failedBuilderEscalation = await openEscalation({ root, id: "SYN-BUILDER-FAIL", summary: "Reject an unavailable test builder.", scope: "project", allowedActions: ["builder-switch-request"] });
+  const failedBuilderDecision = { ...builderDecision, decisionId: "PD-SYN-BUILDER-FAIL", correlationId: "SYN-BUILDER-FAIL", expectedSyncRevision: failedBuilderEscalation.synchronization.contextRevision, scope: { level: "project", id: "SYN-BUILDER-FAIL" }, payload: { builderId: "missing", reason: "Synthetic failure path." } };
+  assert.equal((await applyDecision({ root, decision: failedBuilderDecision })).status, "rejected");
   assert.equal(JSON.parse(await readFile(join(root, "orchestration/product-sync/SYNC_STATE.json"), "utf8")).activeBuilder, "two");
 });

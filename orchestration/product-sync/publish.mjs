@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
-import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -32,7 +32,7 @@ function code(value) { return String.fromCharCode(96) + value + String.fromCharC
 
 async function load(root) {
   const base = join(root, "orchestration", "product-sync");
-  const fallback = { schemaVersion: 1, activeBuilder: "ox-alpha", events: [], builderChanges: [] };
+  const fallback = { schemaVersion: 1, activeBuilder: "ox-alpha", events: [], builderChanges: [], syncRevision: 0, openEscalations: [], decisionLedger: [] };
   const [config, registry, sync, stateText, decisionsText] = await Promise.all([
     json(join(base, "config.json")), json(join(base, "workers.json")), json(join(base, "SYNC_STATE.json"), fallback),
     readFile(join(root, "orchestration", "state", "STATE.md"), "utf8"), readFile(join(root, "orchestration", "state", "DECISIONS.md"), "utf8")
@@ -89,14 +89,20 @@ async function build(project, event) {
     codexVerification: reviews.reviews, humanVerification: reviews.human, unresolvedDefects: list(body(stateText, "Deferred"), 8), activeEscalationsAndProductDecisionsNeeded: [...list(body(stateText, "Escalations"), 8), humanGate].filter((item) => item !== "Not recorded"), decisionsMadeSinceLastSync: event?.summary ? [event.summary] : [], recordedDecisions: decisions, relevantEvidence: [...reviews.human.map((item) => item.path), ...reviews.refs],
     gitCheckpoint: { commit: git(root, ["rev-parse", "HEAD"]), branch: git(root, ["branch", "--show-current"]), workingTree: gitStatus, changedFiles: changed },
     builder: { id: builder.id, name: builder.name, provider: builder.provider, model: builder.model, launcher: registry.launcher, patchPath: config.publication.workerPatchPath },
-    synchronization: { lastEvent: event ?? sync.lastEvent, detailedLogs: "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.", bridge: config.bridge }
+    synchronization: {
+      lastEvent: event ?? sync.lastEvent,
+      contextRevision: sync.syncRevision ?? 0,
+      openEscalations: sync.openEscalations ?? [],
+      detailedLogs: "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
+      bridge: config.bridge
+    }
   };
 }
 
 export async function publishContext({ root = DEFAULT_ROOT, eventName, summary } = {}) {
   const project = await load(resolve(root));
   const event = eventName ? { name: eventName, summary: summary ?? "", at: timestamp() } : null;
-  const state = { ...project.sync, schemaVersion: 1, lastPublishedAt: timestamp(), lastEvent: event, events: event ? [event, ...(project.sync.events ?? [])].slice(0, project.config.limits.recentEvents) : project.sync.events ?? [] };
+  const state = { ...project.sync, schemaVersion: 1, syncRevision: (project.sync.syncRevision ?? 0) + 1, lastPublishedAt: timestamp(), lastEvent: event, events: event ? [event, ...(project.sync.events ?? [])].slice(0, project.config.limits.recentEvents) : project.sync.events ?? [] };
   const patchPath = await ensurePatch(project);
   const packet = await build({ ...project, sync: state, builder: project.builder }, event);
   packet.builder.patchPath = patchPath;
@@ -125,6 +131,145 @@ export async function setBuilder({ root = DEFAULT_ROOT, builderId, reason = "" }
 export async function readBuilder({ root = DEFAULT_ROOT } = {}) { const project = await load(resolve(root)); return { ...project.builder, launcher: project.registry.launcher }; }
 export async function prepareWorker({ root = DEFAULT_ROOT, taskFile } = {}) { const project = await load(resolve(root)); const patchPath = await ensurePatch(project); const task = await readFile(resolve(project.root, taskFile), "utf8"); return { executable: project.registry.launcher.path, arguments: ["--profile", project.registry.launcher.profile, project.registry.launcher.patchArgument, resolve(project.root, patchPath), task.trim()], builder: project.builder, patchPath }; }
 
+function bridgePath(project, key, fallback) { return join(project.root, project.config.publication?.[key] ?? fallback); }
+async function jsonl(path) {
+  try { return (await readFile(path, "utf8")).split(/\r?\n/).filter(Boolean).map((item) => JSON.parse(item)); }
+  catch (error) { if (error.code === "ENOENT") return []; throw error; }
+}
+async function appendJsonl(path, value) { await mkdir(dirname(path), { recursive: true }); await appendFile(path, `${JSON.stringify(value)}\n`, "utf8"); }
+function decisionFromText(text) {
+  const fenced = text.match(/```(?:product-sync-decision|json)\s*([\s\S]*?)```/i)?.[1]?.trim() ?? text.trim();
+  const value = JSON.parse(fenced);
+  return value.type === "product-sync-decision" ? value : (value.decision?.type === "product-sync-decision" ? value.decision : value);
+}
+function githubRepository(config) { return config.bridge?.repositoryUrl?.match(/github\.com\/([^/]+\/[^/]+?)(?:\.git)?$/i)?.[1]; }
+function requiredDecisionFields(decision) { return ["schemaVersion", "type", "decisionId", "projectId", "correlationId", "expectedSyncRevision", "authority", "createdAt", "scope", "action"]; }
+function highImpact(action) { return /delete|destroy|reset|force[-_ ]?push|production|publish|migration|credential|permission/i.test(action); }
+function decisionSummary(decision) { return decision.payload?.rationale || decision.payload?.choice || decision.action; }
+function findOpenEscalation(project, correlationId) { return (project.sync.openEscalations ?? []).find((item) => item.id === correlationId && item.status !== "resolved" && item.status !== "closed"); }
+function existingDecision(project, decision) { return (project.sync.decisionLedger ?? []).find((item) => item.decisionId === decision.decisionId); }
+function existingCorrelation(project, decision) { return (project.sync.decisionLedger ?? []).find((item) => item.status === "accepted" && item.correlationId === decision.correlationId); }
+
+export function validateDecision(project, decision) {
+  const missing = requiredDecisionFields(decision).filter((field) => decision[field] === undefined || decision[field] === null || decision[field] === "");
+  if (decision.schemaVersion !== 1 || decision.type !== "product-sync-decision") return { ok: false, reason: "schema-invalid" };
+  if (missing.length) return { ok: false, reason: `missing-fields:${missing.join(",")}` };
+  if (existingDecision(project, decision)) return { ok: false, duplicate: true, reason: "duplicate-or-replay" };
+  if (decision.projectId !== project.config.projectId) return { ok: false, reason: "project-mismatch" };
+  if (decision.authority !== "product-owner-chat" && decision.authority !== "adam") return { ok: false, reason: "authority-not-allowed" };
+  if (decision.expectedSyncRevision !== (project.sync.syncRevision ?? 0)) return { ok: false, reason: "stale-context-revision" };
+  const escalation = findOpenEscalation(project, decision.correlationId);
+  if (!escalation) return { ok: false, reason: "unknown-or-closed-escalation" };
+  if (!decision.scope || decision.scope.level !== escalation.scope.level || decision.scope.id !== escalation.scope.id) return { ok: false, reason: "scope-mismatch" };
+  if (Array.isArray(escalation.allowedActions) && !escalation.allowedActions.includes(decision.action)) return { ok: false, reason: "action-not-allowed-for-escalation" };
+  if (existingCorrelation(project, decision)) return { ok: false, reason: "conflicting-decision-for-correlation" };
+  if (highImpact(decision.action) && decision.humanApproval?.confirmed !== true) return { ok: false, reason: "human-approval-required" };
+  if (decision.action === "builder-switch-request") {
+    const builderId = decision.payload?.builderId;
+    const candidate = project.registry.builders.find((item) => item.id === builderId);
+    if (!candidate || candidate.available !== true) return { ok: false, reason: "builder-unavailable" };
+    if (!existsSync(project.registry.launcher.path)) return { ok: false, reason: "launcher-unavailable" };
+  }
+  return { ok: true, escalation };
+}
+
+async function recordResult(project, decision, result) {
+  const entry = { decisionId: decision.decisionId, correlationId: decision.correlationId, action: decision.action, status: result.status, reason: result.reason ?? "", at: timestamp() };
+  const state = { ...project.sync, schemaVersion: 1, decisionLedger: [entry, ...(project.sync.decisionLedger ?? [])].slice(0, project.config.limits.recentEvents ?? 12) };
+  await saveJson(join(project.root, project.config.publication.statePath), state);
+  await appendJsonl(bridgePath(project, "decisionLedgerPath", "orchestration/product-sync/DECISION_LEDGER.jsonl"), entry);
+  await appendJsonl(bridgePath(project, "acknowledgementsPath", "orchestration/product-sync/ACKNOWLEDGEMENTS.jsonl"), { ...entry, acknowledgedAt: timestamp() });
+  return entry;
+}
+
+async function appendDecisionDocument(project, decision) {
+  const path = join(project.root, "orchestration", "state", "DECISIONS.md");
+  const current = await readFile(path, "utf8");
+  const heading = `\n## Product decision ${decision.decisionId}\n\n- Correlation: ${decision.correlationId}\n- Scope: ${decision.scope.level}/${decision.scope.id}\n- Action: ${decision.action}\n- Decision: ${decisionSummary(decision)}\n- Recorded by: Codex after product-owner-chat response\n`;
+  await writeFile(path, `${current.trimEnd()}\n${heading}`, "utf8");
+}
+
+export async function applyDecision({ root = DEFAULT_ROOT, decision, decisionFile } = {}) {
+  const project = await load(resolve(root));
+  const incoming = decision ?? decisionFromText(await readFile(resolve(root, decisionFile), "utf8"));
+  const check = validateDecision(project, incoming);
+  if (!check.ok) {
+    if (check.duplicate) return { status: "duplicate", decisionId: incoming.decisionId, reason: check.reason };
+    const entry = await recordResult(project, incoming, { status: "rejected", reason: check.reason });
+    await publishContext({ root, eventName: "product-decision-rejected", summary: `${incoming.decisionId} rejected: ${check.reason}.` });
+    return entry;
+  }
+  const next = { ...project.sync, schemaVersion: 1, decisionLedger: [{ decisionId: incoming.decisionId, correlationId: incoming.correlationId, action: incoming.action, status: "accepted", at: timestamp() }, ...(project.sync.decisionLedger ?? [])].slice(0, project.config.limits.recentEvents ?? 12), openEscalations: (project.sync.openEscalations ?? []).map((item) => item.id === incoming.correlationId ? { ...item, status: "resolved", resolvedBy: incoming.decisionId, resolvedAt: timestamp() } : item) };
+  if (incoming.action === "builder-switch-request") {
+    const candidate = project.registry.builders.find((item) => item.id === incoming.payload.builderId);
+    const change = { at: timestamp(), from: project.builder.id, to: candidate.id, reason: incoming.payload.reason ?? `Product request ${incoming.decisionId}`, scope: incoming.scope };
+    next.activeBuilder = candidate.id;
+    next.builderChanges = [change, ...(project.sync.builderChanges ?? [])].slice(0, project.config.limits.recentEvents ?? 12);
+    await saveText(join(project.root, project.config.publication.workerPatchPath), patchFor(candidate));
+    await appendJsonl(bridgePath(project, "historyPath", "orchestration/product-sync/PUBLICATION_HISTORY.jsonl"), { type: "builder-change", ...change, decisionId: incoming.decisionId });
+  }
+  await appendDecisionDocument(project, incoming);
+  await saveJson(join(project.root, project.config.publication.statePath), next);
+  await appendJsonl(bridgePath(project, "decisionLedgerPath", "orchestration/product-sync/DECISION_LEDGER.jsonl"), next.decisionLedger[0]);
+  await appendJsonl(bridgePath(project, "acknowledgementsPath", "orchestration/product-sync/ACKNOWLEDGEMENTS.jsonl"), { ...next.decisionLedger[0], acknowledgedAt: timestamp() });
+  const packet = await publishContext({ root, eventName: "product-decision-accepted", summary: `${incoming.decisionId} accepted for ${incoming.correlationId}; ${incoming.action}.` });
+  return { status: "accepted", decisionId: incoming.decisionId, action: incoming.action, contextRevision: packet.synchronization.contextRevision };
+}
+
+export async function pollDecisions({ root = DEFAULT_ROOT } = {}) {
+  const project = await load(resolve(root));
+  const inbox = bridgePath(project, "inboxPath", "orchestration/product-sync/inbox");
+  let entries = [];
+  try { entries = (await readdir(inbox, { withFileTypes: true })).filter((item) => item.isFile() && /\.(json|md)$/i.test(item.name)).map((item) => join(inbox, item.name)); }
+  catch (error) { if (error.code !== "ENOENT") throw error; }
+  const results = [];
+  for (const path of entries.sort()) results.push(await applyDecision({ root, decisionFile: path }));
+  return results;
+}
+
+export async function pollGitHubComments({ root = DEFAULT_ROOT } = {}) {
+  const project = await load(resolve(root));
+  const repo = githubRepository(project.config);
+  const issue = project.config.bridge?.issueNumber;
+  if (!repo || !issue) throw new Error("GitHub bridge requires bridge.repositoryUrl and bridge.issueNumber in config.json.");
+  let comments;
+  try { comments = JSON.parse(execFileSync("gh", ["api", "--paginate", `repos/${repo}/issues/${issue}/comments`], { encoding: "utf8" })); }
+  catch { throw new Error("GitHub polling requires an authenticated 'gh' CLI. The connector can still be used to write/read the issue; run poll-decisions after importing comments into the inbox when gh is unavailable."); }
+  const seen = new Set(project.sync.githubCommentIds ?? []);
+  const results = [];
+  for (const comment of comments) {
+    if (seen.has(String(comment.id))) continue;
+    let incoming;
+    try { incoming = decisionFromText(comment.body ?? ""); } catch { continue; }
+    if (incoming.type !== "product-sync-decision" || incoming.projectId !== project.config.projectId) continue;
+    results.push(await applyDecision({ root, decision: incoming }));
+    const latest = await load(resolve(root));
+    latest.sync.githubCommentIds = [...(latest.sync.githubCommentIds ?? []), String(comment.id)].slice(-100);
+    await saveJson(join(root, project.config.publication.statePath), latest.sync);
+    seen.add(String(comment.id));
+  }
+  return results;
+}
+
+export async function openEscalation({ root = DEFAULT_ROOT, id, summary, scope = "escalation", allowedActions = ["choose", "approve", "reject", "clarify", "builder-switch-request"] } = {}) {
+  if (!id || !summary) throw new Error("Escalation id and summary are required.");
+  const project = await load(resolve(root));
+  if (findOpenEscalation(project, id)) throw new Error(`Escalation '${id}' is already open.`);
+  const state = { ...project.sync, openEscalations: [{ id, summary, scope: { level: scope, id }, allowedActions, status: "open", openedAt: timestamp() }, ...(project.sync.openEscalations ?? [])] };
+  await saveJson(join(project.root, project.config.publication.statePath), state);
+  return publishContext({ root, eventName: "escalation-opened", summary: `${id}: ${summary}` });
+}
+
+export async function writeDecision({ root = DEFAULT_ROOT, decision } = {}) {
+  if (!decision) throw new Error("A decision object is required.");
+  const project = await load(resolve(root));
+  const inbox = bridgePath(project, "inboxPath", "orchestration/product-sync/inbox");
+  await mkdir(inbox, { recursive: true });
+  const path = join(inbox, `${decision.decisionId}.json`);
+  await saveJson(path, decision);
+  return path;
+}
+
 function arg(args, name) { const index = args.indexOf(name); return index >= 0 ? args[index + 1] : undefined; }
-async function main() { const [command = "publish", ...args] = process.argv.slice(2); const root = arg(args, "--root") ?? DEFAULT_ROOT; if (command === "publish") { const packet = await publishContext({ root, eventName: arg(args, "--event"), summary: arg(args, "--summary") }); console.log(`Published ${packet.project.name} context at ${packet.generatedAt}.`); return; } if (command === "set-builder") { const result = await setBuilder({ root, builderId: arg(args, "--builder"), reason: arg(args, "--reason") }); console.log(`Active builder is now ${result.builder.name} (${result.builder.provider}/${result.builder.model}).`); return; } if (command === "show-builder") { console.log(JSON.stringify(await readBuilder({ root }), null, 2)); return; } if (command === "prepare-worker") { console.log(JSON.stringify(await prepareWorker({ root, taskFile: arg(args, "--task-file") }), null, 2)); return; } throw new Error(`Unknown command '${command}'.`); }
+async function main() { const [command = "publish", ...args] = process.argv.slice(2); const root = arg(args, "--root") ?? DEFAULT_ROOT; if (command === "publish") { const packet = await publishContext({ root, eventName: arg(args, "--event"), summary: arg(args, "--summary") }); console.log(`Published ${packet.project.name} context at ${packet.generatedAt} (revision ${packet.synchronization.contextRevision}).`); return; } if (command === "set-builder") { const result = await setBuilder({ root, builderId: arg(args, "--builder"), reason: arg(args, "--reason") }); console.log(`Active builder is now ${result.builder.name} (${result.builder.provider}/${result.builder.model}).`); return; } if (command === "show-builder") { console.log(JSON.stringify(await readBuilder({ root }), null, 2)); return; } if (command === "prepare-worker") { console.log(JSON.stringify(await prepareWorker({ root, taskFile: arg(args, "--task-file") }), null, 2)); return; } if (command === "open-escalation") { const packet = await openEscalation({ root, id: arg(args, "--id"), summary: arg(args, "--summary"), scope: arg(args, "--scope") ?? "escalation", allowedActions: (arg(args, "--allowed-actions") ?? "choose,approve,reject,clarify,builder-switch-request").split(",") }); console.log(`Opened ${arg(args, "--id")} at context revision ${packet.synchronization.contextRevision}.`); return; } if (command === "poll-decisions") { console.log(JSON.stringify(await pollDecisions({ root }), null, 2)); return; } if (command === "poll-github") { console.log(JSON.stringify(await pollGitHubComments({ root }), null, 2)); return; } if (command === "apply-decision") { console.log(JSON.stringify(await applyDecision({ root, decisionFile: arg(args, "--decision-file") }), null, 2)); return; } throw new Error(`Unknown command '${command}'.`); }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((error) => { console.error(error.message); process.exitCode = 1; });

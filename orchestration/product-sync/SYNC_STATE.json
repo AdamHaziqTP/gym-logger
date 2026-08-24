@@ -3,16 +3,22 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "product-orchestrator-commissioned",
+      "summary": "Bidirectional product-sync protocol, bridge issue, reusable skill, and bootstrap tooling commissioned; Gym Logger remains at M01 human gate.",
+      "at": "2026-08-24T09:57:24.974Z"
+    },
+    {
       "name": "github-bridge-configured",
       "summary": "GitHub repository connected; product-sync packet regenerated for the current M01 human gate.",
       "at": "2026-08-24T09:23:09.154Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T09:23:09.155Z",
+  "lastPublishedAt": "2026-08-24T09:57:24.975Z",
   "lastEvent": {
-    "name": "github-bridge-configured",
-    "summary": "GitHub repository connected; product-sync packet regenerated for the current M01 human gate.",
-    "at": "2026-08-24T09:23:09.154Z"
-  }
+    "name": "product-orchestrator-commissioned",
+    "summary": "Bidirectional product-sync protocol, bridge issue, reusable skill, and bootstrap tooling commissioned; Gym Logger remains at M01 human gate.",
+    "at": "2026-08-24T09:57:24.974Z"
+  },
+  "syncRevision": 1
 }

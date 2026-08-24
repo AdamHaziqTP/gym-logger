@@ -16,16 +16,23 @@
     "jsonPath": "orchestration/product-sync/PRODUCT_CONTEXT.json",
     "statePath": "orchestration/product-sync/SYNC_STATE.json",
     "historyPath": "orchestration/product-sync/PUBLICATION_HISTORY.jsonl",
-    "workerPatchPath": "orchestration/product-sync/generated/active-worker.patch.yml"
+    "workerPatchPath": "orchestration/product-sync/generated/active-worker.patch.yml",
+    "inboxPath": "orchestration/product-sync/inbox",
+    "decisionLedgerPath": "orchestration/product-sync/DECISION_LEDGER.jsonl",
+    "acknowledgementsPath": "orchestration/product-sync/ACKNOWLEDGEMENTS.jsonl"
   },
   "bridge": {
-    "mode": "repository-file",
+    "mode": "github-issue-comment-or-repository-inbox",
     "currentAccess": "github-repository",
     "repositoryUrl": "https://github.com/AdamHaziqTP/gym-logger",
-    "recommendedUpgrade": "Connect the GitHub app in ChatGPT to the AdamHaziqTP/gym-logger repository and enable repository sync if available on the account.",
+    "writeProtocol": "product-sync-decision-v1",
+    "issueTitle": "[product-sync] Gym Logger product decisions",
+    "issueNumber": 1,
+    "recommendedUpgrade": "If the product conversation can write through the GitHub app, use one append-only comment on the configured product-sync issue. If it can only update files, commit one JSON artifact under orchestration/product-sync/inbox/.",
     "directChatInjection": false,
-    "minimumUserAction": "In the product conversation, ask it to read orchestration/product-sync/PRODUCT_CONTEXT.md from the connected GitHub repository.",
-    "why": "The repository is pushed and ready, but this Codex environment cannot inject a message into an existing ChatGPT conversation or grant the ChatGPT GitHub connector access on the user's behalf."
+    "eventDrivenWakeup": false,
+    "minimumUserAction": "Connect the repository in the product conversation, ask it to read orchestration/product-sync/PRODUCT_CONTEXT.md, and let the local Codex loop run poll-decisions.",
+    "why": "The current GitHub connector exposes supported file and issue-comment writes to tooling, but this environment cannot verify or grant write permission to a particular existing ChatGPT conversation, and it cannot inject or wake that conversation."
   },
   "limits": { "recentCommits": 5, "recentReviews": 3, "recentDecisions": 8, "recentEvidence": 8, "recentEvents": 12 }
 }

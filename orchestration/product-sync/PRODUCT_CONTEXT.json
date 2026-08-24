@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T09:23:09.204Z",
+  "generatedAt": "2026-08-24T09:57:25.022Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -49,11 +49,11 @@
     "Confirmed the Desktop DSH wrapper exists at the verified path."
   ],
   "recentImplementationChanges": [
+    "dcae456 chore: connect product sync bridge to GitHub repository",
     "2b506a4 Revert \"chore: restore product context sync layer\"",
     "a3ce029 Revert \"docs: refresh product context packet\"",
     "2ebbe95 Revert \"docs: record product sync commit checkpoint\"",
-    "843f922 docs: record product sync commit checkpoint",
-    "cd38c11 docs: refresh product context packet"
+    "843f922 docs: record product sync commit checkpoint"
   ],
   "codexVerification": [
     {
@@ -109,7 +109,7 @@
     "awaiting final iPhone verification; FIX-05 automated correction passed independently"
   ],
   "decisionsMadeSinceLastSync": [
-    "GitHub repository connected; product-sync packet regenerated for the current M01 human gate."
+    "Bidirectional product-sync protocol, bridge issue, reusable skill, and bootstrap tooling commissioned; Gym Logger remains at M01 human gate."
   ],
   "recordedDecisions": [
     {
@@ -145,11 +145,18 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "2b506a41200eecf2a00f1c026adc51b554a77e13",
+    "commit": "dcae4563e2c4b7583d8ad4bf59db4bc58fbc302e",
     "branch": "main",
-    "workingTree": "## main...origin/main\n?? orchestration/product-sync/",
+    "workingTree": "## main...origin/main\n M orchestration/product-sync/README.md\n M orchestration/product-sync/config.json\n M orchestration/product-sync/publish.mjs\n D orchestration/product-sync/publish.test.mjs\n?? orchestration/product-orchestrator/\n?? orchestration/product-sync/inbox/\n?? orchestration/product-sync/publish.nodecheck.mjs\n?? orchestration/reports/product-orchestrator-commissioning-2026-08-24.md",
     "changedFiles": [
-      "orchestration/product-sync/"
+      "orchestration/product-sync/README.md",
+      "orchestration/product-sync/config.json",
+      "orchestration/product-sync/publish.mjs",
+      "orchestration/product-sync/publish.test.mjs",
+      "orchestration/product-orchestrator/",
+      "orchestration/product-sync/inbox/",
+      "orchestration/product-sync/publish.nodecheck.mjs",
+      "orchestration/reports/product-orchestrator-commissioning-2026-08-24.md"
     ]
   },
   "builder": {
@@ -169,19 +176,25 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "github-bridge-configured",
-      "summary": "GitHub repository connected; product-sync packet regenerated for the current M01 human gate.",
-      "at": "2026-08-24T09:23:09.154Z"
+      "name": "product-orchestrator-commissioned",
+      "summary": "Bidirectional product-sync protocol, bridge issue, reusable skill, and bootstrap tooling commissioned; Gym Logger remains at M01 human gate.",
+      "at": "2026-08-24T09:57:24.974Z"
     },
+    "contextRevision": 1,
+    "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
-      "mode": "repository-file",
+      "mode": "github-issue-comment-or-repository-inbox",
       "currentAccess": "github-repository",
       "repositoryUrl": "https://github.com/AdamHaziqTP/gym-logger",
-      "recommendedUpgrade": "Connect the GitHub app in ChatGPT to the AdamHaziqTP/gym-logger repository and enable repository sync if available on the account.",
+      "writeProtocol": "product-sync-decision-v1",
+      "issueTitle": "[product-sync] Gym Logger product decisions",
+      "issueNumber": 1,
+      "recommendedUpgrade": "If the product conversation can write through the GitHub app, use one append-only comment on the configured product-sync issue. If it can only update files, commit one JSON artifact under orchestration/product-sync/inbox/.",
       "directChatInjection": false,
-      "minimumUserAction": "In the product conversation, ask it to read orchestration/product-sync/PRODUCT_CONTEXT.md from the connected GitHub repository.",
-      "why": "The repository is pushed and ready, but this Codex environment cannot inject a message into an existing ChatGPT conversation or grant the ChatGPT GitHub connector access on the user's behalf."
+      "eventDrivenWakeup": false,
+      "minimumUserAction": "Connect the repository in the product conversation, ask it to read orchestration/product-sync/PRODUCT_CONTEXT.md, and let the local Codex loop run poll-decisions.",
+      "why": "The current GitHub connector exposes supported file and issue-comment writes to tooling, but this environment cannot verify or grant write permission to a particular existing ChatGPT conversation, and it cannot inject or wake that conversation."
     }
   }
 }
