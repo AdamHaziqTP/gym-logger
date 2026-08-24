@@ -66,3 +66,29 @@ Success requires target-iPhone evidence that the resulting Apple Notes content p
 Timebox the investigation to one bounded spike with no production rewrite. If none of these routes produces a materially better, low-friction result, stop the branch and return evidence to the product bridge. At that point the default product decision is to accept the current editable rich-table paste **without colours** as a documented v1 platform limitation, preserve the working plain-text fallback, and continue M03 rather than spiral into repeated clipboard experiments.
 
 M03-T02 remains blocked only for the duration of this bounded feasibility spike and its required decision/evidence return.
+
+## E-003 final v1 disposition — 2026-08-25
+
+Close the feasibility branch and **accept editable Apple Notes rich paste without category colours as a documented v1 iOS/Notes limitation**.
+
+The standard trusted-HTTPS path already satisfies the two highest-priority transfer requirements: the workout arrives as a real editable Apple Notes table, and the values/order are correct. Apple Notes strips the category foreground/highlight colours. The bounded RTF/file/Shortcuts harness was implemented and verified, but requiring the product owner to learn auxiliary transfer routes adds workflow friction that conflicts with the product's core goal of making Notes logging simpler, not more complicated.
+
+The product owner explicitly reported that the extra feasibility instructions/routes were not understandable enough to be useful and that another standard Copy-to-Notes attempt still had no colours. Treat that usability cost as sufficient reason to stop the branch even though every theoretical auxiliary route was not physically exhausted.
+
+V1 rules from this decision:
+
+- Keep the one-tap rich Copy to Notes path that produces an editable table.
+- Keep all values/order/data fidelity.
+- Document that category colours do not survive the Apple Notes cross-app paste on iPhone.
+- Keep the five colours fully intact inside Gym Logger itself.
+- Retain the truthful plain-text fallback for unsupported/insecure clipboard environments.
+- Do not add RTF/native/Shortcuts setup to the normal v1 workflow.
+- Do not run further open-ended clipboard experiments before v1 completion.
+
+M03-T02 is now unblocked for Codex to continue automatically.
+
+## iPhone Home layout defect — 2026-08-25
+
+The product owner supplied an iPhone 14 Pro Max screenshot showing **Copy Another Session** visually clipping/overlapping the **History** button beneath it on the Home screen. This is a genuine responsive-layout defect, not a product ambiguity.
+
+Codex should route a bounded correction before final acceptance. The fix must preserve the sparse Home layout and should not redesign the navigation. This defect does not block M03 clipboard continuation.
