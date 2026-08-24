@@ -7,12 +7,12 @@ Updated: 2026-08-24
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M01 — offline foundation vertical slice
-- Current task: M01 repeat human verification after M01-T01-FIX-04
-- Status: HUMAN_REVIEW_REQUIRED
+- Current task: M01-T01-FIX-05 — final legend and iPhone drag-handle hardening
+- Status: READY_FOR_OX
 - Automatic correction attempts used: 2 / 2
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
-- Human review gate: awaiting repeat iPhone verification; FIX-04 automated correction passed independently
-- Human-gate correction cycle: 1 / 2; the original human-gate specification gap has been corrected and awaits device confirmation
+- Human review gate: awaiting final FIX-05 correction; FIX-04 automated correction passed independently
+- Human-gate correction cycle: 1 / 2; final narrow touch/legend feedback is now delegated as FIX-05
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
 ## Known-good checkpoints
@@ -35,7 +35,7 @@ Updated: 2026-08-24
 - M01-T01 has been independently audited.
 - Correction 1 repaired the evidenced latest-session sort failure and removed debug residue.
 - Correction 2 was blocked by DSH rate limiting before execution; this is being retried as `M01-T01-FIX-03` after the infrastructure condition was reported resolved.
-- Final decision: FIX-04 automated verification passed; return M01 to human iPhone/visual verification; do not start M02.
+- Final decision: apply FIX-05, independently verify, then return M01 to final human iPhone verification; do not start M02.
 
 ## Deferred
 

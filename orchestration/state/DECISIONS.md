@@ -26,3 +26,7 @@ If the spec, references, and this file do not determine a user-facing behavior, 
 ## Human-gate correction decision — 2026-08-24
 
 The product owner directed the M01 correction loop to close the approved current-session resume, category legend, and Notes-style row interaction after the physical-iPhone gate exposed them as missing. These are genuine specification gaps, not new generic fitness features. M02 remains blocked until the correction is independently verified and the device gate is repeated.
+
+## Final legend decision — 2026-08-24
+
+The visible session legend contains only the five Apple highlight navigation categories: Arms, Back, Chest, Delts, and Legs. `none` remains an internal unhighlighted/white state for abs and other uncategorized rows; it is not a sixth visible legend category.

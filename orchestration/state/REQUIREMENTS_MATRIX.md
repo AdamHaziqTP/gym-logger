@@ -14,7 +14,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-008 | Skip remains plain text, is not auto-dimmed/deleted, and counts in totals. | Spec §8; D1-D5 | M01-M05 | PLANNED | — |
 | REQ-009 | Summary supports calculated values plus manual overrides including 40/39 fixture mismatch. | Spec §9; E1-E3 | M01-M02 | PLANNED | — |
 | REQ-010 | All five visible columns accept arbitrary strings without normalization. | Spec §§6.1-6.3, 27.6-27.7; B1-B5 | M01-M04 | VERIFIED (automated) | M01 evidence; 32/32 |
-| REQ-011 | Row-level color system: Arms orange, Back purple, Chest mint, Delts blue, Legs pink, None. | Spec §5; references/IMG_5550-5554 | M01-M04 | VERIFIED (automated; device pending) | FIX-04 tests; HV-06 |
+| REQ-011 | Row-level color system: Arms orange, Back purple, Chest mint, Delts blue, Legs pink, None. | Spec §5; references/IMG_5550-5554 | M01-M04 | IN_PROGRESS (FIX-05) | five visible legend categories; none remains internal; final device gate pending |
 | REQ-012 | Dark Notes-like presentation uses restrained background, subtle grid, readable colored text/highlights. | Spec §§5.2, 22; IMG_5501-5502 | M01-M04 | VERIFIED (automated; device pending) | FIX-04 source audit; HV-06/HV-07 |
 | REQ-013 | Tap cell edits immediately with normal text behavior. | Spec §7.1; C1 | M01 | VERIFIED (automated) | M01 evidence; App tests |
 | REQ-014 | Apple Notes-like row handle selects a row; selected treatment is clear. | Spec §7.2; C2-C3 | M01 human-gate correction / M04 | VERIFIED (automated; device pending) | FIX-04 tests; HV-04/HV-05 |
