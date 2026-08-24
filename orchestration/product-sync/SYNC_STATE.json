@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "product-orchestrator-checkpoint",
+      "summary": "Clean integration checkpoint recorded after commissioning tests; Gym Logger remains at M01 human gate.",
+      "at": "2026-08-24T09:57:42.446Z"
+    },
+    {
       "name": "product-orchestrator-commissioned",
       "summary": "Bidirectional product-sync protocol, bridge issue, reusable skill, and bootstrap tooling commissioned; Gym Logger remains at M01 human gate.",
       "at": "2026-08-24T09:57:24.974Z"
@@ -14,11 +19,11 @@
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T09:57:24.975Z",
+  "lastPublishedAt": "2026-08-24T09:57:42.447Z",
   "lastEvent": {
-    "name": "product-orchestrator-commissioned",
-    "summary": "Bidirectional product-sync protocol, bridge issue, reusable skill, and bootstrap tooling commissioned; Gym Logger remains at M01 human gate.",
-    "at": "2026-08-24T09:57:24.974Z"
+    "name": "product-orchestrator-checkpoint",
+    "summary": "Clean integration checkpoint recorded after commissioning tests; Gym Logger remains at M01 human gate.",
+    "at": "2026-08-24T09:57:42.446Z"
   },
-  "syncRevision": 1
+  "syncRevision": 2
 }
