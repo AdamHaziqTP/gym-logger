@@ -1,7 +1,7 @@
 # Codex independent review — M01-T01-FIX-04
 
-Date: 2026-08-24  
-Worker report: `orchestration/reports/M01-T01-FIX-04.md`  
+Date: 2026-08-24
+Worker report: `orchestration/reports/M01-T01-FIX-04.md`
 Decision: **AUTOMATED PASS — HUMAN VERIFICATION REQUIRED**
 
 ## Independent verification

@@ -19,7 +19,7 @@ Updated: 2026-08-24
 
 - Handoff baseline: `db71546` — `chore: checkpoint gym logger handoff`
 - Orchestration bootstrap: `dd72762`
-- Last orchestration evidence checkpoint: pending FIX-04 automated checkpoint commit
+- Last orchestration evidence checkpoint: `6efab39` — FIX-04 automated known-good checkpoint candidate
 - M01 accepted checkpoint: none; product acceptance remains gated by human verification
 
 ## Completed
