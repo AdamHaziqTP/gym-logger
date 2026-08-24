@@ -427,6 +427,7 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
   };
 
   const selectedRow = sortedRows.find((row) => row.id === selectedRowId) ?? null;
+  const summaryLine = displaySummary(session);
 
   const saveLabel =
     saveState === "saving" ? "Saving…" : saveState === "saved" ? "Saved" : "";
@@ -448,8 +449,10 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
 
       {editingSummary ? (
         <SummaryEditor
-          db={db}
           session={session}
+          onApply={(override) =>
+            runSave(() => persistSummaryOverride(db, sessionId, override))
+          }
           onDone={() => setEditingSummary(false)}
         />
       ) : (
@@ -459,8 +462,7 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
           onClick={() => setEditingSummary(true)}
           aria-label="Edit session summary"
         >
-          {displaySummary(session).sets} sets ·{" "}
-          {displaySummary(session).exercises} exercises
+          {summaryLine.sets} sets · {summaryLine.exercises} exercises
         </button>
       )}
 
@@ -784,13 +786,26 @@ function RowMenu(props: RowMenuProps) {
 }
 
 interface SummaryEditorProps {
-  db: GymLogDB;
   session: WorkoutSession;
+  /**
+   * Persists the resulting override — or its removal (`undefined`) — through
+   * the session's normal save path, so the header's Saved indicator applies.
+   */
+  onApply: (override: SessionSummaryOverride | undefined) => void;
   onDone: () => void;
 }
 
-/** Manual summary override editor (spec §9.2). Values stay free-form text. */
-function SummaryEditor({ db, session, onDone }: SummaryEditorProps) {
+/**
+ * Manual summary override editor (spec §9.2; M02-T04). Both totals stay
+ * free-form text and are stored exactly as typed — no numeric parsing,
+ * casing, or whitespace normalization. Commit rules per field:
+ * - blank entry → no override for that total (the calculated value shows);
+ * - entry equal to the calculated value → dropped (per-field reset);
+ * - anything else → stored verbatim as the display string.
+ * `Reset to calculated` fills both fields with the calculated values, so
+ * confirming them removes the whole override; `Cancel` writes nothing.
+ */
+function SummaryEditor({ session, onApply, onDone }: SummaryEditorProps) {
   const calculated = calculateSummary(session.rows);
   const current = displaySummary(session);
   const [setsText, setSetsText] = useState(current.sets);
@@ -798,20 +813,15 @@ function SummaryEditor({ db, session, onDone }: SummaryEditorProps) {
 
   const apply = () => {
     const override: SessionSummaryOverride = {};
-    if (setsText.trim() !== String(calculated.sets)) {
-      override.sets = setsText.trim();
+    const sets = setsText.trim();
+    if (sets !== "" && sets !== String(calculated.sets)) {
+      override.sets = setsText;
     }
-    if (exercisesText.trim() !== String(calculated.exercises)) {
-      override.exercises = exercisesText.trim();
+    const exercises = exercisesText.trim();
+    if (exercises !== "" && exercises !== String(calculated.exercises)) {
+      override.exercises = exercisesText;
     }
-    const hasOverride = Object.keys(override).length > 0;
-    void persistSummaryOverride(
-      db,
-      session.id,
-      hasOverride ? override : undefined,
-    ).catch((error) =>
-      console.error("Gym Logger: summary save failed", error),
-    );
+    onApply(Object.keys(override).length > 0 ? override : undefined);
     onDone();
   };
 
@@ -850,7 +860,7 @@ function SummaryEditor({ db, session, onDone }: SummaryEditorProps) {
             setExercisesText(String(calculated.exercises));
           }}
         >
-          Use calculated ({calculated.sets}/{calculated.exercises})
+          Reset to calculated
         </button>
         <button type="button" className="btn btn-secondary btn-small" onClick={onDone}>
           Cancel
@@ -859,6 +869,10 @@ function SummaryEditor({ db, session, onDone }: SummaryEditorProps) {
           Done
         </button>
       </div>
+      <p className="summary-calculated-hint">
+        Calculated from rows: {calculated.sets} sets · {calculated.exercises}{" "}
+        exercises
+      </p>
     </form>
   );
 }

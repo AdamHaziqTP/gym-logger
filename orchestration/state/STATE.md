@@ -8,7 +8,7 @@ Updated: 2026-08-24
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M02 — next bounded implementation milestone after M01 foundation
 - Current task: M02-T02 — Copy Another Session preview and clone flow
-- Status: READY_FOR_OX (M02-T04)
+- Status: READY_FOR_OX (M03-T01)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
 - Human review gate: M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance
@@ -67,10 +67,12 @@ Updated: 2026-08-24
 - Prepared `orchestration/tasks/M02-T03.md` from the M02 plan for whole-session deletion confirmation; summary override UI remains a later bounded M02 task.
 - M02-T03 automated checkpoint accepted by Codex: whole-session delete confirmation and isolated transactional deletion; 98/98 tests, build, and LAN runtime smoke passed. Physical and visual acceptance remain unclaimed.
 - Prepared `orchestration/tasks/M02-T04.md` from spec §9.2 for manual Sets/Exercises summary overrides and reset-to-calculated behavior.
+- M02-T04 automated checkpoint accepted by Codex: summary overrides, arbitrary strings, persistence/remount, and reset-to-calculated; 105/105 tests, build, and LAN runtime smoke passed. Physical and visual acceptance remain unclaimed.
+- Prepared `orchestration/tasks/M03-T01.md` for the minimal Apple Notes clipboard integration spike; target-iPhone paste remains a human gate.
 
 ## Active correction checkpoint
 
-- Active task: `orchestration/tasks/M02-T04.md`
-- Base implementation checkpoint: accepted M02-T03 automated checkpoint, to be committed before dispatch
-- Worker disposition: M02-T03 accepted for automated scope; M01 physical gate remains deferred
-- Next action: checkpoint the accepted M02-T03 changes, prepare the product packet, invoke the configured DSH/OX worker for M02-T04, then independently verify before acceptance
+- Active task: `orchestration/tasks/M03-T01.md`
+- Base implementation checkpoint: accepted M02-T04 automated checkpoint, to be committed before dispatch
+- Worker disposition: M02-T04 accepted for automated scope; M01 physical gate remains deferred
+- Next action: checkpoint the accepted M02-T04 changes, prepare the product packet, invoke the configured DSH/OX worker for M03-T01, then independently verify and stop at the Apple Notes human gate

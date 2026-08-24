@@ -12,7 +12,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-006 | Start today's session uses local phone date and creates exactly one session. | Spec §§4.2, 27.1-27.3; A1-A4 | M01-M02 | PLANNED | — |
 | REQ-007 | Clone rows, order, text, and highlights; do not blank Reps/Weight. | Spec §§4.2, 12.3; A2 | M01-M02 | VERIFIED (automated) | M02-T02-FIX-01 Codex review; 91/91 |
 | REQ-008 | Skip remains plain text, is not auto-dimmed/deleted, and counts in totals. | Spec §8; D1-D5 | M01-M05 | PLANNED | — |
-| REQ-009 | Summary supports calculated values plus manual overrides including 40/39 fixture mismatch. | Spec §9; E1-E3 | M01-M02 | IN_PROGRESS | M02-T04 prepared; not implemented |
+| REQ-009 | Summary supports calculated values plus manual overrides including 40/39 fixture mismatch. | Spec §9; E1-E3 | M01-M02 | VERIFIED (automated) | M02-T04 Codex review; 105/105 |
 | REQ-010 | All five visible columns accept arbitrary strings without normalization. | Spec §§6.1-6.3, 27.6-27.7; B1-B5 | M01-M04 | VERIFIED (automated) | M01 evidence; 32/32 |
 | REQ-011 | Row-level color system: Arms orange, Back purple, Chest mint, Delts blue, Legs pink, None. | Spec §5; references/IMG_5550-5554 | M01-M04 | VERIFIED (automated; device pending) | FIX-05 exact five-entry legend; none internal; final device gate |
 | REQ-012 | Dark Notes-like presentation uses restrained background, subtle grid, readable colored text/highlights. | Spec §§5.2, 22; IMG_5501-5502 | M01-M04 | VERIFIED (automated; device pending) | FIX-04 source audit; HV-06/HV-07 |
@@ -43,4 +43,4 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 
 ## Pilot disposition
 
-M01 remains limited to its first-slice intent, with FIX-05 physical checks explicitly deferred rather than passed. M02-T01 covers History/search/editable historical sessions, M02-T02 covers Copy Another Session, and M02-T03 covers whole-session deletion for automated scope; no later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation. M02-T04 summary override UI is the next bounded task.
+M01 remains limited to its first-slice intent, with FIX-05 physical checks explicitly deferred rather than passed. M02-T01 through M02-T04 cover History/search/editable sessions, Copy Another Session, whole-session deletion, and summary overrides for automated scope; no later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation. M03-T01 Apple Notes clipboard integration is the next bounded task and must stop for its target-iPhone human gate.
