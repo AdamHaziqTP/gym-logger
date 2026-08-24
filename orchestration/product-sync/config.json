@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "projectId": "gym-logger",
+  "projectName": "Gym Logger",
+  "identity": "An offline-first iPhone Home Screen utility that makes Apple Notes-style gym logging easier while keeping Apple Notes as the canonical archive.",
+  "purpose": "Reduce the interaction cost of maintaining a large Apple Notes workout log without adding accounts, cloud sync, analytics, or generic fitness-platform features.",
+  "authoritativeDocs": [
+    { "path": "GYM_LOGGER_SPEC.md", "role": "Product specification and acceptance authority", "precedence": 1 },
+    { "path": "references/", "role": "Supplied visual and data references", "precedence": 2 },
+    { "path": "orchestration/state/DECISIONS.md", "role": "Implementation decisions that preserve the specification", "precedence": 3 },
+    { "path": "orchestration/", "role": "Engineering state, tasks, reviews, evidence, and reports", "precedence": 4 }
+  ],
+  "productChatRole": "Product authority and human interface. It can consume the published packet and decide unresolved product questions, but it does not accept worker claims as verification.",
+  "publication": {
+    "markdownPath": "orchestration/product-sync/PRODUCT_CONTEXT.md",
+    "jsonPath": "orchestration/product-sync/PRODUCT_CONTEXT.json",
+    "statePath": "orchestration/product-sync/SYNC_STATE.json",
+    "historyPath": "orchestration/product-sync/PUBLICATION_HISTORY.jsonl",
+    "workerPatchPath": "orchestration/product-sync/generated/active-worker.patch.yml"
+  },
+  "bridge": {
+    "mode": "repository-file",
+    "currentAccess": "github-repository",
+    "repositoryUrl": "https://github.com/AdamHaziqTP/gym-logger",
+    "recommendedUpgrade": "Connect the GitHub app in ChatGPT to the AdamHaziqTP/gym-logger repository and enable repository sync if available on the account.",
+    "directChatInjection": false,
+    "minimumUserAction": "In the product conversation, ask it to read orchestration/product-sync/PRODUCT_CONTEXT.md from the connected GitHub repository.",
+    "why": "The repository is pushed and ready, but this Codex environment cannot inject a message into an existing ChatGPT conversation or grant the ChatGPT GitHub connector access on the user's behalf."
+  },
+  "limits": { "recentCommits": 5, "recentReviews": 3, "recentDecisions": 8, "recentEvidence": 8, "recentEvents": 12 }
+}

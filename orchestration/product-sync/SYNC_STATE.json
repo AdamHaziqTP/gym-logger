@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "activeBuilder": "ox-alpha",
+  "events": [
+    {
+      "name": "github-bridge-configured",
+      "summary": "GitHub repository connected; product-sync packet regenerated for the current M01 human gate.",
+      "at": "2026-08-24T09:23:09.154Z"
+    }
+  ],
+  "builderChanges": [],
+  "lastPublishedAt": "2026-08-24T09:23:09.155Z",
+  "lastEvent": {
+    "name": "github-bridge-configured",
+    "summary": "GitHub repository connected; product-sync packet regenerated for the current M01 human gate.",
+    "at": "2026-08-24T09:23:09.154Z"
+  }
+}
