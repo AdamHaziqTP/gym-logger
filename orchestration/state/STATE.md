@@ -7,10 +7,11 @@ Updated: 2026-08-24
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M01 — offline foundation vertical slice
-- Current task: M01-T01 — foundation, seed, local persistence, and session shell
-- Status: HUMAN_REVIEW_REQUIRED
+- Current task: M01-T01-FIX-03 — retry the previously unexecuted persistence/test correction
+- Status: READY_FOR_OX
 - Automatic correction attempts used: 2 / 2
-- Human review gate: active; M01 was not accepted
+- Infrastructure retry: authorized; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
+- Human review gate: pending automated re-verification; M01 remains unaccepted
 
 ## Known-good checkpoints
 
@@ -31,8 +32,8 @@ Updated: 2026-08-24
 
 - M01-T01 has been independently audited.
 - Correction 1 repaired the evidenced latest-session sort failure and removed debug residue.
-- Correction 2 was blocked by DSH rate limiting before execution.
-- Final decision: stop for human review; do not start M02.
+- Correction 2 was blocked by DSH rate limiting before execution; this is being retried as `M01-T01-FIX-03` after the infrastructure condition was reported resolved.
+- Final decision: resume the bounded M01 correction/re-verification loop; do not start M02.
 
 ## Deferred
 
