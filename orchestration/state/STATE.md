@@ -6,13 +6,13 @@ Updated: 2026-08-24
 
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
-- Current milestone: M02 — next bounded implementation milestone after M01 foundation
-- Current task: M02-T02 — Copy Another Session preview and clone flow
-- Status: ESCALATION_OPEN (M03-T01 rich-format gate)
+- Current milestone: M03 — Apple Notes clipboard integration
+- Current task: M03-T01 — secure-origin rich Apple Notes verification after FIX-01
+- Status: READY_FOR_CODEX (E-002 RESOLVED — TRUSTED HTTPS VERIFICATION REQUIRED)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
-- Human review gate: M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance
-- Human-gate correction cycle: 2 / 2; FIX-05 is independently green in automated verification
+- Human review gate: M03-T01 rich-paste verification is pending a trusted HTTPS build on the iPhone 14 Pro Max; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance
+- Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
 ## Known-good checkpoints
@@ -21,6 +21,8 @@ Updated: 2026-08-24
 - Orchestration bootstrap: `dd72762`
 - Last orchestration evidence checkpoint: `c10d429` — FIX-05 automated known-good checkpoint candidate
 - M01 engineering checkpoint: independently green automated FIX-05 checkpoint; physical-device acceptance deferred, not passed
+- M02-T02/T03/T04: accepted automatically through Codex verification
+- M03-T01/FIX-01 engineering checkpoint: plain fallback accepted; HTTPS rich-paste behavior remains human-only and unverified
 
 ## Completed
 
@@ -32,27 +34,37 @@ Updated: 2026-08-24
 - Completed independent automated verification of the M01/FIX-05 correction checkpoint.
 - Recorded the product owner's iPhone 14 Pro Max result: temporary LAN/local-host runtime was unreachable, so HV-01 through HV-05 are BLOCKED/DEFERRED rather than passed.
 - Recorded product authorization to continue in full-auto mode through bounded milestones and defer low-risk M01 physical-device checks to the final reachable/installable-build acceptance pass.
+- Accepted M02-T02 Copy Another Session automatically.
+- Accepted M02-T03 whole-session deletion automatically.
+- Accepted M02-T04 summary overrides automatically.
+- Accepted M03-T01 engineering clipboard spike automatically.
+- Accepted M03-T01-FIX-01 engineering correction at 140/140 tests, passing build, and passing LAN runtime smoke.
+- Recorded iPhone plain-fallback result: all text/data survived, while table structure, formatting, and colours were unavailable on the non-secure HTTP LAN origin.
+- Resolved product escalation E-002 in favor of a trusted HTTPS retest rather than accepting HTTP plain-text-only as the final product limitation.
 
 ## Final disposition
 
-- M01/FIX-05 automated verification is the engineering baseline for continuation.
-- The M01 physical-iPhone FIX-05 checklist remains unresolved as human evidence; it is explicitly deferred by the product owner and must not be reclassified as PASS.
-- Product owner has authorized continuation beyond M01 despite this temporary-runtime device block.
-- Codex should now resume orchestration, select the next bounded M02 task from the existing plan/specification, delegate implementation to the configured builder, independently verify the result, and continue automatically while requirements remain determined by the authoritative product sources.
-- Return to the product owner only for genuinely unresolved product decisions, required secrets/credentials, or human-only visual/device checks that cannot reasonably be deferred.
+- M01/FIX-05 automated verification remains the engineering baseline for continuation; its deferred physical-iPhone checks are not reclassified as PASS.
+- Product owner has authorized full-auto continuation through bounded milestones except where a genuinely unavoidable product/human gate exists.
+- M03-T01 is currently such a gate because the authoritative spec makes Copy to Notes a core v1 criterion and requires target-iPhone verification of the rich path.
+- E-002 is resolved: Codex should arrange the simplest trusted HTTPS origin/build for the existing PWA and repeat the M03-T01 Apple Notes paste gate on the iPhone 14 Pro Max.
+- Preserve the HTTP synchronous plain-text fallback as a resilience path.
+- Do not authorize a native rewrite, RTF strategy, or Shortcuts redesign unless the secure HTTPS test first demonstrates that the web rich path cannot satisfy the product requirement.
+- Do not dispatch M03-T02 or claim M03 complete until the secure-origin human result is recorded and, if necessary, a subsequent product decision is made.
 - Do not declare the project complete until all deferred real-iPhone acceptance items, including Notes interoperability, PNG export, offline/installability, and the deferred M01 touch/legend checks, have been physically verified.
 
 ## Deferred
 
 - M01 FIX-05 physical-iPhone HV-01 through HV-05: BLOCKED/DEFERRED due unreachable temporary LAN/local-host runtime; final acceptance still required later.
-- Rich HTML/plain clipboard paste into Apple Notes on the target iPhone.
+- Rich HTML/table/color clipboard paste into Apple Notes on the target iPhone: pending trusted HTTPS retest.
 - Faithful and Compact tall PNG export on the target iPhone.
 - Full history/search, backup/restore, polish, and subsequent milestones according to the existing implementation plan.
 
 ## Escalations
 
-- No active product escalation blocks Codex from continuing.
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
+- E-002 is RESOLVED: use a trusted HTTPS build/origin and retest the existing rich clipboard path before considering a product downgrade or native/RTF alternative.
+- No unresolved product decision is currently blocking Codex from preparing the HTTPS verification path.
 
 ## Active task checkpoint
 
@@ -70,13 +82,14 @@ Updated: 2026-08-24
 - M02-T04 automated checkpoint accepted by Codex: summary overrides, arbitrary strings, persistence/remount, and reset-to-calculated; 105/105 tests, build, and LAN runtime smoke passed. Physical and visual acceptance remain unclaimed.
 - Prepared `orchestration/tasks/M03-T01.md` for the minimal Apple Notes clipboard integration spike; target-iPhone paste remains a human gate.
 - M03-T01 automated checkpoint accepted by Codex: deterministic clipboard payloads and rich/plain/failure handling; 125/125 tests, build, and LAN runtime smoke passed. Apple Notes interoperability is now the explicit human gate in `orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md`.
-- Product owner tested the reachable iPhone 14 Pro Max path and reported `Copy failed — clipboard unavailable` after pressing Copy to Notes. HV-M03-3 is recorded as FAIL; HV-M03-1 and HV-M03-2 are BLOCKED/NOT EXECUTED. The failure is routed to `orchestration/tasks/M03-T01-FIX-01.md`; Apple Notes acceptance remains blocked.
-- M03-T01-FIX-01 automated correction accepted by Codex: scoped synchronous legacy plain-text fallback and activation-preserving payload construction; 140/140 tests, build, and LAN runtime smoke passed. The original device failure remains open for a focused retest; no Apple Notes or rich-paste acceptance is claimed.
-- FIX-01 iPhone retest completed: Copy to Notes reported the plain fallback, and the user reported correct text values, but the HTTP LAN paste was strict text with no Notes table structure, formatting, or colors. Record plain content as PASS and rich formatting as unavailable; E-002 is open for the secure-rich-path/product decision.
+- Product owner tested the reachable iPhone 14 Pro Max path and reported `Copy failed — clipboard unavailable` after pressing Copy to Notes. HV-M03-3 is recorded as FAIL; HV-M03-1 and HV-M03-2 are BLOCKED/NOT EXECUTED. The failure was routed to `orchestration/tasks/M03-T01-FIX-01.md`.
+- M03-T01-FIX-01 automated correction accepted by Codex: scoped synchronous legacy plain-text fallback and activation-preserving payload construction; 140/140 tests, build, and LAN runtime smoke passed.
+- FIX-01 iPhone retest completed: Copy to Notes reported the plain fallback, and the user reported correct text values, but the HTTP LAN paste was strict text with no Notes table structure, formatting, or colors. Plain content is PASS; rich formatting remains untested because HTTP cannot exercise the secure clipboard path.
+- Product decision E-002 recorded: do not accept plain-text-only yet. Prepare a trusted HTTPS origin for the same PWA, then repeat HV-M03-1 on the iPhone 14 Pro Max.
 
 ## Active correction checkpoint
 
-- Active task: `orchestration/tasks/M03-T01-FIX-01.md` (human retest)
-- Base implementation checkpoint: accepted M02-T04 automated checkpoint, now extended by the M03-T01 automated implementation pending human evidence
-- Worker disposition: FIX-01 accepted for automated scope and plain-content device behavior; rich Apple Notes formatting remains unresolved; M01 physical gate remains deferred
-- Next action: resolve E-002 — provide a trusted HTTPS iPhone build for rich-paste verification, or explicitly choose HTTP plain-text-only as the accepted limitation. Do not dispatch M03-T02 or claim M03 completion until the decision is recorded.
+- Active task: M03-T01 secure-origin verification preparation and human retest
+- Base implementation checkpoint: M03-T01-FIX-01 accepted engineering checkpoint (`6cb1b3a`), with human plain-fallback evidence recorded in `610f288`
+- Worker disposition: no product-code rewrite is authorized solely to obtain HTTPS; Codex may use the simplest safe infrastructure/deployment route to expose the existing build securely
+- Next action: provide a trusted HTTPS URL/build to the product owner, then repeat Copy to Notes → Apple Notes paste and record exactly what survives (data, editable table structure, row order, legend, highlights/colors, summary override, multiline notes). M03-T02 remains blocked until this result is recorded.
