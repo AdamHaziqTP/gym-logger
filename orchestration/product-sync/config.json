@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "projectId": "gym-logger",
+  "projectName": "Gym Logger",
+  "identity": "An offline-first iPhone Home Screen utility that makes Apple Notes-style gym logging easier while keeping Apple Notes as the canonical archive.",
+  "purpose": "Reduce the interaction cost of maintaining a large Apple Notes workout log without adding accounts, cloud sync, analytics, or generic fitness-platform features.",
+  "authoritativeDocs": [
+    { "path": "GYM_LOGGER_SPEC.md", "role": "Product specification and acceptance authority", "precedence": 1 },
+    { "path": "references/", "role": "Supplied visual and data references", "precedence": 2 },
+    { "path": "orchestration/state/DECISIONS.md", "role": "Implementation decisions that preserve the specification", "precedence": 3 },
+    { "path": "orchestration/", "role": "Engineering state, tasks, reviews, evidence, and reports", "precedence": 4 }
+  ],
+  "productChatRole": "Product authority and human interface. It can consume the published packet and decide unresolved product questions, but it does not accept worker claims as verification.",
+  "publication": {
+    "markdownPath": "orchestration/product-sync/PRODUCT_CONTEXT.md",
+    "jsonPath": "orchestration/product-sync/PRODUCT_CONTEXT.json",
+    "statePath": "orchestration/product-sync/SYNC_STATE.json",
+    "historyPath": "orchestration/product-sync/PUBLICATION_HISTORY.jsonl",
+    "workerPatchPath": "orchestration/product-sync/generated/active-worker.patch.yml"
+  },
+  "bridge": {
+    "mode": "repository-file",
+    "currentAccess": "local-only",
+    "recommendedUpgrade": "Put this repository on a source the dedicated ChatGPT project can read, such as a connected GitHub repository or synchronized file location.",
+    "directChatInjection": false,
+    "minimumUserAction": "Ask the product conversation to read PRODUCT_CONTEXT.md from the connected source, or attach/open that one file if no connector exists.",
+    "why": "The current environment has no supported API for injecting a message into an existing ChatGPT conversation, and local Windows paths are not inherently readable by that conversation."
+  },
+  "limits": { "recentCommits": 5, "recentReviews": 3, "recentDecisions": 8, "recentEvidence": 8, "recentEvents": 12 }
+}
