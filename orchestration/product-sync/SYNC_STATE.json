@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "correction-task-prepared",
+      "summary": "M02-T01 implementation was independently green but OX timed out without its report and component navigation coverage; FIX-01 correction dispatched within the two-attempt cap.",
+      "at": "2026-08-24T12:21:48.812Z"
+    },
+    {
       "name": "task-prepared",
       "summary": "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution.",
       "at": "2026-08-24T11:58:34.480Z"
@@ -39,11 +44,11 @@
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T11:58:34.480Z",
+  "lastPublishedAt": "2026-08-24T12:21:48.813Z",
   "lastEvent": {
-    "name": "task-prepared",
-    "summary": "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution.",
-    "at": "2026-08-24T11:58:34.480Z"
+    "name": "correction-task-prepared",
+    "summary": "M02-T01 implementation was independently green but OX timed out without its report and component navigation coverage; FIX-01 correction dispatched within the two-attempt cap.",
+    "at": "2026-08-24T12:21:48.812Z"
   },
-  "syncRevision": 6
+  "syncRevision": 7
 }

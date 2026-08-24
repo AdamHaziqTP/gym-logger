@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T11:58:34.530Z",
+  "generatedAt": "2026-08-24T12:21:48.860Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -36,7 +36,7 @@
   },
   "current": {
     "milestone": "M02 — next bounded implementation milestone after M01 foundation",
-    "task": "M02-T01 — History, local search, and editable historical sessions",
+    "task": "M02-T01-FIX-01 — Complete History task evidence and coverage",
     "status": "READY_FOR_OX",
     "humanReviewGate": "M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance",
     "nextAction": "M01/FIX-05 automated verification is the engineering baseline for continuation."
@@ -52,11 +52,11 @@
     "Recorded product authorization to continue in full-auto mode through bounded milestones and defer low-risk M01 physical-device checks to the final reachable/installable-build acceptance pass."
   ],
   "recentImplementationChanges": [
+    "662b164 merge: reconcile latest product decision bridge",
+    "a4037ea docs: prepare M02 history task",
     "f173046 docs: authorize Codex to resume M02 after deferred device gate",
     "2662c4c docs: record M01 iPhone gate as blocked and deferred",
-    "0da8bee docs: record deferred M01 device gate and full-auto authorization",
-    "f7005ce chore(orchestration): use global bridge watcher",
-    "1d8a8bd docs: publish clean thread bridge checkpoint"
+    "0da8bee docs: record deferred M01 device gate and full-auto authorization"
   ],
   "codexVerification": [
     {
@@ -118,7 +118,7 @@
     "M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance"
   ],
   "decisionsMadeSinceLastSync": [
-    "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution."
+    "M02-T01 implementation was independently green but OX timed out without its report and component navigation coverage; FIX-01 correction dispatched within the two-attempt cap."
   ],
   "recordedDecisions": [
     {
@@ -158,15 +158,20 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "f173046671e44ad941afd36a311d7e8317fdfc6d",
+    "commit": "662b164bb21a801d2c258e85ff5436b3b1b48825",
     "branch": "main",
-    "workingTree": "## main...origin/main [ahead 8, behind 3]\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n?? orchestration/tasks/M02-T01.md",
+    "workingTree": "## main...origin/main\n M orchestration/state/STATE.md\n M src/App.tsx\n M src/components/Home.tsx\n M src/styles.css\n?? orchestration/reports/M02-T01-codex-review.md\n?? orchestration/reports/M02-T01-ox-invocation.md\n?? orchestration/tasks/M02-T01-FIX-01.md\n?? src/components/History.tsx\n?? src/domain/historySearch.ts\n?? src/tests/historySearch.test.ts",
     "changedFiles": [
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
       "orchestration/state/STATE.md",
-      "orchestration/tasks/M02-T01.md"
+      "src/App.tsx",
+      "src/components/Home.tsx",
+      "src/styles.css",
+      "orchestration/reports/M02-T01-codex-review.md",
+      "orchestration/reports/M02-T01-ox-invocation.md",
+      "orchestration/tasks/M02-T01-FIX-01.md",
+      "src/components/History.tsx",
+      "src/domain/historySearch.ts",
+      "src/tests/historySearch.test.ts"
     ]
   },
   "builder": {
@@ -186,11 +191,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "task-prepared",
-      "summary": "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution.",
-      "at": "2026-08-24T11:58:34.480Z"
+      "name": "correction-task-prepared",
+      "summary": "M02-T01 implementation was independently green but OX timed out without its report and component navigation coverage; FIX-01 correction dispatched within the two-attempt cap.",
+      "at": "2026-08-24T12:21:48.812Z"
     },
-    "contextRevision": 6,
+    "contextRevision": 7,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
