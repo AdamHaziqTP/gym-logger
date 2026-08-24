@@ -1,6 +1,6 @@
 # HUMAN VERIFICATION — M03-T01 Apple Notes clipboard integration spike
 
-**Status: FAILED — human-only gate. No automated or engineering result may mark
+**Status: PARTIAL — human-only gate. No automated or engineering result may mark
 these items PASS.** The automated suite proves payload generation and button
 behavior only (jsdom + fake-indexeddb). Whether anything survives a real
 iPhone Safari → Apple Notes paste is unknowable from this workstation.
@@ -18,6 +18,18 @@ iPhone Safari → Apple Notes paste is unknowable from this workstation.
 ## FIX-01 retest status
 
 Codex independently accepted the FIX-01 engineering correction at 140/140 tests, passing build, and passing LAN runtime smoke. The original device failure remains recorded above; it is not retroactively changed. Repeat the affected copy on the corrected build. On the current HTTP LAN origin, the expected status is **`Copied as plain text (rich formatting unavailable)`**. Rich HTML/table/color behavior requires a secure HTTPS build and remains unverified.
+
+## Recorded FIX-01 retest result — 2026-08-24
+
+- Device: **iPhone 14 Pro Max**
+- Copy status: **`Copied as plain text (rich formatting unavailable)`**.
+- **Plain-content result: PASS as reported.** The user reported that the text values were all correct.
+- **Rich-format result: FAIL/UNAVAILABLE on the HTTP LAN build.** The pasted result was strict text rather than the Notes-style table; formatting, table structure, and colors did not survive.
+- This is consistent with the documented non-secure-origin ceiling: the HTTP path cannot provide HTML clipboard data. It is not evidence that Apple Notes rich paste works or fails on a secure origin.
+- **HV-M03-1 rich paste: BLOCKED/UNAVAILABLE** pending a trusted HTTPS build.
+- **HV-M03-2 plain fallback: PASS for reported text fidelity;** category/table formatting remains unavailable on this path.
+- **HV-M03-3 plain fallback state: PASS.** The app no longer reported clipboard failure and truthfully identified the plain result.
+- No screenshot or iOS/Safari version was supplied.
 
 ## Preconditions
 

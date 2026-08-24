@@ -8,7 +8,7 @@ Updated: 2026-08-24
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M02 — next bounded implementation milestone after M01 foundation
 - Current task: M02-T02 — Copy Another Session preview and clone flow
-- Status: HUMAN_REVIEW_REQUIRED (M03-T01-FIX-01 retest)
+- Status: ESCALATION_OPEN (M03-T01 rich-format gate)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
 - Human review gate: M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance
@@ -72,10 +72,11 @@ Updated: 2026-08-24
 - M03-T01 automated checkpoint accepted by Codex: deterministic clipboard payloads and rich/plain/failure handling; 125/125 tests, build, and LAN runtime smoke passed. Apple Notes interoperability is now the explicit human gate in `orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md`.
 - Product owner tested the reachable iPhone 14 Pro Max path and reported `Copy failed — clipboard unavailable` after pressing Copy to Notes. HV-M03-3 is recorded as FAIL; HV-M03-1 and HV-M03-2 are BLOCKED/NOT EXECUTED. The failure is routed to `orchestration/tasks/M03-T01-FIX-01.md`; Apple Notes acceptance remains blocked.
 - M03-T01-FIX-01 automated correction accepted by Codex: scoped synchronous legacy plain-text fallback and activation-preserving payload construction; 140/140 tests, build, and LAN runtime smoke passed. The original device failure remains open for a focused retest; no Apple Notes or rich-paste acceptance is claimed.
+- FIX-01 iPhone retest completed: Copy to Notes reported the plain fallback, and the user reported correct text values, but the HTTP LAN paste was strict text with no Notes table structure, formatting, or colors. Record plain content as PASS and rich formatting as unavailable; E-002 is open for the secure-rich-path/product decision.
 
 ## Active correction checkpoint
 
 - Active task: `orchestration/tasks/M03-T01-FIX-01.md` (human retest)
 - Base implementation checkpoint: accepted M02-T04 automated checkpoint, now extended by the M03-T01 automated implementation pending human evidence
-- Worker disposition: FIX-01 accepted for automated scope; original iPhone clipboard failure requires retest; M01 physical gate remains deferred
-- Next action: product owner repeats the focused iPhone clipboard/paste checklist through the decision bridge. Do not dispatch M03-T02 or claim M03 completion until the retest is resolved.
+- Worker disposition: FIX-01 accepted for automated scope and plain-content device behavior; rich Apple Notes formatting remains unresolved; M01 physical gate remains deferred
+- Next action: resolve E-002 — provide a trusted HTTPS iPhone build for rich-paste verification, or explicitly choose HTTP plain-text-only as the accepted limitation. Do not dispatch M03-T02 or claim M03 completion until the decision is recorded.

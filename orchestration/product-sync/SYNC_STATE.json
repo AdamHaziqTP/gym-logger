@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t01-rich-gate-recorded",
+      "summary": "iPhone plain fallback now passes text fidelity, while HTTP rich table/colors remain unavailable; E-002 opened for HTTPS versus plain-only product decision.",
+      "at": "2026-08-24T14:48:13.524Z"
+    },
+    {
+      "name": "escalation-opened",
+      "summary": "E-002: M03-T01 iPhone retest preserves text via HTTP plain fallback, but Notes table structure, formatting, and colors are unavailable on the non-secure LAN origin. Choose a trusted HTTPS build for rich-paste verification, or explicitly accept HTTP plain-text-only behavior as the product limitation.",
+      "at": "2026-08-24T14:48:03.123Z"
+    },
+    {
       "name": "m03-t01-fix-01-human-retest",
       "summary": "FIX-01 automated correction passed 140/140; original iPhone clipboard failure remains open for focused plain-copy retest.",
       "at": "2026-08-24T14:44:16.013Z"
@@ -51,24 +61,32 @@
       "name": "task-prepared",
       "summary": "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution.",
       "at": "2026-08-24T11:58:34.480Z"
-    },
-    {
-      "name": "product-decision-recorded",
-      "summary": "iPhone 14 Pro Max could not reach the temporary LAN build; HV-01 through HV-05 remain blocked/deferred and Codex is authorized to continue bounded M02 work in full-auto mode.",
-      "at": "2026-08-24T11:57:18.233Z"
-    },
-    {
-      "name": "product-orchestrator-clean-thread-bridge-checkpoint",
-      "summary": "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate.",
-      "at": "2026-08-24T10:06:50.713Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T14:44:16.013Z",
+  "lastPublishedAt": "2026-08-24T14:48:13.525Z",
   "lastEvent": {
-    "name": "m03-t01-fix-01-human-retest",
-    "summary": "FIX-01 automated correction passed 140/140; original iPhone clipboard failure remains open for focused plain-copy retest.",
-    "at": "2026-08-24T14:44:16.013Z"
+    "name": "m03-t01-rich-gate-recorded",
+    "summary": "iPhone plain fallback now passes text fidelity, while HTTP rich table/colors remain unavailable; E-002 opened for HTTPS versus plain-only product decision.",
+    "at": "2026-08-24T14:48:13.524Z"
   },
-  "syncRevision": 15
+  "syncRevision": 17,
+  "openEscalations": [
+    {
+      "id": "E-002",
+      "summary": "M03-T01 iPhone retest preserves text via HTTP plain fallback, but Notes table structure, formatting, and colors are unavailable on the non-secure LAN origin. Choose a trusted HTTPS build for rich-paste verification, or explicitly accept HTTP plain-text-only behavior as the product limitation.",
+      "scope": {
+        "level": "product-technical",
+        "id": "E-002"
+      },
+      "allowedActions": [
+        "choose",
+        "approve",
+        "reject",
+        "clarify"
+      ],
+      "status": "open",
+      "openedAt": "2026-08-24T14:48:03.120Z"
+    }
+  ]
 }
