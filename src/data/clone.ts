@@ -119,3 +119,59 @@ function sortNewestFirst(a: WorkoutSession, b: WorkoutSession): number {
     ? b.createdAt.localeCompare(a.createdAt)
     : b.dateLocal.localeCompare(a.dateLocal);
 }
+
+export interface CloneToTodayResult {
+  session: WorkoutSession;
+  /** True when an existing same-date session was explicitly replaced. */
+  replaced: boolean;
+}
+
+/**
+ * Creates the local-date session from a specifically chosen source — the
+ * Copy Another Session → Use This Session flow (spec §4.3, §12.2). Unlike
+ * `startTodaySession` this is not idempotent-by-existence: when a session
+ * already exists for the target date it is REPLACED, because the UI has
+ * already shown the explicit replace warning (spec §4.3 "warn before
+ * replacing"; M02-T02 decision). Even so, the existence check, any delete,
+ * and the write run inside one read-write transaction, so a racing creation
+ * can still never leave two sessions for the same local date (§27.1, §27.2).
+ */
+export async function startTodayFromSession(
+  db: GymLogDB,
+  sourceId: string,
+  options: StartTodayOptions = {},
+): Promise<CloneToTodayResult> {
+  const dateLocal = options.dateLocal ?? todayLocalDate(options.now?.());
+  const policy = options.policy ?? DEFAULT_CLONE_POLICY;
+
+  let result: CloneToTodayResult | undefined;
+
+  await db.transaction("rw", db.sessions, async () => {
+    const source = await db.sessions.get(sourceId);
+    if (!source) {
+      throw new Error(`Cannot copy session ${sourceId}: session not found.`);
+    }
+
+    const existing = await db.sessions
+      .where("dateLocal")
+      .equals(dateLocal)
+      .toArray();
+    const clone = createClonedSession(
+      source,
+      dateLocal,
+      policy,
+      options.newId ?? uuid,
+      options.now,
+    );
+    if (existing.length > 0) {
+      await db.sessions.bulkDelete(existing.map((session) => session.id));
+    }
+    await db.sessions.put(clone);
+    result = { session: clone, replaced: existing.length > 0 };
+  });
+
+  if (!result) {
+    throw new Error("startTodayFromSession did not produce a result.");
+  }
+  return result;
+}

@@ -11,12 +11,20 @@ interface HomeProps {
   onOpenSession: (sessionId: string) => void;
   /** Opens the History screen (spec §4.1 additional navigation; M02-T01). */
   onOpenHistory: () => void;
+  /** Opens the Copy Another Session flow (spec §4.3; M02-T02). */
+  onOpenCopyAnother: () => void;
   /** Overrides today's local date (tests); defaults to the device date. */
   todayLocal?: string;
 }
 
 /** Sparse Home screen (spec §4.1, §13). No analytics cards, no gamification. */
-export function Home({ db, onOpenSession, onOpenHistory, todayLocal }: HomeProps) {
+export function Home({
+  db,
+  onOpenSession,
+  onOpenHistory,
+  onOpenCopyAnother,
+  todayLocal,
+}: HomeProps) {
   const sessions = useLiveQuery(() => db.sessions.toArray(), []) ?? [];
   const [starting, setStarting] = useState(false);
 
@@ -93,6 +101,17 @@ export function Home({ db, onOpenSession, onOpenHistory, todayLocal }: HomeProps
         </section>
       )}
 
+      {/* Secondary action (spec §4.1, §13): clone from a chosen historical
+          session — e.g. when equipment changes (spec §4.3). */}
+      <button
+        type="button"
+        className="btn btn-secondary"
+        onClick={onOpenCopyAnother}
+        disabled={sessions.length === 0}
+      >
+        Copy Another Session
+      </button>
+
       <button
         type="button"
         className="btn btn-secondary"
@@ -102,7 +121,7 @@ export function Home({ db, onOpenSession, onOpenHistory, todayLocal }: HomeProps
       </button>
 
       <footer className="footnote">
-        Copy Another Session and Settings arrive in later milestones.
+        Settings arrives in a later milestone.
         Your Apple Notes archive remains canonical.
       </footer>
     </main>

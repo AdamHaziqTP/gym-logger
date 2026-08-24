@@ -4,11 +4,13 @@ import fixtureJson from "../../seed/latest-session.example.json";
 import {
   createClonedSession,
   startTodaySession,
+  startTodayFromSession,
   DEFAULT_CLONE_POLICY,
 } from "../data/clone";
 import { createDb, type GymLogDB } from "../data/db";
 import { ensureSeeded } from "../data/seed";
 import { todayLocalDate } from "../domain/dates";
+import type { WorkoutSession } from "../domain/types";
 
 const DB_NAME = "gym-logger";
 const SEED_ID = "fixture-sunday-23-aug";
@@ -183,5 +185,132 @@ describe("startTodaySession", () => {
     expect(clone.summaryOverride).toEqual({ sets: "12", exercises: "11" });
     // Empty row is preserved as a row even though nothing is filled in.
     expect(clone.rows).toHaveLength(2);
+  });
+});
+
+describe("startTodayFromSession (Copy Another Session, spec §4.3/§12.2)", () => {
+  /** A non-latest historical source: older than the seeded 2026-08-23. */
+  async function insertTravelSource(): Promise<WorkoutSession> {
+    const source: WorkoutSession = {
+      id: "history-fri-21-aug",
+      dateLocal: "2026-08-21",
+      createdAt: "2026-08-21T18:00:00.000Z",
+      updatedAt: "2026-08-21T19:00:00.000Z",
+      rows: [
+        {
+          id: "row-lat-pulldown",
+          position: 0,
+          exercise: "Lat Pulldown Wide",
+          sets: "1",
+          reps: "10",
+          weight: "50kg",
+          skip: "skip",
+          highlight: "pink",
+        },
+        {
+          id: "row-cable-row",
+          position: 1,
+          exercise: "Cable Row",
+          sets: "1",
+          reps: "12",
+          weight: "body weight",
+          skip: "",
+          highlight: "purple",
+        },
+      ],
+      notes: "travel workout, hotel gym",
+      summaryOverride: { sets: "5", exercises: "4" },
+    };
+    await db.sessions.put(source);
+    return source;
+  }
+
+  it("clones a specifically chosen NON-latest source under the default policy", async () => {
+    const source = await insertTravelSource();
+
+    const result = await startTodayFromSession(db, source.id, {
+      dateLocal: "2026-08-24",
+    });
+
+    const clone = result.session;
+    expect(result.replaced).toBe(false);
+    expect(clone.id).toMatch(UUID_PATTERN);
+    expect(clone.id).not.toBe(source.id);
+    expect(clone.dateLocal).toBe("2026-08-24");
+    expect(clone.sourceSessionId).toBe(source.id);
+    // Exact row order, text, and highlights from the CHOSEN session.
+    expect(clone.rows.map((row) => row.exercise)).toEqual([
+      "Lat Pulldown Wide",
+      "Cable Row",
+    ]);
+    expect(
+      clone.rows.map((row) => [row.sets, row.reps, row.weight]),
+    ).toEqual([
+      ["1", "10", "50kg"],
+      ["1", "12", "body weight"],
+    ]);
+    expect(clone.rows.map((row) => row.highlight)).toEqual(["pink", "purple"]);
+    expect(clone.rows.every((row) => row.id.match(UUID_PATTERN))).toBe(true);
+    // DEFAULT_CLONE_POLICY applied: Skip + notes cleared, override preserved.
+    expect(clone.rows.every((row) => row.skip === "")).toBe(true);
+    expect(clone.notes).toBe("");
+    expect(clone.summaryOverride).toEqual({ sets: "5", exercises: "4" });
+    // The source record itself is untouched.
+    const afterSource = (await db.sessions.get(source.id))!;
+    expect(afterSource.rows[0].skip).toBe("skip");
+    expect(afterSource.notes).toBe("travel workout, hotel gym");
+    // Exactly one session now exists for the target date.
+    expect(
+      await db.sessions.where("dateLocal").equals("2026-08-24").toArray(),
+    ).toHaveLength(1);
+    // Seeded fixture + inserted source + this clone = 3 total sessions.
+    expect(await db.sessions.count()).toBe(3);
+  });
+
+  it("replaces an existing same-date session instead of duplicating it", async () => {
+    await insertTravelSource();
+    // Today already exists — created through the normal latest-clone path.
+    const existing = await startTodaySession(db, { dateLocal: "2026-08-24" });
+    expect(existing.created).toBe(true);
+
+    const result = await startTodayFromSession(db, "history-fri-21-aug", {
+      dateLocal: "2026-08-24",
+    });
+
+    expect(result.replaced).toBe(true);
+    expect(result.session.sourceSessionId).toBe("history-fri-21-aug");
+
+    const todays = await db.sessions
+      .where("dateLocal")
+      .equals("2026-08-24")
+      .toArray();
+    // The previous today's session is GONE, not kept alongside the clone.
+    expect(todays).toHaveLength(1);
+    expect(todays[0].id).not.toBe(existing.session.id);
+    // The replacement swaps the same-date row in place, so the grand total
+    // stays at 3: seeded fixture + inserted source + the one replacement.
+    expect(await db.sessions.count()).toBe(3);
+  });
+
+  it("rejects a missing source without writing anything", async () => {
+    await expect(
+      startTodayFromSession(db, "no-such-session", {
+        dateLocal: "2026-08-24",
+      }),
+    ).rejects.toThrow(/not found/);
+    expect(await db.sessions.count()).toBe(1);
+    expect(
+      await db.sessions.where("dateLocal").equals("2026-08-24").toArray(),
+    ).toHaveLength(0);
+  });
+
+  it("never leaves two same-date sessions when invoked concurrently", async () => {
+    await Promise.all([
+      startTodayFromSession(db, SEED_ID, { dateLocal: "2026-08-24" }),
+      startTodayFromSession(db, SEED_ID, { dateLocal: "2026-08-24" }),
+    ]);
+    expect(
+      await db.sessions.where("dateLocal").equals("2026-08-24").toArray(),
+    ).toHaveLength(1);
   });
 });

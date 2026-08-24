@@ -221,6 +221,78 @@ body {
   margin: 0;
 }
 
+/* ---------- Copy Another Session (spec §4.3; M02-T02) ---------- */
+
+/* Read-preview meta: row count and Skip state under the summary line. */
+.preview-meta {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+
+/* Read-only notes text — a plain block, never an input/textarea. */
+.preview-notes {
+  white-space: pre-wrap;
+  background: var(--surface);
+  border: 1px solid var(--grid);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.45;
+  padding: 10px 12px;
+  margin: 0 0 16px;
+}
+
+.preview-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-destructive {
+  background: #ff453a;
+  color: #ffffff;
+}
+
+.confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.confirm-card {
+  width: 100%;
+  max-width: 340px;
+  background: #1c1c1e;
+  border: 1px solid var(--grid-strong);
+  border-radius: 14px;
+  padding: 18px 16px 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.confirm-card h2 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.confirm-message {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+.confirm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 /* ---------- Session header ---------- */
 
 .session-header {

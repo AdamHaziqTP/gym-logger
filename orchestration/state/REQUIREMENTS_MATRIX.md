@@ -8,9 +8,9 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-002 | Apple Notes remains canonical; app is a local convenience copy. | Spec §2.2 | M01-M06 | PLANNED | — |
 | REQ-003 | No account, backend, cloud sync, analytics, AI, timers, checklists, programs, streaks, or fitness-platform features. | Spec §§2.3, 32 | All | PLANNED | — |
 | REQ-004 | iPhone-first installable PWA with native pivot only for a proven blocked capability. | Spec §3 | M01/M06 | PLANNED | — |
-| REQ-005 | Home shows Today, Last Workout, Start/Continue, Copy Another, History, Settings. | Spec §§4.1, 13 | M02 | IN_PROGRESS | History entry delivered; Copy Another and Settings remain planned |
+| REQ-005 | Home shows Today, Last Workout, Start/Continue, Copy Another, History, Settings. | Spec §§4.1, 13 | M02 | IN_PROGRESS | History and Copy Another delivered/automated-verified; Settings remains planned |
 | REQ-006 | Start today's session uses local phone date and creates exactly one session. | Spec §§4.2, 27.1-27.3; A1-A4 | M01-M02 | PLANNED | — |
-| REQ-007 | Clone rows, order, text, and highlights; do not blank Reps/Weight. | Spec §§4.2, 12.3; A2 | M01-M02 | PLANNED | — |
+| REQ-007 | Clone rows, order, text, and highlights; do not blank Reps/Weight. | Spec §§4.2, 12.3; A2 | M01-M02 | VERIFIED (automated) | M02-T02-FIX-01 Codex review; 91/91 |
 | REQ-008 | Skip remains plain text, is not auto-dimmed/deleted, and counts in totals. | Spec §8; D1-D5 | M01-M05 | PLANNED | — |
 | REQ-009 | Summary supports calculated values plus manual overrides including 40/39 fixture mismatch. | Spec §9; E1-E3 | M01-M02 | PLANNED | — |
 | REQ-010 | All five visible columns accept arbitrary strings without normalization. | Spec §§6.1-6.3, 27.6-27.7; B1-B5 | M01-M04 | VERIFIED (automated) | M01 evidence; 32/32 |
@@ -22,7 +22,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-016 | 40-row table remains responsive; target stress is 100 rows. | Spec §25; C10 | M01/M04/M06 | PLANNED | — |
 | REQ-017 | Notes area below table accepts arbitrary text and travels with export. | Spec §10 | M01/M04-M05 | PLANNED | — |
 | REQ-018 | History is reverse chronological, searchable locally, and old sessions editable. | Spec §11; F1-F5 | M02 | VERIFIED (automated; device pending) | M02-T01-FIX-01 review; 81/81 tests |
-| REQ-019 | Deleting an app session confirms and explicitly says Apple Notes is unaffected. | Spec §11.4; F6 | M02 | PLANNED | — |
+| REQ-019 | Deleting an app session confirms and explicitly says Apple Notes is unaffected. | Spec §11.4; F6 | M02 | IN_PROGRESS | M02-T03 prepared; not implemented |
 | REQ-020 | IndexedDB persistence with immediate/debounced autosave survives termination/reopen. | Spec §§17.2-17.4; B6, G2 | M01 | VERIFIED (automated; device pending) | remount test; HV-02/HV-03 |
 | REQ-021 | Offline shell is cached and core use does not require network. | Spec §17; G1-G5 | M01/M06 | IN_PROGRESS | runtime smoke; HV-01 |
 | REQ-022 | Request persistent storage where appropriate and surface non-destructive storage errors. | Spec §§17.3, 27.9 | M01/M06 | VERIFIED (source/test) | App bootstrap; build/tests; device pending |
@@ -43,4 +43,4 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 
 ## Pilot disposition
 
-M01 remains limited to its first-slice intent, with FIX-05 physical checks explicitly deferred rather than passed. M02-T01 now covers History/search/editable historical sessions for automated scope; no later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation. Copy Another Session is the next bounded M02 task.
+M01 remains limited to its first-slice intent, with FIX-05 physical checks explicitly deferred rather than passed. M02-T01 covers History/search/editable historical sessions and M02-T02 covers Copy Another Session for automated scope; no later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation. M02-T03 whole-session deletion confirmation is the next bounded task.

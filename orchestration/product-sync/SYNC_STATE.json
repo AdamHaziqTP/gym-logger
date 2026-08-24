@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m02-t02-accepted",
+      "summary": "Codex independently accepted M02-T02 automated scope: 91/91 tests, build, and LAN runtime smoke; preparing M02-T03 deletion task.",
+      "at": "2026-08-24T13:07:49.001Z"
+    },
+    {
+      "name": "m02-t02-rejected",
+      "summary": "M02-T02 initial worker timed out without report; Codex found 89/91 tests and prepared FIX-01.",
+      "at": "2026-08-24T13:00:29.556Z"
+    },
+    {
       "name": "task-prepared",
       "summary": "M02-T01 automated checkpoint accepted; M02-T02 Copy Another Session prepared for bounded OX implementation. M01 physical checks remain deferred.",
       "at": "2026-08-24T12:36:44.587Z"
@@ -49,11 +59,11 @@
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T12:36:44.588Z",
+  "lastPublishedAt": "2026-08-24T13:07:49.002Z",
   "lastEvent": {
-    "name": "task-prepared",
-    "summary": "M02-T01 automated checkpoint accepted; M02-T02 Copy Another Session prepared for bounded OX implementation. M01 physical checks remain deferred.",
-    "at": "2026-08-24T12:36:44.587Z"
+    "name": "m02-t02-accepted",
+    "summary": "Codex independently accepted M02-T02 automated scope: 91/91 tests, build, and LAN runtime smoke; preparing M02-T03 deletion task.",
+    "at": "2026-08-24T13:07:49.001Z"
   },
-  "syncRevision": 8
+  "syncRevision": 10
 }

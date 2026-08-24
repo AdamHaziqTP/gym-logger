@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Home } from "./components/Home";
 import { History } from "./components/History";
+import { CopySession } from "./components/CopySession";
 import { SessionView } from "./components/SessionView";
 import type { GymLogDB } from "./data/db";
 import { createDb, sortSessionsNewestFirst } from "./data/db";
@@ -17,6 +18,7 @@ import { todayLocalDate } from "./domain/dates";
 type View =
   | { name: "home" }
   | { name: "history" }
+  | { name: "copy" }
   | { name: "session"; sessionId: string; from: "home" | "history" };
 
 interface AppProps {
@@ -91,6 +93,7 @@ export function App({ db, todayLocal }: AppProps) {
         setView({ name: "session", sessionId, from: "home" })
       }
       onOpenHistory={() => setView({ name: "history" })}
+      onOpenCopyAnother={() => setView({ name: "copy" })}
       todayLocal={todayLocal}
     />
   ) : view.name === "history" ? (
@@ -100,6 +103,17 @@ export function App({ db, todayLocal }: AppProps) {
       onOpenSession={(sessionId) =>
         setView({ name: "session", sessionId, from: "history" })
       }
+    />
+  ) : view.name === "copy" ? (
+    // Copy Another Session flow (spec §4.3; M02-T02). The freshly cloned
+    // session opens like any session started from Home: back returns Home.
+    <CopySession
+      db={db}
+      onBack={() => setView({ name: "home" })}
+      onSessionReady={(sessionId) =>
+        setView({ name: "session", sessionId, from: "home" })
+      }
+      todayLocal={todayLocal}
     />
   ) : (
     <SessionView
