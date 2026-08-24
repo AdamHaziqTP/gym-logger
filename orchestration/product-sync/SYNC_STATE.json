@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "image-export-accepted-backup-task-prepared",
+      "summary": "Image export independently accepted: 29/29 focused, 219/219 full suite, build, diff audit, HTTPS smoke pass; iPhone image/save/share deferred. M05 backup/restore task prepared.",
+      "at": "2026-08-24T18:00:18.177Z"
+    },
+    {
+      "name": "image-export-correction-prepared",
+      "summary": "Codex found 6 focused export test failures plus TypeScript test errors; correction prepared to preserve wrapping/losslessness while repairing verification contracts.",
+      "at": "2026-08-24T17:44:11.891Z"
+    },
+    {
       "name": "home-fix-accepted-image-task-prepared",
       "summary": "Home overlap correction independently accepted at 190/190; M03-T02 image export task prepared for OX; iPhone visual checks remain deferred.",
       "at": "2026-08-24T17:19:33.510Z"
@@ -51,26 +61,16 @@
       "name": "m03-t01-fix-03-codex-verified",
       "summary": "OX FIX-03 completed and Codex independently verified 153/153 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes foreground/highlight color retest is the remaining gate.",
       "at": "2026-08-24T15:47:06.763Z"
-    },
-    {
-      "name": "m03-t01-fix-02-color-failure",
-      "summary": "Secure iPhone retest reconfirmed editable table and values, but Apple Notes still stripped both category foreground and text-highlight colors; FIX-03 prepared for opaque/legacy-compatible text-run markup.",
-      "at": "2026-08-24T15:33:07.813Z"
-    },
-    {
-      "name": "m03-t01-fix-02-checkpoint-pushed",
-      "summary": "FIX-02 known-good checkpoint f32548d pushed; 141/141 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone color retest.",
-      "at": "2026-08-24T15:18:49.340Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T17:19:33.511Z",
+  "lastPublishedAt": "2026-08-24T18:00:18.178Z",
   "lastEvent": {
-    "name": "home-fix-accepted-image-task-prepared",
-    "summary": "Home overlap correction independently accepted at 190/190; M03-T02 image export task prepared for OX; iPhone visual checks remain deferred.",
-    "at": "2026-08-24T17:19:33.510Z"
+    "name": "image-export-accepted-backup-task-prepared",
+    "summary": "Image export independently accepted: 29/29 focused, 219/219 full suite, build, diff audit, HTTPS smoke pass; iPhone image/save/share deferred. M05 backup/restore task prepared.",
+    "at": "2026-08-24T18:00:18.177Z"
   },
-  "syncRevision": 32,
+  "syncRevision": 34,
   "openEscalations": [
     {
       "id": "E-002",

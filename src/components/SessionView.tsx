@@ -34,6 +34,7 @@ import {
   writeNotesPayloadToClipboard,
   type ClipboardCopyOutcome,
 } from "../domain/notesClipboard";
+import { ImageExportPanel } from "./ImageExport";
 import { orderedRows } from "../domain/rows";
 import type {
   Highlight,
@@ -113,6 +114,13 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
 
   // Copy-to-Notes spike (spec §15; M03-T01): local clipboard only.
   const [notesCopyState, setNotesCopyState] = useState<NotesCopyState>("idle");
+
+  // Image export (spec §14; M03-T02-IMAGE-EXPORT-01): holds the visible-state
+  // session snapshot captured when the user opened the export panel, or null
+  // while the panel is closed. A snapshot (not live state) keeps the preview
+  // stable while the modal blocks editing.
+  const [imageExportSession, setImageExportSession] =
+    useState<WorkoutSession | null>(null);
 
   // Drag-reorder state (spec §§7.2, 7.5): press on the SELECTED handle arms a
   // potential drag; movement past the threshold drags, release without it is
@@ -476,13 +484,13 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
   /* --------------- Copy to Notes export (spec §15; M03-T01) -------------- */
 
   /**
-   * Builds the export payload from what the screen shows RIGHT NOW: the cell
-   * inputs and the notes textarea are uncontrolled, so their DOM values are
-   * the truth for edits that may not be persisted yet. Synchronous by design
-   * (FIX-01): constructing the payload inside the tap gesture lets the first
-   * clipboard attempt start in the same task, preserving user activation.
+   * Builds the session as the screen shows it RIGHT NOW: the cell inputs and
+   * the notes textarea are uncontrolled, so their DOM values are the truth
+   * for edits that may not be persisted yet. Shared by every export path
+   * (Copy-to-Notes and the §14 image export), so both always agree with what
+   * the user sees.
    */
-  const buildVisibleNotesPayload = (): NotesPayload | null => {
+  const buildVisibleSession = (): WorkoutSession | null => {
     if (!session) return null;
 
     // Latest visible cell values keyed by row id (DOM order matches display).
@@ -508,7 +516,7 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
       "textarea.notes-input",
     );
 
-    const visibleSession: WorkoutSession = {
+    return {
       ...session,
       rows: displayRows.map((row) => {
         const patch = overrides.get(row.id);
@@ -524,7 +532,17 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
       }),
       notes: notesInput ? notesInput.value : session.notes,
     };
-    return buildNotesPayload(visibleSession);
+  };
+
+  /**
+   * Builds the export payload from what the screen shows RIGHT NOW.
+   * Synchronous by design (FIX-01): constructing the payload inside the tap
+   * gesture lets the first clipboard attempt start in the same task,
+   * preserving user activation.
+   */
+  const buildVisibleNotesPayload = (): NotesPayload | null => {
+    const visibleSession = buildVisibleSession();
+    return visibleSession ? buildNotesPayload(visibleSession) : null;
   };
 
   const commandCopyToNotes = () => {
@@ -741,6 +759,20 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
         )}
       </section>
 
+      {/* Image export (spec §14; M03-T02-IMAGE-EXPORT-01): one quiet local
+          action beside Copy to Notes. Opening it snapshots the visible state
+          (same DOM-truth rule as Copy-to-Notes); nothing is uploaded and no
+          native dependency is involved — SVG→PNG in-page, then share/download. */}
+      <section className="image-export-zone" aria-label="Export session image">
+        <button
+          type="button"
+          className="image-export-button"
+          onClick={() => setImageExportSession(buildVisibleSession() ?? session)}
+        >
+          Export Image
+        </button>
+      </section>
+
       {/* Whole-session delete entry point (spec §11.4; M02-T03): one quiet
           destructive row at the end of the screen — discoverable without
           competing with training-time actions. It only ARMS the confirmation
@@ -777,6 +809,17 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
           current={selectedRow.highlight}
           onPick={handleHighlightPick}
           onClose={() => setColourOpen(false)}
+        />
+      )}
+
+      {/* Image export overlay (spec §14): style choice, live preview of the
+          exact document that will be delivered, and a truthful save/share
+          step. Rendering the snapshot blocks nothing else; closing discards
+          it without touching any record. */}
+      {imageExportSession && (
+        <ImageExportPanel
+          session={imageExportSession}
+          onClose={() => setImageExportSession(null)}
         />
       )}
 

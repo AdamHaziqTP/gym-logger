@@ -338,12 +338,19 @@ body {
 /* ---------- Copy to Notes export (spec §15; M03-T01) ---------- */
 
 /* Quiet local clipboard action at the end of the session screen, styled like
-   the other full-width rows; only the status text distinguishes outcomes. */
+   the other full-width rows; only the status text distinguishes outcomes.
+   M03-T02-IMAGE-EXPORT-01: the §14 Export Image control shares the exact same
+   quiet full-width row treatment so the two local exports read as siblings. */
 .export-zone {
   margin-top: 18px;
 }
 
-.notes-copy-button {
+.image-export-zone {
+  margin-top: 10px;
+}
+
+.notes-copy-button,
+.image-export-button {
   display: block;
   width: 100%;
   background: none;
@@ -371,6 +378,99 @@ body {
   color: var(--text-dim);
   font-size: 13px;
   margin: 8px 4px 0;
+}
+
+/* ---------- Image export overlay (spec §14; M03-T02-IMAGE-EXPORT-01) ---------- */
+
+/* Bottom sheet like the row menu/colour bar: iOS-familiar, keeps the session
+   visible behind a dim backdrop, and scrolls internally for tall previews. */
+.image-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.image-card {
+  width: 100%;
+  max-width: 760px;
+  max-height: 92vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #161618;
+  border-top: 1px solid var(--grid-strong);
+  border-radius: 14px 14px 0 0;
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.image-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.style-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.style-toggle button {
+  flex: 1;
+  background: none;
+  border: 1px solid var(--grid);
+  border-radius: 10px;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.style-toggle button[aria-pressed="true"] {
+  background: #2c2c2e;
+  border-color: var(--grid-strong);
+  color: var(--text);
+}
+
+.image-preview {
+  background: var(--bg);
+  border: 1px solid var(--grid);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.image-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.image-preview-empty {
+  color: var(--text-dim);
+  font-size: 14px;
+  text-align: center;
+  padding: 24px 12px;
+  margin: 0;
+}
+
+.image-status {
+  color: var(--text-dim);
+  font-size: 13px;
+  min-height: 1em;
+  margin: 0 4px 10px;
+}
+
+.image-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 /* ---------- Session header ---------- */
