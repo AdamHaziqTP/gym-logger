@@ -56,7 +56,7 @@ node orchestration/product-sync/publish.mjs poll-decisions
 node orchestration/product-sync/publish.mjs poll-github
 ```
 
-This is polling/manual-resume dependent. No supported mechanism here injects a message into or wakes an existing ChatGPT conversation. Without a connector, Adam opens or attaches the packet; raw DSH/Codex transcript copy/paste is not required.
+The local automation polls every five minutes and can notify the existing product conversation through the supported Codex app thread bridge. Instant webhook wake-up is not implemented. Without the automation or a connector, Adam opens or attaches the packet; raw DSH/Codex transcript copy/paste is not required.
 
 The decision schema and rejection rules are documented in `../product-orchestrator/WORKFLOW_SPEC.md`. A valid response must match the current `synchronization.contextRevision` and an open escalation. Replays, conflicts, stale responses, unrelated scopes, unavailable builders, and high-impact actions without explicit human approval are rejected and acknowledged.
 

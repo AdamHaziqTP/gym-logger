@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "product-orchestrator-thread-bridge-enabled",
+      "summary": "Codex app thread notifications and five-minute bridge automation enabled; GitHub CLI authentication remains the one-time user prerequisite.",
+      "at": "2026-08-24T10:06:45.021Z"
+    },
+    {
       "name": "product-orchestrator-checkpoint",
       "summary": "Clean integration checkpoint recorded after commissioning tests; Gym Logger remains at M01 human gate.",
       "at": "2026-08-24T09:57:42.446Z"
@@ -19,11 +24,11 @@
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T09:57:42.447Z",
+  "lastPublishedAt": "2026-08-24T10:06:45.022Z",
   "lastEvent": {
-    "name": "product-orchestrator-checkpoint",
-    "summary": "Clean integration checkpoint recorded after commissioning tests; Gym Logger remains at M01 human gate.",
-    "at": "2026-08-24T09:57:42.446Z"
+    "name": "product-orchestrator-thread-bridge-enabled",
+    "summary": "Codex app thread notifications and five-minute bridge automation enabled; GitHub CLI authentication remains the one-time user prerequisite.",
+    "at": "2026-08-24T10:06:45.021Z"
   },
-  "syncRevision": 2
+  "syncRevision": 3
 }

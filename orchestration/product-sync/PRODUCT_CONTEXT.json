@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T09:57:42.496Z",
+  "generatedAt": "2026-08-24T10:06:45.069Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -49,11 +49,11 @@
     "Confirmed the Desktop DSH wrapper exists at the verified path."
   ],
   "recentImplementationChanges": [
+    "d947b62 docs: publish clean product orchestrator checkpoint",
     "b818065 feat: add product orchestrator reverse channel",
     "dcae456 chore: connect product sync bridge to GitHub repository",
     "2b506a4 Revert \"chore: restore product context sync layer\"",
-    "a3ce029 Revert \"docs: refresh product context packet\"",
-    "2ebbe95 Revert \"docs: record product sync commit checkpoint\""
+    "a3ce029 Revert \"docs: refresh product context packet\""
   ],
   "codexVerification": [
     {
@@ -109,7 +109,7 @@
     "awaiting final iPhone verification; FIX-05 automated correction passed independently"
   ],
   "decisionsMadeSinceLastSync": [
-    "Clean integration checkpoint recorded after commissioning tests; Gym Logger remains at M01 human gate."
+    "Codex app thread notifications and five-minute bridge automation enabled; GitHub CLI authentication remains the one-time user prerequisite."
   ],
   "recordedDecisions": [
     {
@@ -145,10 +145,18 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "b818065afaa9c3e170fdc91effedab97b9313de2",
+    "commit": "d947b626b7e65de06d286b1f8ff01b0b6ac05333",
     "branch": "main",
-    "workingTree": "## main...origin/main [ahead 1]",
-    "changedFiles": []
+    "workingTree": "## main...origin/main [ahead 2]\n M orchestration/product-orchestrator/CHATGPT_ADAPTER.md\n M orchestration/product-orchestrator/CODEX_ADAPTER.md\n M orchestration/product-sync/README.md\n M orchestration/product-sync/config.json\n M orchestration/product-sync/publish.mjs\n M orchestration/product-sync/publish.nodecheck.mjs\n M orchestration/reports/product-orchestrator-commissioning-2026-08-24.md",
+    "changedFiles": [
+      "orchestration/product-orchestrator/CHATGPT_ADAPTER.md",
+      "orchestration/product-orchestrator/CODEX_ADAPTER.md",
+      "orchestration/product-sync/README.md",
+      "orchestration/product-sync/config.json",
+      "orchestration/product-sync/publish.mjs",
+      "orchestration/product-sync/publish.nodecheck.mjs",
+      "orchestration/reports/product-orchestrator-commissioning-2026-08-24.md"
+    ]
   },
   "builder": {
     "id": "ox-alpha",
@@ -167,11 +175,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "product-orchestrator-checkpoint",
-      "summary": "Clean integration checkpoint recorded after commissioning tests; Gym Logger remains at M01 human gate.",
-      "at": "2026-08-24T09:57:42.446Z"
+      "name": "product-orchestrator-thread-bridge-enabled",
+      "summary": "Codex app thread notifications and five-minute bridge automation enabled; GitHub CLI authentication remains the one-time user prerequisite.",
+      "at": "2026-08-24T10:06:45.021Z"
     },
-    "contextRevision": 2,
+    "contextRevision": 3,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
@@ -182,10 +190,12 @@
       "issueTitle": "[product-sync] Gym Logger product decisions",
       "issueNumber": 1,
       "recommendedUpgrade": "If the product conversation can write through the GitHub app, use one append-only comment on the configured product-sync issue. If it can only update files, commit one JSON artifact under orchestration/product-sync/inbox/.",
-      "directChatInjection": false,
+      "directChatInjection": true,
+      "threadBridge": "codex-app-send-message-to-thread",
+      "productConversationId": "6a8bc798-0620-83ec-8c94-4daeb6eeab19",
       "eventDrivenWakeup": false,
-      "minimumUserAction": "Connect the repository in the product conversation, ask it to read orchestration/product-sync/PRODUCT_CONTEXT.md, and let the local Codex loop run poll-decisions.",
-      "why": "The current GitHub connector exposes supported file and issue-comment writes to tooling, but this environment cannot verify or grant write permission to a particular existing ChatGPT conversation, and it cannot inject or wake that conversation."
+      "minimumUserAction": "Run the one-time gh auth login below; the active local automation then polls, notifies this product conversation, and resumes validated decisions.",
+      "why": "The supported Codex app thread bridge can send a user-visible message to the existing product conversation. GitHub remains the durable decision bridge; the local automation provides scheduled polling rather than instantaneous webhook wake-up."
     }
   }
 }

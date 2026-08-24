@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { applyDecision, openEscalation, pollDecisions, publishContext, setBuilder, writeDecision } from "./publish.mjs";
+import { applyDecision, markChatNotified, openEscalation, pollDecisions, publishContext, setBuilder, writeDecision } from "./publish.mjs";
 
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), "product-sync-"));
@@ -64,4 +64,12 @@ test("the reverse channel accepts one current decision, rejects replay, and reje
   const failedBuilderDecision = { ...builderDecision, decisionId: "PD-SYN-BUILDER-FAIL", correlationId: "SYN-BUILDER-FAIL", expectedSyncRevision: failedBuilderEscalation.synchronization.contextRevision, scope: { level: "project", id: "SYN-BUILDER-FAIL" }, payload: { builderId: "missing", reason: "Synthetic failure path." } };
   assert.equal((await applyDecision({ root, decision: failedBuilderDecision })).status, "rejected");
   assert.equal(JSON.parse(await readFile(join(root, "orchestration/product-sync/SYNC_STATE.json"), "utf8")).activeBuilder, "two");
+});
+
+test("chat notification markers are revision-scoped", async () => {
+  const root = await fixture();
+  await publishContext({ root, eventName: "escalation-opened", summary: "Synthetic escalation." });
+  const marker = await markChatNotified({ root, revision: 1, threadId: "synthetic-chat" });
+  assert.equal(marker.revision, 1);
+  assert.equal(JSON.parse(await readFile(join(root, "orchestration/product-sync/SYNC_STATE.json"), "utf8")).chatNotifications[0].threadId, "synthetic-chat");
 });
