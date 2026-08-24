@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T15:47:06.819Z",
+  "generatedAt": "2026-08-24T15:47:16.591Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "44e959f fix: preserve notes highlight colors",
     "70995cd docs: publish M03 color retest gate",
     "f32548d fix: improve notes color paste compatibility",
     "7246631 chore: prepare trusted https rich paste test",
-    "433f1c5 docs: resume M03 with trusted HTTPS rich-paste gate",
-    "73e79a5 docs: resolve E-002 in favor of trusted HTTPS rich-paste verification"
+    "433f1c5 docs: resume M03 with trusted HTTPS rich-paste gate"
   ],
   "codexVerification": [
     {
@@ -150,7 +150,7 @@
     "FIX-03 engineering verification is complete; FIX-03 secure iPhone retest must confirm foreground and text-highlight colors; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance"
   ],
   "decisionsMadeSinceLastSync": [
-    "OX FIX-03 completed and Codex independently verified 153/153 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes foreground/highlight color retest is the remaining gate."
+    "FIX-03 known-good checkpoint 44e959f pushed; 153/153 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone Apple Notes color retest."
   ],
   "recordedDecisions": [
     {
@@ -195,23 +195,10 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "70995cd7664c7925931ec73ffa3ab57795cd98ac",
+    "commit": "44e959ff19190e2027a630e35e5ed9b7ddc95900",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M src/domain/highlights.ts\n M src/domain/notesExport.ts\n M src/tests/notesExport.test.ts\n?? orchestration/reports/M03-T01-FIX-03.md\n?? orchestration/reviews/M03-T01-FIX-03-codex-review.md\n?? orchestration/tasks/M03-T01-FIX-03.md\n?? src/tests/highlights.test.ts",
-    "changedFiles": [
-      "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/state/STATE.md",
-      "src/domain/highlights.ts",
-      "src/domain/notesExport.ts",
-      "src/tests/notesExport.test.ts",
-      "orchestration/reports/M03-T01-FIX-03.md",
-      "orchestration/reviews/M03-T01-FIX-03-codex-review.md",
-      "orchestration/tasks/M03-T01-FIX-03.md",
-      "src/tests/highlights.test.ts"
-    ]
+    "workingTree": "## main...origin/main",
+    "changedFiles": []
   },
   "builder": {
     "id": "ox-alpha",
@@ -230,11 +217,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t01-fix-03-codex-verified",
-      "summary": "OX FIX-03 completed and Codex independently verified 153/153 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes foreground/highlight color retest is the remaining gate.",
-      "at": "2026-08-24T15:47:06.763Z"
+      "name": "m03-t01-fix-03-checkpoint-pushed",
+      "summary": "FIX-03 known-good checkpoint 44e959f pushed; 153/153 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone Apple Notes color retest.",
+      "at": "2026-08-24T15:47:16.529Z"
     },
-    "contextRevision": 23,
+    "contextRevision": 24,
     "openEscalations": [
       {
         "id": "E-002",
