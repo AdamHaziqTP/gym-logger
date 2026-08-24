@@ -12,6 +12,7 @@ Updated: 2026-08-24
 - Automatic correction attempts used: 2 / 2
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
 - Human review gate: active; automated M01 verification passed, but M01 remains unaccepted
+- Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
 ## Known-good checkpoints
 
