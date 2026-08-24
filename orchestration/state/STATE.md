@@ -7,8 +7,8 @@ Updated: 2026-08-24
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M02 — next bounded implementation milestone after M01 foundation
-- Current task: Codex to resume orchestration from the independently green M01/FIX-05 automated checkpoint and select/prepare the next bounded M02 task according to the existing milestone plan
-- Status: READY_FOR_CODEX
+- Current task: M02-T01 — History, local search, and editable historical sessions
+- Status: READY_FOR_OX
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
 - Human review gate: M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance
@@ -53,3 +53,8 @@ Updated: 2026-08-24
 
 - No active product escalation blocks Codex from continuing.
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
+
+## Active task checkpoint
+
+- Prepared `orchestration/tasks/M02-T01.md` from the approved M02 plan. It is limited to History listing/search and editable historical sessions; Copy Another Session, delete confirmation, and summary override UI remain later bounded tasks.
+- Base checkpoint for the worker: `f173046`.

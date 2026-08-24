@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T10:06:50.762Z",
+  "generatedAt": "2026-08-24T11:58:34.530Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -35,25 +35,28 @@
     "precedenceRule": "Lower precedence numbers win. Worker reports are observations; Codex verification and human evidence control acceptance."
   },
   "current": {
-    "milestone": "M01 — offline foundation vertical slice",
-    "task": "M01 final physical-iPhone verification after M01-T01-FIX-05",
-    "status": "HUMAN_REVIEW_REQUIRED",
-    "humanReviewGate": "awaiting final iPhone verification; FIX-05 automated correction passed independently",
-    "nextAction": "awaiting final iPhone verification; FIX-05 automated correction passed independently"
+    "milestone": "M02 — next bounded implementation milestone after M01 foundation",
+    "task": "M02-T01 — History, local search, and editable historical sessions",
+    "status": "READY_FOR_OX",
+    "humanReviewGate": "M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance",
+    "nextAction": "M01/FIX-05 automated verification is the engineering baseline for continuation."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
     "Inspected all supplied screenshots and the seed fixture.",
     "Read `references/text 2.txt` enough to confirm intentionally irregular free-form history.",
     "Read the available Build Gym Logger conversation export as supplementary history.",
-    "Confirmed the Desktop DSH wrapper exists at the verified path."
+    "Confirmed the Desktop DSH wrapper exists at the verified path.",
+    "Completed independent automated verification of the M01/FIX-05 correction checkpoint.",
+    "Recorded the product owner's iPhone 14 Pro Max result: temporary LAN/local-host runtime was unreachable, so HV-01 through HV-05 are BLOCKED/DEFERRED rather than passed.",
+    "Recorded product authorization to continue in full-auto mode through bounded milestones and defer low-risk M01 physical-device checks to the final reachable/installable-build acceptance pass."
   ],
   "recentImplementationChanges": [
-    "1b72a1e feat: automate product chat escalation notifications",
-    "d947b62 docs: publish clean product orchestrator checkpoint",
-    "b818065 feat: add product orchestrator reverse channel",
-    "dcae456 chore: connect product sync bridge to GitHub repository",
-    "2b506a4 Revert \"chore: restore product context sync layer\""
+    "f173046 docs: authorize Codex to resume M02 after deferred device gate",
+    "2662c4c docs: record M01 iPhone gate as blocked and deferred",
+    "0da8bee docs: record deferred M01 device gate and full-auto authorization",
+    "f7005ce chore(orchestration): use global bridge watcher",
+    "1d8a8bd docs: publish clean thread bridge checkpoint"
   ],
   "codexVerification": [
     {
@@ -70,7 +73,10 @@
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M01-FIX-05.md",
       "result": [
-        "Do not test Apple Notes paste or PNG export; those remain deferred milestones. Return each item as PASS, FAIL, or BLOCKED. M01 is not accepted and M02 remains blocked until this final gate passes."
+        "The product owner could not open the temporary LAN/local-host build on the physical iPhone and chose not to keep engineering blocked on this narrow gate. The remaining interaction checks are explicitly deferred to a later end-to-end device acceptance pass when a reliably reachable/installable build exists.",
+        "[x] **HV-01 — BLOCKED/DEFERRED:** Could not reach the temporary runtime, so the five-entry legend could not be physically re-verified in this pass.",
+        "[x] **HV-02 — BLOCKED/DEFERRED:** Could not reach the temporary runtime, so handle tap/menu behavior could not be physically re-verified in this pass.",
+        "[x] **HV-03 — BLOCKED/DEFERRED:** Could not reach the temporary runtime, so hold/drag behavior could not be physically re-verified in this pass."
       ]
     },
     {
@@ -101,15 +107,18 @@
     }
   ],
   "unresolvedDefects": [
+    "M01 FIX-05 physical-iPhone HV-01 through HV-05: BLOCKED/DEFERRED due unreachable temporary LAN/local-host runtime; final acceptance still required later.",
     "Rich HTML/plain clipboard paste into Apple Notes on the target iPhone.",
     "Faithful and Compact tall PNG export on the target iPhone.",
-    "Full history/search, backup/restore, and polish milestones. Row drag/menu is temporarily pulled into the FIX-04 M01 correction gate because the human acceptance pass found the current row interaction incomplete."
+    "Full history/search, backup/restore, polish, and subsequent milestones according to the existing implementation plan."
   ],
   "activeEscalationsAndProductDecisionsNeeded": [
-    "awaiting final iPhone verification; FIX-05 automated correction passed independently"
+    "No active product escalation blocks Codex from continuing.",
+    "E-001 historical DSH rate-limit condition is no longer the current blocker.",
+    "M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance"
   ],
   "decisionsMadeSinceLastSync": [
-    "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate."
+    "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution."
   ],
   "recordedDecisions": [
     {
@@ -131,6 +140,10 @@
     {
       "title": "Final legend decision — 2026-08-24",
       "detail": ""
+    },
+    {
+      "title": "Human-gate deferral / full-auto authorization — 2026-08-24",
+      "detail": ""
     }
   ],
   "relevantEvidence": [
@@ -145,10 +158,16 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "1b72a1ecd07a77fd26639f9decf33a44d5e3c800",
+    "commit": "f173046671e44ad941afd36a311d7e8317fdfc6d",
     "branch": "main",
-    "workingTree": "## main...origin/main [ahead 3]",
-    "changedFiles": []
+    "workingTree": "## main...origin/main [ahead 8, behind 3]\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n?? orchestration/tasks/M02-T01.md",
+    "changedFiles": [
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/STATE.md",
+      "orchestration/tasks/M02-T01.md"
+    ]
   },
   "builder": {
     "id": "ox-alpha",
@@ -167,11 +186,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "product-orchestrator-clean-thread-bridge-checkpoint",
-      "summary": "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate.",
-      "at": "2026-08-24T10:06:50.713Z"
+      "name": "task-prepared",
+      "summary": "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution.",
+      "at": "2026-08-24T11:58:34.480Z"
     },
-    "contextRevision": 4,
+    "contextRevision": 6,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

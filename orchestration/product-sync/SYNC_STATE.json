@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "task-prepared",
+      "summary": "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution.",
+      "at": "2026-08-24T11:58:34.480Z"
+    },
+    {
+      "name": "product-decision-recorded",
+      "summary": "iPhone 14 Pro Max could not reach the temporary LAN build; HV-01 through HV-05 remain blocked/deferred and Codex is authorized to continue bounded M02 work in full-auto mode.",
+      "at": "2026-08-24T11:57:18.233Z"
+    },
+    {
       "name": "product-orchestrator-clean-thread-bridge-checkpoint",
       "summary": "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate.",
       "at": "2026-08-24T10:06:50.713Z"
@@ -29,11 +39,11 @@
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T10:06:50.714Z",
+  "lastPublishedAt": "2026-08-24T11:58:34.480Z",
   "lastEvent": {
-    "name": "product-orchestrator-clean-thread-bridge-checkpoint",
-    "summary": "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate.",
-    "at": "2026-08-24T10:06:50.713Z"
+    "name": "task-prepared",
+    "summary": "M02-T01 prepared: History, local search, and editable historical sessions. Human M01 device checks remain deferred; no product escalation blocks execution.",
+    "at": "2026-08-24T11:58:34.480Z"
   },
-  "syncRevision": 4
+  "syncRevision": 6
 }
