@@ -137,6 +137,25 @@ async function jsonl(path) {
   catch (error) { if (error.code === "ENOENT") return []; throw error; }
 }
 async function appendJsonl(path, value) { await mkdir(dirname(path), { recursive: true }); await appendFile(path, `${JSON.stringify(value)}\n`, "utf8"); }
+export async function recordPollError({ root = DEFAULT_ROOT, command, error } = {}) {
+  const message = error instanceof Error ? error.message : String(error ?? "Unknown poll error");
+  try {
+    const project = await load(resolve(root));
+    const path = bridgePath(project, "pollErrorPath", "orchestration/product-sync/POLL_ERRORS.json");
+    const current = await json(path, { schemaVersion: 1, errors: [] });
+    const errors = Array.isArray(current.errors) ? current.errors : [];
+    const signature = `${command ?? "poll"}:${message}`;
+    if (errors.some((item) => item.signature === signature)) return;
+    const at = timestamp();
+    await saveJson(path, {
+      schemaVersion: 1,
+      errors: [{ signature, command: command ?? "poll", message, firstSeen: at }, ...errors]
+        .slice(0, project.config.limits.recentPollErrors ?? 12)
+    });
+  } catch {
+    // Never hide the original poll failure behind an audit-write failure.
+  }
+}
 function decisionFromText(text) {
   const fenced = text.match(/```(?:product-sync-decision|json)\s*([\s\S]*?)```/i)?.[1]?.trim() ?? text.trim();
   const value = JSON.parse(fenced);
@@ -220,7 +239,7 @@ export async function pollDecisions({ root = DEFAULT_ROOT } = {}) {
   const project = await load(resolve(root));
   const inbox = bridgePath(project, "inboxPath", "orchestration/product-sync/inbox");
   let entries = [];
-  try { entries = (await readdir(inbox, { withFileTypes: true })).filter((item) => item.isFile() && /\.(json|md)$/i.test(item.name)).map((item) => join(inbox, item.name)); }
+  try { entries = (await readdir(inbox, { withFileTypes: true })).filter((item) => item.isFile() && item.name.toLowerCase() !== "readme.md" && /\.(json|md)$/i.test(item.name)).map((item) => join(inbox, item.name)); }
   catch (error) { if (error.code !== "ENOENT") throw error; }
   const results = [];
   for (const path of entries.sort()) results.push(await applyDecision({ root, decisionFile: path }));
@@ -279,5 +298,41 @@ export async function markChatNotified({ root = DEFAULT_ROOT, revision, threadId
 }
 
 function arg(args, name) { const index = args.indexOf(name); return index >= 0 ? args[index + 1] : undefined; }
-async function main() { const [command = "publish", ...args] = process.argv.slice(2); const root = arg(args, "--root") ?? DEFAULT_ROOT; if (command === "publish") { const packet = await publishContext({ root, eventName: arg(args, "--event"), summary: arg(args, "--summary") }); console.log(`Published ${packet.project.name} context at ${packet.generatedAt} (revision ${packet.synchronization.contextRevision}).`); return; } if (command === "set-builder") { const result = await setBuilder({ root, builderId: arg(args, "--builder"), reason: arg(args, "--reason") }); console.log(`Active builder is now ${result.builder.name} (${result.builder.provider}/${result.builder.model}).`); return; } if (command === "show-builder") { console.log(JSON.stringify(await readBuilder({ root }), null, 2)); return; } if (command === "prepare-worker") { console.log(JSON.stringify(await prepareWorker({ root, taskFile: arg(args, "--task-file") }), null, 2)); return; } if (command === "open-escalation") { const packet = await openEscalation({ root, id: arg(args, "--id"), summary: arg(args, "--summary"), scope: arg(args, "--scope") ?? "escalation", allowedActions: (arg(args, "--allowed-actions") ?? "choose,approve,reject,clarify,builder-switch-request").split(",") }); console.log(`Opened ${arg(args, "--id")} at context revision ${packet.synchronization.contextRevision}.`); return; } if (command === "poll-decisions") { console.log(JSON.stringify(await pollDecisions({ root }), null, 2)); return; } if (command === "poll-github") { console.log(JSON.stringify(await pollGitHubComments({ root }), null, 2)); return; } if (command === "mark-chat-notified") { console.log(JSON.stringify(await markChatNotified({ root, revision: Number(arg(args, "--revision")), threadId: arg(args, "--thread-id") }), null, 2)); return; } if (command === "apply-decision") { console.log(JSON.stringify(await applyDecision({ root, decisionFile: arg(args, "--decision-file") }), null, 2)); return; } throw new Error(`Unknown command '${command}'.`); }
+async function runPoll({ root, command, poll }) {
+  try {
+    const results = await poll({ root });
+    // A clean no-op is intentionally silent. The Codex automation retains output as run history.
+    if (results.length) process.stdout.write(`${JSON.stringify(results, null, 2)}\n`);
+  } catch (error) {
+    await recordPollError({ root, command, error });
+    throw error;
+  }
+}
+
+async function main() {
+  const [command = "publish", ...args] = process.argv.slice(2);
+  const root = arg(args, "--root") ?? DEFAULT_ROOT;
+  if (command === "publish") {
+    const packet = await publishContext({ root, eventName: arg(args, "--event"), summary: arg(args, "--summary") });
+    console.log(`Published ${packet.project.name} context at ${packet.generatedAt} (revision ${packet.synchronization.contextRevision}).`);
+    return;
+  }
+  if (command === "set-builder") {
+    const result = await setBuilder({ root, builderId: arg(args, "--builder"), reason: arg(args, "--reason") });
+    console.log(`Active builder is now ${result.builder.name} (${result.builder.provider}/${result.builder.model}).`);
+    return;
+  }
+  if (command === "show-builder") { console.log(JSON.stringify(await readBuilder({ root }), null, 2)); return; }
+  if (command === "prepare-worker") { console.log(JSON.stringify(await prepareWorker({ root, taskFile: arg(args, "--task-file") }), null, 2)); return; }
+  if (command === "open-escalation") {
+    const packet = await openEscalation({ root, id: arg(args, "--id"), summary: arg(args, "--summary"), scope: arg(args, "--scope") ?? "escalation", allowedActions: (arg(args, "--allowed-actions") ?? "choose,approve,reject,clarify,builder-switch-request").split(",") });
+    console.log(`Opened ${arg(args, "--id")} at context revision ${packet.synchronization.contextRevision}.`);
+    return;
+  }
+  if (command === "poll-decisions") { await runPoll({ root, command, poll: pollDecisions }); return; }
+  if (command === "poll-github") { await runPoll({ root, command, poll: pollGitHubComments }); return; }
+  if (command === "mark-chat-notified") { console.log(JSON.stringify(await markChatNotified({ root, revision: Number(arg(args, "--revision")), threadId: arg(args, "--thread-id") }), null, 2)); return; }
+  if (command === "apply-decision") { console.log(JSON.stringify(await applyDecision({ root, decisionFile: arg(args, "--decision-file") }), null, 2)); return; }
+  throw new Error(`Unknown command '${command}'.`);
+}
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((error) => { console.error(error.message); process.exitCode = 1; });

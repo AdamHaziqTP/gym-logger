@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
@@ -18,6 +19,7 @@ const repositoryUrl = arg(args, "--repository-url") ?? "";
 const builderId = arg(args, "--builder") ?? "unconfigured";
 const builderProvider = arg(args, "--provider") ?? "unconfigured";
 const builderModel = arg(args, "--model") ?? "unconfigured";
+const registerGlobal = args.includes("--register-global");
 const base = join(root, "orchestration");
 const sync = join(base, "product-sync");
 const state = join(base, "state");
@@ -55,4 +57,15 @@ await writeIfMissing(join(sync, "inbox", "README.md"), "Each file contains one p
 const manifest = { schemaVersion: 1, generatedAt: new Date().toISOString(), projectId, projectName, repositoryUrl, sourceDocuments: [...new Set(existingDocs)], legacyTranscripts: transcripts, notes: "Migration manifest only; source documents and existing orchestration state remain authoritative until reconciled by Codex and the product conversation." };
 await writeIfMissing(join(sync, "MIGRATION_MANIFEST.json"), `${JSON.stringify(manifest, null, 2)}\n`);
 await writeIfMissing(join(base, "product-orchestrator", "WORKFLOW_SPEC.md"), await readFile(join(HERE, "WORKFLOW_SPEC.md"), "utf8"));
+if (registerGlobal) {
+  const registerPath = join(process.env.USERPROFILE ?? "", ".codex", "product-orchestrator", "register-project.mjs");
+  if (!existsSync(registerPath)) throw new Error(`Global product-orchestrator registrar not found at ${registerPath}.`);
+  const registerArgs = [registerPath, "--root", root, "--project-id", projectId, "--project-name", projectName];
+  for (const name of ["--issue-number", "--product-thread-id", "--repository-url"]) {
+    const value = arg(args, name);
+    if (value) registerArgs.push(name, value);
+  }
+  registerArgs.push(args.includes("--paused") ? "--paused" : "--enabled");
+  execFileSync(process.execPath, registerArgs, { stdio: "inherit" });
+}
 console.log(JSON.stringify({ root, projectId, created: ["product-sync/config.json", "product-sync/workers.json", "product-sync/SYNC_STATE.json", "state/STATE.md", "state/DECISIONS.md", "product-sync/MIGRATION_MANIFEST.json"], sourceDocuments: manifest.sourceDocuments }, null, 2));

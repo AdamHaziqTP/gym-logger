@@ -31,6 +31,7 @@ Codex remains responsible for scope, acceptance, runtime checks, visual checks, 
 - `publish.mjs` — publication, builder selection, and launch-preparation commands.
 - `PRODUCT_CONTEXT.md` and `.json` — generated compact outputs.
 - `PUBLICATION_HISTORY.jsonl` — small event history; detailed records stay in `orchestration/reports/` and `orchestration/reviews/`.
+- `POLL_ERRORS.json` — bounded records of distinct poll failures; it is created only after a real poll error and is never written for a no-op.
 
 Publish after dispatch, worker completion/failure, review acceptance/rejection, human verification, escalation/decision changes, or builder changes:
 
@@ -58,6 +59,8 @@ node orchestration/product-sync/publish.mjs poll-github
 
 The local automation polls every five minutes and can notify the existing product conversation through the supported Codex app thread bridge. Instant webhook wake-up is not implemented. Without the automation or a connector, Adam opens or attaches the packet; raw DSH/Codex transcript copy/paste is not required.
 
+The poll commands are deliberately silent when they find nothing new. A processed decision still writes the canonical decision/acknowledgement records, while a poll failure is recorded once per distinct error signature in the bounded `POLL_ERRORS.json` file. No per-run log or temporary file is created in the project on a successful no-op. The Codex app may retain its own automation run history outside this repository; project code cannot remove that app-level history.
+
 The decision schema and rejection rules are documented in `../product-orchestrator/WORKFLOW_SPEC.md`. A valid response must match the current `synchronization.contextRevision` and an open escalation. Replays, conflicts, stale responses, unrelated scopes, unavailable builders, and high-impact actions without explicit human approval are rejected and acknowledged.
 
 ## Builder switching
@@ -80,3 +83,9 @@ node orchestration/product-sync/publish.mjs prepare-worker --task-file orchestra
 - For another project, run `node orchestration/product-orchestrator/bootstrap.mjs --root <project> --project-id <id> --project-name "<name>"`, then ingest the existing PRD/docs/references and current state into the generated manifest. Bootstrap is additive and does not discard existing work. Configure the GitHub repository and worker registry before the first worker invocation.
 
 This pilot does not start or advance Gym Logger product work.
+
+## Global polling
+
+Gym Logger is registered in the user-level `Product Orchestrator Bridge Watcher` at `C:\Users\adam4\.codex\product-orchestrator\registry.json`. The single global Codex app automation runs every five minutes and invokes this project’s existing `publish.mjs poll-github` validator only when this registration is enabled.
+
+Do not create a Gym Logger-specific polling automation. Pausing this project in the global registry skips it without deleting its registration or changing `SYNC_STATE.json`, decisions, evidence, or milestones. The watcher never invokes DSH, advances M01, or closes the physical-iPhone gate. No-op polls remain silent; meaningful decisions and bounded errors are retained through the existing project-sync records.

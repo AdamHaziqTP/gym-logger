@@ -16,6 +16,7 @@
     "jsonPath": "orchestration/product-sync/PRODUCT_CONTEXT.json",
     "statePath": "orchestration/product-sync/SYNC_STATE.json",
     "historyPath": "orchestration/product-sync/PUBLICATION_HISTORY.jsonl",
+    "pollErrorPath": "orchestration/product-sync/POLL_ERRORS.json",
     "workerPatchPath": "orchestration/product-sync/generated/active-worker.patch.yml",
     "inboxPath": "orchestration/product-sync/inbox",
     "decisionLedgerPath": "orchestration/product-sync/DECISION_LEDGER.jsonl",
@@ -36,5 +37,13 @@
     "minimumUserAction": "Run the one-time gh auth login below; the active local automation then polls, notifies this product conversation, and resumes validated decisions.",
     "why": "The supported Codex app thread bridge can send a user-visible message to the existing product conversation. GitHub remains the durable decision bridge; the local automation provides scheduled polling rather than instantaneous webhook wake-up."
   },
-  "limits": { "recentCommits": 5, "recentReviews": 3, "recentDecisions": 8, "recentEvidence": 8, "recentEvents": 12 }
+  "polling": {
+    "mode": "global-product-orchestrator",
+    "registryPath": "C:\\Users\\adam4\\.codex\\product-orchestrator\\registry.json",
+    "watcherName": "Product Orchestrator Bridge Watcher",
+    "cadenceMinutes": 5,
+    "projectEnabled": true,
+    "workerExecution": "disabled-by-watcher"
+  },
+  "limits": { "recentCommits": 5, "recentReviews": 3, "recentDecisions": 8, "recentEvidence": 8, "recentEvents": 12, "recentPollErrors": 12 }
 }

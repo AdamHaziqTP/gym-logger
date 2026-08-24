@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { applyDecision, markChatNotified, openEscalation, pollDecisions, publishContext, setBuilder, writeDecision } from "./publish.mjs";
+import { applyDecision, markChatNotified, openEscalation, pollDecisions, publishContext, recordPollError, setBuilder, writeDecision } from "./publish.mjs";
 
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), "product-sync-"));
@@ -72,4 +73,26 @@ test("chat notification markers are revision-scoped", async () => {
   const marker = await markChatNotified({ root, revision: 1, threadId: "synthetic-chat" });
   assert.equal(marker.revision, 1);
   assert.equal(JSON.parse(await readFile(join(root, "orchestration/product-sync/SYNC_STATE.json"), "utf8")).chatNotifications[0].threadId, "synthetic-chat");
+});
+
+test("a no-op decision poll creates no per-run artifact", async () => {
+  const root = await fixture();
+  assert.deepEqual(await pollDecisions({ root }), []);
+  assert.equal(existsSync(join(root, "orchestration/product-sync/POLL_ERRORS.json")), false);
+  assert.equal(existsSync(join(root, "orchestration/product-sync/PUBLICATION_HISTORY.jsonl")), false);
+  assert.equal(existsSync(join(root, "orchestration/product-sync/DECISION_LEDGER.jsonl")), false);
+});
+
+test("poll errors are retained once and capped", async () => {
+  const root = await fixture();
+  await recordPollError({ root, command: "poll-github", error: new Error("authentication unavailable") });
+  await recordPollError({ root, command: "poll-github", error: new Error("authentication unavailable") });
+  const firstErrors = JSON.parse(await readFile(join(root, "orchestration/product-sync/POLL_ERRORS.json"), "utf8")).errors;
+  assert.equal(firstErrors.length, 1);
+  assert.equal(firstErrors[0].message, "authentication unavailable");
+  for (let index = 0; index < 15; index += 1) {
+    await recordPollError({ root, command: "poll-github", error: new Error(`synthetic-${index}`) });
+  }
+  const errors = JSON.parse(await readFile(join(root, "orchestration/product-sync/POLL_ERRORS.json"), "utf8")).errors;
+  assert.equal(errors.length, 12);
 });
