@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T10:06:45.069Z",
+  "generatedAt": "2026-08-24T10:06:50.762Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -49,11 +49,11 @@
     "Confirmed the Desktop DSH wrapper exists at the verified path."
   ],
   "recentImplementationChanges": [
+    "1b72a1e feat: automate product chat escalation notifications",
     "d947b62 docs: publish clean product orchestrator checkpoint",
     "b818065 feat: add product orchestrator reverse channel",
     "dcae456 chore: connect product sync bridge to GitHub repository",
-    "2b506a4 Revert \"chore: restore product context sync layer\"",
-    "a3ce029 Revert \"docs: refresh product context packet\""
+    "2b506a4 Revert \"chore: restore product context sync layer\""
   ],
   "codexVerification": [
     {
@@ -109,7 +109,7 @@
     "awaiting final iPhone verification; FIX-05 automated correction passed independently"
   ],
   "decisionsMadeSinceLastSync": [
-    "Codex app thread notifications and five-minute bridge automation enabled; GitHub CLI authentication remains the one-time user prerequisite."
+    "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate."
   ],
   "recordedDecisions": [
     {
@@ -145,18 +145,10 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "d947b626b7e65de06d286b1f8ff01b0b6ac05333",
+    "commit": "1b72a1ecd07a77fd26639f9decf33a44d5e3c800",
     "branch": "main",
-    "workingTree": "## main...origin/main [ahead 2]\n M orchestration/product-orchestrator/CHATGPT_ADAPTER.md\n M orchestration/product-orchestrator/CODEX_ADAPTER.md\n M orchestration/product-sync/README.md\n M orchestration/product-sync/config.json\n M orchestration/product-sync/publish.mjs\n M orchestration/product-sync/publish.nodecheck.mjs\n M orchestration/reports/product-orchestrator-commissioning-2026-08-24.md",
-    "changedFiles": [
-      "orchestration/product-orchestrator/CHATGPT_ADAPTER.md",
-      "orchestration/product-orchestrator/CODEX_ADAPTER.md",
-      "orchestration/product-sync/README.md",
-      "orchestration/product-sync/config.json",
-      "orchestration/product-sync/publish.mjs",
-      "orchestration/product-sync/publish.nodecheck.mjs",
-      "orchestration/reports/product-orchestrator-commissioning-2026-08-24.md"
-    ]
+    "workingTree": "## main...origin/main [ahead 3]",
+    "changedFiles": []
   },
   "builder": {
     "id": "ox-alpha",
@@ -175,11 +167,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "product-orchestrator-thread-bridge-enabled",
-      "summary": "Codex app thread notifications and five-minute bridge automation enabled; GitHub CLI authentication remains the one-time user prerequisite.",
-      "at": "2026-08-24T10:06:45.021Z"
+      "name": "product-orchestrator-clean-thread-bridge-checkpoint",
+      "summary": "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate.",
+      "at": "2026-08-24T10:06:50.713Z"
     },
-    "contextRevision": 3,
+    "contextRevision": 4,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

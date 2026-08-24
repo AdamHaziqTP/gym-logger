@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "product-orchestrator-clean-thread-bridge-checkpoint",
+      "summary": "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate.",
+      "at": "2026-08-24T10:06:50.713Z"
+    },
+    {
       "name": "product-orchestrator-thread-bridge-enabled",
       "summary": "Codex app thread notifications and five-minute bridge automation enabled; GitHub CLI authentication remains the one-time user prerequisite.",
       "at": "2026-08-24T10:06:45.021Z"
@@ -24,11 +29,11 @@
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T10:06:45.022Z",
+  "lastPublishedAt": "2026-08-24T10:06:50.714Z",
   "lastEvent": {
-    "name": "product-orchestrator-thread-bridge-enabled",
-    "summary": "Codex app thread notifications and five-minute bridge automation enabled; GitHub CLI authentication remains the one-time user prerequisite.",
-    "at": "2026-08-24T10:06:45.021Z"
+    "name": "product-orchestrator-clean-thread-bridge-checkpoint",
+    "summary": "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate.",
+    "at": "2026-08-24T10:06:50.713Z"
   },
-  "syncRevision": 3
+  "syncRevision": 4
 }
