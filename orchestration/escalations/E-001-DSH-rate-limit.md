@@ -2,7 +2,7 @@
 
 ## Status
 
-Open for human review.
+Resolved for this pilot; retain as historical infrastructure evidence.
 
 ## Context
 
@@ -14,6 +14,6 @@ The first Gym Logger pilot used the verified Desktop DSH wrapper and reached the
 
 The final worker patch could not repair the remaining M01 persistence/test gaps. No third automatic correction was attempted.
 
-## Recommendation
+## Resolution
 
-After the DSH quota resets or an approved non-free worker profile is available, rerun only `orchestration/tasks/M01-T01-FIX-02.md` from the current uncommitted implementation tree. Do not advance to M02 until the full test suite is green and the remount persistence path is independently verified.
+OpenRouter/DSH capacity was restored. Codex created `M01-T01-FIX-03` as an infrastructure retry because FIX-02 was rejected before OX execution and therefore did not consume an implementation correction attempt. OX completed the correction, and Codex independently verified the full suite, build, runtime smoke, and remount persistence path. No M02 work was started.

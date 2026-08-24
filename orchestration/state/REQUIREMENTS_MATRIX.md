@@ -13,27 +13,27 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-007 | Clone rows, order, text, and highlights; do not blank Reps/Weight. | Spec §§4.2, 12.3; A2 | M01-M02 | PLANNED | — |
 | REQ-008 | Skip remains plain text, is not auto-dimmed/deleted, and counts in totals. | Spec §8; D1-D5 | M01-M05 | PLANNED | — |
 | REQ-009 | Summary supports calculated values plus manual overrides including 40/39 fixture mismatch. | Spec §9; E1-E3 | M01-M02 | PLANNED | — |
-| REQ-010 | All five visible columns accept arbitrary strings without normalization. | Spec §§6.1-6.3, 27.6-27.7; B1-B5 | M01-M04 | IN_PROGRESS | — |
-| REQ-011 | Row-level color system: Arms orange, Back purple, Chest mint, Delts blue, Legs pink, None. | Spec §5; references/IMG_5550-5554 | M01-M04 | IN_PROGRESS | visual refs |
-| REQ-012 | Dark Notes-like presentation uses restrained background, subtle grid, readable colored text/highlights. | Spec §§5.2, 22; IMG_5501-5502 | M01-M04 | IN_PROGRESS | visual refs |
-| REQ-013 | Tap cell edits immediately with normal text behavior. | Spec §7.1; C1 | M01 | PLANNED | — |
+| REQ-010 | All five visible columns accept arbitrary strings without normalization. | Spec §§6.1-6.3, 27.6-27.7; B1-B5 | M01-M04 | VERIFIED (automated) | M01 evidence; 32/32 |
+| REQ-011 | Row-level color system: Arms orange, Back purple, Chest mint, Delts blue, Legs pink, None. | Spec §5; references/IMG_5550-5554 | M01-M04 | IN_PROGRESS | automated purple persistence; HV-04/HV-05 |
+| REQ-012 | Dark Notes-like presentation uses restrained background, subtle grid, readable colored text/highlights. | Spec §§5.2, 22; IMG_5501-5502 | M01-M04 | IN_PROGRESS | source/runtime inspected; HV-05 |
+| REQ-013 | Tap cell edits immediately with normal text behavior. | Spec §7.1; C1 | M01 | VERIFIED (automated) | M01 evidence; App tests |
 | REQ-014 | Apple Notes-like row handle selects a row; selected treatment is clear. | Spec §7.2; C2-C3 | M04 | PLANNED | — |
 | REQ-015 | Selected row actions support add above/below, duplicate, copy/cut/paste, colour, delete. | Spec §§7.3-7.6; C4-C9 | M04 | PLANNED | — |
 | REQ-016 | 40-row table remains responsive; target stress is 100 rows. | Spec §25; C10 | M01/M04/M06 | PLANNED | — |
 | REQ-017 | Notes area below table accepts arbitrary text and travels with export. | Spec §10 | M01/M04-M05 | PLANNED | — |
 | REQ-018 | History is reverse chronological, searchable locally, and old sessions editable. | Spec §11; F1-F5 | M02 | PLANNED | — |
 | REQ-019 | Deleting an app session confirms and explicitly says Apple Notes is unaffected. | Spec §11.4; F6 | M02 | PLANNED | — |
-| REQ-020 | IndexedDB persistence with immediate/debounced autosave survives termination/reopen. | Spec §§17.2-17.4; B6, G2 | M01 | PLANNED | — |
-| REQ-021 | Offline shell is cached and core use does not require network. | Spec §17; G1-G5 | M01/M06 | PLANNED | — |
-| REQ-022 | Request persistent storage where appropriate and surface non-destructive storage errors. | Spec §§17.3, 27.9 | M01/M06 | PLANNED | — |
+| REQ-020 | IndexedDB persistence with immediate/debounced autosave survives termination/reopen. | Spec §§17.2-17.4; B6, G2 | M01 | VERIFIED (automated; device pending) | remount test; HV-02/HV-03 |
+| REQ-021 | Offline shell is cached and core use does not require network. | Spec §17; G1-G5 | M01/M06 | IN_PROGRESS | runtime smoke; HV-01 |
+| REQ-022 | Request persistent storage where appropriate and surface non-destructive storage errors. | Spec §§17.3, 27.9 | M01/M06 | VERIFIED (source/test) | App bootstrap; build/tests; device pending |
 | REQ-023 | Rich Copy to Notes includes date, legend, summary, table, notes with HTML and plain fallback. | Spec §15; H1-H6 | M03/M05 | DEFERRED | real iPhone required |
 | REQ-024 | Never claim rich Notes structure/color works without target-iPhone paste evidence. | Spec §§15.4-15.6, 32 | M03 | DEFERRED | — |
 | REQ-025 | Faithful and Compact full-session PNG export handle 40+ rows, preserve colors and notes. | Spec §14; I1-I6 | M03/M05 | DEFERRED | real iPhone required |
 | REQ-026 | Compact export hides Skip only when all Skip cells are empty. | Spec §§14.1, 30; D4-D5 | M05 | DEFERRED | — |
 | REQ-027 | Backup JSON includes schema, sessions, rows, highlights, settings, metadata and restores exactly. | Spec §18; J1-J5 | M03/M05 | PLANNED | — |
 | REQ-028 | Historical import is deferred; do not clean or invent data from `text 2.txt`. | Spec §19, §35 | M07 | DEFERRED | — |
-| REQ-029 | IDs use UUIDs; local date is separate from primary key; positions normalize to 0..n-1. | Spec §20 | M01 | PLANNED | — |
-| REQ-030 | Suggested stack is React + TypeScript + Vite + IndexedDB/Dexie + small CSS/PWA layer. | Spec §21 | M01 | PLANNED | — |
+| REQ-029 | IDs use UUIDs; local date is separate from primary key; positions normalize to 0..n-1. | Spec §20 | M01 | VERIFIED (automated) | schema/seed/clone tests |
+| REQ-030 | Suggested stack is React + TypeScript + Vite + IndexedDB/Dexie + small CSS/PWA layer. | Spec §21 | M01 | VERIFIED (automated) | build/runtime |
 | REQ-031 | No heavy UI framework or remote fonts/images; no unnecessary animation/CPU/network work. | Spec §§17, 21, 25 | All | PLANNED | — |
 | REQ-032 | Theme supports System/Dark/Light; export defaults dark; image style supports Compact/Faithful. | Spec §§14, 22-23 | M05-M06 | PLANNED | — |
 | REQ-033 | Touch targets are comfortable, color is not the only selected/destructive signal, and keyboard does not hide edits. | Spec §26 | M04-M06 | PLANNED | — |
@@ -43,4 +43,4 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 
 ## Pilot disposition
 
-M01 is intentionally limited to REQ-010, REQ-011, REQ-012, REQ-013, REQ-016, REQ-020, REQ-021, REQ-022, REQ-029, and REQ-030. No later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation.
+M01 is intentionally limited to REQ-010, REQ-011, REQ-012, REQ-013, REQ-016, REQ-020, REQ-021, REQ-022, REQ-029, and REQ-030. The automatable portions are green; REQ-011, REQ-012, REQ-016, REQ-020, and REQ-021 retain device/manual portions in `HUMAN-VERIFICATION-M01.md`. No later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation.

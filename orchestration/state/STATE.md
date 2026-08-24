@@ -7,18 +7,18 @@ Updated: 2026-08-24
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M01 — offline foundation vertical slice
-- Current task: M01-T01-FIX-03 — retry the previously unexecuted persistence/test correction
-- Status: READY_FOR_OX
+- Current task: M01 human verification gate after M01-T01-FIX-03
+- Status: HUMAN_REVIEW_REQUIRED
 - Automatic correction attempts used: 2 / 2
-- Infrastructure retry: authorized; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
-- Human review gate: pending automated re-verification; M01 remains unaccepted
+- Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
+- Human review gate: active; automated M01 verification passed, but M01 remains unaccepted
 
 ## Known-good checkpoints
 
 - Handoff baseline: `db71546` — `chore: checkpoint gym logger handoff`
 - Orchestration bootstrap: `dd72762`
-- Last orchestration evidence checkpoint: `fecfb8f`
-- M01 accepted checkpoint: none; implementation remains uncommitted and rejected
+- Last orchestration evidence checkpoint: pending commit for the automated M01 known-good checkpoint
+- M01 accepted checkpoint: none; automated known-good checkpoint is pending the commit below, while product acceptance remains gated by human verification
 
 ## Completed
 
@@ -33,7 +33,7 @@ Updated: 2026-08-24
 - M01-T01 has been independently audited.
 - Correction 1 repaired the evidenced latest-session sort failure and removed debug residue.
 - Correction 2 was blocked by DSH rate limiting before execution; this is being retried as `M01-T01-FIX-03` after the infrastructure condition was reported resolved.
-- Final decision: resume the bounded M01 correction/re-verification loop; do not start M02.
+- Final decision: automated M01 gate passes; stop for human device/visual verification; do not start M02.
 
 ## Deferred
 

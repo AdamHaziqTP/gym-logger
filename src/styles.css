@@ -1,0 +1,430 @@
+/*
+ * Gym Logger — dark, restrained, Apple Notes-like presentation (spec §22).
+ * Near-black background, thin subtle grid lines, no gradients, no dashboard
+ * cards. The category highlights provide all the color.
+ */
+
+:root {
+  color-scheme: dark;
+  --bg: #000000;
+  --surface: #111113;
+  --grid: rgba(235, 235, 245, 0.16);
+  --grid-strong: rgba(235, 235, 245, 0.24);
+  --text: #f2f2f7;
+  --text-dim: #98989f;
+  --accent: #0a84ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.boot {
+  min-height: 100vh;
+}
+
+.screen {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px 16px calc(120px + env(safe-area-inset-bottom));
+}
+
+/* ---------- Home ---------- */
+
+.app-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 8px 0 20px;
+}
+
+.panel {
+  margin-bottom: 20px;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  margin: 0 0 6px;
+}
+
+.date-line {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.summary-line {
+  display: block;
+  width: 100%;
+  text-align: left;
+  color: var(--text-dim);
+  font-size: 15px;
+  margin: 0 0 12px;
+}
+
+.summary-line.editable {
+  background: none;
+  border: none;
+  padding: 0 0 12px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.summary-line.editable:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.muted-line {
+  color: var(--text-dim);
+  margin: 0 0 12px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 17px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background: #1c1c1e;
+  color: var(--text);
+}
+
+.btn-small {
+  width: auto;
+  display: inline-block;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 9px;
+}
+
+.footnote {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin-top: 28px;
+}
+
+/* ---------- Session header ---------- */
+
+.session-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 17px;
+  font-family: inherit;
+  padding: 6px 4px;
+  margin-left: -4px;
+  cursor: pointer;
+}
+
+.save-indicator {
+  color: var(--text-dim);
+  font-size: 12px;
+  min-height: 1em;
+}
+
+.session-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 4px 0 2px;
+}
+
+/* ---------- Summary editor ---------- */
+
+.summary-editor {
+  background: var(--surface);
+  border: 1px solid var(--grid);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 10px;
+}
+
+.summary-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.summary-field input {
+  background: var(--bg);
+  border: 1px solid var(--grid);
+  border-radius: 8px;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  padding: 7px 9px;
+  width: 110px;
+}
+
+.summary-editor-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* ---------- Workout table ---------- */
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--grid-strong);
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.workout-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 680px;
+}
+
+.workout-table th,
+.workout-table td {
+  border: 1px solid var(--grid);
+  padding: 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.workout-table thead th {
+  background: var(--surface);
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 9px 8px;
+}
+
+.col-handle {
+  width: 34px;
+  min-width: 34px;
+}
+
+.col-exercise {
+  width: 33%;
+}
+
+.col-sets {
+  width: 11%;
+}
+
+.col-reps {
+  width: 13%;
+}
+
+.col-weight {
+  width: 22%;
+}
+
+.col-skip {
+  width: 21%;
+}
+
+.handle-cell {
+  background: var(--surface);
+}
+
+.row-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 44px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 15px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.row-handle.active {
+  color: var(--accent);
+}
+
+.cell {
+  color: var(--row-fg, var(--text));
+  background-color: var(--row-bg, transparent);
+}
+
+.cell-input {
+  display: block;
+  width: 100%;
+  min-width: 60px;
+  min-height: 42px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  padding: 10px 8px;
+}
+
+.cell-input:focus {
+  outline: none;
+}
+
+tr:focus-within .cell-input {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+tr.selected > td.cell {
+  box-shadow: inset 2px 0 0 var(--accent);
+  filter: brightness(1.25);
+}
+
+tr.selected > td.handle-cell {
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+/* ---------- Notes ---------- */
+
+.notes-section {
+  margin-top: 4px;
+}
+
+.notes-input {
+  display: block;
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  background: var(--surface);
+  border: 1px solid var(--grid);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.45;
+  padding: 10px 12px;
+}
+
+.notes-input::placeholder {
+  color: var(--text-dim);
+}
+
+.notes-input:focus {
+  outline: none;
+  border-color: var(--grid-strong);
+}
+
+/* ---------- Colour bar ---------- */
+
+.colour-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: #161618;
+  border-top: 1px solid var(--grid-strong);
+}
+
+.colour-bar-title {
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.swatches {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow-x: auto;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 7px;
+  cursor: pointer;
+}
+
+.swatch.current {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.swatch-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.swatch-dot.none-dot {
+  background: transparent !important;
+  border: 1.5px dashed var(--text-dim);
+}
+
+.swatch-label {
+  color: var(--text-dim);
+  font-size: 11px;
+}
