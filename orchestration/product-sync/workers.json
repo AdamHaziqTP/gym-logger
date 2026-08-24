@@ -7,7 +7,7 @@
     "patchArgument": "--patch",
     "verified": true,
     "verification": "dsh --help, headless help, and a non-executing --dump-config overlay check on 2026-08-24",
-    "source": "orchestration/README.md"
+    "source": "orchestration/product-sync/README.md"
   },
   "routeSource": "C:/Users/adam4/.dsh/settings.yaml",
   "switchPolicy": { "changesProjectSelectionOnly": true, "doesNotEditGlobalDshSettings": true, "doesNotResetTaskState": true, "doesNotBypassCodexReview": true, "recordsHistory": true, "unavailableRequestBehavior": "Reject before writing state and retain the previous active builder." },
