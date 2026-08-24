@@ -126,3 +126,45 @@ the canonical Gym note. Record each result separately:
 If foreground or background colors fail again, record them separately with
 screenshots if possible. Keep M03-T02 blocked; that result becomes platform
 evidence for the next product/technical decision.
+
+## FIX-03 Codex verification — secure-origin color retest required
+
+- OX completed FIX-03 using the exact locked mapping: Arms orange, Back
+  purple, Chest mint, Delts blue, Legs pink; `none` remains unhighlighted.
+- The correction adds opaque derived highlight colors plus legacy-compatible
+  `<td bgcolor>`, `<font color>`, cell CSS, and text-run CSS while preserving
+  the existing table/data/fallback contract.
+- Codex independently verified **153/153 tests**, `npm run build`, clean
+  `git diff --check`, and the HTTPS runtime at
+  `https://192.168.1.49:5173/` (app HTTP 200; certificate resource HTTP 200).
+- Apple Notes color survival remains **PENDING HUMAN RETEST**. M03-T02
+  remains blocked.
+
+### Next iPhone retest
+
+Use the trusted HTTPS URL on the iPhone 14 Pro Max, copy once, and paste once:
+
+- [ ] Real editable Notes table and all values/order remain correct.
+- [ ] Foreground text colors appear: Arms orange, Back purple, Chest mint,
+      Delts blue, Legs pink.
+- [ ] Text highlight/background colors appear for the same categories.
+- [ ] `none` rows remain unhighlighted and the result is readable in both light
+      and dark Notes appearance.
+
+If either color channel still fails, record foreground and background
+separately and keep M03-T02 blocked for the next product/technical decision.
+
+## Recorded FIX-02 iPhone retest result — 2026-08-24
+
+- Device: **iPhone 14 Pro Max** on the trusted HTTPS build.
+- The user reconfirmed that the pasted table and all values are correct.
+- **Foreground text colors: FAIL.** No category colors appeared in Apple
+  Notes.
+- **Text highlight/background colors: FAIL.** No Apple Notes-style highlight
+  colors appeared either.
+- Product clarification: the intended result is the five Apple Notes highlight
+  choices mapped from the supplied screenshots/spec — Arms orange, Back purple,
+  Chest mint, Delts blue, Legs pink — applied to the exercise/table text. The
+  visible legend remains only those five categories; `none` is unhighlighted.
+- This is routed to `orchestration/tasks/M03-T01-FIX-03.md`. M03-T02 remains
+  blocked. No color acceptance is claimed.

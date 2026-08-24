@@ -1,5 +1,9 @@
 import { formatDateDisplay } from "./dates";
-import { CATEGORY_LEGEND, HIGHLIGHT_TOKENS } from "./highlights";
+import {
+  CATEGORY_LEGEND,
+  HIGHLIGHT_TOKENS,
+  OPAQUE_HIGHLIGHT_BG,
+} from "./highlights";
 import { orderedRows } from "./rows";
 import { displaySummary } from "./summary";
 import type { WorkoutRow, WorkoutSession } from "./types";
@@ -113,24 +117,46 @@ const TD_STYLE = "padding:4px 8px;vertical-align:top";
 type WorkoutColumnField = "exercise" | "sets" | "reps" | "weight" | "skip";
 
 /**
- * One body cell of the export table. FIX-02 (M03-T01-FIX-02): a real iPhone
- * paste kept the table but stripped the previous row-level (`<tr>`) category
- * colors, so the exact spec §5.2 fg/bg tokens are now encoded redundantly on
- * the markup paste importers are most likely to honor: directly on each
- * `<td>` AND on an inline wrapper around exactly the cell text (`<span>`).
- * `none` rows stay uncolored and inherit the wrapper's dark presentation;
- * empty highlighted cells still get the styled wrapper so every colored row's
- * cell/text markup carries its category tokens uniformly.
+ * One body cell of the export table.
+ *
+ * FIX-03 (M03-T01-FIX-03): the FIX-02 per-cell/inline-CSS encoding still had
+ * Apple Notes stripping every category color on the trusted HTTPS retest, so
+ * the colored-row encoding now adds the conservative legacy-compatible layers
+ * native HTML paste importers actually honor, while keeping every value
+ * derived from the locked tokens (single source of truth in
+ * `src/domain/highlights.ts`):
+ *
+ * 1. `<td bgcolor="…">` — legacy solid background attribute, using the
+ *    category's OPAQUE equivalent (locked translucent token composited over
+ *    the payload's `#000000` presentation backdrop; translucent `rgba(...)`
+ *    cannot be expressed by legacy importers and was stripped on device);
+ * 2. inline CSS on the `<td>` with the same opaque background + exact
+ *    `HIGHLIGHT_TOKENS` foreground;
+ * 3. `<font color="…">` directly around the cell text — the most widely
+ *    honored legacy text-run foreground representation;
+ * 4. an inline-styled `<span>` directly around the cell text carrying the
+ *    exact foreground and the OPAQUE highlight (text-run level styling is
+ *    what WebKit's attributed-string conversion privileges).
+ *
+ * Every layer states the SAME two colors per category, so whichever layer a
+ * paste importer honors yields the identical result. `none` rows stay exactly
+ * as before: no colors, no attributes, no wrappers of any kind.
  */
 function buildTableCellHtml(row: WorkoutRow, field: WorkoutColumnField): string {
   const content = escapeMultilineHtml(row[field]);
   if (row.highlight === "none") {
     return `<td style="${TD_STYLE}">${content}</td>`;
   }
-  const { fg, bg } = HIGHLIGHT_TOKENS[row.highlight];
-  const cellStyle = `${TD_STYLE};background-color:${bg};color:${fg}`;
-  const textStyle = `color:${fg};background-color:${bg}`;
-  return `<td style="${cellStyle}"><span style="${textStyle}">${content}</span></td>`;
+  const { fg } = HIGHLIGHT_TOKENS[row.highlight];
+  const bgOpaque = OPAQUE_HIGHLIGHT_BG[row.highlight];
+  const cellStyle = `${TD_STYLE};background-color:${bgOpaque};color:${fg}`;
+  const textStyle = `color:${fg};background-color:${bgOpaque}`;
+  return (
+    `<td bgcolor="${bgOpaque}" style="${cellStyle}">` +
+    `<font color="${fg}">` +
+    `<span style="${textStyle}">${content}</span>` +
+    `</font></td>`
+  );
 }
 
 function buildTableRowHtml(row: WorkoutRow): string {
@@ -167,9 +193,10 @@ function paragraph(style: string, content: string): string {
 /**
  * Standards-compliant, self-contained HTML (spec §15.3): semantic elements,
  * explicit rows/cells, inline styles only, no external references. The five
- * visible columns match the app table; row categories ride along as inline
- * colors on each cell and its text wrapper plus a machine-readable
- * `data-gym-category` attribute.
+ * visible columns match the app table; row categories ride along as opaque
+ * legacy-compatible colors (`bgcolor` + `<font color>` + inline CSS) on each
+ * cell and its text wrappers plus a machine-readable `data-gym-category`
+ * attribute (FIX-03).
  */
 export function buildNotesHtml(session: WorkoutSession): string {
   const summary = displaySummary(session);

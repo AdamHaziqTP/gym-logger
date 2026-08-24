@@ -7,11 +7,11 @@ Updated: 2026-08-24
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes clipboard integration
-- Current task: M03-T01 — secure-origin rich Apple Notes verification after FIX-02
-- Status: HUMAN_REVIEW_REQUIRED (M03-T01-FIX-02 secure iPhone color retest)
+- Current task: M03-T01 — secure-origin rich Apple Notes verification after FIX-03
+- Status: HUMAN_REVIEW_REQUIRED (M03-T01-FIX-03 secure iPhone color retest)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: FIX-02 engineering verification is complete; secure iPhone color survival is pending on the iPhone 14 Pro Max; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance
+- Human review gate: FIX-03 engineering verification is complete; FIX-03 secure iPhone retest must confirm foreground and text-highlight colors; M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -43,6 +43,8 @@ Updated: 2026-08-24
 - Resolved product escalation E-002 in favor of a trusted HTTPS retest rather than accepting HTTP plain-text-only as the final product limitation.
 - Completed OX M03-T01-FIX-02: per-cell and per-text-wrapper category color payload correction.
 - Completed Codex independent FIX-02 verification: 141/141 tests, build, diff audit, and HTTPS runtime smoke passed.
+- Recorded the FIX-02 iPhone result: table/data remain correct, but Apple Notes still strips both category foreground and text-highlight colors; prepared FIX-03 for opaque/legacy-compatible text-run markup.
+- Completed OX M03-T01-FIX-03 and Codex independent verification: 153/153 tests, build, diff audit, and HTTPS runtime smoke passed.
 
 ## Final disposition
 
@@ -58,7 +60,7 @@ Updated: 2026-08-24
 ## Deferred
 
 - M01 FIX-05 physical-iPhone HV-01 through HV-05: BLOCKED/DEFERRED due unreachable temporary LAN/local-host runtime; final acceptance still required later.
-- Rich HTML/table paste is confirmed by the user on trusted HTTPS; category foreground/background color survival after FIX-02 remains pending the next iPhone retest.
+- Rich HTML/table paste is confirmed by the user on trusted HTTPS; category foreground/text-highlight color survival failed after FIX-02 and FIX-03 is now ready for the next secure iPhone retest.
 - Faithful and Compact tall PNG export on the target iPhone.
 - Full history/search, backup/restore, polish, and subsequent milestones according to the existing implementation plan.
 
@@ -66,7 +68,7 @@ Updated: 2026-08-24
 
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: use a trusted HTTPS build/origin and retest the existing rich clipboard path before considering a product downgrade or native/RTF alternative.
-- No unresolved product decision is currently blocking the required FIX-02 human retest.
+- No unresolved product decision is currently blocking FIX-03 implementation and Codex verification; the next iPhone retest remains required afterward.
 
 ## Active task checkpoint
 
@@ -92,7 +94,7 @@ Updated: 2026-08-24
 
 ## Active correction checkpoint
 
-- Active task: `orchestration/tasks/M03-T01-FIX-02.md`
+- Active task: `orchestration/tasks/M03-T01-FIX-03.md`
 - Base implementation checkpoint: M03-T01-FIX-01 accepted engineering checkpoint (`6cb1b3a`), with human plain-fallback evidence recorded in `610f288`
-- Worker disposition: trusted HTTPS path is established; table/data pass, color survival failed; OX FIX-02 completed and Codex independently accepted the automatable scope.
+- Worker disposition: trusted HTTPS path is established; table/data pass, color survival failed after FIX-02; OX FIX-03 completed and Codex independently accepted the automatable scope.
 - Next action: repeat the secure HTTPS iPhone paste gate. Do not dispatch M03-T02 until category color survival is resolved or a new product decision is recorded.

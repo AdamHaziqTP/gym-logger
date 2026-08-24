@@ -4,7 +4,7 @@ import {
   buildNotesPayload,
   buildNotesText,
 } from "../domain/notesExport";
-import { CATEGORY_LEGEND, HIGHLIGHT_TOKENS } from "../domain/highlights";
+import { CATEGORY_LEGEND, HIGHLIGHT_TOKENS, OPAQUE_HIGHLIGHT_BG } from "../domain/highlights";
 import type { WorkoutRow, WorkoutSession } from "../domain/types";
 
 /* ---------------------------------------------------------------------- */
@@ -219,7 +219,7 @@ describe("HTML payload", () => {
     expect(html.includes("<img")).toBe(false);
   });
 
-  it("carries each category's exact fg/bg tokens on EVERY cell and text wrapper of colored rows (FIX-02)", () => {
+  it("carries the exact foreground plus opaque highlight tokens on EVERY cell, legacy font, and text wrapper of colored rows (FIX-03)", () => {
     const session = makeSession({
       rows: CATEGORY_LEGEND.map(({ value, label }, index) =>
         makeRow({
@@ -235,24 +235,40 @@ describe("HTML payload", () => {
 
     expect(html.match(/data-gym-category=/g)?.length).toBe(5);
     for (const { value, label } of CATEGORY_LEGEND) {
-      const { fg, bg } = HIGHLIGHT_TOKENS[value];
+      const { fg } = HIGHLIGHT_TOKENS[value];
+      const bgOpaque = OPAQUE_HIGHLIGHT_BG[value];
       const trStart = html.indexOf(`<tr data-gym-category="${label}"`);
       expect(trStart).toBeGreaterThan(-1);
       const rowChunk = html.slice(trStart, html.indexOf("</tr>", trStart));
 
-      // Cell markup carries both category tokens…
+      // The category encoding must not lean on translucent rgba(...) anymore:
+      // legacy/native paste importers strip or cannot express translucency.
+      expect(rowChunk.includes("rgba(")).toBe(false);
+
+      // Every opening <td> carries byte-exact markup: the legacy solid
+      // bgcolor attribute AND inline CSS with the same opaque highlight plus
+      // that category's exact locked foreground color.
       const tds = rowChunk.match(/<td[^>]*/g) ?? [];
       expect(tds).toHaveLength(5);
       for (const td of tds) {
-        expect(td).toContain(`background-color:${bg}`);
-        expect(td).toContain(`color:${fg}`);
+        expect(td).toBe(
+          `<td bgcolor="${bgOpaque}" style="padding:4px 8px;vertical-align:top;background-color:${bgOpaque};color:${fg}"`,
+        );
       }
-      // …and so does the inline text wrapper inside every cell.
+      // The legacy <font color> wrapper sits directly around the text in
+      // every cell…
+      const fonts = rowChunk.match(/<font[^>]*/g) ?? [];
+      expect(fonts).toHaveLength(5);
+      for (const font of fonts) {
+        expect(font).toBe(`<font color="${fg}"`);
+      }
+      // …and so does the inline-styled text wrapper, carrying both tokens.
       const spans = rowChunk.match(/<span[^>]*/g) ?? [];
       expect(spans).toHaveLength(5);
       for (const span of spans) {
-        expect(span).toContain(`color:${fg}`);
-        expect(span).toContain(`background-color:${bg}`);
+        expect(span).toBe(
+          `<span style="color:${fg};background-color:${bgOpaque}"`,
+        );
       }
       expect(rowChunk).toContain(`${label} row`);
     }
@@ -274,15 +290,19 @@ describe("HTML payload", () => {
       }),
     );
 
-    // The `none` row: no marker, no wrappers, exactly the plain cell style,
-    // and no category color anywhere in its markup.
+    // The `none` row: no marker, no wrappers, no legacy color attributes,
+    // exactly the plain cell style, and no category color anywhere in its
+    // markup — including the FIX-03 opaque equivalents.
     const noneStart = html.indexOf("<tr><td");
     expect(noneStart).toBeGreaterThan(-1);
     const noneChunk = html.slice(noneStart, html.indexOf("</tr>", noneStart));
     expect(noneChunk.includes("data-gym-category")).toBe(false);
     expect(noneChunk.includes("<span")).toBe(false);
+    expect(noneChunk.includes("<font")).toBe(false);
+    expect(noneChunk.includes("bgcolor")).toBe(false);
     expect(noneChunk.includes(orange.bg)).toBe(false);
     expect(noneChunk.includes(orange.fg)).toBe(false);
+    expect(noneChunk.includes(OPAQUE_HIGHLIGHT_BG.orange)).toBe(false);
     expect(noneChunk.match(/<td[^>]*/g)).toEqual([
       '<td style="padding:4px 8px;vertical-align:top"',
       '<td style="padding:4px 8px;vertical-align:top"',

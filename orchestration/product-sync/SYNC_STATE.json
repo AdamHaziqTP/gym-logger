@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t01-fix-03-codex-verified",
+      "summary": "OX FIX-03 completed and Codex independently verified 153/153 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes foreground/highlight color retest is the remaining gate.",
+      "at": "2026-08-24T15:47:06.763Z"
+    },
+    {
+      "name": "m03-t01-fix-02-color-failure",
+      "summary": "Secure iPhone retest reconfirmed editable table and values, but Apple Notes still stripped both category foreground and text-highlight colors; FIX-03 prepared for opaque/legacy-compatible text-run markup.",
+      "at": "2026-08-24T15:33:07.813Z"
+    },
+    {
       "name": "m03-t01-fix-02-checkpoint-pushed",
       "summary": "FIX-02 known-good checkpoint f32548d pushed; 141/141 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone color retest.",
       "at": "2026-08-24T15:18:49.340Z"
@@ -51,26 +61,16 @@
       "name": "m02-t04-accepted",
       "summary": "Codex independently accepted M02-T04 automated scope: 105/105 tests, build, and LAN runtime smoke; preparing M03-T01 clipboard spike with explicit Apple Notes human gate.",
       "at": "2026-08-24T13:39:36.690Z"
-    },
-    {
-      "name": "m02-t03-accepted",
-      "summary": "Codex independently accepted M02-T03 automated scope: 98/98 tests, build, and LAN runtime smoke; preparing M02-T04 summary override task.",
-      "at": "2026-08-24T13:22:45.165Z"
-    },
-    {
-      "name": "m02-t02-accepted",
-      "summary": "Codex independently accepted M02-T02 automated scope: 91/91 tests, build, and LAN runtime smoke; preparing M02-T03 deletion task.",
-      "at": "2026-08-24T13:07:49.001Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T15:18:49.341Z",
+  "lastPublishedAt": "2026-08-24T15:47:06.764Z",
   "lastEvent": {
-    "name": "m03-t01-fix-02-checkpoint-pushed",
-    "summary": "FIX-02 known-good checkpoint f32548d pushed; 141/141 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone color retest.",
-    "at": "2026-08-24T15:18:49.340Z"
+    "name": "m03-t01-fix-03-codex-verified",
+    "summary": "OX FIX-03 completed and Codex independently verified 153/153 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes foreground/highlight color retest is the remaining gate.",
+    "at": "2026-08-24T15:47:06.763Z"
   },
-  "syncRevision": 21,
+  "syncRevision": 23,
   "openEscalations": [
     {
       "id": "E-002",
@@ -87,6 +87,13 @@
       ],
       "status": "open",
       "openedAt": "2026-08-24T14:48:03.120Z"
+    }
+  ],
+  "chatNotifications": [
+    {
+      "revision": 22,
+      "threadId": "6a8bc798-0620-83ec-8c94-4daeb6eeab19",
+      "at": "2026-08-24T15:41:38.037Z"
     }
   ]
 }
