@@ -38,3 +38,13 @@ The product owner reported that the temporary LAN/local-host build is not reacha
 This is a product-process decision, not evidence that HV-01 through HV-05 passed. Record the current FIX-05 device gate as BLOCKED/DEFERRED due to unreachable temporary runtime. Codex may resume the orchestrated implementation workflow and advance beyond M01 based on the independently green automated checkpoint, while preserving all deferred physical-device checks for a later final human acceptance gate. Continue in full-auto mode through bounded milestones and only return to the product owner for genuinely unresolved product decisions, required secrets/credentials, or human-only device/visual checks that cannot reasonably be deferred.
 
 Do not reinterpret this as permission to waive the final real-iPhone acceptance of Apple Notes interoperability, PNG export, offline/installability, or any other human-only behavior required by the specification before the project is declared complete.
+
+## E-002 rich Apple Notes paste decision — 2026-08-24
+
+Choose the trusted HTTPS verification path. Do **not** accept HTTP plain-text-only copying as the product limitation at this stage.
+
+Reasoning: `Copy to Notes` is a core v1 acceptance criterion and the authoritative spec explicitly prioritizes preservation of a real editable table after data fidelity, with category/highlight colours next. The HTTP LAN result only proves that the scoped plain-text fallback preserves the session data; it does not test the intended secure rich-clipboard path at all. Therefore it is premature to downgrade the product before exercising the supported HTTPS path on the target iPhone.
+
+Codex is authorized to arrange the simplest trusted HTTPS build/origin for the existing PWA and repeat the M03-T01 iPhone paste gate there. This is an infrastructure/verification step, not authorization for a native rewrite or a product redesign. Preserve the HTTP plain-text fallback permanently as a truthful resilience path.
+
+M03-T02 remains blocked until the HTTPS retest records what Apple Notes actually preserves. If HTTPS rich paste still fails to produce an editable table, return that concrete device evidence to the product decision bridge. At that point the product owner can choose between documenting plain-text-only as the accepted limitation or authorizing a bounded RTF/native/Shortcuts strategy investigation under the existing spec. Do not jump to native implementation before that evidence exists.
