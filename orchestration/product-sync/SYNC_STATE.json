@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "task-prepared",
+      "summary": "M02-T01 automated checkpoint accepted; M02-T02 Copy Another Session prepared for bounded OX implementation. M01 physical checks remain deferred.",
+      "at": "2026-08-24T12:36:44.587Z"
+    },
+    {
       "name": "correction-task-prepared",
       "summary": "M02-T01 implementation was independently green but OX timed out without its report and component navigation coverage; FIX-01 correction dispatched within the two-attempt cap.",
       "at": "2026-08-24T12:21:48.812Z"
@@ -44,11 +49,11 @@
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T12:21:48.813Z",
+  "lastPublishedAt": "2026-08-24T12:36:44.588Z",
   "lastEvent": {
-    "name": "correction-task-prepared",
-    "summary": "M02-T01 implementation was independently green but OX timed out without its report and component navigation coverage; FIX-01 correction dispatched within the two-attempt cap.",
-    "at": "2026-08-24T12:21:48.812Z"
+    "name": "task-prepared",
+    "summary": "M02-T01 automated checkpoint accepted; M02-T02 Copy Another Session prepared for bounded OX implementation. M01 physical checks remain deferred.",
+    "at": "2026-08-24T12:36:44.587Z"
   },
-  "syncRevision": 7
+  "syncRevision": 8
 }
