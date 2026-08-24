@@ -1,8 +1,9 @@
 # E-003 — Apple Notes strips category colors from editable HTML table paste
 
-**Status:** OPEN — product/technical decision required  
+**Status:** RESOLVED — bounded feasibility route authorized  
 **Milestone:** M03-T01 Copy to Apple Notes  
-**Opened:** 2026-08-24
+**Opened:** 2026-08-24  
+**Resolved:** 2026-08-25
 
 ## Evidence
 
@@ -25,21 +26,36 @@ Codex independently verified the third correction at 153/153 tests, passing
 build, diff audit, and HTTPS runtime. The remaining failure is therefore
 platform interoperability evidence, not an unverified worker defect.
 
-## Decision required
+## Product decision
 
-Choose one route for the product requirement:
+Authorize one bounded native/RTF/Shortcuts feasibility spike specifically for
+Apple Notes color-preserving editable transfer before accepting colour loss as
+a permanent v1 limitation.
 
-1. **Authorize a native/RTF/Shortcuts technical spike** specifically for
-   Apple Notes color-preserving paste. This expands the implementation route
-   and must prove that table editability, values, and the five mappings remain
-   intact before any rewrite is proposed.
-2. **Accept the current PWA rich paste without colors** as a documented v1
-   limitation, retaining the correct values/table and the plain-text category
-   fallback. This does not satisfy the current color acceptance criterion.
-3. **Keep M03-T01 open for another product-approved technical route** if Adam
-   has a specific Apple Notes workflow or reference clipboard source to test.
+This does **not** authorize a native rewrite, a paid Apple Developer dependency,
+or a broad architecture change.
 
-No M03-T02 work is authorized until this decision is recorded. The app's own
-five-color editor mapping remains intact; only cross-app Apple Notes color
-transfer is unresolved.
+Preference order:
 
+1. Keep the PWA and test a lightweight iOS Shortcuts/Notes handoff if it can
+   preserve editable table structure, all values/order, and the five category
+   colours.
+2. Test an RTF/attributed clipboard or file-handoff route only if it can be
+   exercised without redesigning the app.
+3. Test a minimal native helper/wrapper only as a feasibility proof and only if
+   it does not make a paid Apple Developer subscription or fragile recurring
+   installation burden part of v1.
+
+A route succeeds only if the target iPhone proves that Apple Notes receives a
+real editable table with correct data/order and usable category colours. An
+image-only transfer is not a Copy-to-Notes success.
+
+The investigation is timeboxed to one bounded spike. If no materially better,
+low-friction route works, stop the branch and return the evidence to the product
+bridge. The default follow-up decision will then be to accept the existing
+editable rich-table paste without colours as a documented v1 platform
+limitation, preserve the truthful plain-text fallback, and continue M03 rather
+than repeat open-ended clipboard experiments.
+
+M03-T02 remains blocked only for this bounded feasibility spike and its evidence
+return.
