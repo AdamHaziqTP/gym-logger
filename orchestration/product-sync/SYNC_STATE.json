@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "task-ready-for-ox",
+      "summary": "M06-T01 PWA polish/regression task is ready for OX after M05 backup/restore automated acceptance.",
+      "at": "2026-08-24T18:32:24.176Z"
+    },
+    {
       "name": "backup-restore-accepted",
       "summary": "Codex independently accepted M05-T01 automated backup/restore scope: 43 focused tests, 262 full tests, build, diff audit, and trusted HTTPS runtime smoke pass; physical Files/share/restore remains deferred.",
       "at": "2026-08-24T18:32:04.948Z"
@@ -56,21 +61,16 @@
       "name": "m03-t01-fix-03-human-color-failure-escalated",
       "summary": "FIX-03 secure iPhone retest still has editable table/data pass but no foreground or text-highlight colors; three bounded HTML representations failed, so E-003 is open for a product/technical decision.",
       "at": "2026-08-24T15:51:03.064Z"
-    },
-    {
-      "name": "m03-t01-fix-03-checkpoint-pushed",
-      "summary": "FIX-03 known-good checkpoint 44e959f pushed; 153/153 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone Apple Notes color retest.",
-      "at": "2026-08-24T15:47:16.529Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T18:32:04.949Z",
+  "lastPublishedAt": "2026-08-24T18:32:24.177Z",
   "lastEvent": {
-    "name": "backup-restore-accepted",
-    "summary": "Codex independently accepted M05-T01 automated backup/restore scope: 43 focused tests, 262 full tests, build, diff audit, and trusted HTTPS runtime smoke pass; physical Files/share/restore remains deferred.",
-    "at": "2026-08-24T18:32:04.948Z"
+    "name": "task-ready-for-ox",
+    "summary": "M06-T01 PWA polish/regression task is ready for OX after M05 backup/restore automated acceptance.",
+    "at": "2026-08-24T18:32:24.176Z"
   },
-  "syncRevision": 35,
+  "syncRevision": 36,
   "openEscalations": [
     {
       "id": "E-002",

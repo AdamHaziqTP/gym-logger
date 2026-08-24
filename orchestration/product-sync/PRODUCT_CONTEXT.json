@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T18:32:04.998Z",
+  "generatedAt": "2026-08-24T18:32:24.226Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "7ed919f feat: add local backup and restore",
     "d400b93 feat: add Faithful and Compact PNG export",
     "b734f3c test: cover Home action layout",
     "8443010 fix: separate Home secondary actions",
-    "2e3a344 docs: batch human gates and maximize overnight full-auto",
-    "0ffef10 docs: unblock M03 after E003 and queue home overlap fix"
+    "2e3a344 docs: batch human gates and maximize overnight full-auto"
   ],
   "codexVerification": [
     {
@@ -161,7 +161,7 @@
     "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
   ],
   "decisionsMadeSinceLastSync": [
-    "Codex independently accepted M05-T01 automated backup/restore scope: 43 focused tests, 262 full tests, build, diff audit, and trusted HTTPS runtime smoke pass; physical Files/share/restore remains deferred."
+    "M06-T01 PWA polish/regression task is ready for OX after M05 backup/restore automated acceptance."
   ],
   "recordedDecisions": [
     {
@@ -211,24 +211,10 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "d400b932f4e4a4a4c84d06ff6e4480bf193fbf62",
+    "commit": "7ed919f2f9a8f059aa92b508e29774d28c912dba",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/state/STATE.md\n M src/components/Home.tsx\n M src/styles.css\n?? orchestration/reports/M05-T01-BACKUP-RESTORE-01.md\n?? orchestration/reports/M05-T01-BACKUP-RESTORE-02-CORRECTION.md\n?? orchestration/reviews/M05-T01-BACKUP-RESTORE-01-codex-review.md\n?? orchestration/tasks/M05-T01-BACKUP-RESTORE-02-CORRECTION.md\n?? orchestration/tasks/M06-T01-PWA-POLISH-REGRESSION.md\n?? src/components/BackupSection.tsx\n?? src/data/backup.ts\n?? src/domain/backup.ts\n?? src/tests/backupDomain.test.ts\n?? src/tests/backupRestore.test.tsx",
-    "changedFiles": [
-      "orchestration/state/STATE.md",
-      "src/components/Home.tsx",
-      "src/styles.css",
-      "orchestration/reports/M05-T01-BACKUP-RESTORE-01.md",
-      "orchestration/reports/M05-T01-BACKUP-RESTORE-02-CORRECTION.md",
-      "orchestration/reviews/M05-T01-BACKUP-RESTORE-01-codex-review.md",
-      "orchestration/tasks/M05-T01-BACKUP-RESTORE-02-CORRECTION.md",
-      "orchestration/tasks/M06-T01-PWA-POLISH-REGRESSION.md",
-      "src/components/BackupSection.tsx",
-      "src/data/backup.ts",
-      "src/domain/backup.ts",
-      "src/tests/backupDomain.test.ts",
-      "src/tests/backupRestore.test.tsx"
-    ]
+    "workingTree": "## main...origin/main",
+    "changedFiles": []
   },
   "builder": {
     "id": "ox-alpha",
@@ -247,11 +233,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "backup-restore-accepted",
-      "summary": "Codex independently accepted M05-T01 automated backup/restore scope: 43 focused tests, 262 full tests, build, diff audit, and trusted HTTPS runtime smoke pass; physical Files/share/restore remains deferred.",
-      "at": "2026-08-24T18:32:04.948Z"
+      "name": "task-ready-for-ox",
+      "summary": "M06-T01 PWA polish/regression task is ready for OX after M05 backup/restore automated acceptance.",
+      "at": "2026-08-24T18:32:24.176Z"
     },
-    "contextRevision": 35,
+    "contextRevision": 36,
     "openEscalations": [
       {
         "id": "E-002",
