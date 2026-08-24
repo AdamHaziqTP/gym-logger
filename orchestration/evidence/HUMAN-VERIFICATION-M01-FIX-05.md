@@ -1,15 +1,29 @@
 # M01 final physical-iPhone gate — FIX-05
 
-The final narrow correction is independently green. The LAN build is available at:
+The final narrow correction is independently green. The temporary LAN build was advertised at:
 
 `http://192.168.1.49:5173`
 
-Record the iPhone model, iOS/Safari version, result, and screenshots.
+## Product-owner result — 2026-08-24
 
-- [ ] **HV-01 — Five-entry legend:** Open a session and confirm the header shows exactly `Arms`, `Back`, `Chest`, `Delts`, `Legs`, in that order. Confirm there is no visible `Other` or `None` legend item. Confirm unhighlighted/abs rows remain white and valid.
-- [ ] **HV-02 — Handle tap/menu:** Tap a three-dot handle once: the row selects and no native text-selection handles/callout appear. Tap the selected handle again: the row menu opens with the full command set.
-- [ ] **HV-03 — Handle hold/drag:** Press and hold the three-dot handle, then drag the row. Confirm Safari does not select the dots/text, show a magnifier/selection handles, invoke a callout, or start an HTML5 browser drag. Confirm the row reorders and remains in the new position after leaving/reopening.
-- [ ] **HV-04 — Editable text remains normal:** Select/edit text inside Exercise, Sets, Reps, Weight, Skip, and Notes. Confirm normal keyboard/editing and text-selection behavior remains available; the handle-only hardening must not affect these fields.
-- [ ] **HV-05 — Existing M01 behavior:** Reconfirm direct current-session resume, exact weird-value persistence after killing/reopening Safari, row-menu commands, colour application, horizontal/vertical table use, and the restrained per-cell highlight treatment.
+Device: **iPhone 14 Pro Max**
 
-Do not test Apple Notes paste or PNG export; those remain deferred milestones. Return each item as PASS, FAIL, or BLOCKED. M01 is not accepted and M02 remains blocked until this final gate passes.
+iOS/Safari version: not recorded.
+
+The product owner could not open the temporary LAN/local-host build on the physical iPhone and chose not to keep engineering blocked on this narrow gate. The remaining interaction checks are explicitly deferred to a later end-to-end device acceptance pass when a reliably reachable/installable build exists.
+
+- [x] **HV-01 — BLOCKED/DEFERRED:** Could not reach the temporary runtime, so the five-entry legend could not be physically re-verified in this pass.
+- [x] **HV-02 — BLOCKED/DEFERRED:** Could not reach the temporary runtime, so handle tap/menu behavior could not be physically re-verified in this pass.
+- [x] **HV-03 — BLOCKED/DEFERRED:** Could not reach the temporary runtime, so hold/drag behavior could not be physically re-verified in this pass.
+- [x] **HV-04 — BLOCKED/DEFERRED:** Could not reach the temporary runtime, so editable-text behavior could not be physically re-verified in this pass.
+- [x] **HV-05 — BLOCKED/DEFERRED:** Could not reach the temporary runtime, so the remaining current-session/persistence/menu/colour/table/highlight behavior could not be physically re-verified in this pass.
+
+## Product-process disposition
+
+This result is **not a PASS** for HV-01 through HV-05. It is a deliberate product-owner deferral of the current physical-device gate because the temporary LAN runtime is unreachable.
+
+Codex may resume the orchestrated engineering workflow from the independently green automated FIX-05 checkpoint and may advance to subsequent bounded milestones. Preserve these checks for a later real-iPhone end-to-end acceptance pass before the project is declared complete.
+
+Continue in full-auto mode unless a genuinely unresolved product decision, required secret/credential, or non-deferrable human-only device/visual gate requires product-owner input.
+
+Apple Notes paste and PNG export remain deferred to their specified milestones and still require real-iPhone verification before final acceptance.
