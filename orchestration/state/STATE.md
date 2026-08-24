@@ -8,10 +8,10 @@ Updated: 2026-08-25
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes clipboard integration
 - Current task: E-003 bounded native/RTF/Shortcuts feasibility spike for color-preserving editable Apple Notes transfer
-- Status: READY_FOR_CODEX
+- Status: HUMAN_REVIEW_REQUIRED (M03-T01-E003)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: E-003 product decision recorded; no immediate human action is required until the bounded feasibility spike returns a concrete target-iPhone route/result. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.
+- Human review gate: E-003 harness independently verified; target-iPhone route test is now required. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -99,7 +99,7 @@ Updated: 2026-08-25
 
 ## Active correction checkpoint
 
-- Active task: prepare bounded E-003 feasibility task from `orchestration/escalations/E-003-apple-notes-colors-platform-limit.md` and the product decision in `orchestration/state/DECISIONS.md`.
+- Active task: `orchestration/tasks/M03-T01-E003-FEAS-02-CORRECTION.md`
 - Base implementation checkpoint: M03-T01-FIX-03 engineering checkpoint (153/153 tests, passing build, diff audit, HTTPS runtime smoke) with target-iPhone table/data PASS and colour FAIL evidence.
-- Worker disposition: READY_FOR_CODEX — prepare/dispatch one bounded feasibility spike only; do not begin a native rewrite.
-- Next action: Codex should run the bounded feasibility investigation automatically and return only when target-iPhone evidence or a genuinely unavoidable product choice is required.
+- Worker disposition: FEAS-01 and FEAS-02 complete; Codex accepted the automatable harness scope. No native rewrite is authorized.
+- Next action: Adam must run the precise target-iPhone checklist in `orchestration/evidence/HUMAN-VERIFICATION-M03-T01-E003.md`; record route evidence through the product bridge. Keep M03-T02 blocked until the result is resolved.

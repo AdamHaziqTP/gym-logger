@@ -3,6 +3,21 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "e003-engineering-review-complete",
+      "summary": "E-003 bounded feasibility harness independently verified: 33/33 focused, 186/186 full suite, build, diff audit, HTTPS smoke pass; target iPhone route gate required; M03-T02 remains blocked.",
+      "at": "2026-08-24T16:51:51.680Z"
+    },
+    {
+      "name": "builder-correction-prepared",
+      "summary": "FEAS-01 independent verification found two isolated honesty/defensiveness failures; FEAS-02 correction prepared.",
+      "at": "2026-08-24T16:44:07.721Z"
+    },
+    {
+      "name": "m03-t01-e003-feasibility-task-prepared",
+      "summary": "E-003 bounded feasibility task prepared: isolated RTF/file handoff and PWA Share Sheet/Shortcuts probe, with no production Copy-to-Notes change or native rewrite.",
+      "at": "2026-08-24T16:14:17.515Z"
+    },
+    {
       "name": "m03-t01-e003-open",
       "summary": "E-003 opened: after three independently verified HTML payload strategies, Apple Notes still strips both category foreground and text-highlight colors while preserving the editable table/data. Awaiting product/technical route decision.",
       "at": "2026-08-24T15:51:18.169Z"
@@ -46,31 +61,16 @@
       "name": "secure-origin-prepared",
       "summary": "Existing Gym Logger PWA now serves over local HTTPS at https://192.168.1.49:5173 with an installable public certificate; 140/140 tests and build remain green. Human rich-paste retest is next.",
       "at": "2026-08-24T14:57:29.214Z"
-    },
-    {
-      "name": "m03-t01-rich-gate-recorded",
-      "summary": "iPhone plain fallback now passes text fidelity, while HTTP rich table/colors remain unavailable; E-002 opened for HTTPS versus plain-only product decision.",
-      "at": "2026-08-24T14:48:13.524Z"
-    },
-    {
-      "name": "escalation-opened",
-      "summary": "E-002: M03-T01 iPhone retest preserves text via HTTP plain fallback, but Notes table structure, formatting, and colors are unavailable on the non-secure LAN origin. Choose a trusted HTTPS build for rich-paste verification, or explicitly accept HTTP plain-text-only behavior as the product limitation.",
-      "at": "2026-08-24T14:48:03.123Z"
-    },
-    {
-      "name": "m03-t01-fix-01-human-retest",
-      "summary": "FIX-01 automated correction passed 140/140; original iPhone clipboard failure remains open for focused plain-copy retest.",
-      "at": "2026-08-24T14:44:16.013Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T15:51:18.170Z",
+  "lastPublishedAt": "2026-08-24T16:51:51.681Z",
   "lastEvent": {
-    "name": "m03-t01-e003-open",
-    "summary": "E-003 opened: after three independently verified HTML payload strategies, Apple Notes still strips both category foreground and text-highlight colors while preserving the editable table/data. Awaiting product/technical route decision.",
-    "at": "2026-08-24T15:51:18.169Z"
+    "name": "e003-engineering-review-complete",
+    "summary": "E-003 bounded feasibility harness independently verified: 33/33 focused, 186/186 full suite, build, diff audit, HTTPS smoke pass; target iPhone route gate required; M03-T02 remains blocked.",
+    "at": "2026-08-24T16:51:51.680Z"
   },
-  "syncRevision": 26,
+  "syncRevision": 29,
   "openEscalations": [
     {
       "id": "E-002",

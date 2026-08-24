@@ -40,7 +40,11 @@ export function Home({
     if (starting) return; // double-tap guard (spec §27.2)
     setStarting(true);
     try {
-      const result = await startTodaySession(db);
+      // Honor the injected todayLocal override (the prop's documented
+      // contract): without this, Start silently used the DEVICE date, which
+      // broke every date-override consumer whenever the device clock moved
+      // past the test/verification date (baseline correction, FEAS-01).
+      const result = await startTodaySession(db, { dateLocal: today });
       onOpenSession(result.session.id);
     } catch (error) {
       console.error("Gym Logger: could not start today's session", error);

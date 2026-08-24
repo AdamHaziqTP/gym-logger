@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>FEASIBILITY HARNESS — Apple Notes color interoperability (M03-T01-E003-FEAS-01)</title>
+    <style>
+      /* Experimental harness styling — deliberately NOT app styling reuse. */
+      :root {
+        color-scheme: dark;
+        --bg: #000000;
+        --fg: #f2f2f7;
+        --dim: #98989f;
+        --card: #1c1c1e;
+        --line: #38383d;
+        --warn: #ff9f0a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 16px;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.45;
+      }
+      main { max-width: 720px; margin: 0 auto; }
+      .banner {
+        border: 2px solid var(--warn);
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 16px;
+      }
+      .banner h1 { font-size: 17px; margin: 0 0 6px; color: var(--warn); }
+      .banner p { margin: 4px 0; font-size: 13px; color: var(--dim); }
+      section.card {
+        background: var(--card);
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 14px;
+      }
+      h2 { font-size: 15px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--dim); }
+      h3 { font-size: 15px; margin: 12px 0 4px; }
+      ul, ol { margin: 6px 0; padding-left: 20px; }
+      li { margin: 3px 0; font-size: 14px; }
+      button {
+        display: block;
+        width: 100%;
+        margin: 8px 0 2px;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #2c2c2e;
+        color: var(--fg);
+      }
+      button.primary { background: #0a84ff; border-color: #0a84ff; }
+      button:active { opacity: 0.7; }
+      .hint { font-size: 12.5px; color: var(--dim); margin: 2px 0 6px; }
+      .status { font-size: 13px; color: #66d4cf; margin: 2px 0 8px; min-height: 1em; white-space: pre-wrap; word-break: break-word; }
+      .status.error { color: #ff453a; }
+      table.preview { border-collapse: collapse; width: 100%; font-size: 13px; }
+      table.preview th, table.preview td { padding: 4px 8px; vertical-align: top; text-align: left; border-bottom: 1px solid rgba(84,84,88,0.65); }
+      .caps dt { font-size: 12px; color: var(--dim); margin-top: 6px; }
+      .caps dd { margin: 0; font-size: 14px; word-break: break-all; }
+      .verdict { font-size: 13.5px; margin: 8px 0; }
+      .verdict .tag { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; padding: 1px 6px; border-radius: 6px; background: #2c2c2e; border: 1px solid var(--line); }
+      .verdict .detail { color: var(--dim); font-size: 12.5px; margin-top: 2px; }
+      .log { list-style: none; margin: 8px 0 0; padding: 0; max-height: 260px; overflow-y: auto; }
+      .log li { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; border-top: 1px solid var(--line); padding: 5px 0; word-break: break-word; }
+      footer { font-size: 12px; color: var(--dim); margin-top: 18px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- ================================================================= -->
+      <!-- EXPERIMENTAL FEASIBILITY HARNESS (task M03-T01-E003-FEAS-01).     -->
+      <!-- Isolated static test asset; production Copy to Notes untouched.   -->
+      <!-- ================================================================= -->
+      <div class="banner">
+        <h1>⚠️ EXPERIMENTAL FEASIBILITY HARNESS</h1>
+        <p>
+          Task M03-T01-E003-FEAS-01 — bounded Apple Notes color interoperability
+          spike. This page is an isolated static test asset served only from
+          this trusted HTTPS origin. It does not change the Gym Logger app or
+          its accepted Copy to Notes behavior.
+        </p>
+        <p>
+          Every button here reports LOCAL MECHANICS ONLY (copied / shared /
+          downloaded / rejected). Nothing on this page can tell you what Apple
+          Notes will do — that judgment happens after you paste on the iPhone
+          and record the result.
+        </p>
+      </div>
+
+      <section class="card">
+        <h2>Detected capabilities (honest evidence)</h2>
+        <dl class="caps" id="caps-list"></dl>
+        <button type="button" id="btn-copy-caps">Copy capability report as JSON</button>
+        <div class="status" id="status-caps"></div>
+      </section>
+
+      <section class="card">
+        <h2>Route verdicts</h2>
+        <div id="route-verdicts"></div>
+      </section>
+
+      <section class="card">
+        <h2>Controls (accepted behavior baselines)</h2>
+        <p class="hint">
+          Control A mirrors the accepted production plain fallback. Control B is
+          the app's own Copy to Notes screen (use the main PWA at
+          <span id="origin-hint"></span>) — established device evidence:
+          editable table + all data survive, colors stripped.
+        </p>
+        <button type="button" id="btn-copy-plain">Control A — copy plain TSV text</button>
+        <div class="status" id="status-plain"></div>
+        <button type="button" id="btn-copy-html-source">Copy representative HTML source as plain text (Route 3a input)</button>
+        <div class="status" id="status-html-source"></div>
+      </section>
+
+      <section class="card">
+        <h2>Route 1 — Share Sheet / Notes handoff</h2>
+        <button type="button" class="primary" id="btn-share-text">1a — Share plain session text via Share Sheet</button>
+        <p class="hint">Predicted outcome if Notes is chosen: a NEW note with plain text only. Unverified until run.</p>
+        <div class="status" id="status-share-text"></div>
+        <button type="button" class="primary" id="btn-share-html-file">1b — Share .html FILE via Share Sheet</button>
+        <p class="hint">Predicted: attachment when shared into Notes; usable as Route 3b input into a Shortcut.</p>
+        <div class="status" id="status-share-html"></div>
+      </section>
+
+      <section class="card">
+        <h2>Route 2 — RTF / attributed file handoff</h2>
+        <button type="button" id="btn-probe-rtf-clipboard">2a — Probe clipboard write of application/rtf</button>
+        <p class="hint">
+          Expected honest result on iOS Safari: rejection (only text/plain,
+          text/html, text/uri-list, image/png are documented as writable). The
+          verbatim error is recorded as platform evidence either way.
+        </p>
+        <div class="status" id="status-rtf-probe"></div>
+        <button type="button" class="primary" id="btn-share-rtf-file">2b — Share .rtf FILE via Share Sheet</button>
+        <div class="status" id="status-share-rtf"></div>
+        <button type="button" id="btn-download-html">Download gym-session-feasibility.html</button>
+        <div class="status" id="status-dl-html"></div>
+        <button type="button" id="btn-download-rtf">Download gym-session-feasibility.rtf</button>
+        <div class="status" id="status-dl-rtf"></div>
+        <button type="button" id="btn-download-txt">Download gym-session-feasibility.txt (plain control)</button>
+        <div class="status" id="status-dl-txt"></div>
+        <p class="hint">
+          Downloads land in the Files app. Predicted Notes outcome for both
+          formats: view-only attachment — NOT an editable colored table — unless
+          the device test proves otherwise. macOS Notes RTF behavior must not be
+          generalized to iOS.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Route 3 — Shortcuts conversion (requires USER-CREATED Shortcut)</h2>
+        <p class="hint">
+          No Shortcut is bundled with this project and none is assumed to exist.
+          Create one first (one-time, free, ~2 minutes):
+        </p>
+        <h3>Shortcut A — “Gym HTML to Note” (clipboard input)</h3>
+        <ol>
+          <li>Open the Shortcuts app → <strong>+</strong> → name it <strong>Gym HTML to Note</strong>.</li>
+          <li>Add action <strong>Get Clipboard</strong>.</li>
+          <li>Add action <strong>Make Rich Text</strong> (input: HTML from previous action).</li>
+          <li>Add action <strong>Create Note</strong> (turn OFF “Show Compose Sheet”; folder: Notes).</li>
+        </ol>
+        <p class="hint">
+          Run: tap “Copy representative HTML source” above → open Shortcuts → run
+          <strong>Gym HTML to Note</strong> → open the created note.
+        </p>
+        <h3>Shortcut B — share-sheet variant (file/text input)</h3>
+        <ol>
+          <li>Create another shortcut ending in <strong>Make Rich Text</strong> → <strong>Create Note</strong>.</li>
+          <li>Open the shortcut's details → enable <strong>Show in Share Sheet</strong> (receive: Text and/or Files).</li>
+          <li>Run: use Share → <strong>Gym …</strong> on a downloaded .html file or on shared text.</li>
+        </ol>
+        <p class="hint">
+          Both variants carry NO paid Developer dependency and NO recurring install
+          burden — exactly the E-003 constraint. Whether Make Rich Text keeps an
+          editable TABLE and per-category COLORS is precisely what the device test
+          decides.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Fixture preview (what every payload carries)</h2>
+        <div id="fixture-preview"></div>
+      </section>
+
+      <section class="card">
+        <h2>Record results (after pasting on the iPhone)</h2>
+        <ol>
+          <li>Note which route/button was used.</li>
+          <li>Paste ONCE into the canonical Gym note (or inspect the note a Shortcut created).</li>
+          <li>Record separately: real editable table? all values/order? five foreground colors? five highlight/background colors? multi-line notes? summary override?</li>
+          <li>Record friction: Shortcuts setup needed? file handoff needed? native install needed? paid dependency?</li>
+        </ol>
+        <p class="hint">
+          A colored image, screenshot, PDF, or non-editable attachment is NOT a
+          success. If no route passes: stop this spike and return the evidence
+          to the product bridge (E-003 stop condition).
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Mechanics log</h2>
+        <ul class="log" id="mechanics-log"></ul>
+      </section>
+
+      <footer>
+        Isolated experimental asset under public/feasibility/. Generators are
+        pure/deterministic and covered by src/tests/feasibilityHarness.test.mjs.
+        Production Copy to Notes path untouched. No outcome claim about Apple
+        Notes is made or implied by any element of this page.
+      </footer>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
