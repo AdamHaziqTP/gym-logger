@@ -26,7 +26,10 @@ import {
   hasCopiedRow,
   peekRowClipboard,
 } from "../domain/rowClipboard";
-import { buildNotesPayload } from "../domain/notesExport";
+import {
+  buildNotesPayload,
+  type NotesPayload,
+} from "../domain/notesExport";
 import {
   writeNotesPayloadToClipboard,
   type ClipboardCopyOutcome,
@@ -138,8 +141,9 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
   const displayIdsRef = useRef<string[]>([]);
   const rowsByIdRef = useRef<Record<string, WorkoutRow>>({});
 
-  // Saves that already left the debounce queue and are still running, so the
-  // copy-to-Notes export can await them instead of racing an in-flight write.
+  // Saves that already left the debounce queue and are still running, so a
+  // flush can wait for them (pagehide, unmount, and the copy-to-Notes
+  // persistence sweep) instead of racing an in-flight write.
   const activeSaves = useRef<Set<Promise<void>>>(new Set());
 
   const runSave = useCallback((operation: () => Promise<void>): Promise<void> => {
@@ -186,9 +190,11 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
   );
 
   /**
-   * Flushes pending edits before unmount/page hide/copy-export so nothing is
-   * lost (§17.4). Resolves once every queued or in-flight write settled, so a
-   * copy-to-Notes export reads fully persisted data.
+   * Flushes pending edits before unmount/page hide, and immediately after a
+   * copy-to-Notes tap, so persistence converges with what the screen showed
+   * (§17.4). FIX-01: the clipboard action no longer AWAITS this — it only
+   * triggers it — because an awaited save between the tap and the clipboard
+   * call costs Safari's transient user activation.
    */
   const flushSaves = useCallback((): Promise<void> => {
     const entries = [...pendingSaves.current.values()];
@@ -469,22 +475,79 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
 
   /* --------------- Copy to Notes export (spec §15; M03-T01) -------------- */
 
+  /**
+   * Builds the export payload from what the screen shows RIGHT NOW: the cell
+   * inputs and the notes textarea are uncontrolled, so their DOM values are
+   * the truth for edits that may not be persisted yet. Synchronous by design
+   * (FIX-01): constructing the payload inside the tap gesture lets the first
+   * clipboard attempt start in the same task, preserving user activation.
+   */
+  const buildVisibleNotesPayload = (): NotesPayload | null => {
+    if (!session) return null;
+
+    // Latest visible cell values keyed by row id (DOM order matches display).
+    const overrides = new Map<
+      string,
+      Partial<Record<EditableRowField, string>>
+    >();
+    document
+      .querySelectorAll<HTMLTableRowElement>("#workout-tbody tr[data-row-id]")
+      .forEach((tr) => {
+        const rowId = tr.getAttribute("data-row-id");
+        if (!rowId) return;
+        const cells = tr.querySelectorAll<HTMLInputElement>("input.cell-input");
+        if (cells.length < COLUMN_ORDER.length) return;
+        const patch: Partial<Record<EditableRowField, string>> = {};
+        COLUMN_ORDER.forEach((field, index) => {
+          const cell = cells[index];
+          if (cell) patch[field] = cell.value;
+        });
+        overrides.set(rowId, patch);
+      });
+    const notesInput = document.querySelector<HTMLTextAreaElement>(
+      "textarea.notes-input",
+    );
+
+    const visibleSession: WorkoutSession = {
+      ...session,
+      rows: displayRows.map((row) => {
+        const patch = overrides.get(row.id);
+        if (!patch) return row;
+        return {
+          ...row,
+          exercise: patch.exercise ?? row.exercise,
+          sets: patch.sets ?? row.sets,
+          reps: patch.reps ?? row.reps,
+          weight: patch.weight ?? row.weight,
+          skip: patch.skip ?? row.skip,
+        };
+      }),
+      notes: notesInput ? notesInput.value : session.notes,
+    };
+    return buildNotesPayload(visibleSession);
+  };
+
   const commandCopyToNotes = () => {
     if (notesCopyState === "working") return; // double-tap guard (§27.2)
     setNotesCopyState("working");
+
+    // FIX-01: capture the payload and start the clipboard attempt
+    // synchronously inside this tap. Nothing may be awaited between the
+    // gesture and the first clipboard call — iOS/Safari drops transient user
+    // activation across awaited tasks, which surfaced as `Copy failed —
+    // clipboard unavailable` on the http://LAN device test.
+    const payload = buildVisibleNotesPayload();
+    if (!payload) {
+      setNotesCopyState("failed");
+      return;
+    }
+    // Persistence converges without gating the clipboard on IndexedDB: the
+    // payload already carries the latest visible edits verbatim.
+    void flushSaves();
+
     void (async () => {
       try {
-        // Export what the screen shows: settle every debounced or in-flight
-        // edit first (flushSaves), then read the fresh record.
-        await flushSaves();
-        const fresh = (await db.sessions.get(sessionId)) ?? session;
-        if (!fresh) {
-          setNotesCopyState("failed");
-          return;
-        }
-        const outcome = await writeNotesPayloadToClipboard(
-          buildNotesPayload(fresh),
-        );
+        const outcome = await writeNotesPayloadToClipboard(payload);
         setNotesCopyState(outcome);
       } catch (error) {
         console.error("Gym Logger: copy to Notes failed", error);

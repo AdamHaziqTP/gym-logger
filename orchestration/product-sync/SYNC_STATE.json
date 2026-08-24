@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t01-fix-01-human-retest",
+      "summary": "FIX-01 automated correction passed 140/140; original iPhone clipboard failure remains open for focused plain-copy retest.",
+      "at": "2026-08-24T14:44:16.013Z"
+    },
+    {
+      "name": "m03-t01-human-gate-failed",
+      "summary": "iPhone 14 Pro Max reached the app but Copy to Notes reported clipboard unavailable; HV-M03-3 failed and FIX-01 prepared.",
+      "at": "2026-08-24T14:24:45.417Z"
+    },
+    {
       "name": "m03-t01-human-gate-open",
       "summary": "Codex accepted M03-T01 automated clipboard scope: 125/125 tests, build, and LAN runtime smoke; stopped for explicit iPhone Safari to Apple Notes human gate.",
       "at": "2026-08-24T14:03:54.160Z"
@@ -51,24 +61,14 @@
       "name": "product-orchestrator-clean-thread-bridge-checkpoint",
       "summary": "Clean checkpoint after enabling supported product-chat notifications; Gym Logger remains at M01 human gate.",
       "at": "2026-08-24T10:06:50.713Z"
-    },
-    {
-      "name": "product-orchestrator-thread-bridge-enabled",
-      "summary": "Codex app thread notifications and five-minute bridge automation enabled; GitHub CLI authentication remains the one-time user prerequisite.",
-      "at": "2026-08-24T10:06:45.021Z"
-    },
-    {
-      "name": "product-orchestrator-checkpoint",
-      "summary": "Clean integration checkpoint recorded after commissioning tests; Gym Logger remains at M01 human gate.",
-      "at": "2026-08-24T09:57:42.446Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T14:03:54.160Z",
+  "lastPublishedAt": "2026-08-24T14:44:16.013Z",
   "lastEvent": {
-    "name": "m03-t01-human-gate-open",
-    "summary": "Codex accepted M03-T01 automated clipboard scope: 125/125 tests, build, and LAN runtime smoke; stopped for explicit iPhone Safari to Apple Notes human gate.",
-    "at": "2026-08-24T14:03:54.160Z"
+    "name": "m03-t01-fix-01-human-retest",
+    "summary": "FIX-01 automated correction passed 140/140; original iPhone clipboard failure remains open for focused plain-copy retest.",
+    "at": "2026-08-24T14:44:16.013Z"
   },
-  "syncRevision": 13
+  "syncRevision": 15
 }

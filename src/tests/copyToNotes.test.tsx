@@ -27,6 +27,8 @@ beforeEach(async () => {
   await Dexie.delete(DB_NAME);
   db = createDb();
   clearRowClipboard();
+  // No stale legacy-copy stub may leak between tests.
+  Reflect.deleteProperty(document, "execCommand");
 });
 
 afterEach(() => {
@@ -35,6 +37,9 @@ afterEach(() => {
   vi.unstubAllGlobals();
   // Remove whatever clipboard stub this test installed.
   delete (window.navigator as { clipboard?: unknown }).clipboard;
+  // Remove whatever execCommand stub this test installed (jsdom has none of
+  // its own, so deleting restores the real environment).
+  Reflect.deleteProperty(document, "execCommand");
 });
 
 /* ------------------------------ stubbing ------------------------------ */
@@ -63,6 +68,27 @@ function installClipboard(overrides: {
     value: { write: overrides.write, writeText: overrides.writeText },
     configurable: true,
   });
+}
+
+/**
+ * Installs a `document.execCommand` stand-in (jsdom does not implement the
+ * legacy editing API). The spy runs with the temporary copy helper still in
+ * the DOM, so tests can capture exactly what was selected for copying.
+ */
+function installExecCommand(
+  impl: (selectedText: string) => boolean,
+): ReturnType<typeof vi.fn> {
+  const spy = vi.fn(() => {
+    const helper = document.querySelector<HTMLTextAreaElement>(
+      "textarea[aria-hidden='true']",
+    );
+    return impl(helper ? helper.value : "");
+  });
+  Object.defineProperty(document, "execCommand", {
+    configurable: true,
+    value: spy,
+  });
+  return spy;
 }
 
 /** jsdom's Blob may lack .text(); FileReader always works there. */
@@ -172,7 +198,7 @@ describe("clipboard outcomes (AC-03)", () => {
     expect(plain).toContain("Category\tExercise\tSets\tReps\tWeight\tSkip");
   });
 
-  it("exports the edits the user just made by flushing pending saves first", async () => {
+  it("exports the edits the user just made without waiting for autosave (FIX-01 gesture ordering)", async () => {
     await openSession();
     const writes: WriteSpy = { calls: [] };
     installClipboard({
@@ -183,6 +209,8 @@ describe("clipboard outcomes (AC-03)", () => {
     vi.stubGlobal("ClipboardItem", FakeClipboardItem);
 
     // Type and tap Copy immediately — well inside the 300 ms autosave delay.
+    // FIX-01: the payload must come from the visible screen state in the same
+    // task as the tap (no awaited save before the clipboard attempt).
     fireEvent.change(firstExerciseInput(), {
       target: { value: "Exported mid-flight edit" },
     });
@@ -193,10 +221,14 @@ describe("clipboard outcomes (AC-03)", () => {
     const html = await readBlobText(item.entries["text/html"]!);
     expect(html).toContain("Exported mid-flight edit");
 
-    const session = await todaysSession();
-    expect(session.rows.find((row) => row.position === 0)?.exercise).toBe(
-      "Exported mid-flight edit",
-    );
+    // The same tap still triggers persistence of the visible edits —
+    // asynchronously, never ahead of the clipboard call.
+    await waitFor(async () => {
+      const session = await todaysSession();
+      expect(session.rows.find((row) => row.position === 0)?.exercise).toBe(
+        "Exported mid-flight edit",
+      );
+    });
   });
 
   it("falls back to plain text and says so when the combined write fails", async () => {
@@ -246,9 +278,51 @@ describe("clipboard outcomes (AC-03)", () => {
     expect(writtenTexts[0]).toContain("Arms Back Chest Delts Legs");
   });
 
-  it("reports failure instead of success when the whole clipboard API is missing", async () => {
+  it("reaches the plain fallback through the legacy selection copy when the whole Async Clipboard API is unavailable (FIX-01 LAN/HTTP condition)", async () => {
     await openSession();
-    // navigator.clipboard left undefined entirely (jsdom default).
+    // navigator.clipboard left undefined entirely — exactly what iOS Safari
+    // exposes on a non-secure http://LAN-IP origin. The legacy
+    // execCommand("copy") path is the only remaining mechanism.
+    let selectedForCopy = "";
+    const exec = installExecCommand((selected) => {
+      selectedForCopy = selected;
+      return true;
+    });
+
+    fireEvent.click(copyButton());
+    expect(
+      await screen.findByText("Copied as plain text (rich formatting unavailable)"),
+    ).toBeTruthy();
+
+    expect(exec).toHaveBeenCalledTimes(1);
+    // The temporary helper carried ONLY the plain payload…
+    expect(selectedForCopy).toContain("Monday 24 Aug");
+    expect(selectedForCopy).toContain(
+      "Category\tExercise\tSets\tReps\tWeight\tSkip",
+    );
+    expect(selectedForCopy).toContain("Notes");
+    // …and was removed again afterwards.
+    expect(document.querySelector("textarea[aria-hidden='true']")).toBeNull();
+    expect(screen.queryByText("Copied to Notes ✓")).toBeNull();
+  });
+
+  it("falls back to the legacy selection copy after both async attempts are denied", async () => {
+    await openSession();
+    const denial = () => Promise.reject(new Error("denied"));
+    installClipboard({ write: denial, writeText: denial });
+    vi.stubGlobal("ClipboardItem", FakeClipboardItem);
+    const exec = installExecCommand(() => true);
+
+    fireEvent.click(copyButton());
+    expect(
+      await screen.findByText("Copied as plain text (rich formatting unavailable)"),
+    ).toBeTruthy();
+    expect(exec).toHaveBeenCalledTimes(1);
+  });
+
+  it("reports failure when every path fails, including the legacy selection copy", async () => {
+    await openSession();
+    installExecCommand(() => false);
 
     fireEvent.click(copyButton());
     expect(
@@ -257,11 +331,23 @@ describe("clipboard outcomes (AC-03)", () => {
     expect(screen.queryByText("Copied to Notes ✓")).toBeNull();
   });
 
-  it("reports failure when permission is denied for both attempts", async () => {
+  it("reports failure instead of success when no clipboard mechanism exists at all", async () => {
+    await openSession();
+    // navigator.clipboard left undefined AND jsdom has no document.execCommand.
+
+    fireEvent.click(copyButton());
+    expect(
+      await screen.findByText("Copy failed — clipboard unavailable"),
+    ).toBeTruthy();
+    expect(screen.queryByText("Copied to Notes ✓")).toBeNull();
+  });
+
+  it("reports failure when permission is denied for both async attempts and no legacy fallback exists", async () => {
     await openSession();
     const denial = () => Promise.reject(new Error("denied"));
     installClipboard({ write: denial, writeText: denial });
     vi.stubGlobal("ClipboardItem", FakeClipboardItem);
+    Reflect.deleteProperty(document, "execCommand");
 
     fireEvent.click(copyButton());
     expect(

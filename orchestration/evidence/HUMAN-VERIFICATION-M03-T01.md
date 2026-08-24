@@ -1,9 +1,23 @@
 # HUMAN VERIFICATION — M03-T01 Apple Notes clipboard integration spike
 
-**Status: OPEN — human-only gate. No automated or engineering result may mark
+**Status: FAILED — human-only gate. No automated or engineering result may mark
 these items PASS.** The automated suite proves payload generation and button
 behavior only (jsdom + fake-indexeddb). Whether anything survives a real
 iPhone Safari → Apple Notes paste is unknowable from this workstation.
+
+## Recorded device result — 2026-08-24
+
+- Device: **iPhone 14 Pro Max**
+- Result supplied by product owner: pressing **Copy to Notes** showed **`Copy failed — clipboard unavailable`**.
+- **HV-M03-3: FAIL.** The app did not reach either rich or plain clipboard success.
+- **HV-M03-1: BLOCKED/NOT EXECUTED.** No clipboard payload was available to paste into Apple Notes.
+- **HV-M03-2: BLOCKED/NOT EXECUTED.** Plain fallback could not be exercised after the failed copy.
+- No screenshot was supplied with this result.
+- This is not Apple Notes acceptance and is not a reason to mark the gate passed. Route the clipboard failure through `M03-T01-FIX-01` before repeating the device gate.
+
+## FIX-01 retest status
+
+Codex independently accepted the FIX-01 engineering correction at 140/140 tests, passing build, and passing LAN runtime smoke. The original device failure remains recorded above; it is not retroactively changed. Repeat the affected copy on the corrected build. On the current HTTP LAN origin, the expected status is **`Copied as plain text (rich formatting unavailable)`**. Rich HTML/table/color behavior requires a secure HTTPS build and remains unverified.
 
 ## Preconditions
 

@@ -8,7 +8,7 @@ Updated: 2026-08-24
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M02 — next bounded implementation milestone after M01 foundation
 - Current task: M02-T02 — Copy Another Session preview and clone flow
-- Status: HUMAN_REVIEW_REQUIRED (M03-T01 clipboard gate)
+- Status: HUMAN_REVIEW_REQUIRED (M03-T01-FIX-01 retest)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
 - Human review gate: M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance
@@ -70,10 +70,12 @@ Updated: 2026-08-24
 - M02-T04 automated checkpoint accepted by Codex: summary overrides, arbitrary strings, persistence/remount, and reset-to-calculated; 105/105 tests, build, and LAN runtime smoke passed. Physical and visual acceptance remain unclaimed.
 - Prepared `orchestration/tasks/M03-T01.md` for the minimal Apple Notes clipboard integration spike; target-iPhone paste remains a human gate.
 - M03-T01 automated checkpoint accepted by Codex: deterministic clipboard payloads and rich/plain/failure handling; 125/125 tests, build, and LAN runtime smoke passed. Apple Notes interoperability is now the explicit human gate in `orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md`.
+- Product owner tested the reachable iPhone 14 Pro Max path and reported `Copy failed — clipboard unavailable` after pressing Copy to Notes. HV-M03-3 is recorded as FAIL; HV-M03-1 and HV-M03-2 are BLOCKED/NOT EXECUTED. The failure is routed to `orchestration/tasks/M03-T01-FIX-01.md`; Apple Notes acceptance remains blocked.
+- M03-T01-FIX-01 automated correction accepted by Codex: scoped synchronous legacy plain-text fallback and activation-preserving payload construction; 140/140 tests, build, and LAN runtime smoke passed. The original device failure remains open for a focused retest; no Apple Notes or rich-paste acceptance is claimed.
 
 ## Active correction checkpoint
 
-- Active task: `orchestration/tasks/M03-T01.md`
+- Active task: `orchestration/tasks/M03-T01-FIX-01.md` (human retest)
 - Base implementation checkpoint: accepted M02-T04 automated checkpoint, now extended by the M03-T01 automated implementation pending human evidence
-- Worker disposition: M03-T01 accepted for automated scope; Apple Notes/iPhone gate open; M01 physical gate remains deferred
-- Next action: product owner completes the precise iPhone/Apple Notes checklist through the decision bridge. Do not dispatch M03-T02 or claim M03 completion until the gate is resolved.
+- Worker disposition: FIX-01 accepted for automated scope; original iPhone clipboard failure requires retest; M01 physical gate remains deferred
+- Next action: product owner repeats the focused iPhone clipboard/paste checklist through the decision bridge. Do not dispatch M03-T02 or claim M03 completion until the retest is resolved.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-24T14:03:54.209Z",
+  "generatedAt": "2026-08-24T14:44:16.063Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -37,7 +37,7 @@
   "current": {
     "milestone": "M02 — next bounded implementation milestone after M01 foundation",
     "task": "M02-T02 — Copy Another Session preview and clone flow",
-    "status": "HUMAN_REVIEW_REQUIRED (M03-T01 clipboard gate)",
+    "status": "HUMAN_REVIEW_REQUIRED (M03-T01-FIX-01 retest)",
     "humanReviewGate": "M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance",
     "nextAction": "M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance"
   },
@@ -52,11 +52,11 @@
     "Recorded product authorization to continue in full-auto mode through bounded milestones and defer low-risk M01 physical-device checks to the final reachable/installable-build acceptance pass."
   ],
   "recentImplementationChanges": [
+    "ce95e4d feat: add notes clipboard spike",
     "a01c228 feat: harden summary override editing",
     "8d8c2dc feat: add session deletion confirmation",
     "912fcba feat: accept M02 copy session flow",
-    "c7b8fe6 docs: prepare M02 copy-session task",
-    "41a42de feat: add M02 history and search flow"
+    "c7b8fe6 docs: prepare M02 copy-session task"
   ],
   "codexVerification": [
     {
@@ -73,10 +73,10 @@
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
       "result": [
+        "**Status: FAILED — human-only gate. No automated or engineering result may mark",
         "these items PASS.** The automated suite proves payload generation and button",
-        "`Copy failed — clipboard unavailable` and never `Copied to Notes ✓`.",
-        "Record per-item PASS/FAIL plus screenshots into `orchestration/evidence/`, and",
-        "pixel fidelity. A FAIL here must NOT be silently downgraded; it feeds the"
+        "Result supplied by product owner: pressing **Copy to Notes** showed **`Copy failed — clipboard unavailable`**.",
+        "**HV-M03-3: FAIL.** The app did not reach either rich or plain clipboard success."
       ]
     },
     {
@@ -127,7 +127,7 @@
     "M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance"
   ],
   "decisionsMadeSinceLastSync": [
-    "Codex accepted M03-T01 automated clipboard scope: 125/125 tests, build, and LAN runtime smoke; stopped for explicit iPhone Safari to Apple Notes human gate."
+    "FIX-01 automated correction passed 140/140; original iPhone clipboard failure remains open for focused plain-copy retest."
   ],
   "recordedDecisions": [
     {
@@ -168,21 +168,22 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "a01c228c91dfaceab8474088ff2a1ba927647372",
+    "commit": "ce95e4d4a94fc55a696b1fdf091b450bcc80be12",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/state/REQUIREMENTS_MATRIX.md\n M orchestration/state/STATE.md\n M src/components/SessionView.tsx\n M src/styles.css\n?? orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md\n?? orchestration/reports/M03-T01-codex-review.md\n?? orchestration/reports/M03-T01.md\n?? src/domain/notesClipboard.ts\n?? src/domain/notesExport.ts\n?? src/tests/copyToNotes.test.tsx\n?? src/tests/notesExport.test.ts",
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M src/components/SessionView.tsx\n M src/domain/notesClipboard.ts\n M src/tests/copyToNotes.test.tsx\n?? orchestration/reports/M03-T01-FIX-01-codex-review.md\n?? orchestration/reports/M03-T01-FIX-01.md\n?? orchestration/tasks/M03-T01-FIX-01.md\n?? src/tests/notesClipboard.test.ts",
     "changedFiles": [
-      "orchestration/state/REQUIREMENTS_MATRIX.md",
+      "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
       "orchestration/state/STATE.md",
       "src/components/SessionView.tsx",
-      "src/styles.css",
-      "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
-      "orchestration/reports/M03-T01-codex-review.md",
-      "orchestration/reports/M03-T01.md",
       "src/domain/notesClipboard.ts",
-      "src/domain/notesExport.ts",
       "src/tests/copyToNotes.test.tsx",
-      "src/tests/notesExport.test.ts"
+      "orchestration/reports/M03-T01-FIX-01-codex-review.md",
+      "orchestration/reports/M03-T01-FIX-01.md",
+      "orchestration/tasks/M03-T01-FIX-01.md",
+      "src/tests/notesClipboard.test.ts"
     ]
   },
   "builder": {
@@ -202,11 +203,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t01-human-gate-open",
-      "summary": "Codex accepted M03-T01 automated clipboard scope: 125/125 tests, build, and LAN runtime smoke; stopped for explicit iPhone Safari to Apple Notes human gate.",
-      "at": "2026-08-24T14:03:54.160Z"
+      "name": "m03-t01-fix-01-human-retest",
+      "summary": "FIX-01 automated correction passed 140/140; original iPhone clipboard failure remains open for focused plain-copy retest.",
+      "at": "2026-08-24T14:44:16.013Z"
     },
-    "contextRevision": 13,
+    "contextRevision": 15,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
