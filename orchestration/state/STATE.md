@@ -8,15 +8,16 @@ Updated: 2026-08-24
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M01 — offline foundation vertical slice
 - Current task: M01-T01 — foundation, seed, local persistence, and session shell
-- Status: CORRECTION_2_READY
+- Status: HUMAN_REVIEW_REQUIRED
 - Automatic correction attempts used: 2 / 2
-- Human review gate: after M01 verification
+- Human review gate: active; M01 was not accepted
 
 ## Known-good checkpoints
 
 - Handoff baseline: `db71546` — `chore: checkpoint gym logger handoff`
-- Orchestration bootstrap: pending commit
-- M01 accepted checkpoint: pending
+- Orchestration bootstrap: `dd72762`
+- Last orchestration evidence checkpoint: `fecfb8f`
+- M01 accepted checkpoint: none; implementation remains uncommitted and rejected
 
 ## Completed
 
@@ -26,12 +27,12 @@ Updated: 2026-08-24
 - Read the available Build Gym Logger conversation export as supplementary history.
 - Confirmed the Desktop DSH wrapper exists at the verified path.
 
-## In progress
+## Final disposition
 
-- Execute M01-T01 through one fresh headless OX invocation.
-- Independently audit the resulting diff, tests, runtime, and visual evidence.
-- Correction 1: repair the evidenced latest-session sort failure and remove debug residue.
-- Correction 2: repair the verified autosave/remount lifecycle and correct deterministic test expectations.
+- M01-T01 has been independently audited.
+- Correction 1 repaired the evidenced latest-session sort failure and removed debug residue.
+- Correction 2 was blocked by DSH rate limiting before execution.
+- Final decision: stop for human review; do not start M02.
 
 ## Deferred
 
@@ -41,4 +42,4 @@ Updated: 2026-08-24
 
 ## Escalations
 
-None currently. Skip clearing, notes clearing, summary-override cloning, and horizontal table behavior are recorded as implementation choices to validate without inventing new product behavior; escalate only if implementation cannot proceed safely.
+E-001 — DSH rate limit blocked the final correction. Skip clearing, notes clearing, summary-override cloning, and horizontal table behavior remain recorded implementation choices, not product escalations.
