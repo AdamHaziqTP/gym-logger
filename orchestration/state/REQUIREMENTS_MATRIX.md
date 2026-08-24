@@ -26,8 +26,8 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-020 | IndexedDB persistence with immediate/debounced autosave survives termination/reopen. | Spec §§17.2-17.4; B6, G2 | M01 | VERIFIED (automated; device pending) | remount test; HV-02/HV-03 |
 | REQ-021 | Offline shell is cached and core use does not require network. | Spec §17; G1-G5 | M01/M06 | IN_PROGRESS | runtime smoke; HV-01 |
 | REQ-022 | Request persistent storage where appropriate and surface non-destructive storage errors. | Spec §§17.3, 27.9 | M01/M06 | VERIFIED (source/test) | App bootstrap; build/tests; device pending |
-| REQ-023 | Rich Copy to Notes includes date, legend, summary, table, notes with HTML and plain fallback. | Spec §15; H1-H6 | M03/M05 | DEFERRED | real iPhone required |
-| REQ-024 | Never claim rich Notes structure/color works without target-iPhone paste evidence. | Spec §§15.4-15.6, 32 | M03 | DEFERRED | — |
+| REQ-023 | Rich Copy to Notes includes date, legend, summary, table, notes with HTML and plain fallback. | Spec §15; H1-H6 | M03/M05 | IN_PROGRESS | M03-T01 automated payload/clipboard scope accepted; Apple Notes paste human gate open |
+| REQ-024 | Never claim rich Notes structure/color works without target-iPhone paste evidence. | Spec §§15.4-15.6, 32 | M03 | IN_PROGRESS | Explicit open gate: HUMAN-VERIFICATION-M03-T01.md |
 | REQ-025 | Faithful and Compact full-session PNG export handle 40+ rows, preserve colors and notes. | Spec §14; I1-I6 | M03/M05 | DEFERRED | real iPhone required |
 | REQ-026 | Compact export hides Skip only when all Skip cells are empty. | Spec §§14.1, 30; D4-D5 | M05 | DEFERRED | — |
 | REQ-027 | Backup JSON includes schema, sessions, rows, highlights, settings, metadata and restores exactly. | Spec §18; J1-J5 | M03/M05 | PLANNED | — |
@@ -43,4 +43,4 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 
 ## Pilot disposition
 
-M01 remains limited to its first-slice intent, with FIX-05 physical checks explicitly deferred rather than passed. M02-T01 through M02-T04 cover History/search/editable sessions, Copy Another Session, whole-session deletion, and summary overrides for automated scope; no later requirement may be marked verified by desktop evidence alone when the spec calls for real-iPhone validation. M03-T01 Apple Notes clipboard integration is the next bounded task and must stop for its target-iPhone human gate.
+M01 remains limited to its first-slice intent, with FIX-05 physical checks explicitly deferred rather than passed. M02-T01 through M02-T04 cover History/search/editable sessions, Copy Another Session, whole-session deletion, and summary overrides for automated scope. M03-T01 clipboard engineering is accepted for automated scope, but Apple Notes/iPhone interoperability is an open human gate; no later requirement may be marked verified by desktop evidence alone.

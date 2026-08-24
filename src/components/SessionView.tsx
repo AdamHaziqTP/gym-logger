@@ -26,6 +26,11 @@ import {
   hasCopiedRow,
   peekRowClipboard,
 } from "../domain/rowClipboard";
+import { buildNotesPayload } from "../domain/notesExport";
+import {
+  writeNotesPayloadToClipboard,
+  type ClipboardCopyOutcome,
+} from "../domain/notesClipboard";
 import { orderedRows } from "../domain/rows";
 import type {
   Highlight,
@@ -39,6 +44,21 @@ const AUTOSAVE_DELAY_MS = 300;
 const UNDO_TOAST_MS = 5000;
 /** Pointer travel before a handle press becomes a drag instead of a tap. */
 const DRAG_THRESHOLD_PX = 8;
+
+/**
+ * Copy-to-Notes action states (spec §15; M03-T01). `copied-rich` is the only
+ * state that may show the spec's success copy; plain fallback and failure are
+ * always worded so they cannot be mistaken for full success (AC-03).
+ */
+type NotesCopyState = "idle" | "working" | ClipboardCopyOutcome;
+
+const NOTES_COPY_STATUS: Record<NotesCopyState, string> = {
+  idle: "",
+  working: "Copying…",
+  "copied-rich": "Copied to Notes ✓",
+  "copied-plain": "Copied as plain text (rich formatting unavailable)",
+  failed: "Copy failed — clipboard unavailable",
+};
 
 const COLUMN_ORDER: EditableRowField[] = [
   "exercise",
@@ -88,6 +108,9 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [deletingSession, setDeletingSession] = useState(false);
 
+  // Copy-to-Notes spike (spec §15; M03-T01): local clipboard only.
+  const [notesCopyState, setNotesCopyState] = useState<NotesCopyState>("idle");
+
   // Drag-reorder state (spec §§7.2, 7.5): press on the SELECTED handle arms a
   // potential drag; movement past the threshold drags, release without it is
   // the tap that opens the row menu.
@@ -115,17 +138,29 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
   const displayIdsRef = useRef<string[]>([]);
   const rowsByIdRef = useRef<Record<string, WorkoutRow>>({});
 
-  const runSave = useCallback(async (operation: () => Promise<void>) => {
-    setSaveState("saving");
-    try {
-      await operation();
-      setSaveState("saved");
-      if (savedResetTimer.current) clearTimeout(savedResetTimer.current);
-      savedResetTimer.current = setTimeout(() => setSaveState("idle"), 1500);
-    } catch (error) {
-      console.error("Gym Logger: save failed", error);
-      setSaveState("idle");
-    }
+  // Saves that already left the debounce queue and are still running, so the
+  // copy-to-Notes export can await them instead of racing an in-flight write.
+  const activeSaves = useRef<Set<Promise<void>>>(new Set());
+
+  const runSave = useCallback((operation: () => Promise<void>): Promise<void> => {
+    const run = async () => {
+      setSaveState("saving");
+      try {
+        await operation();
+        setSaveState("saved");
+        if (savedResetTimer.current) clearTimeout(savedResetTimer.current);
+        savedResetTimer.current = setTimeout(() => setSaveState("idle"), 1500);
+      } catch (error) {
+        console.error("Gym Logger: save failed", error);
+        setSaveState("idle");
+      }
+    };
+    const promise = run();
+    activeSaves.current.add(promise);
+    void promise.finally(() => {
+      activeSaves.current.delete(promise);
+    });
+    return promise;
   }, []);
 
   const scheduleSave = useCallback(
@@ -150,16 +185,22 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
     [runSave],
   );
 
-  /** Flushes pending edits before unmount/page hide so nothing is lost (§17.4). */
-  const flushSaves = useCallback(() => {
+  /**
+   * Flushes pending edits before unmount/page hide/copy-export so nothing is
+   * lost (§17.4). Resolves once every queued or in-flight write settled, so a
+   * copy-to-Notes export reads fully persisted data.
+   */
+  const flushSaves = useCallback((): Promise<void> => {
     const entries = [...pendingSaves.current.values()];
     pendingSaves.current.clear();
     for (const entry of entries) clearTimeout(entry.timer);
-    for (const entry of entries) {
-      void entry.operation().catch((error) =>
+    const flushed = entries.map((entry) =>
+      entry.operation().catch((error) =>
         console.error("Gym Logger: flush save failed", error),
-      );
-    }
+      ),
+    );
+    const active = [...activeSaves.current];
+    return Promise.all([...flushed, ...active]).then(() => undefined);
   }, []);
 
   useEffect(() => {
@@ -426,6 +467,32 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
     }
   };
 
+  /* --------------- Copy to Notes export (spec §15; M03-T01) -------------- */
+
+  const commandCopyToNotes = () => {
+    if (notesCopyState === "working") return; // double-tap guard (§27.2)
+    setNotesCopyState("working");
+    void (async () => {
+      try {
+        // Export what the screen shows: settle every debounced or in-flight
+        // edit first (flushSaves), then read the fresh record.
+        await flushSaves();
+        const fresh = (await db.sessions.get(sessionId)) ?? session;
+        if (!fresh) {
+          setNotesCopyState("failed");
+          return;
+        }
+        const outcome = await writeNotesPayloadToClipboard(
+          buildNotesPayload(fresh),
+        );
+        setNotesCopyState(outcome);
+      } catch (error) {
+        console.error("Gym Logger: copy to Notes failed", error);
+        setNotesCopyState("failed");
+      }
+    })();
+  };
+
   const selectedRow = sortedRows.find((row) => row.id === selectedRowId) ?? null;
   const summaryLine = displaySummary(session);
 
@@ -588,6 +655,27 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
           onChange={(event) => handleNotesChange(event.target.value)}
           onBlur={(event) => handleNotesChange(event.currentTarget.value, true)}
         />
+      </section>
+
+      {/* Copy to Notes (spec §15; M03-T01 spike): one quiet local clipboard
+          action at the end of the screen, before the destructive zone. The
+          status line is explicit — plain-text fallback and failure states
+          never present as a rich success (AC-03). No Apple Notes append or
+          cloud involvement happens here (§2.2). */}
+      <section className="export-zone" aria-label="Copy session for Apple Notes">
+        <button
+          type="button"
+          className="notes-copy-button"
+          onClick={commandCopyToNotes}
+          disabled={notesCopyState === "working"}
+        >
+          Copy to Notes
+        </button>
+        {notesCopyState !== "idle" && (
+          <p className="copy-notes-status" role="status" aria-live="polite">
+            {NOTES_COPY_STATUS[notesCopyState]}
+          </p>
+        )}
       </section>
 
       {/* Whole-session delete entry point (spec §11.4; M02-T03): one quiet

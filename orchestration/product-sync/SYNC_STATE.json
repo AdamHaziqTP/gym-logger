@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t01-human-gate-open",
+      "summary": "Codex accepted M03-T01 automated clipboard scope: 125/125 tests, build, and LAN runtime smoke; stopped for explicit iPhone Safari to Apple Notes human gate.",
+      "at": "2026-08-24T14:03:54.160Z"
+    },
+    {
       "name": "m02-t04-accepted",
       "summary": "Codex independently accepted M02-T04 automated scope: 105/105 tests, build, and LAN runtime smoke; preparing M03-T01 clipboard spike with explicit Apple Notes human gate.",
       "at": "2026-08-24T13:39:36.690Z"
@@ -56,19 +61,14 @@
       "name": "product-orchestrator-checkpoint",
       "summary": "Clean integration checkpoint recorded after commissioning tests; Gym Logger remains at M01 human gate.",
       "at": "2026-08-24T09:57:42.446Z"
-    },
-    {
-      "name": "product-orchestrator-commissioned",
-      "summary": "Bidirectional product-sync protocol, bridge issue, reusable skill, and bootstrap tooling commissioned; Gym Logger remains at M01 human gate.",
-      "at": "2026-08-24T09:57:24.974Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T13:39:36.690Z",
+  "lastPublishedAt": "2026-08-24T14:03:54.160Z",
   "lastEvent": {
-    "name": "m02-t04-accepted",
-    "summary": "Codex independently accepted M02-T04 automated scope: 105/105 tests, build, and LAN runtime smoke; preparing M03-T01 clipboard spike with explicit Apple Notes human gate.",
-    "at": "2026-08-24T13:39:36.690Z"
+    "name": "m03-t01-human-gate-open",
+    "summary": "Codex accepted M03-T01 automated clipboard scope: 125/125 tests, build, and LAN runtime smoke; stopped for explicit iPhone Safari to Apple Notes human gate.",
+    "at": "2026-08-24T14:03:54.160Z"
   },
-  "syncRevision": 12
+  "syncRevision": 13
 }

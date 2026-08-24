@@ -8,7 +8,7 @@ Updated: 2026-08-24
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M02 — next bounded implementation milestone after M01 foundation
 - Current task: M02-T02 — Copy Another Session preview and clone flow
-- Status: READY_FOR_OX (M03-T01)
+- Status: HUMAN_REVIEW_REQUIRED (M03-T01 clipboard gate)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
 - Human review gate: M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance
@@ -69,10 +69,11 @@ Updated: 2026-08-24
 - Prepared `orchestration/tasks/M02-T04.md` from spec §9.2 for manual Sets/Exercises summary overrides and reset-to-calculated behavior.
 - M02-T04 automated checkpoint accepted by Codex: summary overrides, arbitrary strings, persistence/remount, and reset-to-calculated; 105/105 tests, build, and LAN runtime smoke passed. Physical and visual acceptance remain unclaimed.
 - Prepared `orchestration/tasks/M03-T01.md` for the minimal Apple Notes clipboard integration spike; target-iPhone paste remains a human gate.
+- M03-T01 automated checkpoint accepted by Codex: deterministic clipboard payloads and rich/plain/failure handling; 125/125 tests, build, and LAN runtime smoke passed. Apple Notes interoperability is now the explicit human gate in `orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md`.
 
 ## Active correction checkpoint
 
 - Active task: `orchestration/tasks/M03-T01.md`
-- Base implementation checkpoint: accepted M02-T04 automated checkpoint, to be committed before dispatch
-- Worker disposition: M02-T04 accepted for automated scope; M01 physical gate remains deferred
-- Next action: checkpoint the accepted M02-T04 changes, prepare the product packet, invoke the configured DSH/OX worker for M03-T01, then independently verify and stop at the Apple Notes human gate
+- Base implementation checkpoint: accepted M02-T04 automated checkpoint, now extended by the M03-T01 automated implementation pending human evidence
+- Worker disposition: M03-T01 accepted for automated scope; Apple Notes/iPhone gate open; M01 physical gate remains deferred
+- Next action: product owner completes the precise iPhone/Apple Notes checklist through the decision bridge. Do not dispatch M03-T02 or claim M03 completion until the gate is resolved.
