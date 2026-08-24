@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "fixturePurpose": "Seed/test fixture reconstructed from the user's Sunday 23 Aug Notes session.",
+  "session": {
+    "id": "fixture-sunday-23-aug",
+    "dateLocal": "2026-08-23",
+    "displayDate": "Sunday 23 Aug",
+    "summary": {
+      "setsDisplayOverride": "40",
+      "exercisesDisplayOverride": "39",
+      "note": "The source header says 40 sets / 39 exercises even though the table contains 40 rows whose Sets cells are all '1'. This is intentional source fidelity and is the reason v1 must support editable summary overrides rather than assuming totals are always derivable."
+    },
+    "rows": [
+      {
+        "id": "r01",
+        "position": 0,
+        "exercise": "Recline curl bench 30° IR uni",
+        "sets": "1",
+        "reps": "8",
+        "weight": "10 kg",
+        "skip": "",
+        "highlight": "orange"
+      },
+      {
+        "id": "r02",
+        "position": 1,
+        "exercise": "Recline curl bench 30° ER bilateral",
+        "sets": "1",
+        "reps": "8",
+        "weight": "10 kg",
+        "skip": "",
+        "highlight": "orange"
+      },
+      {
+        "id": "r03",
+        "position": 2,
+        "exercise": "Dumbell bilateral front raise",
+        "sets": "1",
+        "reps": "5",
+        "weight": "10kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r04",
+        "position": 3,
+        "exercise": "Dumbell Pullover",
+        "sets": "1",
+        "reps": "8",
+        "weight": "12kg",
+        "skip": "",
+        "highlight": "mint"
+      },
+      {
+        "id": "r05",
+        "position": 4,
+        "exercise": "Abducted dumbell External Rotation",
+        "sets": "1",
+        "reps": "6",
+        "weight": "7kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r06",
+        "position": 5,
+        "exercise": "Chest Press Neutral 5",
+        "sets": "1",
+        "reps": "7",
+        "weight": "55kg",
+        "skip": "",
+        "highlight": "mint"
+      },
+      {
+        "id": "r07",
+        "position": 6,
+        "exercise": "Chest Press decline 9",
+        "sets": "1",
+        "reps": "6",
+        "weight": "55kg",
+        "skip": "",
+        "highlight": "mint"
+      },
+      {
+        "id": "r08",
+        "position": 7,
+        "exercise": "Chest Press guillotine 1",
+        "sets": "1",
+        "reps": "6",
+        "weight": "55kg",
+        "skip": "",
+        "highlight": "mint"
+      },
+      {
+        "id": "r09",
+        "position": 8,
+        "exercise": "Scapular Protraction on chest press",
+        "sets": "1",
+        "reps": "5",
+        "weight": "82.5kg",
+        "skip": "",
+        "highlight": "mint"
+      },
+      {
+        "id": "r10",
+        "position": 9,
+        "exercise": "Saggital Flap Uni internally rotated cables",
+        "sets": "1",
+        "reps": "7",
+        "weight": "31.25kg",
+        "skip": "",
+        "highlight": "purple"
+      },
+      {
+        "id": "r11",
+        "position": 10,
+        "exercise": "Scapular Flap Uni internally rotated cables",
+        "sets": "1",
+        "reps": "7",
+        "weight": "31.25kg",
+        "skip": "",
+        "highlight": "purple"
+      },
+      {
+        "id": "r12",
+        "position": 11,
+        "exercise": "Frontal Flap internal rotated cables",
+        "sets": "1",
+        "reps": "7",
+        "weight": "31.25kg",
+        "skip": "",
+        "highlight": "purple"
+      },
+      {
+        "id": "r13",
+        "position": 12,
+        "exercise": "Elbow Cuff Cable Lat Raise",
+        "sets": "1",
+        "reps": "7",
+        "weight": "16.25kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r14",
+        "position": 13,
+        "exercise": "Wrist Cuff Y-Raise",
+        "sets": "1",
+        "reps": "5",
+        "weight": "6.25kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r15",
+        "position": 14,
+        "exercise": "Impingement Raise Wrist",
+        "sets": "1",
+        "reps": "7",
+        "weight": "7.5kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r16",
+        "position": 15,
+        "exercise": "Cuff Tricep Extension recline",
+        "sets": "1",
+        "reps": "7",
+        "weight": "16.25kg",
+        "skip": "",
+        "highlight": "orange"
+      },
+      {
+        "id": "r17",
+        "position": 16,
+        "exercise": "Cuff OTE IR ML head bias",
+        "sets": "1",
+        "reps": "7",
+        "weight": "11.25kg",
+        "skip": "",
+        "highlight": "orange"
+      },
+      {
+        "id": "r18",
+        "position": 17,
+        "exercise": "Ab Cable Crunch inc",
+        "sets": "1",
+        "reps": "9",
+        "weight": "52.5kg",
+        "skip": "",
+        "highlight": "none"
+      },
+      {
+        "id": "r19",
+        "position": 18,
+        "exercise": "Cable Reverse Curl Bilateral",
+        "sets": "1",
+        "reps": "6",
+        "weight": "32.5kg",
+        "skip": "",
+        "highlight": "orange"
+      },
+      {
+        "id": "r20",
+        "position": 19,
+        "exercise": "supination strap",
+        "sets": "1",
+        "reps": "8",
+        "weight": "6.25kg",
+        "skip": "",
+        "highlight": "orange"
+      },
+      {
+        "id": "r21",
+        "position": 20,
+        "exercise": "wrist flexion",
+        "sets": "1",
+        "reps": "8",
+        "weight": "8.75kg",
+        "skip": "",
+        "highlight": "orange"
+      },
+      {
+        "id": "r22",
+        "position": 21,
+        "exercise": "wrist extension",
+        "sets": "1",
+        "reps": "8",
+        "weight": "3.75kg",
+        "skip": "",
+        "highlight": "orange"
+      },
+      {
+        "id": "r23",
+        "position": 22,
+        "exercise": "Adducted Internal Rotation",
+        "sets": "1",
+        "reps": "8",
+        "weight": "6.25kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r24",
+        "position": 23,
+        "exercise": "Adducted External Rotation",
+        "sets": "1",
+        "reps": "8",
+        "weight": "3.75kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r25",
+        "position": 24,
+        "exercise": "Abducted Internal Rotation",
+        "sets": "1",
+        "reps": "8",
+        "weight": "3.75kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r26",
+        "position": 25,
+        "exercise": "Frontal Shoulder Press 9",
+        "sets": "1",
+        "reps": "6",
+        "weight": "37.5kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r27",
+        "position": 26,
+        "exercise": "Saggital Shoulder Press 3",
+        "sets": "1",
+        "reps": "5",
+        "weight": "30kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r28",
+        "position": 27,
+        "exercise": "Scapular Depression on LP Unilateral",
+        "sets": "1",
+        "reps": "9",
+        "weight": "36.5kg",
+        "skip": "",
+        "highlight": "purple"
+      },
+      {
+        "id": "r29",
+        "position": 28,
+        "exercise": "SLDL erector focused cable row",
+        "sets": "1",
+        "reps": "7",
+        "weight": "89kg",
+        "skip": "",
+        "highlight": "purple"
+      },
+      {
+        "id": "r30",
+        "position": 29,
+        "exercise": "Kelso Shrug on Chest supported row plate Neutral grip",
+        "sets": "1",
+        "reps": "8",
+        "weight": "160kg",
+        "skip": "",
+        "highlight": "purple"
+      },
+      {
+        "id": "r31",
+        "position": 30,
+        "exercise": "Kelso Shrug on Chest supported row plate wide grip",
+        "sets": "1",
+        "reps": "8",
+        "weight": "160kg",
+        "skip": "",
+        "highlight": "purple"
+      },
+      {
+        "id": "r32",
+        "position": 31,
+        "exercise": "Rear Delt Row",
+        "sets": "1",
+        "reps": "8",
+        "weight": "120kg",
+        "skip": "",
+        "highlight": "blue"
+      },
+      {
+        "id": "r33",
+        "position": 32,
+        "exercise": "Seated Leg Curl",
+        "sets": "1",
+        "reps": "7",
+        "weight": "70 kg",
+        "skip": "",
+        "highlight": "pink"
+      },
+      {
+        "id": "r34",
+        "position": 33,
+        "exercise": "Leg Extension",
+        "sets": "1",
+        "reps": "7",
+        "weight": "100kg",
+        "skip": "",
+        "highlight": "pink"
+      },
+      {
+        "id": "r35",
+        "position": 34,
+        "exercise": "Calf raise on leg press plate Unilateral",
+        "sets": "1",
+        "reps": "6",
+        "weight": "120 kg",
+        "skip": "",
+        "highlight": "pink"
+      },
+      {
+        "id": "r36",
+        "position": 35,
+        "exercise": "Leg Press PL",
+        "sets": "1",
+        "reps": "8",
+        "weight": "120kg",
+        "skip": "",
+        "highlight": "pink"
+      },
+      {
+        "id": "r37",
+        "position": 36,
+        "exercise": "Hip Thrust",
+        "sets": "1",
+        "reps": "7",
+        "weight": "100kg",
+        "skip": "",
+        "highlight": "pink"
+      },
+      {
+        "id": "r38",
+        "position": 37,
+        "exercise": "Hip Flexion via Decline Sit-up",
+        "sets": "1",
+        "reps": "8",
+        "weight": "body weight",
+        "skip": "",
+        "highlight": "pink"
+      },
+      {
+        "id": "r39",
+        "position": 38,
+        "exercise": "Hip Abduction lean fwd",
+        "sets": "1",
+        "reps": "8",
+        "weight": "77.5kg",
+        "skip": "",
+        "highlight": "pink"
+      },
+      {
+        "id": "r40",
+        "position": 39,
+        "exercise": "ADDuctors",
+        "sets": "1",
+        "reps": "6",
+        "weight": "60kg",
+        "skip": "",
+        "highlight": "pink"
+      }
+    ],
+    "notes": ""
+  },
+  "highlightLegend": {
+    "orange": "Arms: biceps, triceps, brachioradialis, forearm/wrist flexors/extensors",
+    "purple": "Back: lats, traps, erectors and back-focused work",
+    "mint": "Chest",
+    "blue": "Delts/shoulder, including internal/external rotation",
+    "pink": "Legs: quads, hamstrings, glutes, hip flexors, etc.",
+    "none": "Other/uncategorized, currently mainly abs"
+  },
+  "knownFormattingException": "SLDL is conceptually both hamstrings (pink) and erectors/back (purple). In Apple Notes the user may mix highlights within this special entry. V1 may use one row-level highlight unless mixed rich-text formatting can be added without compromising simplicity."
+}
