@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t01-fix-02-codex-verified",
+      "summary": "OX FIX-02 completed and Codex independently verified 141/141 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes color retest is the remaining gate.",
+      "at": "2026-08-24T15:18:09.239Z"
+    },
+    {
+      "name": "m03-t01-secure-color-failure",
+      "summary": "Secure HTTPS retest passed editable table and values but lost category text/highlight colors; M03-T01-FIX-02 prepared.",
+      "at": "2026-08-24T15:03:49.601Z"
+    },
+    {
       "name": "secure-origin-prepared",
       "summary": "Existing Gym Logger PWA now serves over local HTTPS at https://192.168.1.49:5173 with an installable public certificate; 140/140 tests and build remain green. Human rich-paste retest is next.",
       "at": "2026-08-24T14:57:29.214Z"
@@ -51,26 +61,16 @@
       "name": "m02-t02-rejected",
       "summary": "M02-T02 initial worker timed out without report; Codex found 89/91 tests and prepared FIX-01.",
       "at": "2026-08-24T13:00:29.556Z"
-    },
-    {
-      "name": "task-prepared",
-      "summary": "M02-T01 automated checkpoint accepted; M02-T02 Copy Another Session prepared for bounded OX implementation. M01 physical checks remain deferred.",
-      "at": "2026-08-24T12:36:44.587Z"
-    },
-    {
-      "name": "correction-task-prepared",
-      "summary": "M02-T01 implementation was independently green but OX timed out without its report and component navigation coverage; FIX-01 correction dispatched within the two-attempt cap.",
-      "at": "2026-08-24T12:21:48.812Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T14:57:29.214Z",
+  "lastPublishedAt": "2026-08-24T15:18:09.240Z",
   "lastEvent": {
-    "name": "secure-origin-prepared",
-    "summary": "Existing Gym Logger PWA now serves over local HTTPS at https://192.168.1.49:5173 with an installable public certificate; 140/140 tests and build remain green. Human rich-paste retest is next.",
-    "at": "2026-08-24T14:57:29.214Z"
+    "name": "m03-t01-fix-02-codex-verified",
+    "summary": "OX FIX-02 completed and Codex independently verified 141/141 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes color retest is the remaining gate.",
+    "at": "2026-08-24T15:18:09.239Z"
   },
-  "syncRevision": 18,
+  "syncRevision": 20,
   "openEscalations": [
     {
       "id": "E-002",

@@ -109,22 +109,38 @@ const TH_STYLE =
 
 const TD_STYLE = "padding:4px 8px;vertical-align:top";
 
+/** Field names of the five visible workout columns. */
+type WorkoutColumnField = "exercise" | "sets" | "reps" | "weight" | "skip";
+
+/**
+ * One body cell of the export table. FIX-02 (M03-T01-FIX-02): a real iPhone
+ * paste kept the table but stripped the previous row-level (`<tr>`) category
+ * colors, so the exact spec §5.2 fg/bg tokens are now encoded redundantly on
+ * the markup paste importers are most likely to honor: directly on each
+ * `<td>` AND on an inline wrapper around exactly the cell text (`<span>`).
+ * `none` rows stay uncolored and inherit the wrapper's dark presentation;
+ * empty highlighted cells still get the styled wrapper so every colored row's
+ * cell/text markup carries its category tokens uniformly.
+ */
+function buildTableCellHtml(row: WorkoutRow, field: WorkoutColumnField): string {
+  const content = escapeMultilineHtml(row[field]);
+  if (row.highlight === "none") {
+    return `<td style="${TD_STYLE}">${content}</td>`;
+  }
+  const { fg, bg } = HIGHLIGHT_TOKENS[row.highlight];
+  const cellStyle = `${TD_STYLE};background-color:${bg};color:${fg}`;
+  const textStyle = `color:${fg};background-color:${bg}`;
+  return `<td style="${cellStyle}"><span style="${textStyle}">${content}</span></td>`;
+}
+
 function buildTableRowHtml(row: WorkoutRow): string {
   const label = categoryLabel(row);
   const categoryAttr =
     label !== "" ? ` data-gym-category="${escapeHtml(label)}"` : "";
-  // Highlighted rows carry their category colors inline on the whole row
-  // (spec §5.2 tokens); `none` rows stay unstyled and inherit the wrapper's
-  // dark presentation.
-  const styleAttr =
-    row.highlight === "none"
-      ? ""
-      : ` style="background-color:${HIGHLIGHT_TOKENS[row.highlight].bg};color:${HIGHLIGHT_TOKENS[row.highlight].fg}"`;
-  const cells = EXPORT_COLUMNS.map(
-    ({ field }) =>
-      `<td style="${TD_STYLE}">${escapeMultilineHtml(row[field])}</td>`,
+  const cells = EXPORT_COLUMNS.map(({ field }) =>
+    buildTableCellHtml(row, field),
   ).join("");
-  return `<tr${styleAttr}${categoryAttr}>${cells}</tr>`;
+  return `<tr${categoryAttr}>${cells}</tr>`;
 }
 
 function buildTableHtml(rows: WorkoutRow[]): string {
@@ -152,7 +168,8 @@ function paragraph(style: string, content: string): string {
  * Standards-compliant, self-contained HTML (spec §15.3): semantic elements,
  * explicit rows/cells, inline styles only, no external references. The five
  * visible columns match the app table; row categories ride along as inline
- * colors plus a machine-readable `data-gym-category` attribute.
+ * colors on each cell and its text wrapper plus a machine-readable
+ * `data-gym-category` attribute.
  */
 export function buildNotesHtml(session: WorkoutSession): string {
   const summary = displaySummary(session);

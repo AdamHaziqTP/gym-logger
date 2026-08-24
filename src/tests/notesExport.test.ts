@@ -219,24 +219,81 @@ describe("HTML payload", () => {
     expect(html.includes("<img")).toBe(false);
   });
 
-  it("carries highlight categories as inline colors plus data-gym-category", () => {
-    const html = buildNotesHtml(makeSession({ rows: REPRESENTATIVE_ROWS }));
+  it("carries each category's exact fg/bg tokens on EVERY cell and text wrapper of colored rows (FIX-02)", () => {
+    const session = makeSession({
+      rows: CATEGORY_LEGEND.map(({ value, label }, index) =>
+        makeRow({
+          id: value,
+          position: index,
+          exercise: `${label} row`,
+          sets: "3",
+          highlight: value,
+        }),
+      ),
+    });
+    const html = buildNotesHtml(session);
+
+    expect(html.match(/data-gym-category=/g)?.length).toBe(5);
+    for (const { value, label } of CATEGORY_LEGEND) {
+      const { fg, bg } = HIGHLIGHT_TOKENS[value];
+      const trStart = html.indexOf(`<tr data-gym-category="${label}"`);
+      expect(trStart).toBeGreaterThan(-1);
+      const rowChunk = html.slice(trStart, html.indexOf("</tr>", trStart));
+
+      // Cell markup carries both category tokens…
+      const tds = rowChunk.match(/<td[^>]*/g) ?? [];
+      expect(tds).toHaveLength(5);
+      for (const td of tds) {
+        expect(td).toContain(`background-color:${bg}`);
+        expect(td).toContain(`color:${fg}`);
+      }
+      // …and so does the inline text wrapper inside every cell.
+      const spans = rowChunk.match(/<span[^>]*/g) ?? [];
+      expect(spans).toHaveLength(5);
+      for (const span of spans) {
+        expect(span).toContain(`color:${fg}`);
+        expect(span).toContain(`background-color:${bg}`);
+      }
+      expect(rowChunk).toContain(`${label} row`);
+    }
+  });
+
+  it("keeps none rows uncolored while colored rows keep their markers (FIX-02)", () => {
     const orange = HIGHLIGHT_TOKENS.orange;
-    const purple = HIGHLIGHT_TOKENS.purple;
+    const html = buildNotesHtml(
+      makeSession({
+        rows: [
+          makeRow({ id: "n", position: 0, exercise: "Plain row" }),
+          makeRow({
+            id: "o",
+            position: 1,
+            exercise: "Arms row",
+            highlight: "orange",
+          }),
+        ],
+      }),
+    );
 
-    const armsTr = html.match(/<tr[^>]*data-gym-category="Arms"[^>]*>/)?.[0];
-    expect(armsTr).toBeDefined();
-    expect(armsTr).toContain(`background-color:${orange.bg}`);
-    expect(armsTr).toContain(`color:${orange.fg}`);
+    // The `none` row: no marker, no wrappers, exactly the plain cell style,
+    // and no category color anywhere in its markup.
+    const noneStart = html.indexOf("<tr><td");
+    expect(noneStart).toBeGreaterThan(-1);
+    const noneChunk = html.slice(noneStart, html.indexOf("</tr>", noneStart));
+    expect(noneChunk.includes("data-gym-category")).toBe(false);
+    expect(noneChunk.includes("<span")).toBe(false);
+    expect(noneChunk.includes(orange.bg)).toBe(false);
+    expect(noneChunk.includes(orange.fg)).toBe(false);
+    expect(noneChunk.match(/<td[^>]*/g)).toEqual([
+      '<td style="padding:4px 8px;vertical-align:top"',
+      '<td style="padding:4px 8px;vertical-align:top"',
+      '<td style="padding:4px 8px;vertical-align:top"',
+      '<td style="padding:4px 8px;vertical-align:top"',
+      '<td style="padding:4px 8px;vertical-align:top"',
+    ]);
 
-    const backTr = html.match(/<tr[^>]*data-gym-category="Back"[^>]*>/)?.[0];
-    expect(backTr).toBeDefined();
-    expect(backTr).toContain(`color:${purple.fg}`);
-
-    // The `none` row has no category marker and no inline color style.
+    // Colored rows keep their machine-readable marker; it never renders empty.
+    expect(html.includes('data-gym-category="Arms"')).toBe(true);
     expect(html.includes('data-gym-category=""')).toBe(false);
-    const noneRowStart = html.indexOf("<tr><td");
-    expect(noneRowStart).toBeGreaterThan(-1);
   });
 
   it("converts newlines to <br /> while keeping text content intact", () => {

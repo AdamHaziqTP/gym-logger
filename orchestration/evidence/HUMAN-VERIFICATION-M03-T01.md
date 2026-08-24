@@ -31,6 +31,15 @@ Codex independently accepted the FIX-01 engineering correction at 140/140 tests,
 - **HV-M03-3 plain fallback state: PASS.** The app no longer reported clipboard failure and truthfully identified the plain result.
 - No screenshot or iOS/Safari version was supplied.
 
+## Recorded secure-origin retest result — 2026-08-24
+
+- Device: **iPhone 14 Pro Max**
+- Origin: trusted HTTPS build at `https://192.168.1.49:5173`.
+- Copy status: rich copy succeeded; the user reported that the editable Notes table and all values were filled correctly.
+- **Table/data result: PASS as reported.**
+- **Category text/highlight color result: FAIL.** The pasted table had no Notes-style category text/highlight colors.
+- This is now a genuine rich-payload compatibility defect, not the previous HTTP limitation. Keep M03-T02 blocked and route the color representation through `M03-T01-FIX-02`.
+
 ## Preconditions
 
 - Build served over LAN HTTPS/HTTP reachable from the iPhone 14 Pro Max (same
@@ -86,3 +95,34 @@ update `orchestration/state/STATE.md` deferred list accordingly. Per spec
 pixel fidelity. A FAIL here must NOT be silently downgraded; it feeds the
 documented-limitations list and possibly an RTF/native strategy decision
 (spec §15.2), which is explicitly out of scope for this spike.
+
+## FIX-02 Codex verification — secure-origin color retest required
+
+- OX completed the bounded FIX-02 correction through the configured headless
+  Desktop wrapper. The correction places the unchanged category foreground and
+  background tokens on every colored `<td>` and its inline text `<span>`;
+  `none` rows remain uncolored.
+- Codex independently verified **141/141 tests**, `npm run build`, clean
+  `git diff --check`, and the HTTPS runtime at
+  `https://192.168.1.49:5173/` (HTTP 200; certificate resource HTTP 200).
+- These are engineering results only. Apple Notes color survival remains
+  **PENDING HUMAN RETEST** and M03-T02 remains blocked.
+
+### Next iPhone retest
+
+Using the trusted certificate and the same iPhone 14 Pro Max, open
+`https://192.168.1.49:5173`, tap **Copy to Notes** once, and paste once into
+the canonical Gym note. Record each result separately:
+
+- [ ] Status says `Copied to Notes ✓`.
+- [ ] Paste is a real editable Notes table.
+- [ ] Date, legend, summary, row order, all values, weird free-form values,
+      summary override, and multiline notes survive.
+- [ ] Foreground text colors survive: Arms orange, Back purple, Chest mint,
+      Delts blue, Legs pink; `none` rows remain default-colored.
+- [ ] Background/highlight colors survive as subtle row/cell tints.
+- [ ] The result remains readable in both light and dark Notes appearance.
+
+If foreground or background colors fail again, record them separately with
+screenshots if possible. Keep M03-T02 blocked; that result becomes platform
+evidence for the next product/technical decision.
