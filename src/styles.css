@@ -132,6 +132,20 @@ body {
   color: var(--text);
 }
 
+/*
+ * M03-T02-HOME-LAYOUT-FIX-01: the Home secondary actions previously stacked
+ * as margin-less full-width blocks, so on narrow iPhone viewports they
+ * rendered flush together — rounded corners clipping into each other like one
+ * overlapping control. A scoped flex column gives each button its own row
+ * plus an explicit gap (same pattern as .preview-actions/.confirm-actions),
+ * without touching any other button.
+ */
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .btn-small {
   width: auto;
   display: inline-block;

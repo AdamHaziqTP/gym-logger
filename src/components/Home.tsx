@@ -105,24 +105,30 @@ export function Home({
         </section>
       )}
 
-      {/* Secondary action (spec §4.1, §13): clone from a chosen historical
-          session — e.g. when equipment changes (spec §4.3). */}
-      <button
-        type="button"
-        className="btn btn-secondary"
-        onClick={onOpenCopyAnother}
-        disabled={sessions.length === 0}
-      >
-        Copy Another Session
-      </button>
+      {/* Secondary actions (spec §4.1, §13): clone from a chosen historical
+          session — e.g. when equipment changes (spec §4.3) — plus History.
+          M03-T02-HOME-LAYOUT-FIX-01: as margin-less block buttons these
+          stacked flush and visually clipped/overlapped on iPhone; the single
+          .home-actions flex column keeps them two distinct full-width
+          controls with explicit vertical separation at every width. */}
+      <div className="home-actions">
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={onOpenCopyAnother}
+          disabled={sessions.length === 0}
+        >
+          Copy Another Session
+        </button>
 
-      <button
-        type="button"
-        className="btn btn-secondary"
-        onClick={onOpenHistory}
-      >
-        History
-      </button>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={onOpenHistory}
+        >
+          History
+        </button>
+      </div>
 
       <footer className="footnote">
         Settings arrives in a later milestone.

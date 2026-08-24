@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "home-fix-accepted-image-task-prepared",
+      "summary": "Home overlap correction independently accepted at 190/190; M03-T02 image export task prepared for OX; iPhone visual checks remain deferred.",
+      "at": "2026-08-24T17:19:33.510Z"
+    },
+    {
+      "name": "m03-t02-home-fix-prepared",
+      "summary": "Prepared bounded Home action-area overlap correction; product navigation/layout scope preserved; physical iPhone visual verification remains deferred.",
+      "at": "2026-08-24T17:08:11.569Z"
+    },
+    {
       "name": "e003-human-gate-ready",
       "summary": "E-003 harness checkpoint 75c7ba4 is independently accepted; trusted HTTPS feasibility page is live; target iPhone 14 Pro Max route evidence is now the only active gate.",
       "at": "2026-08-24T16:52:22.736Z"
@@ -51,26 +61,16 @@
       "name": "m03-t01-fix-02-checkpoint-pushed",
       "summary": "FIX-02 known-good checkpoint f32548d pushed; 141/141 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone color retest.",
       "at": "2026-08-24T15:18:49.340Z"
-    },
-    {
-      "name": "m03-t01-fix-02-codex-verified",
-      "summary": "OX FIX-02 completed and Codex independently verified 141/141 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes color retest is the remaining gate.",
-      "at": "2026-08-24T15:18:09.239Z"
-    },
-    {
-      "name": "m03-t01-secure-color-failure",
-      "summary": "Secure HTTPS retest passed editable table and values but lost category text/highlight colors; M03-T01-FIX-02 prepared.",
-      "at": "2026-08-24T15:03:49.601Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T16:52:22.737Z",
+  "lastPublishedAt": "2026-08-24T17:19:33.511Z",
   "lastEvent": {
-    "name": "e003-human-gate-ready",
-    "summary": "E-003 harness checkpoint 75c7ba4 is independently accepted; trusted HTTPS feasibility page is live; target iPhone 14 Pro Max route evidence is now the only active gate.",
-    "at": "2026-08-24T16:52:22.736Z"
+    "name": "home-fix-accepted-image-task-prepared",
+    "summary": "Home overlap correction independently accepted at 190/190; M03-T02 image export task prepared for OX; iPhone visual checks remain deferred.",
+    "at": "2026-08-24T17:19:33.510Z"
   },
-  "syncRevision": 30,
+  "syncRevision": 32,
   "openEscalations": [
     {
       "id": "E-002",

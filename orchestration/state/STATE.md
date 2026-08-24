@@ -7,8 +7,8 @@ Updated: 2026-08-25
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes clipboard integration
-- Current task: M03-T02 — next bounded clipboard/export continuation after accepted v1 Notes limitation
-- Status: READY_FOR_CODEX
+- Current task: M03-T02-IMAGE-EXPORT-01 — Faithful/Compact full-session PNG export
+- Status: READY_FOR_OX (M03-T02-IMAGE-EXPORT-01)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
 - Human review gate: E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.
@@ -104,7 +104,7 @@ Updated: 2026-08-25
 
 ## Active correction checkpoint
 
-- Active task: next bounded M03-T02 task from the approved plan/specification.
+- Active task: `orchestration/tasks/M03-T02-IMAGE-EXPORT-01.md`
 - Base implementation checkpoint: M03-T01/FIX-03 plus accepted E-003 feasibility engineering checkpoint, with standard rich Notes table/data PASS and colour limitation documented.
-- Worker disposition: READY_FOR_CODEX. Full-auto continuation is authorized.
-- Next action: Codex resumes orchestration, selects M03-T02, delegates to the configured builder, independently verifies, and continues automatically. Route the Home overlap as a bounded UX correction before final acceptance.
+- Worker disposition: READY_FOR_OX — bounded Faithful/Compact PNG export only. Full-auto continuation is authorized.
+- Next action: invoke OX, independently verify export contracts/build/runtime, then continue with remaining v1 work. Preserve iPhone image/save/share checks for the consolidated final gate.
