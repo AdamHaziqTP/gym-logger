@@ -8,8 +8,8 @@ Updated: 2026-08-24
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M01 — offline foundation vertical slice
 - Current task: M01-T01 — foundation, seed, local persistence, and session shell
-- Status: CORRECTION_1_READY
-- Automatic correction attempts used: 1 / 2
+- Status: CORRECTION_2_READY
+- Automatic correction attempts used: 2 / 2
 - Human review gate: after M01 verification
 
 ## Known-good checkpoints
@@ -31,6 +31,7 @@ Updated: 2026-08-24
 - Execute M01-T01 through one fresh headless OX invocation.
 - Independently audit the resulting diff, tests, runtime, and visual evidence.
 - Correction 1: repair the evidenced latest-session sort failure and remove debug residue.
+- Correction 2: repair the verified autosave/remount lifecycle and correct deterministic test expectations.
 
 ## Deferred
 
