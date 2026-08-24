@@ -473,6 +473,44 @@ body {
   gap: 8px;
 }
 
+/* ---------- Local backup (spec §18; M05-T01-BACKUP-RESTORE-01) ---------- */
+
+/* Same quiet full-width rhythm as .home-actions, under its own label so the
+   two existing Home actions stay an untouched pair above it. */
+.backup-section {
+  margin-top: 20px;
+}
+
+.backup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* The import file picker is opened programmatically from the Import button;
+   keep it out of the layout but still focusable-free and invisible. */
+.file-input-offscreen {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.backup-error {
+  color: #ff453a;
+}
+
+/* Pre-replacement summary facts inside the confirm card. */
+.backup-summary {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 12px;
+  padding-left: 18px;
+}
+
 /* ---------- Session header ---------- */
 
 .session-header {

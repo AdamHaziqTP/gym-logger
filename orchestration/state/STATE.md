@@ -6,9 +6,9 @@ Updated: 2026-08-25
 
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
-- Current milestone: M03 — Apple Notes clipboard integration
-- Current task: M05-T01-BACKUP-RESTORE-01 — local JSON backup and restore
-- Status: READY_FOR_OX (M05-T01-BACKUP-RESTORE-01)
+- Current milestone: M06 — PWA polish and regression
+- Current task: M06-T01-PWA-POLISH-REGRESSION — offline shell and minimal polish
+- Status: READY_FOR_OX (M06-T01-PWA-POLISH-REGRESSION)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
 - Human review gate: E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.
@@ -51,6 +51,8 @@ Updated: 2026-08-25
 - Completed and independently verified the bounded E-003 feasibility harness at 33/33 focused tests, 186/186 full suite, passing build and HTTPS runtime.
 - Closed E-003 after product-owner evidence that another normal copy still had no colours and the auxiliary RTF/file/Shortcuts workflow was too unclear/high-friction for the intended simple v1 workflow. V1 now accepts editable rich-table paste without category colours as a documented iOS/Notes limitation.
 - Recorded iPhone visual defect: Home screen Copy Another Session button clips/overlaps the History button below it on iPhone 14 Pro Max.
+- Completed M03-T02 image export automated scope: Faithful/Compact deterministic PNG rendering, preview/download/share contract, and export controls; physical iPhone readability/save/share remain deferred.
+- Completed M05-T01 backup/restore automated scope: deterministic JSON export, strict validation, explicit replacement summary/confirmation, transactional session restore, and best-effort safety export; physical Files/share/restore remain deferred.
 
 ## Final disposition
 
@@ -62,6 +64,7 @@ Updated: 2026-08-25
 - M03-T02 is unblocked. Codex should select and dispatch the next bounded task from the existing plan/specification, independently verify it, and continue automatically.
 - The Home responsive-layout defect (Copy Another Session overlapping History on iPhone 14 Pro Max) must be routed as a bounded correction before final product acceptance. It does not block M03 continuation.
 - Do not declare the project complete until all deferred real-iPhone acceptance items, including PNG export, offline/installability, the deferred M01 touch/legend checks, and the recorded Home overlap correction, have been physically verified.
+- M05-T01 backup/restore is accepted for automated scope; proceed to M06-T01. Keep iPhone Files/share/restore checks in the consolidated final human gate.
 
 ## Deferred
 
@@ -70,6 +73,7 @@ Updated: 2026-08-25
 - Faithful and Compact tall PNG export on the target iPhone.
 - Home responsive-layout defect: Copy Another Session visually clips/overlaps History on iPhone 14 Pro Max; correction required before final acceptance.
 - Full history/search, backup/restore, polish, and subsequent milestones according to the existing implementation plan.
+- Backup/restore physical Files/share/restore behavior remains deferred to the consolidated final iPhone pass.
 
 ## Escalations
 
@@ -102,9 +106,10 @@ Updated: 2026-08-25
 - E-003 decision recorded: authorize one bounded non-HTML interoperability feasibility spike, then either adopt a proven low-friction route or accept uncolored editable-table paste as the documented v1 platform limitation.
 - E-003 feasibility harness completed and independently verified. Product owner did not adopt the auxiliary routes; the branch is closed with uncolored editable-table paste accepted for v1.
 
-## Active correction checkpoint
+## Active task checkpoint
 
-- Active task: `orchestration/tasks/M05-T01-BACKUP-RESTORE-01.md`
-- Base implementation checkpoint: M03-T01/FIX-03 plus accepted E-003 feasibility engineering checkpoint, with standard rich Notes table/data PASS and colour limitation documented.
-- Worker disposition: READY_FOR_OX — bounded local JSON backup/restore only. Full-auto continuation is authorized.
-- Next action: invoke OX, independently verify backup validation/restore/build/runtime, then continue with remaining v1 work. Preserve iPhone Files/share/restore checks for the consolidated final gate.
+- M05-T01 backup/restore automated scope accepted by Codex: 43/43 focused tests, 262/262 full suite, passing build, diff audit, and trusted HTTPS runtime smoke. Review: `orchestration/reviews/M05-T01-BACKUP-RESTORE-01-codex-review.md`.
+- Active task: `orchestration/tasks/M06-T01-PWA-POLISH-REGRESSION.md`
+- Base implementation checkpoint: M05-T01 automated backup/restore checkpoint with Apple Notes color limitation documented.
+- Worker disposition: READY_FOR_OX — implement the bounded offline shell/PWA polish task only. Full-auto continuation is authorized.
+- Next action: invoke OX M06-T01, independently verify manifest/service worker/build/runtime, then continue while preserving physical iPhone checks for the consolidated final gate.

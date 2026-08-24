@@ -3,6 +3,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { startTodaySession } from "../data/clone";
 import type { GymLogDB } from "../data/db";
 import { sortSessionsNewestFirst } from "../data/db";
+import { BackupSection } from "./BackupSection";
 import { formatDateDisplay, todayLocalDate } from "../domain/dates";
 import { displaySummary } from "../domain/summary";
 
@@ -129,6 +130,12 @@ export function Home({
           History
         </button>
       </div>
+
+      {/* Local backup controls (spec §18; M05-T01-BACKUP-RESTORE-01): a
+          small labeled section of its own so the existing .home-actions pair
+          above stays exactly two buttons, and the sparse layout keeps its
+          Today / Last Workout / actions rhythm. */}
+      <BackupSection db={db} todayLocal={todayLocal} />
 
       <footer className="footnote">
         Settings arrives in a later milestone.

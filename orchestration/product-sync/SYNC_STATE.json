@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "backup-restore-accepted",
+      "summary": "Codex independently accepted M05-T01 automated backup/restore scope: 43 focused tests, 262 full tests, build, diff audit, and trusted HTTPS runtime smoke pass; physical Files/share/restore remains deferred.",
+      "at": "2026-08-24T18:32:04.948Z"
+    },
+    {
       "name": "image-export-accepted-backup-task-prepared",
       "summary": "Image export independently accepted: 29/29 focused, 219/219 full suite, build, diff audit, HTTPS smoke pass; iPhone image/save/share deferred. M05 backup/restore task prepared.",
       "at": "2026-08-24T18:00:18.177Z"
@@ -56,21 +61,16 @@
       "name": "m03-t01-fix-03-checkpoint-pushed",
       "summary": "FIX-03 known-good checkpoint 44e959f pushed; 153/153 tests, build, diff audit, and HTTPS runtime pass; awaiting secure iPhone Apple Notes color retest.",
       "at": "2026-08-24T15:47:16.529Z"
-    },
-    {
-      "name": "m03-t01-fix-03-codex-verified",
-      "summary": "OX FIX-03 completed and Codex independently verified 153/153 tests, build, diff audit, and HTTPS runtime; secure iPhone Apple Notes foreground/highlight color retest is the remaining gate.",
-      "at": "2026-08-24T15:47:06.763Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T18:00:18.178Z",
+  "lastPublishedAt": "2026-08-24T18:32:04.949Z",
   "lastEvent": {
-    "name": "image-export-accepted-backup-task-prepared",
-    "summary": "Image export independently accepted: 29/29 focused, 219/219 full suite, build, diff audit, HTTPS smoke pass; iPhone image/save/share deferred. M05 backup/restore task prepared.",
-    "at": "2026-08-24T18:00:18.177Z"
+    "name": "backup-restore-accepted",
+    "summary": "Codex independently accepted M05-T01 automated backup/restore scope: 43 focused tests, 262 full tests, build, diff audit, and trusted HTTPS runtime smoke pass; physical Files/share/restore remains deferred.",
+    "at": "2026-08-24T18:32:04.948Z"
   },
-  "syncRevision": 34,
+  "syncRevision": 35,
   "openEscalations": [
     {
       "id": "E-002",
