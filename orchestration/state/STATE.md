@@ -7,11 +7,11 @@ Updated: 2026-08-25
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes clipboard integration
-- Current task: E-003 bounded native/RTF/Shortcuts feasibility spike for color-preserving editable Apple Notes transfer
-- Status: HUMAN_REVIEW_REQUIRED (M03-T01-E003)
+- Current task: M03-T02 — next bounded clipboard/export continuation after accepted v1 Notes limitation
+- Status: READY_FOR_CODEX
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: E-003 harness independently verified; target-iPhone route test is now required. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.
+- Human review gate: E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -22,8 +22,8 @@ Updated: 2026-08-25
 - Last orchestration evidence checkpoint: `c10d429` — FIX-05 automated known-good checkpoint candidate
 - M01 engineering checkpoint: independently green automated FIX-05 checkpoint; physical-device acceptance deferred, not passed
 - M02-T02/T03/T04: accepted automatically through Codex verification
-- M03-T01/FIX-03 engineering checkpoint: 153/153 tests, build, diff audit, and HTTPS runtime smoke accepted; Apple Notes color interoperability is escalated/resolved into a bounded feasibility route
-- M03-T01/E-003 engineering checkpoint: `75c7ba4` — isolated feasibility harness accepted by Codex at 33/33 focused tests, 186/186 full suite, build, diff audit, and HTTPS runtime smoke; target-iPhone route gate remains open
+- M03-T01/FIX-03 engineering checkpoint: 153/153 tests, build, diff audit, and HTTPS runtime smoke accepted; Apple Notes color interoperability was escalated and is now resolved as a documented v1 limitation
+- M03-T01/E-003 engineering checkpoint: `75c7ba4` — isolated feasibility harness accepted by Codex at 33/33 focused tests, 186/186 full suite, build, diff audit, and HTTPS runtime smoke; no auxiliary route is adopted into v1
 
 ## Completed
 
@@ -48,31 +48,34 @@ Updated: 2026-08-25
 - Completed OX M03-T01-FIX-03 and Codex independent verification: 153/153 tests, build, diff audit, and HTTPS runtime smoke passed.
 - Recorded the FIX-03 iPhone result: no category foreground or text-highlight colors survived; opened E-003 as platform interoperability evidence after three bounded HTML representations.
 - Resolved E-003 by authorizing one bounded native/RTF/Shortcuts feasibility spike before accepting uncolored rich paste as the final v1 limitation.
+- Completed and independently verified the bounded E-003 feasibility harness at 33/33 focused tests, 186/186 full suite, passing build and HTTPS runtime.
+- Closed E-003 after product-owner evidence that another normal copy still had no colours and the auxiliary RTF/file/Shortcuts workflow was too unclear/high-friction for the intended simple v1 workflow. V1 now accepts editable rich-table paste without category colours as a documented iOS/Notes limitation.
+- Recorded iPhone visual defect: Home screen Copy Another Session button clips/overlaps the History button below it on iPhone 14 Pro Max.
 
 ## Final disposition
 
 - M01/FIX-05 automated verification remains the engineering baseline for continuation; its deferred physical-iPhone checks are not reclassified as PASS.
 - Product owner has authorized full-auto continuation through bounded milestones except where a genuinely unavoidable product/human gate exists.
-- The trusted-HTTPS iPhone result is accepted as evidence that the current PWA rich path preserves a real editable Notes table and all data/order but Apple Notes strips category foreground/highlight colours.
-- E-003 is resolved in favor of exactly one bounded feasibility spike; this is not authorization for a native rewrite or broad architecture change.
-- Codex should prepare and dispatch the smallest feasibility task that compares: (1) PWA→Shortcuts/Notes handoff, (2) RTF/attributed clipboard/file handoff, and only if necessary (3) a minimal native helper/wrapper proof. Preserve the no-paid-Apple-Developer/no-fragile-installation constraint for v1.
-- Success requires target-iPhone evidence of a real editable Notes table, correct data/order, and usable five-category colours. Image-only transfer does not satisfy Copy to Notes.
-- If the bounded spike cannot produce a materially better low-friction route, stop the branch and return evidence to the product bridge. The default next product disposition is to accept editable rich paste without colours as a documented v1 platform limitation, keep the plain-text fallback, and continue M03 rather than conduct additional open-ended clipboard experiments.
-- Do not dispatch M03-T02 until the bounded feasibility spike completes and its result is recorded.
-- Do not declare the project complete until all deferred real-iPhone acceptance items, including Notes interoperability, PNG export, offline/installability, and the deferred M01 touch/legend checks, have been physically verified.
+- The trusted-HTTPS iPhone result is accepted as the v1 Notes-transfer baseline: real editable Notes table and all data/order PASS; category foreground/highlight colours are stripped by Apple Notes and accepted as a documented platform limitation.
+- Preserve the HTTP synchronous plain-text fallback as a resilience path.
+- Do not add RTF/native/Shortcuts setup to the normal v1 workflow and do not run more open-ended clipboard experiments before v1 completion.
+- M03-T02 is unblocked. Codex should select and dispatch the next bounded task from the existing plan/specification, independently verify it, and continue automatically.
+- The Home responsive-layout defect (Copy Another Session overlapping History on iPhone 14 Pro Max) must be routed as a bounded correction before final product acceptance. It does not block M03 continuation.
+- Do not declare the project complete until all deferred real-iPhone acceptance items, including PNG export, offline/installability, the deferred M01 touch/legend checks, and the recorded Home overlap correction, have been physically verified.
 
 ## Deferred
 
 - M01 FIX-05 physical-iPhone HV-01 through HV-05: BLOCKED/DEFERRED due unreachable temporary LAN/local-host runtime; final acceptance still required later.
-- Current PWA rich paste: editable table/data/order PASS; category foreground/text-highlight colour survival FAIL on trusted HTTPS after three HTML strategies.
+- Apple Notes category colour transfer: accepted v1 limitation; standard rich paste preserves editable table/data/order but not category foreground/highlight colours.
 - Faithful and Compact tall PNG export on the target iPhone.
+- Home responsive-layout defect: Copy Another Session visually clips/overlaps History on iPhone 14 Pro Max; correction required before final acceptance.
 - Full history/search, backup/restore, polish, and subsequent milestones according to the existing implementation plan.
 
 ## Escalations
 
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: trusted HTTPS verification completed.
-- E-003 is RESOLVED: one bounded native/RTF/Shortcuts feasibility spike is authorized; no production rewrite is authorized.
+- E-003 is RESOLVED/CLOSED: bounded feasibility work completed; v1 accepts editable rich Notes paste without category colours rather than introducing RTF/native/Shortcuts workflow friction.
 
 ## Active task checkpoint
 
@@ -97,10 +100,11 @@ Updated: 2026-08-25
 - Trusted HTTPS retest completed: editable Notes table and all values survived, but category text/highlight colors did not.
 - M03-T01-FIX-02 and FIX-03 attempted three bounded HTML color representations. Codex independently accepted the automatable scope, but target-iPhone Apple Notes continued stripping both foreground and highlight colours.
 - E-003 decision recorded: authorize one bounded non-HTML interoperability feasibility spike, then either adopt a proven low-friction route or accept uncolored editable-table paste as the documented v1 platform limitation.
+- E-003 feasibility harness completed and independently verified. Product owner did not adopt the auxiliary routes; the branch is closed with uncolored editable-table paste accepted for v1.
 
 ## Active correction checkpoint
 
-- Active task: `orchestration/tasks/M03-T01-E003-FEAS-02-CORRECTION.md`
-- Base implementation checkpoint: M03-T01-FIX-03 engineering checkpoint (153/153 tests, passing build, diff audit, HTTPS runtime smoke) with target-iPhone table/data PASS and colour FAIL evidence.
-- Worker disposition: FEAS-01 and FEAS-02 complete; Codex accepted the automatable harness scope. No native rewrite is authorized.
-- Next action: Adam must run the precise target-iPhone checklist in `orchestration/evidence/HUMAN-VERIFICATION-M03-T01-E003.md`; record route evidence through the product bridge. Keep M03-T02 blocked until the result is resolved.
+- Active task: next bounded M03-T02 task from the approved plan/specification.
+- Base implementation checkpoint: M03-T01/FIX-03 plus accepted E-003 feasibility engineering checkpoint, with standard rich Notes table/data PASS and colour limitation documented.
+- Worker disposition: READY_FOR_CODEX. Full-auto continuation is authorized.
+- Next action: Codex resumes orchestration, selects M03-T02, delegates to the configured builder, independently verifies, and continues automatically. Route the Home overlap as a bounded UX correction before final acceptance.
