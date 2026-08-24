@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import {
+  deleteSession,
   duplicateRowById,
   insertBlankRowAtIndex,
   insertRowCopyAtIndex,
@@ -81,6 +82,11 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
     null,
   );
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved">("idle");
+
+  // Whole-session delete (spec §11.4, §27.8; M02-T03): the destructive action
+  // is armed here and only executed after the explicit confirmation dialog.
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
+  const [deletingSession, setDeletingSession] = useState(false);
 
   // Drag-reorder state (spec §§7.2, 7.5): press on the SELECTED handle arms a
   // potential drag; movement past the threshold drags, release without it is
@@ -392,6 +398,34 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
     if (removal) showUndoToast(removal.previousRows);
   };
 
+  /* --------------- Whole-session deletion (spec §11.4) ----------------- */
+
+  const closeDeleteConfirmation = () => {
+    if (deletingSession) return;
+    setConfirmingDelete(false);
+  };
+
+  const commandDeleteSession = async () => {
+    if (deletingSession) return; // double-tap guard (spec §27.2)
+    setDeletingSession(true);
+    try {
+      // Transactional single-record removal (db.deleteSession): only this
+      // session is touched; Apple Notes is untouched by definition (§2.2).
+      const removed = await deleteSession(db, sessionId);
+      setConfirmingDelete(false);
+      if (removed) {
+        // Return to the stable screen this session was opened from
+        // (History when entered from History, Home otherwise). Never a stale
+        // deleted-session view.
+        onBack();
+      }
+    } catch (error) {
+      console.error("Gym Logger: could not delete the session", error);
+    } finally {
+      setDeletingSession(false);
+    }
+  };
+
   const selectedRow = sortedRows.find((row) => row.id === selectedRowId) ?? null;
 
   const saveLabel =
@@ -554,6 +588,20 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
         />
       </section>
 
+      {/* Whole-session delete entry point (spec §11.4; M02-T03): one quiet
+          destructive row at the end of the screen — discoverable without
+          competing with training-time actions. It only ARMS the confirmation
+          below; nothing is removed until explicit confirmation. */}
+      <section className="danger-zone" aria-label="Danger zone">
+        <button
+          type="button"
+          className="session-delete-button"
+          onClick={() => setConfirmingDelete(true)}
+        >
+          Delete Session
+        </button>
+      </section>
+
       {menuOpen && selectedRow && (
         <>
           <div className="menu-backdrop" onClick={closeMenu} aria-hidden="true" />
@@ -585,6 +633,44 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
           <button type="button" className="btn btn-secondary btn-small" onClick={handleUndo}>
             Undo
           </button>
+        </div>
+      )}
+
+      {/* Whole-session delete confirmation (spec §11.4, §27.8; F6). The
+          specified Apple Notes-safe copy appears verbatim, in ONE element,
+          as the entire alert content; Cancel and backdrop dismissal leave
+          every record untouched. */}
+      {confirmingDelete && (
+        <div className="confirm-backdrop" onClick={closeDeleteConfirmation}>
+          <div
+            className="confirm-card"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-session-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h2 id="delete-session-title">
+              Delete this session from Gym Log? This does not affect your
+              Apple Notes archive.
+            </h2>
+            <div className="confirm-actions">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={closeDeleteConfirmation}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-destructive"
+                disabled={deletingSession}
+                onClick={() => void commandDeleteSession()}
+              >
+                Delete Session
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </main>

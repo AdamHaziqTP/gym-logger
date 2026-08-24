@@ -249,4 +249,26 @@ export async function removeRowById(
   return result;
 }
 
+/**
+ * Deletes exactly one whole session (spec §11.4, §27.8; M02-T03). Rows are
+ * embedded in the record, so removing it removes everything that belongs to
+ * the session and nothing else. The existence check and removal run inside
+ * one read-write transaction, so a racing write cannot resurrect the record
+ * and no other session can be mutated. Resolves to `true` only when the
+ * session existed and was removed.
+ */
+export async function deleteSession(
+  db: GymLogDB,
+  sessionId: string,
+): Promise<boolean> {
+  let deleted = false;
+  await db.transaction("rw", db.sessions, async () => {
+    const current = await db.sessions.get(sessionId);
+    if (!current) return;
+    await db.sessions.delete(sessionId);
+    deleted = true;
+  });
+  return deleted;
+}
+
 /** Drag-reorder and Undo share this explicit-order write path (replaceRows). */

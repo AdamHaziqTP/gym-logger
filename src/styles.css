@@ -293,6 +293,34 @@ body {
   gap: 8px;
 }
 
+/* ---------- Whole-session delete (spec §11.4; M02-T03) ---------- */
+
+/* Quiet destructive row at the very end of the session screen: discoverable
+   without competing with training-time actions; red text only, no fill. */
+.danger-zone {
+  margin-top: 18px;
+}
+
+.session-delete-button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: 1px solid var(--grid);
+  border-radius: 12px;
+  color: #ff453a;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 13px 18px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.session-delete-button:focus-visible {
+  outline: 2px solid #ff453a;
+  outline-offset: 2px;
+}
+
 /* ---------- Session header ---------- */
 
 .session-header {

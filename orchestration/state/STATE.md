@@ -8,7 +8,7 @@ Updated: 2026-08-24
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M02 — next bounded implementation milestone after M01 foundation
 - Current task: M02-T02 — Copy Another Session preview and clone flow
-- Status: READY_FOR_OX (M02-T03)
+- Status: READY_FOR_OX (M02-T04)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
 - Human review gate: M01 FIX-05 physical-iPhone checks BLOCKED/DEFERRED by product owner because the temporary LAN/local-host build was unreachable on iPhone 14 Pro Max; preserve them for final end-to-end device acceptance
@@ -65,10 +65,12 @@ Updated: 2026-08-24
 - M02-T02 initial run was rejected. Correction task `orchestration/tasks/M02-T02-FIX-01.md` is prepared; correction attempts used: 1 / 2. The one-session-per-local-date behavior remains required.
 - M02-T02-FIX-01 automated checkpoint accepted by Codex: Copy Another Session/search/preview/clone/conflict flow; 91/91 tests, build, and LAN runtime smoke passed. Physical and visual acceptance remain unclaimed.
 - Prepared `orchestration/tasks/M02-T03.md` from the M02 plan for whole-session deletion confirmation; summary override UI remains a later bounded M02 task.
+- M02-T03 automated checkpoint accepted by Codex: whole-session delete confirmation and isolated transactional deletion; 98/98 tests, build, and LAN runtime smoke passed. Physical and visual acceptance remain unclaimed.
+- Prepared `orchestration/tasks/M02-T04.md` from spec §9.2 for manual Sets/Exercises summary overrides and reset-to-calculated behavior.
 
 ## Active correction checkpoint
 
-- Active task: `orchestration/tasks/M02-T03.md`
-- Base implementation checkpoint: accepted M02-T02 automated checkpoint, to be committed before dispatch
-- Worker disposition: M02-T02-FIX-01 accepted for automated scope; M01 physical gate remains deferred
-- Next action: checkpoint the accepted M02-T02 changes, prepare the product packet, invoke the configured DSH/OX worker for M02-T03, then independently verify before acceptance
+- Active task: `orchestration/tasks/M02-T04.md`
+- Base implementation checkpoint: accepted M02-T03 automated checkpoint, to be committed before dispatch
+- Worker disposition: M02-T03 accepted for automated scope; M01 physical gate remains deferred
+- Next action: checkpoint the accepted M02-T03 changes, prepare the product packet, invoke the configured DSH/OX worker for M02-T04, then independently verify before acceptance
