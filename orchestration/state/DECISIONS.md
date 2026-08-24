@@ -30,3 +30,11 @@ The product owner directed the M01 correction loop to close the approved current
 ## Final legend decision — 2026-08-24
 
 The visible session legend contains only the five Apple highlight navigation categories: Arms, Back, Chest, Delts, and Legs. `none` remains an internal unhighlighted/white state for abs and other uncategorized rows; it is not a sixth visible legend category.
+
+## Human-gate deferral / full-auto authorization — 2026-08-24
+
+The product owner reported that the temporary LAN/local-host build is not reachable on the physical iPhone 14 Pro Max and explicitly chose not to block continued engineering on the remaining M01 physical-iPhone checks. The previously listed FIX-05 interaction checks are considered low-risk enough to defer to the final end-to-end device acceptance pass when the app has a reliably reachable/installable build.
+
+This is a product-process decision, not evidence that HV-01 through HV-05 passed. Record the current FIX-05 device gate as BLOCKED/DEFERRED due to unreachable temporary runtime. Codex may resume the orchestrated implementation workflow and advance beyond M01 based on the independently green automated checkpoint, while preserving all deferred physical-device checks for a later final human acceptance gate. Continue in full-auto mode through bounded milestones and only return to the product owner for genuinely unresolved product decisions, required secrets/credentials, or human-only device/visual checks that cannot reasonably be deferred.
+
+Do not reinterpret this as permission to waive the final real-iPhone acceptance of Apple Notes interoperability, PNG export, offline/installability, or any other human-only behavior required by the specification before the project is declared complete.
