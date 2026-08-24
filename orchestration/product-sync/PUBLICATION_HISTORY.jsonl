@@ -1,0 +1,2 @@
+{"type":"builder-change","at":"2026-08-24T08:39:41.260Z","from":"ox-alpha","to":"openrouter-free","reason":"No-build commissioning switch test."}
+{"type":"builder-change","at":"2026-08-24T08:39:45.807Z","from":"openrouter-free","to":"ox-alpha","reason":"Restore the pilot's verified builder after the no-build switch test."}

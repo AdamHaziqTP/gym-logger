@@ -482,6 +482,11 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
                       }
                       aria-label={`Select row ${index + 1}`}
                       aria-pressed={selected}
+                      /* FIX-05 handle hardening: never an HTML5 drag source. */
+                      draggable={false}
+                      /* iOS Safari long-press must not open a callout/context
+                         menu on the drag control (spec §7.2; FIX-05). */
+                      onContextMenu={(event) => event.preventDefault()}
                       onPointerDown={(event) => {
                         armedHandle.current = {
                           rowId: row.id,
@@ -613,16 +618,20 @@ function moveIdInList(ids: string[], id: string, toIndex: number): string[] {
   return next;
 }
 
-/** Approved category legend (spec §5.1, §14.2; locked colour mapping). */
+/**
+ * Approved category legend (spec §5.1, §14.2; final legend decision
+ * 2026-08-24): exactly the five Apple highlight navigation categories in
+ * order. `none` is the internal unhighlighted/white row state and is
+ * deliberately NOT a sixth visible entry; it stays available through the row
+ * colour control's `None` swatch.
+ */
 function CategoryLegend() {
   return (
     <ul className="category-legend" aria-label="Category legend">
       {CATEGORY_LEGEND.map(({ value, label }) => (
         <li key={label} className="legend-item" data-highlight={value}>
           <span
-            className={
-              value === "none" ? "legend-dot legend-dot-none" : "legend-dot"
-            }
+            className="legend-dot"
             style={{ backgroundColor: HIGHLIGHT_TOKENS[value].fg }}
             aria-hidden="true"
           />

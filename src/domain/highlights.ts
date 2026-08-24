@@ -37,12 +37,17 @@ export const HIGHLIGHT_OPTIONS: ReadonlyArray<{
 ];
 
 /**
- * Approved session-header legend in the finalized content order
- * date → category legend → summary (spec §14.2; M01 human-gate correction):
- * Arms orange, Back purple, Chest mint, Delts blue, Legs pink, Other white.
+ * Approved visible session-header legend in the finalized content order
+ * date → category legend → summary (spec §14.2; final legend decision,
+ * 2026-08-24): exactly the five Apple highlight navigation categories
+ * Arms, Back, Chest, Delts, Legs — no sixth entry.
+ *
+ * `none` stays an INTERNAL unhighlighted/white state for abs and other
+ * uncategorized rows (it remains available through HIGHLIGHT_OPTIONS in the
+ * row colour control); it must not appear in this legend.
  */
 export const CATEGORY_LEGEND: ReadonlyArray<{
-  value: Highlight;
+  value: Exclude<Highlight, "none">;
   label: string;
 }> = [
   { value: "orange", label: "Arms" },
@@ -50,5 +55,4 @@ export const CATEGORY_LEGEND: ReadonlyArray<{
   { value: "mint", label: "Chest" },
   { value: "blue", label: "Delts" },
   { value: "pink", label: "Legs" },
-  { value: "none", label: "Other" },
 ];

@@ -225,7 +225,7 @@ describe("app-owned row clipboard", () => {
     expect(peekRowClipboard()).toBeNull();
   });
 
-  it("createBlankRow produces an empty Other-highlighted row", () => {
+  it("createBlankRow produces an empty row in the internal unhighlighted state (none)", () => {
     expect(createBlankRow("blank")).toEqual({
       id: "blank",
       position: 0,

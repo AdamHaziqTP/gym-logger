@@ -203,10 +203,9 @@ body {
   flex-shrink: 0;
 }
 
-.legend-dot-none {
-  background: transparent !important;
-  border: 1.5px dashed var(--text-dim);
-}
+/* No `.legend-dot-none` rule: the visible legend is exactly the five
+   categories; the internal `none` state has no legend dot (final legend
+   decision, 2026-08-24). */
 
 .legend-label {
   color: var(--text-dim);
@@ -325,6 +324,19 @@ body {
   color: var(--text-dim);
   font-size: 15px;
   cursor: grab;
+  /*
+   * FIX-05 handle-only iOS hardening (spec §7.2): pressing/holding/dragging
+   * the three-dot handle must never turn it into selectable text, show
+   * native selection handles, open the long-press callout, or start a
+   * browser drag. Scoped strictly to .row-handle — editable cells
+   * (.cell-input) and Notes (.notes-input) keep normal selection/editing.
+   */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Vertical press-drag belongs to reorder, not page scroll (§7.5). */
   touch-action: none;
 }
 

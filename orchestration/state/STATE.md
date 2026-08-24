@@ -7,19 +7,19 @@ Updated: 2026-08-24
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M01 — offline foundation vertical slice
-- Current task: M01-T01-FIX-05 — final legend and iPhone drag-handle hardening
-- Status: READY_FOR_OX
+- Current task: M01 final physical-iPhone verification after M01-T01-FIX-05
+- Status: HUMAN_REVIEW_REQUIRED
 - Automatic correction attempts used: 2 / 2
 - Infrastructure retry: completed; FIX-02 was blocked before OX execution and did not consume an implementation correction attempt
-- Human review gate: awaiting final FIX-05 correction; FIX-04 automated correction passed independently
-- Human-gate correction cycle: 1 / 2; final narrow touch/legend feedback is now delegated as FIX-05
+- Human review gate: awaiting final iPhone verification; FIX-05 automated correction passed independently
+- Human-gate correction cycle: 2 / 2; final narrow touch/legend feedback is corrected and device-gated
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
 ## Known-good checkpoints
 
 - Handoff baseline: `db71546` — `chore: checkpoint gym logger handoff`
 - Orchestration bootstrap: `dd72762`
-- Last orchestration evidence checkpoint: `6efab39` — FIX-04 automated known-good checkpoint candidate
+- Last orchestration evidence checkpoint: pending FIX-05 automated checkpoint commit
 - M01 accepted checkpoint: none; product acceptance remains gated by human verification
 
 ## Completed

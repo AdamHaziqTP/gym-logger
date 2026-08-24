@@ -1,8 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import Dexie from "dexie";
 import { App } from "../App";
 import { createDb, type GymLogDB } from "../data/db";
+import {
+  CATEGORY_LEGEND,
+  HIGHLIGHT_OPTIONS,
+} from "../domain/highlights";
 import { clearRowClipboard } from "../domain/rowClipboard";
 
 const DB_NAME = "gym-logger";
@@ -127,9 +133,12 @@ function normalizedPositions(rows: { position: number }[]): number[] {
 /* ------------------------------- tests ------------------------------- */
 
 describe("category legend", () => {
-  it("renders the approved labels and mapping between date and summary", async () => {
+  it("renders exactly the five approved categories, in order, between date and summary", async () => {
     await openSession();
 
+    // Final legend decision (2026-08-24): the visible legend is EXACTLY
+    // Arms/Back/Chest/Delts/Legs in that order. `Other` was removed; the
+    // internal `none` state is not a sixth visible entry.
     const legend = screen.getByLabelText("Category legend");
     const items = within(legend).getAllByRole("listitem");
     expect(items.map((item) => item.textContent)).toEqual([
@@ -138,7 +147,17 @@ describe("category legend", () => {
       "Chest",
       "Delts",
       "Legs",
-      "Other",
+    ]);
+    expect(within(legend).queryByText("Other")).toBeNull();
+    expect(within(legend).queryByText("None")).toBeNull();
+    expect(items).toHaveLength(5);
+    // Locked colour mapping survives intact behind the five entries.
+    expect(items.map((item) => item.getAttribute("data-highlight"))).toEqual([
+      "orange",
+      "purple",
+      "mint",
+      "blue",
+      "pink",
     ]);
 
     // Content order: date → category legend → sets/exercises summary → table.
@@ -151,6 +170,33 @@ describe("category legend", () => {
 
     // The legend renders the Arms entry with its dot.
     expect(within(items[0]).getByText("Arms")).toBeTruthy();
+  });
+
+  it("keeps `none` internal only: the row colour control still offers None", () => {
+    // Data-level invariant: five legend entries without `none`, while the
+    // colour palette retains the six choices including `None` (spec §5.1).
+    expect(CATEGORY_LEGEND.map(({ label }) => label)).toEqual([
+      "Arms",
+      "Back",
+      "Chest",
+      "Delts",
+      "Legs",
+    ]);
+    // The type is `Exclude<Highlight, "none">`, so a `none` legend entry is a
+    // compile error; this widened runtime guard keeps the invariant honest.
+    const legendValues: readonly string[] = CATEGORY_LEGEND.map(
+      ({ value }) => value,
+    );
+    expect(legendValues.includes("none")).toBe(false);
+    expect(HIGHLIGHT_OPTIONS[0]).toEqual({ value: "none", label: "None" });
+    expect(HIGHLIGHT_OPTIONS.map(({ label }) => label)).toEqual([
+      "None",
+      "Arms",
+      "Back",
+      "Chest",
+      "Delts",
+      "Legs",
+    ]);
   });
 });
 
@@ -466,6 +512,96 @@ describe("drag reorder", () => {
       "Dumbell Pullover",
       "Recline curl bench 30° IR uni",
     ]);
+  });
+});
+
+/* ------------------ FIX-05 handle iOS-hardening audit ------------------ */
+
+interface CssRule {
+  selector: string;
+  body: string;
+}
+
+/** Minimal flat-rule parser: enough for this stylesheet's top-level blocks. */
+function parseCssRules(css: string): CssRule[] {
+  const rules: CssRule[] = [];
+  const rulePattern = /([^{}]+)\{([^{}]*)\}/g;
+  let match: RegExpExecArray | null;
+  while ((match = rulePattern.exec(css)) !== null) {
+    rules.push({
+      selector: match[1].replace(/\/\*.*?\*\//gs, "").trim(),
+      body: match[2],
+    });
+  }
+  return rules;
+}
+
+function stylesheetRules(): CssRule[] {
+  // `npm test` runs from the project root; read the exact shipped stylesheet.
+  return parseCssRules(
+    readFileSync(resolve(process.cwd(), "src", "styles.css"), "utf8"),
+  );
+}
+
+describe("drag-handle iOS hardening", () => {
+  it("scopes selection/callout/drag prevention to .row-handle and nothing else in the stylesheet", () => {
+    const rules = stylesheetRules();
+
+    const handleBlock = rules.find((rule) => rule.selector === ".row-handle");
+    expect(handleBlock).toBeDefined();
+    expect(handleBlock!.body).toMatch(/-webkit-user-select\s*:\s*none/);
+    expect(handleBlock!.body).toMatch(/(?:^|[;\s])user-select\s*:\s*none/);
+    expect(handleBlock!.body).toMatch(/-webkit-touch-callout\s*:\s*none/);
+    expect(handleBlock!.body).toMatch(/-webkit-user-drag\s*:\s*none/);
+    // Vertical press-drag must stay owned by reorder, not page scroll.
+    expect(handleBlock!.body).toMatch(/touch-action\s*:\s*none/);
+
+    // Narrowest possible treatment: NO other rule anywhere disables text
+    // selection — no global `*`/`html`/`body`, editable cells, or Notes.
+    const selectionRules = rules.filter((rule) =>
+      rule.body.includes("user-select"),
+    );
+    expect(selectionRules.map((rule) => rule.selector)).toEqual([
+      ".row-handle",
+    ]);
+
+    for (const selector of [".cell-input", ".notes-input"]) {
+      const rule = rules.find((item) => item.selector === selector);
+      expect(rule).toBeDefined();
+      expect(rule!.body.includes("user-select")).toBe(false);
+    }
+  });
+
+  it("blocks the context menu and HTML5 drag on the handle while taps still select", async () => {
+    await openSession();
+
+    const firstHandle = handle(0);
+    // Never an HTML5 drag source.
+    expect(firstHandle.getAttribute("draggable")).toBe("false");
+
+    // Long-press/right-click on the dots opens no callout/context menu…
+    const handleMenu = new Event("contextmenu", {
+      bubbles: true,
+      cancelable: true,
+    });
+    firstHandle.dispatchEvent(handleMenu);
+    expect(handleMenu.defaultPrevented).toBe(true);
+
+    // …while editable cells keep normal behavior (no drag lock, no menu
+    // suppression).
+    const cell = screen.getAllByLabelText(/^Exercise row /)[0];
+    expect(cell.getAttribute("draggable")).toBeNull();
+    const cellMenu = new Event("contextmenu", {
+      bubbles: true,
+      cancelable: true,
+    });
+    cell.dispatchEvent(cellMenu);
+    expect(cellMenu.defaultPrevented).toBe(false);
+
+    // Hardening did not break the interaction contract: tap still selects.
+    fireEvent.click(firstHandle);
+    expect(document.querySelector("tr.selected")).not.toBeNull();
+    expect(firstHandle.getAttribute("aria-pressed")).toBe("true");
   });
 });
 
