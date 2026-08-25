@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "final-human-gate-ready",
+      "summary": "M03-T03 is accepted for automated scope after 41 focused and 359 full tests, build, diff audit, and HTTPS smoke; one consolidated iPhone 14 Pro Max pass now includes the optional Shortcuts colour route and all prior deferred checks.",
+      "at": "2026-08-25T12:24:28.296Z"
+    },
+    {
+      "name": "task-ready-for-ox",
+      "summary": "M03-T03 bounded iOS Shortcuts colour-recovery feasibility is ready for OX Alpha; preserve the uncoloured Copy to Notes baseline and keep final iPhone checks deferred.",
+      "at": "2026-08-25T12:17:01.787Z"
+    },
+    {
       "name": "final-retest-infrastructure-restored",
       "summary": "Port 5174 certificate server was restarted and verified over LAN; HTTPS app on 4173 was also restarted and verified. The final iPhone trust result remains pending.",
       "at": "2026-08-25T11:46:43.177Z"
@@ -51,26 +61,16 @@
       "name": "m06-t03-accepted",
       "summary": "M06-T03 release readiness accepted: 350/350 tests, build, HTTPS PWA smoke, static audit, docs, and final iPhone checklist ready.",
       "at": "2026-08-25T03:40:08.499Z"
-    },
-    {
-      "name": "task-ready-for-ox",
-      "summary": "M06-T03 release-readiness task is ready after settings/theme automated acceptance.",
-      "at": "2026-08-25T03:22:14.482Z"
-    },
-    {
-      "name": "m06-t02-accepted",
-      "summary": "Codex independently accepted M06-T02 after correction: 32 settings tests, 348 full tests, clean build/diff, and HTTPS shell/manifest/service-worker smoke; M06-T03 release readiness is next.",
-      "at": "2026-08-25T03:22:04.888Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T11:46:43.178Z",
+  "lastPublishedAt": "2026-08-25T12:24:28.297Z",
   "lastEvent": {
-    "name": "final-retest-infrastructure-restored",
-    "summary": "Port 5174 certificate server was restarted and verified over LAN; HTTPS app on 4173 was also restarted and verified. The final iPhone trust result remains pending.",
-    "at": "2026-08-25T11:46:43.177Z"
+    "name": "final-human-gate-ready",
+    "summary": "M03-T03 is accepted for automated scope after 41 focused and 359 full tests, build, diff audit, and HTTPS smoke; one consolidated iPhone 14 Pro Max pass now includes the optional Shortcuts colour route and all prior deferred checks.",
+    "at": "2026-08-25T12:24:28.296Z"
   },
-  "syncRevision": 52,
+  "syncRevision": 54,
   "openEscalations": [],
   "chatNotifications": [
     {

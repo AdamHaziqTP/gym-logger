@@ -68,6 +68,26 @@ Evidence source: product-owner observations and two screenshots supplied in the 
 - The plain text session content pasted into the product conversation on 2026-08-25 is not evidence about colour survival because plain text cannot carry the visual formatting. Do not infer a new Notes colour result from that transcript alone.
 - PENDING — final Copy to Notes retest after the trusted HTTPS origin is actually trusted on-device; verify editable table, date, legend, order, values, summary override, multiline notes, and free-form text. Missing category colours are not currently a v1 failure under the recorded decision.
 
+## Optional M03-T03 Shortcuts colour-recovery proof
+
+The product owner explicitly reopened the colour branch on 2026-08-25. The
+optional PWA action **Share for Notes Colours** is now ready for the same final
+iPhone pass. It hands a self-contained `Gym-Logger-Notes.html` file to the
+iPhone share sheet; the one-time Shortcut setup is recorded in
+`orchestration/evidence/M03-T03-SHORTCUTS-SETUP.md`.
+
+- PENDING — create the one-time **Gym Logger Notes Colours** Shortcut.
+- PENDING — share a real session through the optional action and select that
+  Shortcut.
+- PENDING — confirm the result is a real editable Apple Notes table with the
+  correct date, five-entry legend, order, values, summary, and notes.
+- PENDING — confirm Arms, Back, Chest, Delts, and Legs retain their intended
+  text/highlight colours; unhighlighted rows remain uncoloured.
+- If the Shortcut creates only an attachment/plain text or loses colours,
+  close this bounded branch and request a separate native-helper decision.
+
+Desktop evidence does not pass any of these items.
+
 ## Correction disposition
 
 Route bounded autonomous corrections for:
