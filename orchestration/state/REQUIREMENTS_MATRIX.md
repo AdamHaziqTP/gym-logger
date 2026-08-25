@@ -31,7 +31,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-025 | Faithful and Compact full-session PNG export handle 40+ rows, preserve colors and notes. | Spec §14; I1-I6 | M03/M05 | VERIFIED (automated; device pending) | image/export tests; final device gate |
 | REQ-026 | Compact export hides Skip only when all Skip cells are empty. | Spec §§14.1, 30; D4-D5 | M05 | VERIFIED (automated; device pending) | image/export tests; final device gate |
 | REQ-027 | Backup JSON includes schema, sessions, rows, highlights, settings, metadata and restores exactly. | Spec §18; J1-J5 | M03/M05/M06 | VERIFIED (automated; device pending) | M06-T04 review; 45 focused / 352 full; final device gate |
-| REQ-028 | Historical import is deferred; do not clean or invent data from `text 2.txt`. | Spec §19, §35 | M07 | DEFERRED | — |
+| REQ-028 | Generic historical import is deferred; do not clean or invent data from `text 2.txt`. The explicit owner-supplied Tuesday reference is handled separately by REQ-037. | Spec §19, §35 | M07 | DEFERRED | — |
 | REQ-029 | IDs use UUIDs; local date is separate from primary key; positions normalize to 0..n-1. | Spec §20 | M01 | VERIFIED (automated) | schema/seed/clone tests |
 | REQ-030 | Suggested stack is React + TypeScript + Vite + IndexedDB/Dexie + small CSS/PWA layer. | Spec §21 | M01 | VERIFIED (automated) | build/runtime |
 | REQ-031 | No heavy UI framework or remote fonts/images; no unnecessary animation/CPU/network work. | Spec §§17, 21, 25 | All | VERIFIED (static audit) | M06-T03 review |
@@ -40,6 +40,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-034 | Weird values, empty rows, spelling, date edits, duplicate starts, quota errors do not crash or silently mutate data. | Spec §27 | M01-M06 | VERIFIED (automated; device pending) | persistence/backup/startup-failure suites; final device/storage gate |
 | REQ-035 | No exercise identity system, autocomplete, analytics, or exercise-history dashboard in v1. | Spec §28, §32 | All | VERIFIED (source audit) | M06-T03 review |
 | REQ-036 | Every accepted task has a Codex review, actual diff inspection, tests/build/runtime evidence, and known-good git checkpoint. | orchestration/README | All | VERIFIED | M06-T03 review and checkpoint |
+| REQ-037 | The owner-supplied Tuesday 25 Aug workout can be imported once into an existing device without duplicates, data loss, or string normalization, and can seed the next session clone. | Product handoff and `references/ACTUAL_SESSION_2026-08-25.json` | M06 | VERIFIED (automated; device pending) | M06-T06 migration review/evidence |
 
 ## Pilot disposition
 

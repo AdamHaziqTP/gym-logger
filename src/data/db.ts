@@ -39,8 +39,8 @@ export class GymLogDB extends Dexie {
   }
 }
 
-export function createDb(): GymLogDB {
-  return new GymLogDB();
+export function createDb(name = "gym-logger"): GymLogDB {
+  return new GymLogDB(name);
 }
 
 export type EditableRowField =

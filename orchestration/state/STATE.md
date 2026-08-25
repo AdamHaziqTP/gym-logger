@@ -1,6 +1,6 @@
 # Gym Logger orchestration state
 
-Updated: 2026-08-25
+Updated: 2026-08-26
 
 ## Current status
 
@@ -12,6 +12,7 @@ Updated: 2026-08-25
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
 - Human review gate: Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker.
+- Latest bounded task: M06-T06 actual Tuesday session migration + owner-supplied icon asset; Codex-verified automated scope is accepted and the existing consolidated iPhone gate remains open.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -68,6 +69,7 @@ Updated: 2026-08-25
 - Recorded the target-iPhone M03-T03 result as a genuine failure: Shortcuts flattened the content to plain text, lost all colours, and produced `Â·`/`Â°` mojibake. The Shortcuts branch is closed with no further variants authorized.
 - E-004 is authorized for exactly one isolated native attributed-string/pasteboard feasibility proof; the PWA and normal Copy to Notes path remain unchanged.
 - E-004 source proof is independently reviewed: 12/12 native harness checks, 359/359 PWA tests, build, and diff audit pass; Swift/Xcode compilation is unavailable on this Windows workstation.
+- M06-T06 actual Tuesday session migration is independently accepted: exact 40-row source, transactional once-only marker, Sunday/unrelated-data preservation, Wednesday safety, next-session cloning, supplied icon assets, 365/365 full tests, build, HTTPS runtime, certificate endpoint, and diff audit pass. Physical IndexedDB/Home Screen verification remains deferred.
 
 ## Final disposition
 
@@ -84,6 +86,7 @@ Updated: 2026-08-25
 - The consolidated iPhone 14 Pro Max pass found real failures in both image-export previews, mobile export-sheet dismissal, local HTTPS trust, and the Home Screen icon. Route the bounded code/icon corrections through M06-T05 before requesting one consolidated retest; do not mark any physical behavior passed from desktop evidence.
 - M06-T05 is accepted for automated scope. The same consolidated checklist now awaits one physical retest at `https://192.168.1.49:4173/`; do not mark device behavior passed from desktop evidence.
 - M03-T03 target-iPhone proof is closed as failed; do not claim Apple Notes colours from the Shortcuts route or desktop evidence. E-004 is parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE and remains preserved for a later legitimate toolchain.
+- M06-T06 OX invocation produced no output or delta during the bounded ~95-second task window; classify this as a task-level worker hang/timeout, not OX unavailability. Codex fallback was used only after that concrete failure and independently verified the implementation.
 
 ## Deferred
 
@@ -145,3 +148,4 @@ Updated: 2026-08-25
 - The transparent-pixel correction is recorded in `orchestration/reviews/M06-T05-FIX-EXPORT-PIXEL-TRACE-codex-review.md`; after independent verification, return one saved-image-only physical retest. Do not repeat preview or dismissal.
 - The alternate raster correction is recorded in `orchestration/reviews/M06-T05-FIX-EXPORT-ALTERNATE-RASTER-codex-review.md`; return one saved-image-only physical retest. Do not repeat preview or dismissal unless they regress again.
 - DSH/OX recovery diagnostic on 2026-08-26 is recorded in `orchestration/reports/OX-DSH-RECOVERY-2026-08-26.md`: fresh unpatched smoke passed in 16.65s, fresh patched smoke passed in 25.33s, and a fresh larger multi-file worker review timed out at 90.08s with empty stdout/stderr. Classify this as a worker-task hang/timeout, not OX unavailability; preserve the verified Desktop wrapper route and keep fallback emergency-only.
+- M06-T06 accepted automated checkpoint: `orchestration/reviews/M06-T06-ACTUAL-SESSION-MIGRATION-codex-review.md`; current human gate remains `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.

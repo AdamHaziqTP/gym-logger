@@ -15,6 +15,7 @@ import {
   type ThemeSetting,
 } from "./domain/settings";
 import { ensureSeeded } from "./data/seed";
+import { migrateActualSession } from "./data/actualSessionMigration";
 import { todayLocalDate } from "./domain/dates";
 
 /**
@@ -38,6 +39,8 @@ interface AppProps {
    * The device clock is never touched by production code paths.
    */
   todayLocal?: string;
+  /** Production root enables the one-time product-owner data migration. */
+  runLiveMigrations?: boolean;
 }
 
 /**
@@ -46,7 +49,7 @@ interface AppProps {
  * — the `Gym Log` back control in SessionView stays available for deliberate
  * navigation Home. Without a current session the sparse Home/Start flow shows.
  */
-export function App({ db, todayLocal }: AppProps) {
+export function App({ db, todayLocal, runLiveMigrations = false }: AppProps) {
   const [ready, setReady] = useState(false);
   const [view, setView] = useState<View>({ name: "home" });
   /**
@@ -72,6 +75,7 @@ export function App({ db, todayLocal }: AppProps) {
         // Open on first mount; also covers an externally closed connection.
         if (!db.isOpen()) await db.open();
         await ensureSeeded(db);
+        if (runLiveMigrations) await migrateActualSession(db);
 
         // Settings load with the same bootstrap; a read problem falls back
         // to defaults inside readAppSettings instead of failing startup.
@@ -114,7 +118,7 @@ export function App({ db, todayLocal }: AppProps) {
     return () => {
       cancelled = true;
     };
-  }, [db, todayLocal, retryToken]);
+  }, [db, todayLocal, retryToken, runLiveMigrations]);
 
   /**
    * Theme changes apply immediately without a reload (spec §22.1): the
@@ -245,5 +249,5 @@ export function App({ db, todayLocal }: AppProps) {
 
 export default function AppRoot() {
   const db = useMemo(() => createDb(), []);
-  return <App db={db} />;
+  return <App db={db} runLiveMigrations />;
 }
