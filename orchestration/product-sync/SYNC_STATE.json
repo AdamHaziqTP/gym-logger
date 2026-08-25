@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "accepted-checkpoint",
+      "summary": "M06-T05 alternate pure-JS rasterizer checkpoint d8f19e9; one saved-image-only iPhone retest remains",
+      "at": "2026-08-25T15:59:58.014Z"
+    },
+    {
       "name": "correction-accepted",
       "summary": "M06-T05 alternate offline pure-JS raster checkpoint independently verified at 362/362; one saved-image-only iPhone retest remains",
       "at": "2026-08-25T15:59:40.746Z"
@@ -56,21 +61,16 @@
       "name": "correction-accepted",
       "summary": "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains",
       "at": "2026-08-25T14:46:13.047Z"
-    },
-    {
-      "name": "task-ready-for-ox",
-      "summary": "M06-T05 saved-image delivery correction is ready; preserve preview and dismissal",
-      "at": "2026-08-25T14:40:40.248Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T15:59:40.746Z",
+  "lastPublishedAt": "2026-08-25T15:59:58.014Z",
   "lastEvent": {
-    "name": "correction-accepted",
-    "summary": "M06-T05 alternate offline pure-JS raster checkpoint independently verified at 362/362; one saved-image-only iPhone retest remains",
-    "at": "2026-08-25T15:59:40.746Z"
+    "name": "accepted-checkpoint",
+    "summary": "M06-T05 alternate pure-JS rasterizer checkpoint d8f19e9; one saved-image-only iPhone retest remains",
+    "at": "2026-08-25T15:59:58.014Z"
   },
-  "syncRevision": 71,
+  "syncRevision": 72,
   "openEscalations": [],
   "chatNotifications": [
     {

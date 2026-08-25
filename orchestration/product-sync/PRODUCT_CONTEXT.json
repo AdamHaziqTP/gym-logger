@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T15:59:40.791Z",
+  "generatedAt": "2026-08-25T15:59:58.058Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "d8f19e9 feat: use offline JavaScript SVG rasterizer",
     "fa5d9a3 docs: record pixel-guard iPhone regression",
     "fa57dcb chore: refresh final PNG guard context",
     "c176437 fix: explain blocked blank PNG delivery",
-    "ed239ee chore: refresh pixel guard checkpoint",
-    "f7cead6 fix: guard iPhone PNG delivery by canvas pixels"
+    "ed239ee chore: refresh pixel guard checkpoint"
   ],
   "codexVerification": [
     {
@@ -179,7 +179,7 @@
     "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker."
   ],
   "decisionsMadeSinceLastSync": [
-    "M06-T05 alternate offline pure-JS raster checkpoint independently verified at 362/362; one saved-image-only iPhone retest remains"
+    "M06-T05 alternate pure-JS rasterizer checkpoint d8f19e9; one saved-image-only iPhone retest remains"
   ],
   "recordedDecisions": [
     {
@@ -231,24 +231,12 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "fa5d9a348a803680efcb806d6b8a0acb653322b5",
+    "commit": "d8f19e9992dbf6fdafa6a29feceeb0d0e35e11d4",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M package-lock.json\n M package.json\n M src/domain/pngExport.ts\n M src/tests/pngExport.test.ts\n?? orchestration/reports/M06-T05-FIX-EXPORT-ALTERNATE-RASTER.md\n?? orchestration/reviews/M06-T05-FIX-EXPORT-ALTERNATE-RASTER-codex-review.md\n?? orchestration/tasks/M06-T05-FIX-EXPORT-ALTERNATE-RASTER.md",
+    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
-      "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/state/STATE.md",
-      "package-lock.json",
-      "package.json",
-      "src/domain/pngExport.ts",
-      "src/tests/pngExport.test.ts",
-      "orchestration/reports/M06-T05-FIX-EXPORT-ALTERNATE-RASTER.md",
-      "orchestration/reviews/M06-T05-FIX-EXPORT-ALTERNATE-RASTER-codex-review.md",
-      "orchestration/tasks/M06-T05-FIX-EXPORT-ALTERNATE-RASTER.md"
+      "orchestration/product-orchestrator/bootstrap.mjs"
     ]
   },
   "builder": {
@@ -268,11 +256,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "correction-accepted",
-      "summary": "M06-T05 alternate offline pure-JS raster checkpoint independently verified at 362/362; one saved-image-only iPhone retest remains",
-      "at": "2026-08-25T15:59:40.746Z"
+      "name": "accepted-checkpoint",
+      "summary": "M06-T05 alternate pure-JS rasterizer checkpoint d8f19e9; one saved-image-only iPhone retest remains",
+      "at": "2026-08-25T15:59:58.014Z"
     },
-    "contextRevision": 71,
+    "contextRevision": 72,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
