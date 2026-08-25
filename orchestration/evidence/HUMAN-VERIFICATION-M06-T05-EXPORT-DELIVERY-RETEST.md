@@ -60,3 +60,13 @@ Direct inspection of the newly supplied PNG confirms the failure persists:
 This means the real-canvas correction did not resolve the target-iPhone saved-output path despite the source-level root-cause hypothesis and green automated checks. Do not repeat preview or dismissal checks; those remain PASS unless a later correction regresses them.
 
 Next correction must trace the exact iPhone path from the successfully rendered preview/SVG through rasterization, canvas pixel population, PNG byte extraction, `File`/`Blob` construction, Web Share / save handoff, and the final payload received by Photos. Add a device-relevant diagnostic or a deterministic pre-share assertion that proves the exact canvas being serialized contains non-zero alpha / visible pixels before the file is handed to iOS. Do not accept another correction based solely on code-path inspection or desktop PNG structure tests.
+
+## Pixel-trace correction checkpoint — pending physical retest
+
+The next bounded correction now waits for image decode completion, checks the
+exact delivery canvas with `getImageData` for non-zero-alpha visible pixels
+before encoding, and refuses to create/share a blank file. It tries one
+Blob-backed SVG source if the primary data URL does not populate pixels. The
+automated checkpoint is recorded separately; only the saved-image device
+criterion remains open for this correction. Faithful/Compact preview and
+mobile dismissal remain PASS and must not be repeated.

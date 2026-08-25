@@ -38,14 +38,48 @@ export function chooseRasterScale(
   return pixels * 4 <= budgetPx ? 2 : 1;
 }
 
-/** Resolves when the image has loaded; rejects on load error. */
-function loadImage(src: string): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("SVG image failed to load"));
-    image.src = src;
+/** Resolves when the image has loaded and, where supported, decoded. */
+async function loadImage(src: string): Promise<HTMLImageElement> {
+  const image = await new Promise<HTMLImageElement>((resolve, reject) => {
+    const element = new Image();
+    element.onload = () => resolve(element);
+    element.onerror = () => reject(new Error("SVG image failed to load"));
+    element.src = src;
   });
+  if (typeof image.decode === "function") {
+    try {
+      await image.decode();
+    } catch {
+      // onload is still a usable signal on older WebKit implementations.
+    }
+  }
+  return image;
+}
+
+/**
+ * Prevents a blank bitmap from ever becoming a shareable file. Checking the
+ * actual delivery canvas immediately before encoding is deliberately stronger
+ * than checking a Blob's type, dimensions, or PNG signature.
+ */
+function hasVisiblePixels(
+  context: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+): boolean {
+  if (typeof context.getImageData !== "function") return false;
+  try {
+    const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    for (let index = 0; index + 3 < pixels.length; index += 4) {
+      if (
+        pixels[index + 3]! > 0 &&
+        (pixels[index]! > 0 || pixels[index + 1]! > 0 || pixels[index + 2]! > 0)
+      ) {
+        return true;
+      }
+    }
+  } catch {
+    return false;
+  }
+  return false;
 }
 
 function pngDataUrlToBlob(dataUrl: string): Blob | null {
@@ -118,24 +152,39 @@ export async function rasterizeSvgToPngBlob(
   }
   if (!context) return null;
 
-  // Data URL keeps the image same-origin: the canvas stays untainted and
-  // `toBlob`/`toDataURL` remain permitted. No object-URL lifecycle to manage.
-  let image: HTMLImageElement;
+  // The normal data URL keeps the image same-origin. A Blob-backed SVG is a
+  // narrow WebKit fallback for cases where an SVG data URL can be previewed
+  // but does not populate a canvas bitmap during drawImage.
+  const sources = [`data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`];
+  let blobUrl: string | null = null;
   try {
-    image = await loadImage(
-      `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`,
-    );
+    if (typeof URL.createObjectURL === "function") {
+      blobUrl = URL.createObjectURL(
+        new Blob([svg], { type: "image/svg+xml;charset=utf-8" }),
+      );
+      sources.push(blobUrl);
+    }
   } catch {
-    return null;
+    // Continue with the primary data URL.
   }
 
   try {
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
-  } catch {
+    for (const source of sources) {
+      try {
+        const image = await loadImage(source);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        if (hasVisiblePixels(context, canvas)) {
+          return canvasToPngBlob(canvas);
+        }
+      } catch {
+        // Try the next narrowly-scoped source before failing truthfully.
+      }
+    }
     return null;
+  } finally {
+    if (blobUrl) URL.revokeObjectURL(blobUrl);
   }
-
-  return canvasToPngBlob(canvas);
 }
 
 /* ------------------------------- delivery ------------------------------- */

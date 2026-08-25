@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T15:28:58.255Z",
+  "generatedAt": "2026-08-25T15:44:41.516Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,13 +56,21 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "65a25e4 docs: record real-canvas PNG retest failure",
+    "bfa2fba chore: refresh transparent PNG checkpoint",
     "c0e37f9 Merge remote-tracking branch 'origin/main'",
     "1e893a0 fix: use real canvas for iPhone PNG export",
-    "4fe6ea0 docs: record rich clipboard shortcut failure",
-    "b78601d docs: confirm Shortcuts setup was correct",
-    "d8a43b1 docs: record transparent PNG retest failure"
+    "4fe6ea0 docs: record rich clipboard shortcut failure"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M06-T05-FIX-EXPORT-PIXEL-TRACE-codex-review.md",
+      "result": [
+        "[x] Device evidence for the failed `bfa2fba` saved output is recorded.",
+        "[x] Image decode readiness is awaited where available.",
+        "[x] Build, runtime, and diff audit pass."
+      ]
+    },
     {
       "path": "orchestration/reviews/M06-T05-FIX-EXPORT-TRANSPARENT-codex-review.md",
       "result": [
@@ -79,21 +87,13 @@
         "[x] Diff hygiene passes.",
         "contract. The physical failure remains open because a desktop/browser test"
       ]
-    },
-    {
-      "path": "orchestration/reviews/E-004-NATIVE-NOTES-COLOUR-HELPER-codex-review.md",
-      "result": [
-        "Review status: `SOURCE-VERIFIED; DEVICE-PROOF-BLOCKED`",
-        "[x] Platform-neutral harness: 12/12 checks passed.",
-        "[x] Existing PWA regression suite/build remain green: 359/359 and build pass."
-      ]
     }
   ],
   "humanVerification": [
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
       "result": [
-        "Status: `FAIL — SAVED PNG REMAINS FULLY TRANSPARENT AFTER 0cb9b46`",
+        "Status: `FAIL — SAVED PNG STILL FULLY TRANSPARENT AFTER REAL-CANVAS FIX`",
         "Physical result supplied by the product owner during the consolidated PWA acceptance pass:",
         "**PASS — Faithful preview:** the Faithful export preview now visibly renders the workout on the iPhone instead of showing the earlier blank/black preview.",
         "**PASS — Compact preview:** the Compact export preview now visibly renders the workout on the iPhone instead of showing the earlier blank/black preview."
@@ -180,7 +180,7 @@
     "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker."
   ],
   "decisionsMadeSinceLastSync": [
-    "M06-T05 real-canvas PNG correction and failed Shortcut UI removal are current after merged evidence sync; one saved-image retest remains"
+    "M06-T05 pixel-trace correction independently verified at 362/362; blank canvas blocked before File creation; one saved-image retest remains"
   ],
   "recordedDecisions": [
     {
@@ -232,12 +232,22 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "c0e37f92e803be4f3ffe299e7bbfde773f47823d",
+    "commit": "65a25e43c3022914a201eb78086e1d9f76dcd5e9",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M src/domain/pngExport.ts\n M src/tests/pngExport.test.ts\n?? orchestration/reports/M06-T05-FIX-EXPORT-PIXEL-TRACE.md\n?? orchestration/reviews/M06-T05-FIX-EXPORT-PIXEL-TRACE-codex-review.md\n?? orchestration/tasks/M06-T05-FIX-EXPORT-PIXEL-TRACE.md",
     "changedFiles": [
+      "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs"
+      "orchestration/product-orchestrator/bootstrap.mjs",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/STATE.md",
+      "src/domain/pngExport.ts",
+      "src/tests/pngExport.test.ts",
+      "orchestration/reports/M06-T05-FIX-EXPORT-PIXEL-TRACE.md",
+      "orchestration/reviews/M06-T05-FIX-EXPORT-PIXEL-TRACE-codex-review.md",
+      "orchestration/tasks/M06-T05-FIX-EXPORT-PIXEL-TRACE.md"
     ]
   },
   "builder": {
@@ -257,11 +267,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "accepted-checkpoint",
-      "summary": "M06-T05 real-canvas PNG correction and failed Shortcut UI removal are current after merged evidence sync; one saved-image retest remains",
-      "at": "2026-08-25T15:28:58.212Z"
+      "name": "correction-accepted",
+      "summary": "M06-T05 pixel-trace correction independently verified at 362/362; blank canvas blocked before File creation; one saved-image retest remains",
+      "at": "2026-08-25T15:44:41.473Z"
     },
-    "contextRevision": 65,
+    "contextRevision": 67,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

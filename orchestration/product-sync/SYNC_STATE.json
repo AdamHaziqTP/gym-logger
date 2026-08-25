@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "correction-accepted",
+      "summary": "M06-T05 pixel-trace correction independently verified at 362/362; blank canvas blocked before File creation; one saved-image retest remains",
+      "at": "2026-08-25T15:44:41.473Z"
+    },
+    {
+      "name": "correction-required",
+      "summary": "M06-T05 still fails: saved PNG remains fully transparent after bfa2fba; require pixel-level pre-share trace",
+      "at": "2026-08-25T15:40:48.936Z"
+    },
+    {
       "name": "accepted-checkpoint",
       "summary": "M06-T05 real-canvas PNG correction and failed Shortcut UI removal are current after merged evidence sync; one saved-image retest remains",
       "at": "2026-08-25T15:28:58.212Z"
@@ -51,26 +61,16 @@
       "name": "task-ready-for-ox",
       "summary": "E-004 authorized: one bounded isolated native pasteboard helper proof after M03-T03 Shortcuts physically failed; keep PWA and uncoloured Copy to Notes unchanged.",
       "at": "2026-08-25T12:56:54.811Z"
-    },
-    {
-      "name": "accepted-checkpoint",
-      "summary": "M03-T03 accepted for automated scope and pushed at d93400f; product context refreshed for the consolidated iPhone 14 Pro Max pass including optional Shortcuts colour proof.",
-      "at": "2026-08-25T12:25:09.390Z"
-    },
-    {
-      "name": "final-human-gate-ready",
-      "summary": "M03-T03 is accepted for automated scope after 41 focused and 359 full tests, build, diff audit, and HTTPS smoke; one consolidated iPhone 14 Pro Max pass now includes the optional Shortcuts colour route and all prior deferred checks.",
-      "at": "2026-08-25T12:24:28.296Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T15:28:58.213Z",
+  "lastPublishedAt": "2026-08-25T15:44:41.474Z",
   "lastEvent": {
-    "name": "accepted-checkpoint",
-    "summary": "M06-T05 real-canvas PNG correction and failed Shortcut UI removal are current after merged evidence sync; one saved-image retest remains",
-    "at": "2026-08-25T15:28:58.212Z"
+    "name": "correction-accepted",
+    "summary": "M06-T05 pixel-trace correction independently verified at 362/362; blank canvas blocked before File creation; one saved-image retest remains",
+    "at": "2026-08-25T15:44:41.473Z"
   },
-  "syncRevision": 65,
+  "syncRevision": 67,
   "openEscalations": [],
   "chatNotifications": [
     {

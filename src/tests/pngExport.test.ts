@@ -58,7 +58,13 @@ describe("rasterizeSvgToPngBlob", () => {
       () => {
         const drawImage = vi.fn();
         drawImages.push(drawImage);
-        return { drawImage } as unknown as CanvasRenderingContext2D;
+        return {
+          drawImage,
+          clearRect: vi.fn(),
+          getImageData: () => ({
+            data: new Uint8ClampedArray([255, 255, 255, 255]),
+          }),
+        } as unknown as CanvasRenderingContext2D;
       },
     );
     const toDataURL = vi
@@ -97,10 +103,44 @@ describe("rasterizeSvgToPngBlob", () => {
     expect(toBlob).not.toHaveBeenCalled();
   });
 
+  it("refuses to encode when the exact delivery canvas has no visible pixels", async () => {
+    const drawImage = vi.fn();
+    const toDataURL = vi.spyOn(HTMLCanvasElement.prototype, "toDataURL");
+    const toBlob = vi.spyOn(HTMLCanvasElement.prototype, "toBlob");
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
+      drawImage,
+      clearRect: vi.fn(),
+      getImageData: () => ({
+        data: new Uint8ClampedArray([0, 0, 0, 0]),
+      }),
+    } as unknown as CanvasRenderingContext2D);
+
+    class FakeImage {
+      onload: (() => void) | null = null;
+      onerror: (() => void) | null = null;
+
+      set src(_value: string) {
+        queueMicrotask(() => this.onload?.());
+      }
+    }
+    vi.stubGlobal("Image", FakeImage);
+
+    await expect(
+      rasterizeSvgToPngBlob("<svg />", 1, 1),
+    ).resolves.toBeNull();
+    expect(drawImage).toHaveBeenCalled();
+    expect(toDataURL).not.toHaveBeenCalled();
+    expect(toBlob).not.toHaveBeenCalled();
+  });
+
   it("falls back to toBlob when synchronous PNG serialization is unavailable", async () => {
     const fallbackBlob = new Blob(["png"], { type: "image/png" });
     vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
       drawImage: vi.fn(),
+      clearRect: vi.fn(),
+      getImageData: () => ({
+        data: new Uint8ClampedArray([255, 255, 255, 255]),
+      }),
     } as unknown as CanvasRenderingContext2D);
     vi.spyOn(HTMLCanvasElement.prototype, "toDataURL").mockImplementation(() => {
       throw new Error("serialization unavailable");
