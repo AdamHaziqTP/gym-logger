@@ -34,7 +34,7 @@ describe("ImageExportPanel final-gate corrections", () => {
       (screen.getByRole("img", { name: /compact style/i }) as HTMLImageElement)
         .src,
     ).toContain("data:image/svg+xml");
-    expect(screen.getByText(/PNG encoding is unavailable/i)).toBeTruthy();
+    expect(screen.getByText(/no visible pixels were verified/i)).toBeTruthy();
   });
 
   it("exposes a reachable header close control for tall mobile previews", () => {

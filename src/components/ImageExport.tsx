@@ -45,7 +45,7 @@ const STYLE_OPTIONS: ReadonlyArray<{
 
 /** Status shown when the environment has no PNG encoder (canvas missing). */
 export const PNG_UNAVAILABLE_MESSAGE =
-  "PNG encoding is unavailable here — showing the vector preview only.";
+  "PNG delivery is unavailable here — no visible pixels were verified; showing the vector preview only.";
 
 /** Status lines per literal share outcome; never claims an unverified result. */
 export const SHARE_STATUS: Record<ShareOutcome, string> = {
