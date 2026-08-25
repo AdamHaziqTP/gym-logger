@@ -71,3 +71,13 @@ headless profile and produced no usable output, report, or repository delta in
 the bounded task window. This is recorded as a task-level worker timeout, not
 as OX unavailability. Codex completed the isolated fallback and independently
 verified it; no production Copy to Notes code was changed.
+
+## Re-dispatched correction record
+
+The first fallback proof was later audited and retired because its fixture date
+could render as `undefined`. The single live proof is now
+`/feasibility/native-copy.html`, implemented in
+`nativeSelectionCopy.mjs`/`nativeCopyApp.js`, with the target checklist updated
+to match. The service worker explicitly bypasses `/feasibility` requests, and
+the fresh build plus exact LAN response have been independently checked for
+the experimental title/button rather than the React shell.

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>EXPERIMENTAL PROOF — WebKit native selection copy (M03-T04)</title>
+    <style>
+      /* Experimental proof styling — deliberately NOT app styling reuse. */
+      :root {
+        color-scheme: dark;
+        --bg: #000000;
+        --fg: #f2f2f7;
+        --dim: #98989f;
+        --card: #1c1c1e;
+        --line: #38383d;
+        --warn: #ff9f0a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 16px;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.45;
+      }
+      main { max-width: 720px; margin: 0 auto; }
+      .banner {
+        border: 2px solid var(--warn);
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 16px;
+      }
+      .banner h1 { font-size: 17px; margin: 0 0 6px; color: var(--warn); }
+      .banner p { margin: 4px 0; font-size: 13px; color: var(--dim); }
+      section.card {
+        background: var(--card);
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 14px;
+      }
+      h2 { font-size: 15px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--dim); }
+      ul, ol { margin: 6px 0; padding-left: 20px; }
+      li { margin: 3px 0; font-size: 14px; }
+      button {
+        display: block;
+        width: 100%;
+        margin: 8px 0 2px;
+        padding: 14px;
+        font-size: 17px;
+        border-radius: 10px;
+        border: 1px solid #0a84ff;
+        background: #0a84ff;
+        color: #ffffff;
+        font-weight: 600;
+      }
+      button:active { opacity: 0.7; }
+      .hint { font-size: 12.5px; color: var(--dim); margin: 2px 0 6px; }
+      .status { font-size: 13.5px; color: #66d4cf; margin: 6px 0 8px; min-height: 1em; white-space: pre-wrap; word-break: break-word; }
+      .status.error { color: #ff453a; }
+      .caps dt { font-size: 12px; color: var(--dim); margin-top: 6px; }
+      .caps dd { margin: 0; font-size: 13px; word-break: break-all; }
+      .log { list-style: none; margin: 8px 0 0; padding: 0; max-height: 220px; overflow-y: auto; }
+      .log li { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; border-top: 1px solid var(--line); padding: 5px 0; word-break: break-word; }
+      footer { font-size: 12px; color: var(--dim); margin-top: 18px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- ============================================================== -->
+      <!-- EXPERIMENTAL PROOF PAGE (task M03-T04). Isolated static asset; -->
+      <!-- production Copy to Notes is untouched by this experiment.       -->
+      <!-- ============================================================== -->
+      <div class="banner">
+        <h1>⚠️ EXPERIMENTAL — WEBKIT NATIVE SELECTION-COPY PROOF</h1>
+        <p>
+          Task M03-T04. This isolated page tests ONE hypothesis: whether the
+          browser's own rendered-selection copy path produces richer native
+          pasteboard representations than the app's normal Copy to Notes
+          write. It runs only on this trusted origin and changes nothing in
+          the Gym Logger app.
+        </p>
+        <p>
+          One tap renders the canonical session off screen as real document
+          content, selects it with a DOM Range, and asks the browser to copy
+          it using its native path. No manual payload assembly and no copy
+          interception are involved — that is the entire point of the proof.
+        </p>
+        <p>
+          The status below reports ONLY whether the browser command succeeded
+          or failed. What Apple Notes does with the result can ONLY be judged
+          after you paste into the existing Gym note on this iPhone.
+        </p>
+      </div>
+
+      <section class="card">
+        <h2>Native selection-copy proof</h2>
+        <p class="hint">
+          Tap once. Keep this tab in the foreground until the status appears.
+        </p>
+        <button type="button" id="btn-native-copy">
+          Copy proof session via native selection path
+        </button>
+        <div class="status" id="status-native-copy"></div>
+      </section>
+
+      <section class="card">
+        <h2>Environment facts (honest evidence)</h2>
+        <dl class="caps" id="env-facts"></dl>
+      </section>
+
+      <section class="card">
+        <h2>After the copy: iPhone paste gate</h2>
+        <ol>
+          <li>Open the existing Apple Notes note named <strong>Gym</strong>.</li>
+          <li>Tap once at the end of the note, then <strong>Paste</strong>.</li>
+          <li>Record separately:
+            real editable table structure? exact date / five-entry legend /
+            summary / row order / every value / notes? correct Unicode
+            (<code>·</code> and <code>°</code>)? all five category colours
+            (Arms orange, Back purple, Chest mint, Delts blue, Legs pink)?
+            unhighlighted rows staying plain?</li>
+          <li>Return PASS, FAIL, or BLOCKED with screenshots if anything is
+            missing. Do not retest E-004 or alter the normal Copy to Notes.</li>
+        </ol>
+        <p class="hint">
+          A desktop success here proves nothing about Apple Notes. Only this
+          paste decides whether the native-selection branch continues.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Mechanics log</h2>
+        <ul class="log" id="proof-log"></ul>
+      </section>
+
+      <footer>
+        Isolated experimental asset under public/feasibility/. Covered by
+        src/tests/m03t04NativeCopy.test.mjs. Production Copy to Notes path is
+        unchanged, and nothing on this page claims an Apple Notes result.
+      </footer>
+    </main>
+
+    <script type="module" src="./nativeCopyApp.js"></script>
+  </body>
+</html>

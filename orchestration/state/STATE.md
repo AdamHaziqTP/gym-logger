@@ -165,6 +165,11 @@ Updated: 2026-08-26
 - If the proof is ready, the next gate is one simple target-iPhone paste into
   the existing `Gym` note; only that result determines whether the fingerprint
   and native-helper branches proceed.
+- The first fallback proof at `/feasibility/selection-copy.html` was retired
+  after a content-contract audit found its date field could be `undefined`.
+  The single live proof is `/feasibility/native-copy.html`.
+- The service worker now bypasses `/feasibility` navigation and static requests
+  so the experimental proof cannot be replaced by a cached app shell.
 
 ## Final automated checkpoint
 

@@ -341,6 +341,10 @@ describe("service worker runtime behavior (M06-T01)", () => {
     ["cross-origin requests", request("https://cdn.example/lib.js")],
     ["range requests", request(`${ORIGIN}/video`, { range: true })],
     ["the service worker itself", request(`${ORIGIN}/sw.js`)],
+    [
+      "experimental feasibility pages",
+      request(`${ORIGIN}/feasibility/native-copy.html`, { mode: "navigate" }),
+    ],
   ])("bypasses %s entirely", async (_label, bypassRequest) => {
     const world = makeWorld({});
     const response = await runFetch(world, bypassRequest);

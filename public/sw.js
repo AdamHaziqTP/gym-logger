@@ -11,8 +11,10 @@
  * Caching policy (spec §17.1): local static app shell only — HTML shell,
  * built JS/CSS, manifest, icons, other same-origin static files. Gym Logger
  * has no API/cloud endpoints; nothing is ever sent or cached anywhere remote,
- * non-GET requests bypass this worker entirely, and `/sw.js` itself is never
- * cached (the browser owns service-worker updates).
+ * non-GET requests bypass this worker entirely. The isolated experimental
+ * `/feasibility/` pages also bypass this worker so a stale app shell can never
+ * replace a proof page. `/sw.js` itself is never cached (the browser owns
+ * service-worker updates).
  */
 "use strict";
 
@@ -77,6 +79,9 @@ self.addEventListener("fetch", function (event) {
   var url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname === "/sw.js") return;
+  if (url.pathname === "/feasibility" || url.pathname.indexOf("/feasibility/") === 0) {
+    return; // Experimental proof pages must always come directly from the host.
+  }
 
   if (request.mode === "navigate") {
     // Network-first for navigations: fresh shell when online, cached shell
