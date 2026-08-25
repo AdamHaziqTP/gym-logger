@@ -80,3 +80,12 @@ The product owner physically retested the updated build and reported a new regre
 - The product owner did **not** report seeing the specific `no visible pixels were verified` status text, so do not claim that the guard surfaced that exact message.
 
 This correction therefore fails the target-device gate and also violates the requirement to preserve the previously working preview path. The next attempt should not continue incrementally mutating the same WebKit canvas pipeline without a stronger architectural reason. Preserve/recover the known-good SVG preview first, then evaluate a materially different PNG rasterization strategy for iPhone rather than another small canvas timing/identity patch.
+
+## Alternate-raster checkpoint — pending physical retest
+
+The next correction restores preview independence and replaces the unstable
+SVG-image `drawImage` bridge with the offline pure-JavaScript Canvg renderer.
+Canvg parses the known standalone SVG and emits ordinary Canvas 2D drawing
+operations; the exact canvas is still checked for visible pixels before PNG
+encoding. Automated checks are green, but no desktop result is treated as
+proof of iPhone Photos output. Return one saved-image-only device retest.

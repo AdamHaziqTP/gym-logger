@@ -1,12 +1,14 @@
+import { Canvg } from "canvg";
+
 /**
  * Browser-side image delivery (spec §§14.3, 14.5; task M03-T02-IMAGE-EXPORT-01).
  * Separated from the pure renderer in `imageExport.ts` so every layout and
  * serialization guarantee stays testable without a canvas.
  *
- * Rasterization: SVG document → <img> (data URL, same-origin so the canvas
- * never taints) → 2D canvas at the largest safe integer scale → PNG Blob
- * (`toDataURL`, with a `toBlob` fallback). Any missing piece resolves to
- * `null`; callers must degrade truthfully instead of pretending a PNG exists.
+ * Rasterization: SVG document → pure-JS SVG renderer → 2D canvas at the
+ * largest safe integer scale → PNG Blob (`toDataURL`, with a `toBlob`
+ * fallback). Any missing piece resolves to `null`; callers must degrade
+ * truthfully instead of pretending a PNG exists.
  *
  * Delivery honesty contract (task requirement): an iOS share-sheet outcome is
  * only ever reported from a resolved `navigator.share` call — never inferred
@@ -36,24 +38,6 @@ export function chooseRasterScale(
   const pixels = width * height;
   if (pixels <= 0) return 1;
   return pixels * 4 <= budgetPx ? 2 : 1;
-}
-
-/** Resolves when the image has loaded and, where supported, decoded. */
-async function loadImage(src: string): Promise<HTMLImageElement> {
-  const image = await new Promise<HTMLImageElement>((resolve, reject) => {
-    const element = new Image();
-    element.onload = () => resolve(element);
-    element.onerror = () => reject(new Error("SVG image failed to load"));
-    element.src = src;
-  });
-  if (typeof image.decode === "function") {
-    try {
-      await image.decode();
-    } catch {
-      // onload is still a usable signal on older WebKit implementations.
-    }
-  }
-  return image;
 }
 
 /**
@@ -124,7 +108,7 @@ function canvasToPngBlob(canvas: HTMLCanvasElement): Promise<Blob | null> {
 /**
  * Rasterizes one standalone SVG document into a PNG blob at up to 2× scale.
  * Resolves `null` whenever the environment cannot produce a PNG (no 2D
- * canvas, no image decode, encoding refusal) — jsdom among them — so the UI
+ * canvas, renderer failure, encoding refusal) — jsdom among them — so the UI
  * can say so honestly.
  */
 export async function rasterizeSvgToPngBlob(
@@ -133,7 +117,7 @@ export async function rasterizeSvgToPngBlob(
   height: number,
 ): Promise<Blob | null> {
   if (typeof document === "undefined") return null;
-  if (typeof window === "undefined" || typeof Image !== "function") {
+  if (typeof window === "undefined") {
     return null;
   }
 
@@ -152,38 +136,23 @@ export async function rasterizeSvgToPngBlob(
   }
   if (!context) return null;
 
-  // The normal data URL keeps the image same-origin. A Blob-backed SVG is a
-  // narrow WebKit fallback for cases where an SVG data URL can be previewed
-  // but does not populate a canvas bitmap during drawImage.
-  const sources = [`data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`];
-  let blobUrl: string | null = null;
   try {
-    if (typeof URL.createObjectURL === "function") {
-      blobUrl = URL.createObjectURL(
-        new Blob([svg], { type: "image/svg+xml;charset=utf-8" }),
-      );
-      sources.push(blobUrl);
-    }
+    // Canvg parses the known standalone SVG and issues ordinary Canvas 2D
+    // drawing calls. This avoids the failing iOS WebKit SVG-image drawImage
+    // bridge while keeping the renderer client-side and offline-first.
+    const renderer = Canvg.fromString(context, svg, {
+      window,
+      DOMParser,
+    });
+    await renderer.render({
+      ignoreAnimation: true,
+      ignoreMouse: true,
+      ignoreDimensions: true,
+    });
+    if (!hasVisiblePixels(context, canvas)) return null;
+    return canvasToPngBlob(canvas);
   } catch {
-    // Continue with the primary data URL.
-  }
-
-  try {
-    for (const source of sources) {
-      try {
-        const image = await loadImage(source);
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
-        if (hasVisiblePixels(context, canvas)) {
-          return canvasToPngBlob(canvas);
-        }
-      } catch {
-        // Try the next narrowly-scoped source before failing truthfully.
-      }
-    }
     return null;
-  } finally {
-    if (blobUrl) URL.revokeObjectURL(blobUrl);
   }
 }
 

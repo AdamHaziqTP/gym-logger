@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "correction-accepted",
+      "summary": "M06-T05 alternate offline pure-JS raster checkpoint independently verified at 362/362; one saved-image-only iPhone retest remains",
+      "at": "2026-08-25T15:59:40.746Z"
+    },
+    {
+      "name": "correction-required",
+      "summary": "M06-T05 pixel-guard checkpoint regressed preview and saved PNG still fails; restore preview and evaluate materially different raster path",
+      "at": "2026-08-25T15:53:41.304Z"
+    },
+    {
       "name": "accepted-checkpoint",
       "summary": "M06-T05 pixel guard checkpoint c176437; blank output now blocks saving with an explicit status; one saved-image-only retest remains",
       "at": "2026-08-25T15:45:44.638Z"
@@ -51,26 +61,16 @@
       "name": "task-ready-for-ox",
       "summary": "M06-T05 saved-image delivery correction is ready; preserve preview and dismissal",
       "at": "2026-08-25T14:40:40.248Z"
-    },
-    {
-      "name": "final-pwa-gate-resumed",
-      "summary": "E-004 parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE; native helper preserved. PWA v1 final iPhone acceptance resumed independently at https://192.168.1.49:4173/.",
-      "at": "2026-08-25T13:19:13.438Z"
-    },
-    {
-      "name": "e004-source-proof-blocked",
-      "summary": "E-004 source proof pushed at 145e22e: 12/12 native harness checks, 359/359 PWA tests, and build pass; Swift/Xcode/iPhone proof remains blocked by the available workstation toolchain.",
-      "at": "2026-08-25T13:06:01.883Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T15:45:44.639Z",
+  "lastPublishedAt": "2026-08-25T15:59:40.746Z",
   "lastEvent": {
-    "name": "accepted-checkpoint",
-    "summary": "M06-T05 pixel guard checkpoint c176437; blank output now blocks saving with an explicit status; one saved-image-only retest remains",
-    "at": "2026-08-25T15:45:44.638Z"
+    "name": "correction-accepted",
+    "summary": "M06-T05 alternate offline pure-JS raster checkpoint independently verified at 362/362; one saved-image-only iPhone retest remains",
+    "at": "2026-08-25T15:59:40.746Z"
   },
-  "syncRevision": 69,
+  "syncRevision": 71,
   "openEscalations": [],
   "chatNotifications": [
     {

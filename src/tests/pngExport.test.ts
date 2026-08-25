@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { Canvg } from "canvg";
 import {
   chooseRasterScale,
   rasterizeSvgToPngBlob,
@@ -52,35 +53,25 @@ describe("rasterizeSvgToPngBlob", () => {
     vi.restoreAllMocks();
   });
 
+  function installRenderer() {
+    return vi.spyOn(Canvg, "fromString").mockReturnValue({
+      render: vi.fn().mockResolvedValue(undefined),
+    } as unknown as Canvg);
+  }
+
   it("serializes the rendered canvas as a non-empty PNG before using the WebKit toBlob fallback", async () => {
-    const drawImages: Array<ReturnType<typeof vi.fn>> = [];
-    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockImplementation(
-      () => {
-        const drawImage = vi.fn();
-        drawImages.push(drawImage);
-        return {
-          drawImage,
-          clearRect: vi.fn(),
-          getImageData: () => ({
-            data: new Uint8ClampedArray([255, 255, 255, 255]),
-          }),
-        } as unknown as CanvasRenderingContext2D;
-      },
-    );
+    const context = {
+      clearRect: vi.fn(),
+      getImageData: () => ({
+        data: new Uint8ClampedArray([255, 255, 255, 255]),
+      }),
+    } as unknown as CanvasRenderingContext2D;
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(context);
+    const renderer = installRenderer();
     const toDataURL = vi
       .spyOn(HTMLCanvasElement.prototype, "toDataURL")
       .mockReturnValue(validPngDataUrl);
     const toBlob = vi.spyOn(HTMLCanvasElement.prototype, "toBlob");
-
-    class FakeImage {
-      onload: (() => void) | null = null;
-      onerror: (() => void) | null = null;
-
-      set src(_value: string) {
-        queueMicrotask(() => this.onload?.());
-      }
-    }
-    vi.stubGlobal("Image", FakeImage);
 
     const blob = await rasterizeSvgToPngBlob(
       '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" />',
@@ -95,40 +86,34 @@ describe("rasterizeSvgToPngBlob", () => {
     expect(bytes.slice(0, 8)).toEqual(
       new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]),
     );
-    // There must be exactly one canvas in this path: the canvas that receives
-    // drawImage is the canvas whose toDataURL bytes are delivered.
-    expect(drawImages).toHaveLength(1);
-    expect(drawImages[0]).toHaveBeenCalledTimes(1);
+    expect(renderer).toHaveBeenCalledTimes(1);
+    expect(renderer).toHaveBeenCalledWith(
+      context,
+      expect.any(String),
+      expect.objectContaining({ window, DOMParser }),
+    );
     expect(toDataURL).toHaveBeenCalledWith("image/png");
     expect(toBlob).not.toHaveBeenCalled();
   });
 
   it("refuses to encode when the exact delivery canvas has no visible pixels", async () => {
-    const drawImage = vi.fn();
     const toDataURL = vi.spyOn(HTMLCanvasElement.prototype, "toDataURL");
     const toBlob = vi.spyOn(HTMLCanvasElement.prototype, "toBlob");
-    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
-      drawImage,
+    const context = {
       clearRect: vi.fn(),
       getImageData: () => ({
         data: new Uint8ClampedArray([0, 0, 0, 0]),
       }),
-    } as unknown as CanvasRenderingContext2D);
-
-    class FakeImage {
-      onload: (() => void) | null = null;
-      onerror: (() => void) | null = null;
-
-      set src(_value: string) {
-        queueMicrotask(() => this.onload?.());
-      }
-    }
-    vi.stubGlobal("Image", FakeImage);
+    } as unknown as CanvasRenderingContext2D;
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
+      ...context,
+    });
+    const renderer = installRenderer();
 
     await expect(
       rasterizeSvgToPngBlob("<svg />", 1, 1),
     ).resolves.toBeNull();
-    expect(drawImage).toHaveBeenCalled();
+    expect(renderer).toHaveBeenCalledTimes(1);
     expect(toDataURL).not.toHaveBeenCalled();
     expect(toBlob).not.toHaveBeenCalled();
   });
@@ -136,7 +121,6 @@ describe("rasterizeSvgToPngBlob", () => {
   it("falls back to toBlob when synchronous PNG serialization is unavailable", async () => {
     const fallbackBlob = new Blob(["png"], { type: "image/png" });
     vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
-      drawImage: vi.fn(),
       clearRect: vi.fn(),
       getImageData: () => ({
         data: new Uint8ClampedArray([255, 255, 255, 255]),
@@ -148,16 +132,7 @@ describe("rasterizeSvgToPngBlob", () => {
     vi.spyOn(HTMLCanvasElement.prototype, "toBlob").mockImplementation(
       (callback) => callback(fallbackBlob),
     );
-
-    class FakeImage {
-      onload: (() => void) | null = null;
-      onerror: (() => void) | null = null;
-
-      set src(_value: string) {
-        queueMicrotask(() => this.onload?.());
-      }
-    }
-    vi.stubGlobal("Image", FakeImage);
+    installRenderer();
 
     await expect(
       rasterizeSvgToPngBlob("<svg />", 1, 1),
