@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M06 — PWA polish and regression
-- Current task: M03-T04 WebKit native-selection-copy colour proof — M06-T07 polish checkpoint accepted; colour recovery is reopened under the new bounded investigation order
-- Status: HUMAN_REVIEW_REQUIRED (remaining PWA/device checks are open; E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE and does not block v1)
+- Current task: M03-T05 Notes clipboard fingerprint — M03-T04 native selection-copy proof closed after target-iPhone colour failure
+- Status: HUMAN_REVIEW_REQUIRED (M03-T05 diagnostic ready; M03-T04 colour failure closed; E-004 native inspection staged behind the result)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: after the isolated M03-T04 proof is independently verified, perform one target-iPhone paste into the existing Gym note. M06-T07's icon/share checks remain deferred and batched. E-004 is reopened only as a later native evidence branch; no physical or colour pass is claimed.
-- Latest bounded task: M03-T04 WebKit native-selection-copy proof after the accepted M06-T07 polish checkpoint; normal Copy to Notes remains unchanged while the isolated proof is prepared.
+- Human review gate: after M03-T05 is independently verified and served over HTTPS, copy a small coloured table directly in Apple Notes, return to the diagnostic page, tap Inspect Notes Clipboard, and download the fingerprint JSON. Do not claim colours from the diagnostic alone. M06-T07 icon/share checks remain deferred and batched.
+- Latest bounded task: M03-T05 isolated web-visible Notes clipboard fingerprint after M03-T04 target-iPhone failure; normal Copy to Notes remains unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -113,6 +113,23 @@ Updated: 2026-08-26
 - E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE: preserve the one authorized isolated native proof; it does not block the remaining PWA v1 gate and requires no paid Developer dependency.
 
 ## Active task checkpoint
+
+## M03-T05 current checkpoint — 2026-08-26
+
+- M03-T04 is closed after the target-iPhone native selection-copy result:
+  editable Notes table/data/order/Unicode PASS; category colours FAIL.
+- M03-T05 is independently accepted for automated scope in
+  `orchestration/reviews/M03-T05-NOTES-CLIPBOARD-FINGERPRINT-codex-review.md`.
+- OX Alpha was dispatched through the verified Desktop wrapper but produced
+  no output or delta in the bounded task window; this is recorded as a
+  task-level timeout in `orchestration/reports/M03-T05-OX-ALPHA-REPORT.md`.
+- The current human gate is
+  `orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md`:
+  copy a small coloured table in Apple Notes, inspect it at the exact HTTPS
+  diagnostic URL, and return the downloaded JSON. Do not alter production
+  `Copy to Notes` or advance E-004 until this web-visible result is reviewed.
+- M06-T07 icon/share and the remaining consolidated iPhone checks remain
+  deferred and batched; no device behavior is passed from desktop evidence.
 
 - Prepared `orchestration/tasks/M02-T01.md` from the approved M02 plan. It is limited to History listing/search and editable historical sessions; Copy Another Session, delete confirmation, and summary override UI remain later bounded tasks.
 - Base checkpoint for the worker: `f173046`.

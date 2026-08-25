@@ -27,7 +27,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-021 | Offline shell is cached and core use does not require network. | Spec §17; G1-G5 | M01/M06 | VERIFIED (automated; device pending) | M06-T01 service-worker tests/review; final airplane-mode gate |
 | REQ-022 | Request persistent storage where appropriate and surface non-destructive storage errors. | Spec §§17.3, 27.9 | M01/M06 | VERIFIED (source/test) | App bootstrap; build/tests; device pending |
 | REQ-023 | Rich Copy to Notes includes date, legend, summary, table, notes with HTML and plain fallback. | Spec §15; H1-H6 | M03/M05 | VERIFIED (automated; device pending) | M03 reviews; trusted HTTPS editable table/data/order evidence |
-| REQ-024 | Never claim rich Notes structure/color works without target-iPhone paste evidence. | Spec §§15.4-15.6, 32 | M03 | VERIFIED (policy; color limitation accepted) | E-003 closed; standard rich paste keeps editable table/data/order, Notes strips category colours |
+| REQ-024 | Never claim rich Notes structure/color works without target-iPhone paste evidence. | Spec §§15.4-15.6, 32 | M03 | IN_PROGRESS (colour recovery reopened) | M03-T04 target-iPhone evidence: editable table/data/order PASS, category colours FAIL; M03-T05 clipboard fingerprint next |
 | REQ-025 | Faithful and Compact full-session PNG export handle 40+ rows, preserve colors and notes. | Spec §14; I1-I6 | M03/M05/M06 | VERIFIED (automated; device pending) | M06-T05 framing review; M06-T07 share review; final icon/share device gate |
 | REQ-026 | Compact export hides Skip only when all Skip cells are empty. | Spec §§14.1, 30; D4-D5 | M05 | VERIFIED (automated; device pending) | image/export tests; final device gate |
 | REQ-027 | Backup JSON includes schema, sessions, rows, highlights, settings, metadata and restores exactly. | Spec §18; J1-J5 | M03/M05/M06 | VERIFIED (automated; device pending) | M06-T04 review; 45 focused / 352 full; final device gate |
@@ -45,3 +45,5 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 ## Pilot disposition
 
 M01 remains limited to its first-slice intent, with FIX-05 physical checks explicitly deferred rather than passed. M02-T01 through M02-T04, M03 clipboard/image work, M05 backup/export, M06 PWA/settings/release-readiness, and M06-T07 final-polish work are accepted for automated scope where their reviews say so. The remaining v1 device gate is limited to a fresh Home Screen icon install and direct Compact colour-snapshot share check; no requirement may be marked physically verified by desktop evidence alone.
+
+The normal editable Notes-table path remains accepted for table/data/order, but Apple Notes colour transfer is not accepted as solved. M03-T04's distinct WebKit native selection-copy route physically failed on colours, so M03-T05 must fingerprint the web-visible Notes clipboard before E-004 native inspection is advanced.

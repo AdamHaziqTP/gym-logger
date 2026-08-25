@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101114" />
+    <title>Gym Logger — Notes clipboard fingerprint</title>
+    <style>
+      :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      body { margin: 0; min-height: 100vh; background: #101114; color: #f3f4f6; }
+      main { box-sizing: border-box; width: min(760px, 100%); margin: 0 auto; padding: 32px 20px 48px; }
+      h1 { margin: 0 0 12px; font-size: 28px; }
+      p, li { color: #b5b8c2; line-height: 1.55; }
+      .warning { padding: 14px 16px; border: 1px solid #8b6f32; border-radius: 12px; background: #2a2110; color: #f7d98a; }
+      button { min-height: 48px; padding: 12px 18px; border: 0; border-radius: 12px; background: #1683f5; color: white; font: inherit; font-weight: 700; }
+      button:disabled { opacity: .6; }
+      #fingerprint-status { min-height: 24px; margin: 18px 0 8px; color: #83d7be; }
+      #fingerprint-status[data-state="error"] { color: #ff9b9b; }
+      pre { overflow: auto; max-height: 52vh; margin: 0; padding: 16px; border-radius: 12px; background: #07080a; color: #d6d8df; white-space: pre-wrap; overflow-wrap: anywhere; }
+      a { display: inline-block; margin-top: 14px; color: #79b8ff; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Notes clipboard fingerprint</h1>
+      <p>This is an isolated diagnostic page, not the Gym Logger app.</p>
+      <ol>
+        <li>In Apple Notes, copy a small table containing the five category colours.</li>
+        <li>Return to this page without copying anything else.</li>
+        <li>Tap <strong>Inspect Notes Clipboard</strong> once.</li>
+        <li>Download the JSON report and send it back with the result.</li>
+      </ol>
+      <p class="warning"><strong>Privacy:</strong> the report may include clipboard text. Do not copy passwords or other sensitive material before using this diagnostic.</p>
+      <button id="inspect-clipboard" type="button">Inspect Notes Clipboard</button>
+      <p id="fingerprint-status" role="status">Waiting for the one clipboard inspection.</p>
+      <div id="fingerprint-download"></div>
+      <pre id="fingerprint-output" aria-label="Clipboard fingerprint JSON">No clipboard has been read.</pre>
+    </main>
+    <script type="module" src="./notesClipboardFingerprintApp.js"></script>
+  </body>
+</html>

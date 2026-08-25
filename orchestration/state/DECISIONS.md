@@ -248,3 +248,23 @@ No HTML styling permutation already tested is authorized. No native Gym Logger
 rewrite, paid Apple Developer membership, or automatic colour claim is
 authorized. Success still requires target-iPhone proof of an editable table,
 correct Unicode/data/order, and all five colours.
+
+## M03-T04 closed; proceed to Notes clipboard fingerprint — 2026-08-26
+
+The target-iPhone WebKit native-selection-copy proof is closed as a genuine
+colour-fidelity failure. Apple Notes received a real editable table with the
+intentional short fixture, representative values, order, summary, notes, and
+Unicode intact, but stripped all five category colours. The short Sunday
+fixture was deliberate and is not a product defect.
+
+Do not iterate HTML/CSS encodings or the WebKit selection-copy route further.
+Proceed with exactly one isolated Stage 1 diagnostic: copy a small coloured
+table directly in Apple Notes, then use `navigator.clipboard.read()` on the
+trusted HTTPS fingerprint page to capture web-visible item/type order, text
+payloads, byte lengths, and hashes without writing to or mutating the
+clipboard. The diagnostic must not alter production `Copy to Notes`.
+
+If the Notes-origin web-visible payload contains no colour-bearing
+representation, advance the already-authorized E-004 native helper branch to
+inspect and replay the actual native pasteboard. Do not claim colour support
+from desktop evidence or from the fingerprint alone.

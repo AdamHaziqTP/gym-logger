@@ -31,3 +31,13 @@ Codex should research the smallest viable iOS implementation and packaging route
 ## Stop condition
 
 If the helper cannot preserve both editable table structure and category colours in Apple Notes, or if the installation/usage burden is disproportionate to the benefit, close the colour-recovery branch and retain the uncoloured editable-table baseline for v1. Do not continue with open-ended pasteboard-format experiments.
+
+## Staged after M03-T04 — 2026-08-26
+
+M03-T04's target-iPhone native WebKit selection-copy proof preserved the
+editable table and data but stripped every category colour. E-004 remains
+authorized and preserved, but Stage 1 web-visible clipboard fingerprinting is
+required first. If Stage 1 cannot expose colour-bearing web representations,
+advance this helper to native pasteboard inspection/replay and investigate a
+GitHub-hosted macOS build plus a free-account device-test route. This remains
+a bounded feasibility proof, not a PWA rewrite or paid Developer dependency.

@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t05-human-gate-ready",
+      "summary": "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch.",
+      "at": "2026-08-25T22:53:02.246Z"
+    },
+    {
+      "name": "m03-t05-fingerprint-ready",
+      "summary": "M03-T05 standalone Notes clipboard fingerprint is independently verified and ready for one target-iPhone capture; M03-T04 native selection-copy colour failure is closed and E-004 native inspection remains staged behind the result.",
+      "at": "2026-08-25T22:52:45.308Z"
+    },
+    {
       "name": "proof-route-retest-ready",
       "summary": "Retired SPA-shell proof route recorded as blocked; native-copy proof now verified over LAN HTTPS with service-worker bypass and is ready for one iPhone retest.",
       "at": "2026-08-25T22:36:23.986Z"
@@ -51,26 +61,16 @@
       "name": "correction-accepted",
       "summary": "M06-T05 alternate offline pure-JS raster checkpoint independently verified at 362/362; one saved-image-only iPhone retest remains",
       "at": "2026-08-25T15:59:40.746Z"
-    },
-    {
-      "name": "correction-required",
-      "summary": "M06-T05 pixel-guard checkpoint regressed preview and saved PNG still fails; restore preview and evaluate materially different raster path",
-      "at": "2026-08-25T15:53:41.304Z"
-    },
-    {
-      "name": "accepted-checkpoint",
-      "summary": "M06-T05 pixel guard checkpoint c176437; blank output now blocks saving with an explicit status; one saved-image-only retest remains",
-      "at": "2026-08-25T15:45:44.638Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T22:36:23.986Z",
+  "lastPublishedAt": "2026-08-25T22:53:02.247Z",
   "lastEvent": {
-    "name": "proof-route-retest-ready",
-    "summary": "Retired SPA-shell proof route recorded as blocked; native-copy proof now verified over LAN HTTPS with service-worker bypass and is ready for one iPhone retest.",
-    "at": "2026-08-25T22:36:23.986Z"
+    "name": "m03-t05-human-gate-ready",
+    "summary": "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch.",
+    "at": "2026-08-25T22:53:02.246Z"
   },
-  "syncRevision": 80,
+  "syncRevision": 82,
   "openEscalations": [],
   "chatNotifications": [
     {

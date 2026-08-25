@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T22:36:24.028Z",
+  "generatedAt": "2026-08-25T22:53:02.289Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -36,10 +36,10 @@
   },
   "current": {
     "milestone": "M06 — PWA polish and regression",
-    "task": "M03-T04 WebKit native-selection-copy colour proof — M06-T07 polish checkpoint accepted; colour recovery is reopened under the new bounded investigation order",
-    "status": "HUMAN_REVIEW_REQUIRED (remaining PWA/device checks are open; E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE and does not block v1)",
-    "humanReviewGate": "after the isolated M03-T04 proof is independently verified, perform one target-iPhone paste into the existing Gym note. M06-T07's icon/share checks remain deferred and batched. E-004 is reopened only as a later native evidence branch; no physical or colour pass is claimed.",
-    "nextAction": "after the isolated M03-T04 proof is independently verified, perform one target-iPhone paste into the existing Gym note. M06-T07's icon/share checks remain deferred and batched. E-004 is reopened only as a later native evidence branch; no physical or colour pass is claimed."
+    "task": "M03-T05 Notes clipboard fingerprint — M03-T04 native selection-copy proof closed after target-iPhone colour failure",
+    "status": "HUMAN_REVIEW_REQUIRED (M03-T05 diagnostic ready; M03-T04 colour failure closed; E-004 native inspection staged behind the result)",
+    "humanReviewGate": "after M03-T05 is independently verified and served over HTTPS, copy a small coloured table directly in Apple Notes, return to the diagnostic page, tap Inspect Notes Clipboard, and download the fingerprint JSON. Do not claim colours from the diagnostic alone. M06-T07 icon/share checks remain deferred and batched.",
+    "nextAction": "after M03-T05 is independently verified and served over HTTPS, copy a small coloured table directly in Apple Notes, return to the diagnostic page, tap Inspect Notes Clipboard, and download the fingerprint JSON. Do not claim colours from the diagnostic alone. M06-T07 icon/share checks remain deferred and batched."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,13 +56,22 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "3d44df4 docs: record M03-T04 iPhone colour failure",
+    "0df613e docs: publish proof retest readiness",
     "45f9136 docs: reconcile blocked proof route evidence",
     "2e2d007 Merge remote-tracking branch 'origin/main'",
-    "2b670f0 docs: publish served proof correction",
-    "9c72b3f fix: serve native copy proof outside app shell",
-    "75e633b docs: record selection-copy proof route blocked on iPhone"
+    "2b670f0 docs: publish served proof correction"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M03-T05-NOTES-CLIPBOARD-FINGERPRINT-codex-review.md",
+      "result": [
+        "Decision: **ACCEPTED for isolated automated scope; target-iPhone clipboard capture remains pending**",
+        "Focused diagnostic tests: **6/6 PASS**.",
+        "Full suite: **404/404 PASS** across 34 test files.",
+        "Production build: **PASS**; Vite emitted the diagnostic assets and stamped"
+      ]
+    },
     {
       "path": "orchestration/reviews/M03-T04-WEBKIT-SELECTION-COPY-CORRECTION-codex-review.md",
       "result": [
@@ -79,25 +88,23 @@
         "Production build: PASS",
         "Not accepted from automation: Apple Notes editable-table structure, Unicode,"
       ]
-    },
-    {
-      "path": "orchestration/reviews/M06-T06-ACTUAL-SESSION-MIGRATION-codex-review.md",
-      "result": [
-        "**ACCEPTED for automated scope.** The source-preserving migration, production startup wiring, icon assets, and test coverage are independently verified. The final physical iPhone gate remains open.",
-        "[x] Focused migration tests: 12/12 pass, including App startup integration.",
-        "[x] Full tests: 374/374 pass across 32 test files.",
-        "[x] Build, HTTPS shell/manifest, certificate endpoint, and diff hygiene pass."
-      ]
     }
   ],
   "humanVerification": [
     {
+      "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
+      "result": [
+        "Delts, and Legs colours. Do not copy a password or other sensitive text.",
+        "reproducible. No colour success or failure should be inferred until the JSON"
+      ]
+    },
+    {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T04-WEBKIT-SELECTION-COPY.md",
       "result": [
-        "Result: `BLOCKED — RETEST READY`",
-        "Historical blocked attempt — 2026-08-26:",
-        "That attempt did not exercise Apple Notes and is not a colour PASS or FAIL.",
-        "The service worker now bypasses `/feasibility/*` requests."
+        "Result: `FAIL — STRUCTURE/DATA SURVIVE; COLOURS STRIPPED`",
+        "**PASS — real editable table structure survives.** The pasted content is a",
+        "**PASS — proof fixture content survives.** The short `Sunday 23 Aug` fixture,",
+        "**FAIL — category colours do not survive.** The pasted table is uniformly"
       ]
     },
     {
@@ -153,15 +160,6 @@
         "**PASS:** correct values and row order.",
         "**PASS:** summary/data fidelity from the previously verified rich path."
       ]
-    },
-    {
-      "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
-      "result": [
-        "these items PASS.** The automated suite proves payload generation and button",
-        "Result supplied by product owner: pressing **Copy to Notes** showed **`Copy failed — clipboard unavailable`**.",
-        "**HV-M03-3: FAIL.** The app did not reach either rich or plain clipboard success.",
-        "**HV-M03-1: BLOCKED/NOT EXECUTED.** No clipboard payload was available to paste into Apple Notes."
-      ]
     }
   ],
   "unresolvedDefects": [
@@ -179,16 +177,12 @@
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
     "E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE: preserve the one authorized isolated native proof; it does not block the remaining PWA v1 gate and requires no paid Developer dependency.",
-    "after the isolated M03-T04 proof is independently verified, perform one target-iPhone paste into the existing Gym note. M06-T07's icon/share checks remain deferred and batched. E-004 is reopened only as a later native evidence branch; no physical or colour pass is claimed."
+    "after M03-T05 is independently verified and served over HTTPS, copy a small coloured table directly in Apple Notes, return to the diagnostic page, tap Inspect Notes Clipboard, and download the fingerprint JSON. Do not claim colours from the diagnostic alone. M06-T07 icon/share checks remain deferred and batched."
   ],
   "decisionsMadeSinceLastSync": [
-    "Retired SPA-shell proof route recorded as blocked; native-copy proof now verified over LAN HTTPS with service-worker bypass and is ready for one iPhone retest."
+    "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch."
   ],
   "recordedDecisions": [
-    {
-      "title": "Batch human verification / overnight full-auto policy — 2026-08-25",
-      "detail": "Continue full-auto through every bounded implementation milestone, correction, automated test, build check, runtime check, code review, and non-human acceptance step that can be completed from the authoritative product sources. **Do not stop at a human-only iPhone/visual gate if that gate can be safely deferred without creating architectural ambiguity or risking destructive work.** Record it as DEFERRED/PENDING and continue with independent branches/milestones."
-    },
     {
       "title": "Final iPhone failure correction authorization — 2026-08-25",
       "detail": "Faithful export preview is blank/black. Compact export preview is blank/black."
@@ -216,9 +210,14 @@
     {
       "title": "Apple Notes colour recovery reopened — 2026-08-26",
       "detail": ""
+    },
+    {
+      "title": "M03-T04 closed; proceed to Notes clipboard fingerprint — 2026-08-26",
+      "detail": ""
     }
   ],
   "relevantEvidence": [
+    "orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T04-WEBKIT-SELECTION-COPY.md",
     "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX-2026-08-26.md",
     "orchestration/evidence/M06-T07-FINAL-HUMAN-CHECKLIST.md",
@@ -226,7 +225,6 @@
     "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
     "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T01-E003.md",
-    "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
     "references/gym_logger_app_icon_1024.png",
     "references/IMG_5554.jpeg",
     "references/IMG_5553.png",
@@ -234,12 +232,27 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "45f9136b13bb4862064f14d812d3437c6875cc25",
+    "commit": "3d44df4e281335f4a7dcba07a24ca46639463f72",
     "branch": "main",
-    "workingTree": "## main...origin/main [ahead 4]\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
+    "workingTree": "## main...origin/main\n M orchestration/escalations/E-004-NATIVE-NOTES-COLOUR-HELPER.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/DECISIONS.md\n M orchestration/state/REQUIREMENTS_MATRIX.md\n M orchestration/state/STATE.md\n?? orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md\n?? orchestration/reports/M03-T05-OX-ALPHA-REPORT.md\n?? orchestration/reviews/M03-T05-NOTES-CLIPBOARD-FINGERPRINT-codex-review.md\n?? orchestration/tasks/M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md\n?? public/feasibility/notes-clipboard-fingerprint.html\n?? public/feasibility/notesClipboardFingerprint.mjs\n?? public/feasibility/notesClipboardFingerprintApp.js\n?? src/tests/notesClipboardFingerprint.test.mjs",
     "changedFiles": [
+      "orchestration/escalations/E-004-NATIVE-NOTES-COLOUR-HELPER.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs"
+      "orchestration/product-orchestrator/bootstrap.mjs",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/DECISIONS.md",
+      "orchestration/state/REQUIREMENTS_MATRIX.md",
+      "orchestration/state/STATE.md",
+      "orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
+      "orchestration/reports/M03-T05-OX-ALPHA-REPORT.md",
+      "orchestration/reviews/M03-T05-NOTES-CLIPBOARD-FINGERPRINT-codex-review.md",
+      "orchestration/tasks/M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
+      "public/feasibility/notes-clipboard-fingerprint.html",
+      "public/feasibility/notesClipboardFingerprint.mjs",
+      "public/feasibility/notesClipboardFingerprintApp.js",
+      "src/tests/notesClipboardFingerprint.test.mjs"
     ]
   },
   "builder": {
@@ -259,11 +272,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "proof-route-retest-ready",
-      "summary": "Retired SPA-shell proof route recorded as blocked; native-copy proof now verified over LAN HTTPS with service-worker bypass and is ready for one iPhone retest.",
-      "at": "2026-08-25T22:36:23.986Z"
+      "name": "m03-t05-human-gate-ready",
+      "summary": "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch.",
+      "at": "2026-08-25T22:53:02.246Z"
     },
-    "contextRevision": 80,
+    "contextRevision": 82,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
