@@ -7,8 +7,8 @@ Updated: 2026-08-25
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M06 — PWA polish and regression
-- Current task: M06-T03-RELEASE-READINESS — performance, static deployment, and final handoff
-- Status: READY_FOR_OX (M06-T03-RELEASE-READINESS)
+- Current task: FINAL-HUMAN-ACCEPTANCE — consolidated iPhone 14 Pro Max v1 pass
+- Status: HUMAN_REVIEW_REQUIRED (automated v1 scope complete; final device gate remains)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
 - Human review gate: E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.
@@ -57,6 +57,7 @@ Updated: 2026-08-25
 - M06-T01 and its timer correction are now independently accepted: 316/316 tests, clean build, diff audit, and trusted HTTPS manifest/service-worker/icon smoke; physical install/offline/visual checks remain deferred.
 - M06-T02 is not accepted: independent build found two TypeScript errors and the worker has not yet supplied focused settings coverage or its required report. A bounded correction is prepared.
 - M06-T02 is independently accepted for automated scope: 32 focused settings tests, 348 full tests, clean build/diff, and HTTPS shell/manifest/service-worker smoke; device theme/readability checks remain deferred.
+- M06-T03 release-readiness is independently accepted for automated scope: deterministic 40-row fixture and synthetic 100-row render/export/order coverage, 350/350 full tests, clean build/diff, trusted HTTPS shell/manifest/service-worker/icon/asset smoke, static-hosting audit, and consolidated final-device documentation.
 
 ## Final disposition
 
@@ -65,10 +66,10 @@ Updated: 2026-08-25
 - The trusted-HTTPS iPhone result is accepted as the v1 Notes-transfer baseline: real editable Notes table and all data/order PASS; category foreground/highlight colours are stripped by Apple Notes and accepted as a documented platform limitation.
 - Preserve the HTTP synchronous plain-text fallback as a resilience path.
 - Do not add RTF/native/Shortcuts setup to the normal v1 workflow and do not run more open-ended clipboard experiments before v1 completion.
-- M03-T02 is unblocked. Codex should select and dispatch the next bounded task from the existing plan/specification, independently verify it, and continue automatically.
+- M06-T03 is accepted for automated scope. No further bounded v1 implementation is identified in the finalized specification: historical import remains explicitly deferred, and Apple Notes colour transfer remains the accepted v1 platform limitation.
 - The Home responsive-layout defect (Copy Another Session overlapping History on iPhone 14 Pro Max) must be routed as a bounded correction before final product acceptance. It does not block M03 continuation.
 - Do not declare the project complete until all deferred real-iPhone acceptance items, including PNG export, offline/installability, the deferred M01 touch/legend checks, and the recorded Home overlap correction, have been physically verified.
-- M05-T01 backup/restore is accepted for automated scope; proceed to M06-T01. Keep iPhone Files/share/restore checks in the consolidated final human gate.
+- M05-T01 backup/restore and M06 release-readiness are accepted for automated scope. Stop only at the consolidated final iPhone 14 Pro Max gate in `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
 
 ## Deferred
 
@@ -76,7 +77,7 @@ Updated: 2026-08-25
 - Apple Notes category colour transfer: accepted v1 limitation; standard rich paste preserves editable table/data/order but not category foreground/highlight colours.
 - Faithful and Compact tall PNG export on the target iPhone.
 - Home responsive-layout defect: Copy Another Session visually clips/overlaps History on iPhone 14 Pro Max; correction required before final acceptance.
-- Full history/search, backup/restore, polish, and subsequent milestones according to the existing implementation plan.
+- Final iPhone 14 Pro Max install/offline/touch/layout/settings/PNG/backup/Notes checks in the consolidated checklist.
 - Backup/restore physical Files/share/restore behavior remains deferred to the consolidated final iPhone pass.
 
 ## Escalations
@@ -110,10 +111,10 @@ Updated: 2026-08-25
 - E-003 decision recorded: authorize one bounded non-HTML interoperability feasibility spike, then either adopt a proven low-friction route or accept uncolored editable-table paste as the documented v1 platform limitation.
 - E-003 feasibility harness completed and independently verified. Product owner did not adopt the auxiliary routes; the branch is closed with uncolored editable-table paste accepted for v1.
 
-## Active task checkpoint
+## Final automated checkpoint
 
 - M05-T01 backup/restore automated scope accepted by Codex: 43/43 focused tests, 262/262 full suite, passing build, diff audit, and trusted HTTPS runtime smoke. Review: `orchestration/reviews/M05-T01-BACKUP-RESTORE-01-codex-review.md`.
-- Active task: `orchestration/tasks/M06-T03-RELEASE-READINESS.md`
-- Base implementation checkpoint: M05-T01 automated backup/restore checkpoint with Apple Notes color limitation documented.
-- Worker disposition: READY_FOR_OX — complete bounded performance, static deployment readiness, documentation, and state reconciliation. Full-auto continuation is authorized.
-- Next action: invoke OX M06-T03, independently verify the complete release-readiness gate, then stop only at the consolidated human-only iPhone gate if no automatable work remains.
+- M06-T03 automated release-readiness scope accepted: 2/2 focused tests, 350/350 full suite, passing build, diff audit, trusted HTTPS runtime smoke, static deployment audit, documentation, and final-device checklist. Review: `orchestration/reviews/M06-T03-RELEASE-READINESS-codex-review.md`.
+- OX was dispatched twice through the verified Desktop DSH headless wrapper for M06-T03, but both invocations ended without a worker report or repository delta. The bounded task was completed from the authoritative task file and independently verified; this worker execution issue does not alter product acceptance.
+- Current gate: `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
+- Next action: human-only final iPhone 14 Pro Max acceptance; do not mark device/offline/visual behavior passed from desktop evidence.

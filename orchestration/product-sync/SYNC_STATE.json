@@ -3,6 +3,21 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "final-human-gate-ready",
+      "summary": "M06 automated scope is complete; consolidated iPhone 14 Pro Max acceptance is the only remaining v1 gate.",
+      "at": "2026-08-25T03:40:36.020Z"
+    },
+    {
+      "name": "m06-t03-accepted",
+      "summary": "M06-T03 release readiness accepted: 350/350 tests, build, HTTPS PWA smoke, static audit, docs, and final iPhone checklist ready.",
+      "at": "2026-08-25T03:40:08.499Z"
+    },
+    {
+      "name": "task-ready-for-ox",
+      "summary": "M06-T03 release-readiness task is ready after settings/theme automated acceptance.",
+      "at": "2026-08-25T03:22:14.482Z"
+    },
+    {
       "name": "m06-t02-accepted",
       "summary": "Codex independently accepted M06-T02 after correction: 32 settings tests, 348 full tests, clean build/diff, and HTTPS shell/manifest/service-worker smoke; M06-T03 release readiness is next.",
       "at": "2026-08-25T03:22:04.888Z"
@@ -46,65 +61,17 @@
       "name": "image-export-correction-prepared",
       "summary": "Codex found 6 focused export test failures plus TypeScript test errors; correction prepared to preserve wrapping/losslessness while repairing verification contracts.",
       "at": "2026-08-24T17:44:11.891Z"
-    },
-    {
-      "name": "home-fix-accepted-image-task-prepared",
-      "summary": "Home overlap correction independently accepted at 190/190; M03-T02 image export task prepared for OX; iPhone visual checks remain deferred.",
-      "at": "2026-08-24T17:19:33.510Z"
-    },
-    {
-      "name": "m03-t02-home-fix-prepared",
-      "summary": "Prepared bounded Home action-area overlap correction; product navigation/layout scope preserved; physical iPhone visual verification remains deferred.",
-      "at": "2026-08-24T17:08:11.569Z"
-    },
-    {
-      "name": "e003-human-gate-ready",
-      "summary": "E-003 harness checkpoint 75c7ba4 is independently accepted; trusted HTTPS feasibility page is live; target iPhone 14 Pro Max route evidence is now the only active gate.",
-      "at": "2026-08-24T16:52:22.736Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T03:22:04.889Z",
+  "lastPublishedAt": "2026-08-25T03:40:36.021Z",
   "lastEvent": {
-    "name": "m06-t02-accepted",
-    "summary": "Codex independently accepted M06-T02 after correction: 32 settings tests, 348 full tests, clean build/diff, and HTTPS shell/manifest/service-worker smoke; M06-T03 release readiness is next.",
-    "at": "2026-08-25T03:22:04.888Z"
+    "name": "final-human-gate-ready",
+    "summary": "M06 automated scope is complete; consolidated iPhone 14 Pro Max acceptance is the only remaining v1 gate.",
+    "at": "2026-08-25T03:40:36.020Z"
   },
-  "syncRevision": 41,
-  "openEscalations": [
-    {
-      "id": "E-002",
-      "summary": "M03-T01 iPhone retest preserves text via HTTP plain fallback, but Notes table structure, formatting, and colors are unavailable on the non-secure LAN origin. Choose a trusted HTTPS build for rich-paste verification, or explicitly accept HTTP plain-text-only behavior as the product limitation.",
-      "scope": {
-        "level": "product-technical",
-        "id": "E-002"
-      },
-      "allowedActions": [
-        "choose",
-        "approve",
-        "reject",
-        "clarify"
-      ],
-      "status": "open",
-      "openedAt": "2026-08-24T14:48:03.120Z"
-    },
-    {
-      "id": "E-003",
-      "summary": "Trusted HTTPS iPhone retests preserve the editable Apple Notes table and values but strip both category foreground and text-highlight colors after three bounded HTML representations. Choose a native/RTF/Shortcuts feasibility spike, accept uncolored rich paste as a limitation, or provide another explicitly approved route.",
-      "scope": {
-        "level": "product-technical",
-        "id": "E-003"
-      },
-      "allowedActions": [
-        "choose",
-        "approve",
-        "reject",
-        "clarify"
-      ],
-      "status": "open",
-      "openedAt": "2026-08-24T15:50:00.000Z"
-    }
-  ],
+  "syncRevision": 44,
+  "openEscalations": [],
   "chatNotifications": [
     {
       "revision": 22,
