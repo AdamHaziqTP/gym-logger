@@ -13,8 +13,17 @@ Observed result:
 - The five category colours did not survive.
 - Unicode text was also decoded incorrectly: examples included `40 sets Â· 39 exercises` and `30Â°`.
 
+A later screenshot of the Shortcut confirms the product owner did **not** misconfigure the handoff. The Shortcut is wired as intended for the bounded experiment:
+
+1. receive from Share Sheet;
+2. `Get Text from Shortcut Input`;
+3. `Make Rich Text from HTML`;
+4. `Append Rich Text from HTML to Gym`.
+
+The corresponding Apple Notes screenshot still shows flattened text and mojibake. Therefore this is a route/platform failure, not a setup error by the product owner.
+
 This fails the M03-T03 success criteria. The bounded Shortcuts route is closed rather than iterated through more HTML/Shortcuts variants, per the recorded product decision.
 
 The existing standard **Copy to Notes** path remains the reliable baseline because it preserves the editable table/data/order, albeit without category colours.
 
-Next product decision: whether to authorize one bounded native attributed-string / pasteboard helper feasibility proof. Such a proof must not replace the PWA or require a paid Apple Developer subscription as a v1 dependency. It should test whether native pasteboard representations can preserve both an editable Notes table and the five category colours on the target iPhone. If the native helper cannot prove that behavior with low enough friction, close colour recovery and retain the uncoloured editable-table baseline.
+E-004 native attributed-string/pasteboard feasibility is the only remaining authorized colour-recovery route. It is separately parked as `BLOCKED/DEFERRED — NEEDS MAC/XCODE`; no further Shortcuts or HTML variants are authorized.
