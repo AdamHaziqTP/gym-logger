@@ -473,6 +473,35 @@ body {
   border-radius: 14px 14px 0 0;
   padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
   box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.6);
+  overscroll-behavior: contain;
+}
+
+.image-card-header {
+  position: sticky;
+  top: -16px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: -16px -16px 12px;
+  padding: 14px 16px 10px;
+  background: var(--sheet-bg);
+  border-bottom: 1px solid var(--grid);
+}
+
+.image-close {
+  flex: 0 0 auto;
+  border: 1px solid var(--grid-strong);
+  border-radius: 9px;
+  background: var(--control-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  min-height: 40px;
+  padding: 8px 13px;
+  cursor: pointer;
 }
 
 .image-card-title {

@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "correction-accepted",
+      "summary": "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/.",
+      "at": "2026-08-25T10:25:44.640Z"
+    },
+    {
+      "name": "correction-required",
+      "summary": "Consolidated iPhone 14 Pro Max gate found real failures in Faithful/Compact previews, mobile export dismissal, HTTPS trust, and Home Screen icon; M06-T05 correction batch queued.",
+      "at": "2026-08-25T10:13:23.734Z"
+    },
+    {
       "name": "final-environment-prepared",
       "summary": "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance.",
       "at": "2026-08-25T09:52:50.172Z"
@@ -51,26 +61,16 @@
       "name": "task-ready-for-ox",
       "summary": "M06-T02 settings/theme/default image-style task is ready after M06 PWA polish acceptance.",
       "at": "2026-08-25T02:40:08.978Z"
-    },
-    {
-      "name": "m06-t01-accepted",
-      "summary": "Codex independently accepted M06-T01 after the timer correction: 316 tests, clean build, diff audit, and trusted HTTPS PWA asset smoke; M06-T02 settings/style is next.",
-      "at": "2026-08-25T02:39:57.467Z"
-    },
-    {
-      "name": "correction-required",
-      "summary": "Codex found one unhandled delayed SessionView timer after full-suite teardown; M06 remains unaccepted and a narrow cleanup correction is ready.",
-      "at": "2026-08-25T02:23:59.816Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T09:52:50.172Z",
+  "lastPublishedAt": "2026-08-25T10:25:44.640Z",
   "lastEvent": {
-    "name": "final-environment-prepared",
-    "summary": "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance.",
-    "at": "2026-08-25T09:52:50.172Z"
+    "name": "correction-accepted",
+    "summary": "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/.",
+    "at": "2026-08-25T10:25:44.640Z"
   },
-  "syncRevision": 48,
+  "syncRevision": 50,
   "openEscalations": [],
   "chatNotifications": [
     {

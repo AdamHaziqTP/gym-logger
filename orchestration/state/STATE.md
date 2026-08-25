@@ -7,8 +7,8 @@ Updated: 2026-08-25
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M06 — PWA polish and regression
-- Current task: FINAL-HUMAN-ACCEPTANCE — consolidated iPhone 14 Pro Max v1 pass
-- Status: HUMAN_REVIEW_REQUIRED (autonomous v1 readiness sweep complete; final device gate remains)
+- Current task: FINAL-HUMAN-ACCEPTANCE — consolidated iPhone 14 Pro Max retest after M06-T05
+- Status: HUMAN_REVIEW_REQUIRED (M06-T05 correction is accepted for automated scope; device gate remains open)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
 - Human review gate: E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.
@@ -60,6 +60,7 @@ Updated: 2026-08-25
 - M06-T03 release-readiness is independently accepted for automated scope: deterministic 40-row fixture and synthetic 100-row render/export/order coverage, 350/350 full tests, clean build/diff, trusted HTTPS shell/manifest/service-worker/icon/asset smoke, static-hosting audit, and consolidated final-device documentation.
 - Full v1 readiness sweep found one genuine bounded gap: backup restore included metadata/settings in the file but `replaceAllSessions` left the device's existing metadata/settings untouched. M06-T04 corrected this contract and added coverage before returning to the final human gate.
 - M06-T04 is independently accepted: atomic sessions/settings restore, duplicate metadata rejection, live settings refresh, 45/45 focused backup tests, 352/352 full tests, clean build/diff, and trusted HTTPS runtime smoke.
+- M06-T05 correction is independently accepted for automated scope: SVG-backed export previews, reachable mobile close control, deliberate generated Gym Logger icon, repaired local root/leaf HTTPS chain, 354/354 tests, build, runtime smoke, and diff audit. The physical retest remains open.
 
 ## Final disposition
 
@@ -72,6 +73,8 @@ Updated: 2026-08-25
 - The Home responsive-layout defect (Copy Another Session overlapping History on iPhone 14 Pro Max) must be routed as a bounded correction before final product acceptance. It does not block M03 continuation.
 - Do not declare the project complete until all deferred real-iPhone acceptance items, including PNG export, offline/installability, the deferred M01 touch/legend checks, and the recorded Home overlap correction, have been physically verified.
 - M05-T01 backup/restore, M06 release-readiness, and M06-T04 settings restore are accepted for automated scope. Stop only at the consolidated final iPhone 14 Pro Max gate in `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
+- The consolidated iPhone 14 Pro Max pass found real failures in both image-export previews, mobile export-sheet dismissal, local HTTPS trust, and the Home Screen icon. Route the bounded code/icon corrections through M06-T05 before requesting one consolidated retest; do not mark any physical behavior passed from desktop evidence.
+- M06-T05 is accepted for automated scope. The same consolidated checklist now awaits one physical retest at `https://192.168.1.49:4173/`; do not mark device behavior passed from desktop evidence.
 
 ## Deferred
 
@@ -81,6 +84,7 @@ Updated: 2026-08-25
 - Home responsive-layout defect: Copy Another Session visually clips/overlaps History on iPhone 14 Pro Max; correction required before final acceptance.
 - Final iPhone 14 Pro Max install/offline/touch/layout/settings/PNG/backup/Notes checks in the consolidated checklist.
 - Backup/restore physical Files/share/restore behavior remains deferred to the consolidated final iPhone pass.
+- M06-T05 physical preview rendering, mobile sheet dismissal, certificate/profile trust, and refreshed Home Screen icon appearance remain deferred to the consolidated final iPhone pass.
 
 ## Escalations
 
@@ -119,4 +123,4 @@ Updated: 2026-08-25
 - M06-T03 automated release-readiness scope accepted: 2/2 focused tests, 350/350 full suite, passing build, diff audit, trusted HTTPS runtime smoke, static deployment audit, documentation, and final-device checklist. Review: `orchestration/reviews/M06-T03-RELEASE-READINESS-codex-review.md`.
 - OX was dispatched twice through the verified Desktop DSH headless wrapper for M06-T03, but both invocations ended without a worker report or repository delta. The bounded task was completed from the authoritative task file and independently verified; this worker execution issue does not alter product acceptance.
 - Current gate: `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
-- Next action: perform the one consolidated human-only iPhone 14 Pro Max acceptance pass; do not mark device/offline/visual behavior passed from desktop evidence.
+- M06-T05 is accepted for automated scope. Next action: one consolidated human-only iPhone 14 Pro Max retest at `https://192.168.1.49:4173/`; do not mark device behavior passed from desktop evidence.

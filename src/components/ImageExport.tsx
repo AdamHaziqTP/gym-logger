@@ -89,44 +89,44 @@ export function ImageExportPanel({
   const pngBlobRef = useRef<Blob | null>(null);
 
   // Render the preview whenever the snapshot or style changes. One effect
-  // owns the whole lifecycle so its cleanup always revokes the object URL.
+  // owns the preview and delivery-blob lifecycle so stale async work cannot
+  // update a later export selection.
   useEffect(() => {
     let cancelled = false;
-    let objectUrl: string | null = null;
 
     setRendering(true);
     setStatusText("");
 
     const doc = buildImageLayout(session, style);
     const svg = renderSessionSvg(doc);
+    // Keep the preview on the source SVG. iOS WebKit can successfully encode
+    // a canvas blob while displaying the resulting raster as an all-black
+    // image; the deterministic vector is the same document and remains crisp
+    // for tall sessions. PNG generation is still performed separately for the
+    // delivery button and is never inferred from the preview.
+    setPreviewSrc(
+      `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`,
+    );
+    pngBlobRef.current = null;
+    setPngReady(false);
 
     void (async () => {
       const blob = await rasterizeSvgToPngBlob(svg, doc.width, doc.height);
       if (cancelled) return;
-      if (
-        blob &&
-        typeof URL !== "undefined" &&
-        typeof URL.createObjectURL === "function"
-      ) {
-        objectUrl = URL.createObjectURL(blob);
+      if (blob) {
         pngBlobRef.current = blob;
         setPngReady(true);
-        setPreviewSrc(objectUrl);
       } else {
-        // No canvas/PNG path here: show the identical SVG document instead
-        // and disable delivery rather than faking success later.
+        // No canvas/PNG path here: retain the identical SVG preview and disable
+        // delivery rather than faking success later.
         pngBlobRef.current = null;
         setPngReady(false);
-        setPreviewSrc(
-          `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`,
-        );
       }
       if (!cancelled) setRendering(false);
     })();
 
     return () => {
       cancelled = true;
-      if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
   }, [session, style]);
 
@@ -180,9 +180,19 @@ export function ImageExportPanel({
         aria-labelledby="image-export-title"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 className="image-card-title" id="image-export-title">
-          Export Image
-        </h2>
+        <div className="image-card-header">
+          <h2 className="image-card-title" id="image-export-title">
+            Export Image
+          </h2>
+          <button
+            type="button"
+            className="image-close"
+            aria-label="Close Export Image"
+            onClick={onClose}
+          >
+            Close
+          </button>
+        </div>
 
         <div className="style-toggle" role="group" aria-label="Export style">
           {STYLE_OPTIONS.map((option) => (

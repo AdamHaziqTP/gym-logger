@@ -132,3 +132,14 @@ Correction policy:
 - Do not ask the product owner to retest each individual fix. Batch the corrections and return one new consolidated iPhone pass once all automatable correction work is complete.
 
 The session text pasted into the product conversation does **not** reopen E-003 by itself: plain text cannot demonstrate colour survival. Apple Notes category-colour transfer remains the accepted v1 limitation unless the product owner explicitly changes that product decision.
+
+## Final iPhone correction batch — 2026-08-25
+
+The consolidated iPhone 14 Pro Max acceptance pass found genuine release
+failures: Faithful and Compact image previews were blank/black, the Export
+Image mobile sheet was hard to dismiss, the local HTTPS origin was still not
+trusted normally on the device after the certificate/profile attempt, and the
+Home Screen icon appeared placeholder-like. These are bounded corrections, not
+new product scope. Route them through M06-T05, keep Apple Notes colour loss as
+the accepted v1 limitation, and request one consolidated retest only after
+independent automated verification and a repaired HTTPS setup.

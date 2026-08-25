@@ -1,6 +1,29 @@
 # Consolidated final iPhone 14 Pro Max acceptance
 
-Status: `FAILURES_FOUND — CORRECTION_REQUIRED` — the first real-device pass exposed release-blocking iPhone issues. Remaining checks stay pending until the affected branches are corrected and the trusted HTTPS environment is actually trusted on-device.
+Status: `READY_FOR_CONSOLIDATED_RETEST` — the consolidated iPhone 14 Pro Max
+pass found real failures, and M06-T05 has been independently verified for
+automated scope. The affected branches were corrected in
+`orchestration/tasks/M06-T05-FINAL-IPHONe-CORRECTIONS.md`; no physical result
+below is being reclassified as passed by desktop evidence.
+
+Recorded failure batch:
+
+- Faithful image-export preview appeared blank/black on the iPhone.
+- Compact image-export preview appeared blank/black on the iPhone.
+- Export Image was difficult to dismiss on the mobile sheet.
+- The local HTTPS origin still showed a trust warning/manual interstitial after
+  the supplied certificate/profile attempt.
+- The Home Screen icon appeared placeholder-like rather than a deliberate Gym
+  Logger icon.
+
+Correction status: `M06-T05 ACCEPTED_FOR_AUTOMATED_SCOPE`. Use the rebuilt
+trusted HTTPS URL `https://192.168.1.49:4173/` for one consolidated retest. Do
+not ask for individual intermediate checks.
+
+For the Home Screen icon check, remove the old Home Screen bookmark before
+adding the refreshed build again so iOS does not continue displaying its cached
+icon. The certificate installation steps remain in
+`orchestration/evidence/HTTPS-RICH-PASTE-SETUP.md`.
 
 Device: iPhone 14 Pro Max
 Test date: 2026-08-25

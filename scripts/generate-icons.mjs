@@ -7,8 +7,9 @@
  * whenever the glyph changes; output is byte-deterministic for a given input
  * size (no timestamps, no randomness).
  *
- * Glyph: a minimal blue barbell on the near-black app background — enough to
- * read as a training log tile at 60 px, restrained enough to match spec §22.
+ * Glyph: a minimal blue workout-log card with a small tab and five category
+ * rows on the near-black app background. It is deliberately a log/table mark,
+ * not a letterform or placeholder glyph, and matches the app identity.
  */
 
 import { deflateSync } from "node:zlib";
@@ -21,15 +22,22 @@ const ICONS_DIR = path.resolve(ROOT, "public/icons");
 
 const BACKGROUND = [0, 0, 0, 255]; // #000000 — matches --bg / theme-color
 const ACCENT = [10, 132, 255, 255]; // #0a84ff — matches --accent
+const PANEL = [17, 17, 19, 255]; // #111113 — raised app surface
+const LIGHT = [242, 242, 247, 255]; // #f2f2f7 — primary text
+const CATEGORY_COLORS = [
+  [255, 159, 10, 255], // Arms / orange
+  [191, 90, 242, 255], // Back / purple
+  [102, 212, 207, 255], // Chest / mint
+  [10, 132, 255, 255], // Delts / blue
+  [255, 55, 95, 255], // Legs / pink
+];
 
 /** Normalized glyph rectangles in 0..1 canvas coordinates (x0, y0, x1, y1). */
 const GLYPH_RECTS = [
-  // Left weight plate.
-  [0.16, 0.28, 0.3, 0.72],
-  // Right weight plate.
-  [0.7, 0.28, 0.84, 0.72],
-  // Bar between the plates.
-  [0.3, 0.46, 0.7, 0.54],
+  { rect: [0.16, 0.18, 0.84, 0.84], color: ACCENT },
+  { rect: [0.22, 0.3, 0.78, 0.78], color: PANEL },
+  { rect: [0.37, 0.1, 0.63, 0.24], color: ACCENT },
+  { rect: [0.3, 0.36, 0.7, 0.4], color: LIGHT },
 ];
 
 const CRC_TABLE = (() => {
@@ -61,7 +69,7 @@ function pngChunk(type, data) {
   return Buffer.concat([length, typeBuffer, data, crc]);
 }
 
-/** Renders one size. `pixelColor(xNorm, yNorm)` decides the RGBA sample. */
+/** Renders one size with five category-colored log rows. */
 function renderPng(size) {
   const raw = Buffer.alloc((size * 4 + 1) * size);
   let offset = 0;
@@ -71,10 +79,15 @@ function renderPng(size) {
     for (let x = 0; x < size; x += 1) {
       const xn = (x + 0.5) / size;
       const yn = (y + 0.5) / size;
-      const inside = GLYPH_RECTS.some(
-        ([x0, y0, x1, y1]) => xn >= x0 && xn < x1 && yn >= y0 && yn < y1,
-      );
-      const color = inside ? ACCENT : BACKGROUND;
+      let color = BACKGROUND;
+      for (const glyph of GLYPH_RECTS) {
+        const [x0, y0, x1, y1] = glyph.rect;
+        if (xn >= x0 && xn < x1 && yn >= y0 && yn < y1) color = glyph.color;
+      }
+      if (xn >= 0.3 && xn < 0.7 && yn >= 0.46 && yn < 0.7) {
+        const row = Math.min(4, Math.floor((yn - 0.46) / 0.05));
+        color = CATEGORY_COLORS[row];
+      }
       raw[offset] = color[0];
       raw[offset + 1] = color[1];
       raw[offset + 2] = color[2];

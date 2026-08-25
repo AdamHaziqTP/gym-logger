@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T09:52:50.229Z",
+  "generatedAt": "2026-08-25T10:25:44.688Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -36,8 +36,8 @@
   },
   "current": {
     "milestone": "M06 — PWA polish and regression",
-    "task": "FINAL-HUMAN-ACCEPTANCE — consolidated iPhone 14 Pro Max v1 pass",
-    "status": "HUMAN_REVIEW_REQUIRED (autonomous v1 readiness sweep complete; final device gate remains)",
+    "task": "FINAL-HUMAN-ACCEPTANCE — consolidated iPhone 14 Pro Max retest after M06-T05",
+    "status": "HUMAN_REVIEW_REQUIRED (M06-T05 correction is accepted for automated scope; device gate remains open)",
     "humanReviewGate": "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.",
     "nextAction": "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
   },
@@ -56,13 +56,22 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "420984f chore: refresh final product sync checkpoint",
     "b305ee1 fix: restore backup settings metadata",
     "058b316 chore: complete v1 release readiness",
     "34b2419 feat: add persisted settings and theme",
-    "fd466e7 chore: queue settings and theme task",
-    "6781b56 feat: finish PWA polish and queue settings"
+    "fd466e7 chore: queue settings and theme task"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M06-T05-FINAL-IPHONE-CORRECTIONS-codex-review.md",
+      "result": [
+        "The correction is bounded to the five failures recorded by the final iPhone",
+        "Focused export/icon/Home coverage: **47/47 passed**.",
+        "Full suite: **354/354 passed**, with no unhandled test failures.",
+        "`npm run build`: **passed**."
+      ]
+    },
     {
       "path": "orchestration/reviews/M06-T04-BACKUP-SETTINGS-RESTORE-codex-review.md",
       "result": [
@@ -80,25 +89,16 @@
         "2. Full suite: **350/350 passed** across 29 files; zero unhandled errors.",
         "3. Production build: **passed**; 61 modules, 17 service-worker precache"
       ]
-    },
-    {
-      "path": "orchestration/reviews/M06-T02-SETTINGS-THEME-STYLE-codex-review.md",
-      "result": [
-        "Settings/style focused tests: **32/32 passed**.",
-        "Full suite: **348/348 passed**, zero unhandled errors.",
-        "Production build: passed; service-worker cache stamp and 17-asset precache",
-        "Diff hygiene: `git diff --check` passed."
-      ]
     }
   ],
   "humanVerification": [
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
       "result": [
-        "current v1 scope; these checks are intentionally not marked passed here.",
-        "only for failures.",
-        "Do not treat missing category colours as a failure: Apple Notes stripping the",
-        "Record each item as `PASS`, `FAIL`, or `BLOCKED`, with a short observation. A"
+        "pass found real failures, and M06-T05 has been independently verified for",
+        "below is being reclassified as passed by desktop evidence.",
+        "Recorded failure batch:",
+        "only for failures."
       ]
     },
     {
@@ -161,7 +161,8 @@
     "Faithful and Compact tall PNG export on the target iPhone.",
     "Home responsive-layout defect: Copy Another Session visually clips/overlaps History on iPhone 14 Pro Max; correction required before final acceptance.",
     "Final iPhone 14 Pro Max install/offline/touch/layout/settings/PNG/backup/Notes checks in the consolidated checklist.",
-    "Backup/restore physical Files/share/restore behavior remains deferred to the consolidated final iPhone pass."
+    "Backup/restore physical Files/share/restore behavior remains deferred to the consolidated final iPhone pass.",
+    "M06-T05 physical preview rendering, mobile sheet dismissal, certificate/profile trust, and refreshed Home Screen icon appearance remain deferred to the consolidated final iPhone pass."
   ],
   "activeEscalationsAndProductDecisionsNeeded": [
     "E-001 historical DSH rate-limit condition is no longer the current blocker.",
@@ -170,13 +171,9 @@
     "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
   ],
   "decisionsMadeSinceLastSync": [
-    "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance."
+    "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/."
   ],
   "recordedDecisions": [
-    {
-      "title": "Human-gate correction decision — 2026-08-24",
-      "detail": ""
-    },
     {
       "title": "Final legend decision — 2026-08-24",
       "detail": ""
@@ -204,6 +201,10 @@
     {
       "title": "Batch human verification / overnight full-auto policy — 2026-08-25",
       "detail": "Continue full-auto through every bounded implementation milestone, correction, automated test, build check, runtime check, code review, and non-human acceptance step that can be completed from the authoritative product sources. **Do not stop at a human-only iPhone/visual gate if that gate can be safely deferred without creating architectural ambiguity or risking destructive work.** Record it as DEFERRED/PENDING and continue with independent branches/milestones."
+    },
+    {
+      "title": "Final iPhone correction batch — 2026-08-25",
+      "detail": ""
     }
   ],
   "relevantEvidence": [
@@ -221,10 +222,29 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "b305ee126d12949b86d7031c75da7b81dfe6278b",
+    "commit": "420984f191d8ab5953f8cb78d2a045fb0dc89e95",
     "branch": "main",
-    "workingTree": "## main...origin/main",
-    "changedFiles": []
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HTTPS-RICH-PASTE-SETUP.md\n M orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/DECISIONS.md\n M orchestration/state/STATE.md\n M public/apple-touch-icon.png\n M public/gym-logger-dev.cer\n M public/icons/icon-192.png\n M public/icons/icon-512.png\n M scripts/generate-icons.mjs\n M src/components/ImageExport.tsx\n M src/styles.css\n?? orchestration/reports/M06-T05-FINAL-IPHONE-CORRECTIONS.md\n?? orchestration/reviews/M06-T05-FINAL-IPHONE-CORRECTIONS-codex-review.md\n?? orchestration/tasks/M06-T05-FINAL-IPHONe-CORRECTIONS.md\n?? src/tests/imageExportPanel.test.tsx",
+    "changedFiles": [
+      "orchestration/evidence/HTTPS-RICH-PASTE-SETUP.md",
+      "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/DECISIONS.md",
+      "orchestration/state/STATE.md",
+      "public/apple-touch-icon.png",
+      "public/gym-logger-dev.cer",
+      "public/icons/icon-192.png",
+      "public/icons/icon-512.png",
+      "scripts/generate-icons.mjs",
+      "src/components/ImageExport.tsx",
+      "src/styles.css",
+      "orchestration/reports/M06-T05-FINAL-IPHONE-CORRECTIONS.md",
+      "orchestration/reviews/M06-T05-FINAL-IPHONE-CORRECTIONS-codex-review.md",
+      "orchestration/tasks/M06-T05-FINAL-IPHONe-CORRECTIONS.md",
+      "src/tests/imageExportPanel.test.tsx"
+    ]
   },
   "builder": {
     "id": "ox-alpha",
@@ -243,11 +263,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "final-environment-prepared",
-      "summary": "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance.",
-      "at": "2026-08-25T09:52:50.172Z"
+      "name": "correction-accepted",
+      "summary": "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/.",
+      "at": "2026-08-25T10:25:44.640Z"
     },
-    "contextRevision": 48,
+    "contextRevision": 50,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
