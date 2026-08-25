@@ -108,3 +108,27 @@ Operational rule:
 - If a later task is technically dependent on a human gate but can be built behind an isolated assumption without irreversible work, proceed with the lowest-risk spec-consistent assumption and record it for the consolidated acceptance pass rather than waking the product owner immediately.
 
 This policy is intended to let Codex/OX finish as much of v1 as possible unattended and then present the product owner with one concise final test checklist rather than a sequence of small interruptions.
+
+## Final iPhone failure correction authorization — 2026-08-25
+
+The first consolidated iPhone 14 Pro Max pass exposed concrete failures that supersede the previous `HUMAN_REVIEW_REQUIRED` stopping condition for the affected branches. Codex is authorized to resume full-auto correction work immediately and should use DSH/OX Alpha as the primary builder where practical, with normal independent Codex verification.
+
+Observed release-blocking failures from the physical iPhone:
+
+- Faithful export preview is blank/black.
+- Compact export preview is blank/black.
+- Export Image is difficult to dismiss on mobile and lacks an obvious reliable close/escape control in the supplied screenshots.
+- The supposedly trusted local HTTPS origin still presents Safari's `Connection Not Private` / `Not Secure` state after the supplied certificate/profile was installed, forcing the product owner through a manual visit interstitial.
+- The installed Home Screen icon is only a plain `G`; treat this as placeholder-level polish and replace it with a deliberate, minimal Gym Logger icon without broad visual redesign.
+
+Correction policy:
+
+- Treat the current final human gate as failed for these branches and resume bounded autonomous correction rather than asking for more human testing now.
+- Fix image preview/render/delivery on iPhone-compatible WebKit paths, not merely desktop mocks.
+- Add an obvious and reliable mobile dismissal path for Export Image while preserving the existing sparse interface.
+- Repair the local certificate/origin setup so the final test environment is genuinely trusted by Safari; do not call the origin trusted while iOS still presents a certificate warning/interstitial.
+- Replace the `G` icon with a simple deliberate Gym Logger icon consistent with the current minimal product identity; this is polish, not a branding redesign.
+- Independently run focused tests, the full suite, build, HTTPS/runtime/static-host checks, and diff hygiene after each correction.
+- Do not ask the product owner to retest each individual fix. Batch the corrections and return one new consolidated iPhone pass once all automatable correction work is complete.
+
+The session text pasted into the product conversation does **not** reopen E-003 by itself: plain text cannot demonstrate colour survival. Apple Notes category-colour transfer remains the accepted v1 limitation unless the product owner explicitly changes that product decision.
