@@ -116,3 +116,9 @@ After independent automated verification, return to this same consolidated check
 - **PARTIAL — one-time privacy interstitial remains:** after the new certificate/root-CA setup was available again, the product owner still saw `Connection Not Private` when first opening/adding the app to the Home Screen.
 - **PASS for subsequent standalone launch behavior only:** after choosing to visit once, closing and reopening the installed Home Screen app goes directly into Gym Logger without presenting the privacy interstitial again.
 - This is sufficient to continue the remaining physical-device functional checks in the temporary development environment, but it is **not evidence that the local certificate chain is fully trusted** and should not be treated as the desired final production install experience.
+
+## Retest infrastructure interruption — 2026-08-25 ~22:29 SGT
+
+- **BLOCKED — installed Home Screen app currently does not open:** when the final PWA acceptance pass resumed, the product owner attempted to launch Gym Logger from the iPhone Home Screen and reported that the app does not open on-device.
+- Do not classify this as an application-code regression yet. The current test build depends on workstation-hosted LAN services, which have stopped previously; Codex must first verify whether the HTTPS preview on port 4173 and related LAN reachability are still alive.
+- Resume physical acceptance only after the test environment is independently confirmed reachable from the LAN again. If the services are healthy but the installed PWA still fails to launch, treat that as a genuine installability/offline defect and record exact device behavior before correction.
