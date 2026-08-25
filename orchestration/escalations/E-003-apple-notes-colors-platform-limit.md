@@ -59,3 +59,15 @@ than repeat open-ended clipboard experiments.
 
 M03-T02 remains blocked only for this bounded feasibility spike and its evidence
 return.
+
+## Later engineering research note (2026-08-25)
+
+Authoritative Apple documentation confirms that RTF/attributed strings can carry
+font and color attributes and that native pasteboards can expose multiple rich
+representations, while WebKit documents HTML as the browser rich-clipboard
+representation. That supports the earlier conclusion: a native/RTF-capable
+producer could be technically viable, but it is not a direct PWA-to-iPhone
+Notes guarantee and would require a separate native/helper/Shortcuts workflow.
+The three bounded HTML attempts plus the user's trusted-HTTPS iPhone result
+remain the controlling product evidence; this note does not reopen E-003 or
+change the accepted v1 limitation.

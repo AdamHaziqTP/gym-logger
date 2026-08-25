@@ -35,6 +35,7 @@ import {
   type ClipboardCopyOutcome,
 } from "../domain/notesClipboard";
 import { ImageExportPanel } from "./ImageExport";
+import type { ImageExportStyle } from "../domain/imageExport";
 import { orderedRows } from "../domain/rows";
 import type {
   Highlight,
@@ -83,6 +84,11 @@ const COLUMN_LABELS: Record<EditableRowField, string> = {
 interface SessionViewProps {
   db: GymLogDB;
   sessionId: string;
+  /**
+   * M06-T02 (spec §14.1): the persisted Default Image Style seeds the export
+   * panel's initial selection; the panel's own toggle stays per-export.
+   */
+  defaultImageStyle?: ImageExportStyle;
   onBack: () => void;
 }
 
@@ -92,7 +98,12 @@ interface SessionViewProps {
  * (spec §6.2, §17.2, §17.4). Header content order follows the approved rule:
  * date → category legend → sets/exercises summary → table (spec §14.2).
  */
-export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
+export function SessionView({
+  db,
+  sessionId,
+  defaultImageStyle = "compact",
+  onBack,
+}: SessionViewProps) {
   const session = useLiveQuery(
     () => db.sessions.get(sessionId),
     [db, sessionId],
@@ -644,10 +655,20 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
               const tokens = HIGHLIGHT_TOKENS[row.highlight];
               const selected = row.id === selectedRowId;
               const dragging = row.id === draggingRowId;
-              const rowStyle = {
-                "--row-fg": tokens.fg,
-                "--row-bg": tokens.bg,
-              } as CSSProperties;
+              /**
+               * Category tokens ride inline custom properties. `none` rows
+               * deliberately set NONE: the CSS fallbacks (`--row-fg` →
+               * `var(--text)`, `--row-bg` → transparent) render identically
+               * in the approved dark theme (spec §22.1) while letting light
+               * theme (M06-T02) use readable dark text instead of the
+               * near-white `none` token. Highlighted rows keep their exact
+               * locked category colors in both themes (spec §5).
+               */
+              const rowStyle = (
+                row.highlight === "none"
+                  ? {}
+                  : { "--row-fg": tokens.fg, "--row-bg": tokens.bg }
+              ) as CSSProperties;
               return (
                 <tr
                   key={row.id}
@@ -824,6 +845,7 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
       {imageExportSession && (
         <ImageExportPanel
           session={imageExportSession}
+          initialStyle={defaultImageStyle}
           onClose={() => setImageExportSession(null)}
         />
       )}

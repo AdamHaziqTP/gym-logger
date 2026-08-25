@@ -19,6 +19,8 @@ interface HomeProps {
   onOpenHistory: () => void;
   /** Opens the Copy Another Session flow (spec §4.3; M02-T02). */
   onOpenCopyAnother: () => void;
+  /** Opens the Settings screen (spec §§4.1, 23; M06-T02). */
+  onOpenSettings: () => void;
   /** Overrides today's local date (tests); defaults to the device date. */
   todayLocal?: string;
   /** Injectable StorageManager for deterministic tests; default is real. */
@@ -31,6 +33,7 @@ export function Home({
   onOpenSession,
   onOpenHistory,
   onOpenCopyAnother,
+  onOpenSettings,
   todayLocal,
   storageArea,
 }: HomeProps) {
@@ -165,11 +168,23 @@ export function Home({
           Today / Last Workout / actions rhythm. */}
       <BackupSection db={db} todayLocal={todayLocal} />
 
+      {/* Settings entry (spec §§4.1, 13, 23; M06-T02): one quiet full-width
+          control in its own section — the same rhythm as the backup section
+          — replacing the earlier "arrives later" placeholder. */}
+      <div className="settings-entry">
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={onOpenSettings}
+        >
+          Settings
+        </button>
+      </div>
+
       <footer className="footnote">
         <p className="storage-note" role="note">
           {storageNote}
         </p>
-        Settings arrives in a later milestone.
         Your Apple Notes archive remains canonical.
       </footer>
     </main>

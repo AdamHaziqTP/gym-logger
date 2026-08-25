@@ -18,10 +18,12 @@ import type { WorkoutSession } from "../domain/types";
 /**
  * Full-session image export overlay (spec §14; M03-T02-IMAGE-EXPORT-01).
  * Local, bounded control: a style choice plus a live preview and a truthful
- * save/share step — no Settings system, no cloud, no native dependency.
+ * save/share step — no cloud, no native dependency.
  *
- * Honoring spec §14.1's Default Image Style ordering, Compact is the initial
- * selection; Faithful is one tap away. The preview renders from the exact
+ * M06-T02 (spec §14.1): the initial selection comes from the persisted
+ * Default Image Style setting (Compact when unset), and the toggle remains a
+ * per-export choice — it never rewrites the stored preference.
+ * The preview renders from the exact
  * same deterministic SVG document that gets delivered, so what the user
  * approves is byte-for-byte what leaves the device.
  *
@@ -63,10 +65,21 @@ interface ImageExportPanelProps {
   /** Snapshot captured when the user opened the panel; edits are blocked behind it. */
   session: WorkoutSession;
   onClose: () => void;
+  /**
+   * M06-T02 (spec §14.1): initial selection comes from the persisted
+   * Default Image Style setting. Defaults to Compact — the original
+   * pre-setting behavior — so existing consumers are unchanged. The toggle
+   * stays per-export: switching here never rewrites the stored preference.
+   */
+  initialStyle?: ImageExportStyle;
 }
 
-export function ImageExportPanel({ session, onClose }: ImageExportPanelProps) {
-  const [style, setStyle] = useState<ImageExportStyle>("compact");
+export function ImageExportPanel({
+  session,
+  onClose,
+  initialStyle = "compact",
+}: ImageExportPanelProps) {
+  const [style, setStyle] = useState<ImageExportStyle>(initialStyle);
   const [previewSrc, setPreviewSrc] = useState<string | null>(null);
   const [pngReady, setPngReady] = useState(false);
   const [rendering, setRendering] = useState(true);

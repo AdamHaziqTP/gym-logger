@@ -2,6 +2,13 @@
  * Gym Logger — dark, restrained, Apple Notes-like presentation (spec §22).
  * Near-black background, thin subtle grid lines, no gradients, no dashboard
  * cards. The category highlights provide all the color.
+ *
+ * M06-T02 theming (spec §§22–23): every surface color lives in a custom
+ * property. Dark is the DEFAULT presentation (spec §22.1/§14.4): an explicit
+ * Light choice sets [data-theme="light"] on <html>, and System removes the
+ * attribute entirely so the prefers-color-scheme media query decides. The
+ * locked category highlight tokens are NOT themed — they stay exactly as
+ * approved in src/domain/highlights.ts for both appearances.
  */
 
 :root {
@@ -13,6 +20,54 @@
   --text: #f2f2f7;
   --text-dim: #98989f;
   --accent: #0a84ff;
+  /* Control/sheet surfaces previously hard-coded inline values. */
+  --control-bg: #1c1c1e;
+  --sheet-bg: #161618;
+  --raised-bg: #2c2c2e;
+  --selection-tint: rgba(255, 255, 255, 0.08);
+  --focus-inner-ring: rgba(255, 255, 255, 0.18);
+}
+
+/*
+ * Light theme (spec §22.1; M06-T02): readable and restrained — an iOS-like
+ * neutral palette, same layout, same components, no redesign. Declared once
+ * per mechanism below; the two blocks MUST stay token-identical (the theme
+ * stylesheet test pins this).
+ */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #f2f2f7;
+  --grid: rgba(60, 60, 67, 0.14);
+  --grid-strong: rgba(60, 60, 67, 0.26);
+  --text: #1c1c1e;
+  --text-dim: #6e6e73;
+  --accent: #0a84ff;
+  --control-bg: #e5e5ea;
+  --sheet-bg: #ffffff;
+  --raised-bg: #d1d1d6;
+  --selection-tint: rgba(0, 0, 0, 0.06);
+  --focus-inner-ring: rgba(0, 0, 0, 0.22);
+}
+
+/* System preference: applies ONLY while no explicit theme is set, so Dark
+   keeps working regardless of the OS setting. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --bg: #ffffff;
+    --surface: #f2f2f7;
+    --grid: rgba(60, 60, 67, 0.14);
+    --grid-strong: rgba(60, 60, 67, 0.26);
+    --text: #1c1c1e;
+    --text-dim: #6e6e73;
+    --accent: #0a84ff;
+    --control-bg: #e5e5ea;
+    --sheet-bg: #ffffff;
+    --raised-bg: #d1d1d6;
+    --selection-tint: rgba(0, 0, 0, 0.06);
+    --focus-inner-ring: rgba(0, 0, 0, 0.22);
+  }
 }
 
 * {
@@ -128,7 +183,7 @@ body {
 }
 
 .btn-secondary {
-  background: #1c1c1e;
+  background: var(--control-bg);
   color: var(--text);
 }
 
@@ -295,7 +350,7 @@ body {
 .confirm-card {
   width: 100%;
   max-width: 340px;
-  background: #1c1c1e;
+  background: var(--control-bg);
   border: 1px solid var(--grid-strong);
   border-radius: 14px;
   padding: 18px 16px 16px;
@@ -413,7 +468,7 @@ body {
   max-height: 92vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  background: #161618;
+  background: var(--sheet-bg);
   border-top: 1px solid var(--grid-strong);
   border-radius: 14px 14px 0 0;
   padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
@@ -446,7 +501,7 @@ body {
 }
 
 .style-toggle button[aria-pressed="true"] {
-  background: #2c2c2e;
+  background: var(--raised-bg);
   border-color: var(--grid-strong);
   color: var(--text);
 }
@@ -764,7 +819,7 @@ body {
 }
 
 tr:focus-within .cell-input {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px var(--focus-inner-ring);
 }
 
 /* Selected row: clear non-colour selection treatment (spec §7.2, C3). */
@@ -822,7 +877,7 @@ tr:focus-within .cell-input {
   align-items: center;
   gap: 12px;
   padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-  background: #161618;
+  background: var(--sheet-bg);
   border-top: 1px solid var(--grid-strong);
 }
 
@@ -855,7 +910,7 @@ tr:focus-within .cell-input {
 }
 
 .swatch.current {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--selection-tint);
 }
 
 .swatch-dot {
@@ -894,7 +949,7 @@ tr:focus-within .cell-input {
   display: flex;
   flex-direction: column;
   padding: 8px 10px calc(12px + env(safe-area-inset-bottom));
-  background: #161618;
+  background: var(--sheet-bg);
   border-top: 1px solid var(--grid-strong);
   border-radius: 14px 14px 0 0;
 }
@@ -938,7 +993,7 @@ tr:focus-within .cell-input {
   align-items: center;
   gap: 12px;
   padding: 8px 8px 8px 16px;
-  background: #2c2c2e;
+  background: var(--raised-bg);
   border: 1px solid var(--grid-strong);
   border-radius: 12px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
@@ -947,4 +1002,25 @@ tr:focus-within .cell-input {
 .undo-message {
   color: var(--text);
   font-size: 14px;
+}
+
+/* ---------- Settings (spec §§22–23; M06-T02) ---------- */
+
+/* Home entry: same quiet full-width rhythm as .backup-actions, in its own
+   section so the two original .home-actions controls stay an untouched pair
+   (the M03-T02 layout contract pins those to exactly Copy Another + History). */
+.settings-entry {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.settings-section {
+  margin-bottom: 24px;
+}
+
+.settings-hint {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin: 8px 2px 0;
 }

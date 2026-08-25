@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T02:40:09.021Z",
+  "generatedAt": "2026-08-25T03:22:05.000Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -36,8 +36,8 @@
   },
   "current": {
     "milestone": "M06 — PWA polish and regression",
-    "task": "M06-T02-SETTINGS-THEME-STYLE — minimal settings and persisted export style",
-    "status": "READY_FOR_OX (M06-T02-SETTINGS-THEME-STYLE)",
+    "task": "M06-T03-RELEASE-READINESS — performance, static deployment, and final handoff",
+    "status": "READY_FOR_OX (M06-T03-RELEASE-READINESS)",
     "humanReviewGate": "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.",
     "nextAction": "M01/FIX-05 automated verification remains the engineering baseline for continuation; its deferred physical-iPhone checks are not reclassified as PASS."
   },
@@ -56,13 +56,22 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "fd466e7 chore: queue settings and theme task",
     "6781b56 feat: finish PWA polish and queue settings",
     "7e547f9 chore: queue M06 PWA polish task",
     "7ed919f feat: add local backup and restore",
-    "d400b93 feat: add Faithful and Compact PNG export",
-    "b734f3c test: cover Home action layout"
+    "d400b93 feat: add Faithful and Compact PNG export"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M06-T02-SETTINGS-THEME-STYLE-codex-review.md",
+      "result": [
+        "Settings/style focused tests: **32/32 passed**.",
+        "Full suite: **348/348 passed**, zero unhandled errors.",
+        "Production build: passed; service-worker cache stamp and 17-asset precache",
+        "Diff hygiene: `git diff --check` passed."
+      ]
+    },
     {
       "path": "orchestration/reviews/M06-T01-PWA-POLISH-REGRESSION-codex-review.md",
       "result": [
@@ -79,15 +88,6 @@
         "Focused backup suites: **43/43 passed** across `backupDomain.test.ts` and",
         "Full suite: **262/262 passed** across 21 files.",
         "`npm run build`: **passed**; TypeScript and Vite build cleanly (56 modules)."
-      ]
-    },
-    {
-      "path": "orchestration/reviews/M03-T02-IMAGE-EXPORT-01-codex-review.md",
-      "result": [
-        "| Focused image/PNG suites | PASS — 29/29 |",
-        "| Full repository suite | PASS — 219/219 across 19 files |",
-        "| Production build | PASS — 53 modules |",
-        "| Diff audit | PASS — `git diff --check` |"
       ]
     }
   ],
@@ -161,7 +161,7 @@
     "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
   ],
   "decisionsMadeSinceLastSync": [
-    "M06-T02 settings/theme/default image-style task is ready after M06 PWA polish acceptance."
+    "Codex independently accepted M06-T02 after correction: 32 settings tests, 348 full tests, clean build/diff, and HTTPS shell/manifest/service-worker smoke; M06-T03 release readiness is next."
   ],
   "recordedDecisions": [
     {
@@ -211,10 +211,31 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "6781b56f47ca5759fece8560a19ad217d1099b50",
+    "commit": "fd466e7febe24c7f2f0e356f42c5ee8e4a0d5634",
     "branch": "main",
-    "workingTree": "## main...origin/main",
-    "changedFiles": []
+    "workingTree": "## main...origin/main\n M orchestration/escalations/E-003-apple-notes-colors-platform-limit.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/REQUIREMENTS_MATRIX.md\n M orchestration/state/STATE.md\n M src/App.tsx\n M src/components/Home.tsx\n M src/components/ImageExport.tsx\n M src/components/SessionView.tsx\n M src/styles.css\n?? orchestration/reports/M06-T02-SETTINGS-THEME-STYLE.md\n?? orchestration/reviews/M06-T02-SETTINGS-THEME-STYLE-codex-review.md\n?? orchestration/tasks/M06-T02-CORRECTION-01-SETTINGS-TYPES-COVERAGE.md\n?? orchestration/tasks/M06-T03-RELEASE-READINESS.md\n?? src/components/Settings.tsx\n?? src/data/settings.ts\n?? src/domain/settings.ts\n?? src/tests/settingsDomain.test.ts\n?? src/tests/settingsFlow.test.tsx",
+    "changedFiles": [
+      "orchestration/escalations/E-003-apple-notes-colors-platform-limit.md",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/REQUIREMENTS_MATRIX.md",
+      "orchestration/state/STATE.md",
+      "src/App.tsx",
+      "src/components/Home.tsx",
+      "src/components/ImageExport.tsx",
+      "src/components/SessionView.tsx",
+      "src/styles.css",
+      "orchestration/reports/M06-T02-SETTINGS-THEME-STYLE.md",
+      "orchestration/reviews/M06-T02-SETTINGS-THEME-STYLE-codex-review.md",
+      "orchestration/tasks/M06-T02-CORRECTION-01-SETTINGS-TYPES-COVERAGE.md",
+      "orchestration/tasks/M06-T03-RELEASE-READINESS.md",
+      "src/components/Settings.tsx",
+      "src/data/settings.ts",
+      "src/domain/settings.ts",
+      "src/tests/settingsDomain.test.ts",
+      "src/tests/settingsFlow.test.tsx"
+    ]
   },
   "builder": {
     "id": "ox-alpha",
@@ -233,11 +254,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "task-ready-for-ox",
-      "summary": "M06-T02 settings/theme/default image-style task is ready after M06 PWA polish acceptance.",
-      "at": "2026-08-25T02:40:08.978Z"
+      "name": "m06-t02-accepted",
+      "summary": "Codex independently accepted M06-T02 after correction: 32 settings tests, 348 full tests, clean build/diff, and HTTPS shell/manifest/service-worker smoke; M06-T03 release readiness is next.",
+      "at": "2026-08-25T03:22:04.888Z"
     },
-    "contextRevision": 39,
+    "contextRevision": 41,
     "openEscalations": [
       {
         "id": "E-002",

@@ -3,8 +3,17 @@ import { Home } from "./components/Home";
 import { History } from "./components/History";
 import { CopySession } from "./components/CopySession";
 import { SessionView } from "./components/SessionView";
+import { Settings } from "./components/Settings";
 import type { GymLogDB } from "./data/db";
 import { createDb, sortSessionsNewestFirst } from "./data/db";
+import { readAppSettings, saveDefaultImageStyleSetting, saveThemeSetting } from "./data/settings";
+import {
+  applyThemePreference,
+  DEFAULT_SETTINGS,
+  type AppSettings,
+  type ImageStyleSetting,
+  type ThemeSetting,
+} from "./domain/settings";
 import { ensureSeeded } from "./data/seed";
 import { todayLocalDate } from "./domain/dates";
 
@@ -19,6 +28,7 @@ type View =
   | { name: "home" }
   | { name: "history" }
   | { name: "copy" }
+  | { name: "settings" }
   | { name: "session"; sessionId: string; from: "home" | "history" };
 
 interface AppProps {
@@ -47,6 +57,13 @@ export function App({ db, todayLocal }: AppProps) {
    */
   const [startupFailed, setStartupFailed] = useState(false);
   const [retryToken, setRetryToken] = useState(0);
+  /**
+   * M06-T02 (spec §§22–23): the two v1 preferences, loaded from the local
+   * meta table during bootstrap and updated through the Settings screen.
+   * Starts at the spec defaults (System / Compact) until the stored values
+   * arrive; theme application is idempotent so re-applying is harmless.
+   */
+  const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
 
   useEffect(() => {
     let cancelled = false;
@@ -55,6 +72,14 @@ export function App({ db, todayLocal }: AppProps) {
         // Open on first mount; also covers an externally closed connection.
         if (!db.isOpen()) await db.open();
         await ensureSeeded(db);
+
+        // Settings load with the same bootstrap; a read problem falls back
+        // to defaults inside readAppSettings instead of failing startup.
+        const loaded = await readAppSettings(db);
+        if (!cancelled) {
+          setSettings(loaded);
+          applyThemePreference(loaded.theme);
+        }
 
         // Direct resume: a current session reopens itself instead of landing
         // on Home. One session per local date (spec §4.1).
@@ -90,6 +115,37 @@ export function App({ db, todayLocal }: AppProps) {
       cancelled = true;
     };
   }, [db, todayLocal, retryToken]);
+
+  /**
+   * Theme changes apply immediately without a reload (spec §22.1): the
+   * explicit Dark/Light choice sets the document attribute; System removes
+   * it so the stylesheet's media query follows the OS preference.
+   */
+  useEffect(() => {
+    applyThemePreference(settings.theme);
+  }, [settings.theme]);
+
+  /** Persist + apply a theme choice. UI updates first, write follows. */
+  const changeTheme = (theme: ThemeSetting) => {
+    setSettings((current) =>
+      current.theme === theme ? current : { ...current, theme },
+    );
+    saveThemeSetting(db, theme).catch((error) => {
+      console.error("Gym Logger: could not save theme setting", error);
+    });
+  };
+
+  /** Same contract for the default image style preference. */
+  const changeDefaultImageStyle = (style: ImageStyleSetting) => {
+    setSettings((current) =>
+      current.defaultImageStyle === style
+        ? current
+        : { ...current, defaultImageStyle: style },
+    );
+    saveDefaultImageStyleSetting(db, style).catch((error) => {
+      console.error("Gym Logger: could not save image style setting", error);
+    });
+  };
 
   if (!ready) {
     return <div className="boot" role="status" aria-label="Loading" />;
@@ -137,6 +193,7 @@ export function App({ db, todayLocal }: AppProps) {
       }
       onOpenHistory={() => setView({ name: "history" })}
       onOpenCopyAnother={() => setView({ name: "copy" })}
+      onOpenSettings={() => setView({ name: "settings" })}
       todayLocal={todayLocal}
     />
   ) : view.name === "history" ? (
@@ -158,10 +215,20 @@ export function App({ db, todayLocal }: AppProps) {
       }
       todayLocal={todayLocal}
     />
+  ) : view.name === "settings" ? (
+    // Minimal settings surface (spec §§22–23; M06-T02): theme + default
+    // image style only. Choices apply immediately and persist locally.
+    <Settings
+      settings={settings}
+      onChangeTheme={changeTheme}
+      onChangeDefaultImageStyle={changeDefaultImageStyle}
+      onBack={() => setView({ name: "home" })}
+    />
   ) : (
     <SessionView
       db={db}
       sessionId={view.sessionId}
+      defaultImageStyle={settings.defaultImageStyle}
       onBack={() =>
         setView(view.from === "history" ? { name: "history" } : { name: "home" })
       }
