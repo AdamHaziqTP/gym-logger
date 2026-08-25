@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T14:46:13.088Z",
+  "generatedAt": "2026-08-25T14:46:47.102Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "0cb9b46 fix: harden iPhone PNG image delivery",
     "f1f4545 docs: record iPhone export delivery failure",
     "8fde227 docs: clarify slow iPhone launch observation",
     "f4f4d07 docs: record final retest app unreachable",
-    "03d2e90 docs: park native helper and resume PWA gate",
-    "b91fcc0 docs: sync E-004 native proof state"
+    "03d2e90 docs: park native helper and resume PWA gate"
   ],
   "codexVerification": [
     {
@@ -179,7 +179,7 @@
     "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker."
   ],
   "decisionsMadeSinceLastSync": [
-    "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains"
+    "M06-T05 saved-image delivery correction checkpoint 0cb9b46; one physical saved-image retest remains"
   ],
   "recordedDecisions": [
     {
@@ -231,22 +231,12 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "f1f45459ad1cb42653f478cb059fccd3ac556654",
+    "commit": "0cb9b46ba4388b2c18e9482598a62414e7d894bf",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M src/domain/pngExport.ts\n M src/tests/pngExport.test.ts\n?? orchestration/reports/M06-T05-FIX-EXPORT-DELIVERY.md\n?? orchestration/reviews/M06-T05-FIX-EXPORT-DELIVERY-codex-review.md\n?? orchestration/tasks/M06-T05-FIX-EXPORT-DELIVERY.md",
+    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
-      "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/state/STATE.md",
-      "src/domain/pngExport.ts",
-      "src/tests/pngExport.test.ts",
-      "orchestration/reports/M06-T05-FIX-EXPORT-DELIVERY.md",
-      "orchestration/reviews/M06-T05-FIX-EXPORT-DELIVERY-codex-review.md",
-      "orchestration/tasks/M06-T05-FIX-EXPORT-DELIVERY.md"
+      "orchestration/product-orchestrator/bootstrap.mjs"
     ]
   },
   "builder": {
@@ -266,11 +256,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "correction-accepted",
-      "summary": "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains",
-      "at": "2026-08-25T14:46:13.047Z"
+      "name": "accepted-checkpoint",
+      "summary": "M06-T05 saved-image delivery correction checkpoint 0cb9b46; one physical saved-image retest remains",
+      "at": "2026-08-25T14:46:47.058Z"
     },
-    "contextRevision": 61,
+    "contextRevision": 62,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

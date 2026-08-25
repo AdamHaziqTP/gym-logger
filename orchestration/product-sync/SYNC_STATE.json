@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "accepted-checkpoint",
+      "summary": "M06-T05 saved-image delivery correction checkpoint 0cb9b46; one physical saved-image retest remains",
+      "at": "2026-08-25T14:46:47.058Z"
+    },
+    {
       "name": "correction-accepted",
       "summary": "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains",
       "at": "2026-08-25T14:46:13.047Z"
@@ -56,21 +61,16 @@
       "name": "final-retest-ready",
       "summary": "M06-T05 is accepted for automated scope; final iPhone 14 Pro Max retest is ready at https://192.168.1.49:4173/ with the repaired root/leaf HTTPS setup. Apple Notes colour loss remains accepted v1.",
       "at": "2026-08-25T10:27:25.282Z"
-    },
-    {
-      "name": "correction-accepted",
-      "summary": "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/.",
-      "at": "2026-08-25T10:25:44.640Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T14:46:13.047Z",
+  "lastPublishedAt": "2026-08-25T14:46:47.059Z",
   "lastEvent": {
-    "name": "correction-accepted",
-    "summary": "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains",
-    "at": "2026-08-25T14:46:13.047Z"
+    "name": "accepted-checkpoint",
+    "summary": "M06-T05 saved-image delivery correction checkpoint 0cb9b46; one physical saved-image retest remains",
+    "at": "2026-08-25T14:46:47.058Z"
   },
-  "syncRevision": 61,
+  "syncRevision": 62,
   "openEscalations": [],
   "chatNotifications": [
     {
