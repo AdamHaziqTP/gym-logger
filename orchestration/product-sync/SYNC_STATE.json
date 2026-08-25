@@ -4,6 +4,11 @@
   "events": [
     {
       "name": "accepted-checkpoint",
+      "summary": "M06-T05 pixel guard checkpoint c176437; blank output now blocks saving with an explicit status; one saved-image-only retest remains",
+      "at": "2026-08-25T15:45:44.638Z"
+    },
+    {
+      "name": "accepted-checkpoint",
       "summary": "M06-T05 pixel-level PNG guard checkpoint f7cead6; one saved-image-only iPhone retest remains",
       "at": "2026-08-25T15:44:57.085Z"
     },
@@ -56,21 +61,16 @@
       "name": "e004-source-proof-blocked",
       "summary": "E-004 source proof pushed at 145e22e: 12/12 native harness checks, 359/359 PWA tests, and build pass; Swift/Xcode/iPhone proof remains blocked by the available workstation toolchain.",
       "at": "2026-08-25T13:06:01.883Z"
-    },
-    {
-      "name": "human-gate-blocked",
-      "summary": "E-004 native helper source proof completed with 12/12 harness checks, but Swift/Xcode compilation and iPhone installation are blocked on this Windows workstation; no PWA changes made.",
-      "at": "2026-08-25T13:05:36.185Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T15:44:57.086Z",
+  "lastPublishedAt": "2026-08-25T15:45:44.639Z",
   "lastEvent": {
     "name": "accepted-checkpoint",
-    "summary": "M06-T05 pixel-level PNG guard checkpoint f7cead6; one saved-image-only iPhone retest remains",
-    "at": "2026-08-25T15:44:57.085Z"
+    "summary": "M06-T05 pixel guard checkpoint c176437; blank output now blocks saving with an explicit status; one saved-image-only retest remains",
+    "at": "2026-08-25T15:45:44.638Z"
   },
-  "syncRevision": 68,
+  "syncRevision": 69,
   "openEscalations": [],
   "chatNotifications": [
     {
