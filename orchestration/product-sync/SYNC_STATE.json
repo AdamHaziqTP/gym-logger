@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "accepted-checkpoint",
+      "summary": "M03-T03 accepted for automated scope and pushed at d93400f; product context refreshed for the consolidated iPhone 14 Pro Max pass including optional Shortcuts colour proof.",
+      "at": "2026-08-25T12:25:09.390Z"
+    },
+    {
       "name": "final-human-gate-ready",
       "summary": "M03-T03 is accepted for automated scope after 41 focused and 359 full tests, build, diff audit, and HTTPS smoke; one consolidated iPhone 14 Pro Max pass now includes the optional Shortcuts colour route and all prior deferred checks.",
       "at": "2026-08-25T12:24:28.296Z"
@@ -56,21 +61,16 @@
       "name": "final-human-gate-ready",
       "summary": "M06 automated scope is complete; consolidated iPhone 14 Pro Max acceptance is the only remaining v1 gate.",
       "at": "2026-08-25T03:40:36.020Z"
-    },
-    {
-      "name": "m06-t03-accepted",
-      "summary": "M06-T03 release readiness accepted: 350/350 tests, build, HTTPS PWA smoke, static audit, docs, and final iPhone checklist ready.",
-      "at": "2026-08-25T03:40:08.499Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T12:24:28.297Z",
+  "lastPublishedAt": "2026-08-25T12:25:09.391Z",
   "lastEvent": {
-    "name": "final-human-gate-ready",
-    "summary": "M03-T03 is accepted for automated scope after 41 focused and 359 full tests, build, diff audit, and HTTPS smoke; one consolidated iPhone 14 Pro Max pass now includes the optional Shortcuts colour route and all prior deferred checks.",
-    "at": "2026-08-25T12:24:28.296Z"
+    "name": "accepted-checkpoint",
+    "summary": "M03-T03 accepted for automated scope and pushed at d93400f; product context refreshed for the consolidated iPhone 14 Pro Max pass including optional Shortcuts colour proof.",
+    "at": "2026-08-25T12:25:09.390Z"
   },
-  "syncRevision": 54,
+  "syncRevision": 55,
   "openEscalations": [],
   "chatNotifications": [
     {

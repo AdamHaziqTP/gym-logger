@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T12:24:28.356Z",
+  "generatedAt": "2026-08-25T12:25:09.446Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "d93400f feat: prepare Shortcuts Notes colour handoff",
     "8710fd8 docs: reopen optional Apple Notes colour path",
     "91ba3f0 docs: record one-time iPhone trust warning",
     "fb8d9f1 docs: record final retest infrastructure recovery",
-    "1050fff docs: record unreachable certificate download server",
-    "013d776 docs: point product sync to final iPhone retest"
+    "1050fff docs: record unreachable certificate download server"
   ],
   "codexVerification": [
     {
@@ -172,7 +172,7 @@
     "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. M03-T03 optional Shortcuts execution and Apple Notes colour proof are included in this same final pass."
   ],
   "decisionsMadeSinceLastSync": [
-    "M03-T03 is accepted for automated scope after 41 focused and 359 full tests, build, diff audit, and HTTPS smoke; one consolidated iPhone 14 Pro Max pass now includes the optional Shortcuts colour route and all prior deferred checks."
+    "M03-T03 accepted for automated scope and pushed at d93400f; product context refreshed for the consolidated iPhone 14 Pro Max pass including optional Shortcuts colour proof."
   ],
   "recordedDecisions": [
     {
@@ -223,25 +223,12 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "8710fd85cdbf0dad506bf3269f8d03ceca9fc39f",
+    "commit": "d93400f27be38fe7dd0afb48d853c329219c54b7",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M src/components/SessionView.tsx\n M src/styles.css\n?? orchestration/evidence/M03-T03-SHORTCUTS-SETUP.md\n?? orchestration/reports/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY.md\n?? orchestration/reviews/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY-codex-review.md\n?? orchestration/tasks/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY.md\n?? src/domain/notesShortcut.ts\n?? src/tests/notesShortcut.test.ts",
+    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
-      "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/state/STATE.md",
-      "src/components/SessionView.tsx",
-      "src/styles.css",
-      "orchestration/evidence/M03-T03-SHORTCUTS-SETUP.md",
-      "orchestration/reports/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY.md",
-      "orchestration/reviews/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY-codex-review.md",
-      "orchestration/tasks/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY.md",
-      "src/domain/notesShortcut.ts",
-      "src/tests/notesShortcut.test.ts"
+      "orchestration/product-orchestrator/bootstrap.mjs"
     ]
   },
   "builder": {
@@ -261,11 +248,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "final-human-gate-ready",
-      "summary": "M03-T03 is accepted for automated scope after 41 focused and 359 full tests, build, diff audit, and HTTPS smoke; one consolidated iPhone 14 Pro Max pass now includes the optional Shortcuts colour route and all prior deferred checks.",
-      "at": "2026-08-25T12:24:28.296Z"
+      "name": "accepted-checkpoint",
+      "summary": "M03-T03 accepted for automated scope and pushed at d93400f; product context refreshed for the consolidated iPhone 14 Pro Max pass including optional Shortcuts colour proof.",
+      "at": "2026-08-25T12:25:09.390Z"
     },
-    "contextRevision": 54,
+    "contextRevision": 55,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
