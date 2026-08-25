@@ -84,3 +84,9 @@ After independent automated verification, return to this same consolidated check
 - **BLOCKED — certificate download endpoint unreachable:** while beginning the M06-T05 consolidated retest, the product owner attempted to open `http://192.168.1.49:5174/gym-logger-dev.cer` on the iPhone and Safari reported that the server stopped responding / could not open the page.
 - Do not treat this as a certificate-trust result. The local certificate-serving process must be restarted or repaired on the workstation and the endpoint re-verified before the iPhone can install the new root CA.
 - No further trust/installability result should be recorded until the certificate endpoint is reachable again.
+
+## Retest trust observation — 2026-08-25 ~19:53 SGT
+
+- **PARTIAL — one-time privacy interstitial remains:** after the new certificate/root-CA setup was available again, the product owner still saw `Connection Not Private` when first opening/adding the app to the Home Screen.
+- **PASS for subsequent standalone launch behavior only:** after choosing to visit once, closing and reopening the installed Home Screen app goes directly into Gym Logger without presenting the privacy interstitial again.
+- This is sufficient to continue the remaining physical-device functional checks in the temporary development environment, but it is **not evidence that the local certificate chain is fully trusted** and should not be treated as the desired final production install experience.
