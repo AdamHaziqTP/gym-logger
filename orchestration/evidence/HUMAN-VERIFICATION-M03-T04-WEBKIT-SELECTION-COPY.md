@@ -28,16 +28,24 @@ Notes` button for this result, and do not run the old Shortcut conversion.
    - Arms orange, Back purple, Chest mint, Delts blue, and Legs pink;
    - unhighlighted rows staying plain.
 
-Result: `BLOCKED`
+Result: `BLOCKED — RETEST READY`
 
-Observed result — 2026-08-26 target-iPhone attempt:
+Historical blocked attempt — 2026-08-26:
 
-- The product owner opened the exact proof URL above in Safari.
-- Instead of the isolated proof page, Safari rendered the normal Gym Logger application UI (Home/session screens), so the required **Copy rendered Gym table using Safari** control was not present.
-- The normal app UI did show the existing **Copy to Notes**, **Share Colour Snapshot**, and **Export Image** controls, confirming the request reached the Gym Logger origin but not the intended feasibility document.
-- Therefore M03-T04 has **not** yet been physically exercised and must not be classified PASS or FAIL for colour preservation.
+- The product owner opened the retired `/feasibility/selection-copy.html`
+  route in Safari.
+- Safari rendered the normal Gym Logger application UI instead of the
+  experimental page, so the required proof button was absent.
+- That attempt did not exercise Apple Notes and is not a colour PASS or FAIL.
 
-Repository inspection confirms `public/feasibility/selection-copy.html` itself does contain the required proof button. The current blocker is the served/runtime route: the target iPhone is receiving the SPA/app shell rather than that static feasibility document. Codex must verify the exact response body/title/content for `/feasibility/selection-copy.html` from the currently running LAN preview, not merely HTTP 200, and correct stale `dist`, preview process, SPA fallback, or service-worker interference as applicable before asking for another human paste.
+Correction status:
+
+- The retired proof was replaced by the complete
+  `/feasibility/native-copy.html` proof.
+- Fresh `dist` and the exact LAN response were independently checked for the
+  experimental title/button and absence of the React shell.
+- The service worker now bypasses `/feasibility/*` requests.
+- M03-T04 is ready for the single retest using the current Proof URL above.
 
 Desktop tests only establish that the proof requested the native browser copy
 operation. They do not establish the Apple Notes result. If this fails or
