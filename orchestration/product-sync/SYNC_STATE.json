@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "proof-served-body-corrected",
+      "summary": "M03-T04 proof now serves as standalone native-copy page over LAN HTTPS; /feasibility service-worker bypass added; 398/398 tests and build pass.",
+      "at": "2026-08-25T22:35:31.047Z"
+    },
+    {
       "name": "worker-timeout-and-proof-ready",
       "summary": "M03-T04 WebKit native-selection-copy proof is ready for one target-iPhone paste; M06-T07 polish remains automated-green and colour recovery is reopened.",
       "at": "2026-08-25T17:49:29.197Z"
@@ -56,21 +61,16 @@
       "name": "accepted-checkpoint",
       "summary": "M06-T05 pixel-level PNG guard checkpoint f7cead6; one saved-image-only iPhone retest remains",
       "at": "2026-08-25T15:44:57.085Z"
-    },
-    {
-      "name": "correction-accepted",
-      "summary": "M06-T05 pixel-trace correction independently verified at 362/362; blank canvas blocked before File creation; one saved-image retest remains",
-      "at": "2026-08-25T15:44:41.473Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T17:49:29.198Z",
+  "lastPublishedAt": "2026-08-25T22:35:31.047Z",
   "lastEvent": {
-    "name": "worker-timeout-and-proof-ready",
-    "summary": "M03-T04 WebKit native-selection-copy proof is ready for one target-iPhone paste; M06-T07 polish remains automated-green and colour recovery is reopened.",
-    "at": "2026-08-25T17:49:29.197Z"
+    "name": "proof-served-body-corrected",
+    "summary": "M03-T04 proof now serves as standalone native-copy page over LAN HTTPS; /feasibility service-worker bypass added; 398/398 tests and build pass.",
+    "at": "2026-08-25T22:35:31.047Z"
   },
-  "syncRevision": 78,
+  "syncRevision": 79,
   "openEscalations": [],
   "chatNotifications": [
     {
