@@ -6,7 +6,10 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ImageExportPanel } from "../components/ImageExport";
+import {
+  CompactSnapshotShare,
+  ImageExportPanel,
+} from "../components/ImageExport";
 import { seedSessionFromFixture } from "../data/fixture";
 
 describe("ImageExportPanel final-gate corrections", () => {
@@ -48,5 +51,22 @@ describe("ImageExportPanel final-gate corrections", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Close Export Image" }));
     expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("exposes the direct Compact colour snapshot action without replacing Notes copy", async () => {
+    render(
+      <CompactSnapshotShare
+        session={seedSessionFromFixture("2026-08-24T08:00:00.000Z")}
+      />,
+    );
+
+    const button = await screen.findByRole("button", {
+      name: "Share Colour Snapshot",
+    });
+    expect((button as HTMLButtonElement).disabled).toBe(true);
+    expect(
+      button.closest("[data-export-style='compact']"),
+    ).not.toBeNull();
+    expect(screen.getByText(/no visible pixels were verified/i)).toBeTruthy();
   });
 });

@@ -5,8 +5,8 @@ import {
   deleteSession,
   duplicateRowById,
   insertBlankRowAtIndex,
-  insertRowCopyAtIndex,
   removeRowById,
+  replaceRowContentsById,
   replaceRows,
   setNotes as persistNotes,
   setRowHighlight as persistRowHighlight,
@@ -34,7 +34,7 @@ import {
   writeNotesPayloadToClipboard,
   type ClipboardCopyOutcome,
 } from "../domain/notesClipboard";
-import { ImageExportPanel } from "./ImageExport";
+import { CompactSnapshotShare, ImageExportPanel } from "./ImageExport";
 import type { ImageExportStyle } from "../domain/imageExport";
 import { orderedRows } from "../domain/rows";
 import type {
@@ -436,23 +436,18 @@ export function SessionView({
     closeMenu();
   };
 
-  const commandCut = async () => {
-    const row = sortedRows.find((item) => item.id === selectedRowId);
-    if (!row) return;
-    copyRowToClipboard(row); // Cut keeps the copied data (task FIX-04 §1).
-    const removal = await removeRowById(db, sessionId, row.id);
-    setSelectedRowId(null);
-    closeMenu();
-    if (removal) showUndoToast(removal.previousRows);
-  };
-
   const commandPaste = async () => {
     const copied = peekRowClipboard();
     if (!copied || !selectedRowId) return;
-    const index = sortedRows.findIndex((row) => row.id === selectedRowId);
-    const pastedId = await insertRowCopyAtIndex(db, sessionId, index + 1, copied);
+    const targetId = selectedRowId;
+    const replaced = await replaceRowContentsById(
+      db,
+      sessionId,
+      targetId,
+      copied,
+    );
     closeMenu();
-    if (pastedId) setSelectedRowId(pastedId);
+    if (replaced) setSelectedRowId(targetId);
   };
 
   const commandColour = () => {
@@ -788,6 +783,8 @@ export function SessionView({
           action beside Copy to Notes. Opening it snapshots the visible state
           (same DOM-truth rule as Copy-to-Notes); nothing is uploaded and no
           native dependency is involved — SVG→PNG in-page, then share/download. */}
+      <CompactSnapshotShare session={session} />
+
       <section className="image-export-zone" aria-label="Export session image">
         <button
           type="button"
@@ -821,7 +818,6 @@ export function SessionView({
             onAddBelow={() => void commandAddBelow()}
             onDuplicate={() => void commandDuplicate()}
             onCopy={commandCopy}
-            onCut={() => void commandCut()}
             onPaste={() => void commandPaste()}
             onColour={commandColour}
             onDelete={() => void commandDelete()}
@@ -956,7 +952,6 @@ interface RowMenuProps {
   onAddBelow: () => void;
   onDuplicate: () => void;
   onCopy: () => void;
-  onCut: () => void;
   onPaste: () => void;
   onColour: () => void;
   onDelete: () => void;
@@ -977,9 +972,6 @@ function RowMenu(props: RowMenuProps) {
       </button>
       <button type="button" role="menuitem" className="row-menu-item" onClick={props.onCopy}>
         Copy
-      </button>
-      <button type="button" role="menuitem" className="row-menu-item" onClick={props.onCut}>
-        Cut
       </button>
       <button
         type="button"

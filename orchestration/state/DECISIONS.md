@@ -193,3 +193,28 @@ consolidated PWA/iPhone acceptance workflow for the remaining image export,
 dismissal, installability/trust, offline, Home icon/layout, table interaction,
 backup/restore, and ordinary uncoloured Notes-copy checks. Reopen E-004 only
 when a legitimate Mac/Xcode or equivalent iOS build/install route is available.
+
+## M06-T07 final polish — 2026-08-26
+
+The latest physical iPhone pass confirms that Compact and Faithful PNG export,
+the Tuesday migration, offline behavior, backup/import/export, and ordinary
+editable Copy to Notes are functionally good. The remaining bounded polish is:
+
+- Compact is the preferred initial export style; Faithful remains available as
+  the secondary style.
+- Add a direct **Share Colour Snapshot** action near Copy to Notes. It shares
+  the already-working Compact PNG as an image snapshot and must not be
+  described as an editable Notes export or replace Copy to Notes.
+- Remove Cut from the personal row menu. Paste replaces the selected row's
+  contents while retaining that row's identity, position, and row count.
+- Version the existing deliberate Gym Logger icon URLs/assets and require a
+  one-time remove-from-Home-Screen then fresh re-add for iOS cache refresh.
+- Keep E-004 `BLOCKED/DEFERRED — NEEDS MAC/XCODE`; do not reopen Shortcuts or
+  HTML colour experiments. Apple Notes colour loss remains the accepted v1
+  limitation for the normal editable-table path.
+
+The three bounded M06-T07 OX tasks were each dispatched through the verified
+DSH Desktop headless wrapper. Each produced no usable output or repository
+delta within its bounded task window, so Codex used the permitted fallback and
+independently verified the resulting batch. This is recorded as a task-level
+worker timeout, not as evidence that the wrapper or OX provider is unavailable.

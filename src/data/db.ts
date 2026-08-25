@@ -95,6 +95,33 @@ export async function updateRowField(
   }));
 }
 
+/** Replaces one selected row's contents without changing its identity/order. */
+export async function replaceRowContentsById(
+  db: GymLogDB,
+  sessionId: string,
+  rowId: string,
+  source: WorkoutRow,
+): Promise<boolean> {
+  let replaced = false;
+  await mutateSession(db, sessionId, (session) => ({
+    ...session,
+    rows: session.rows.map((row) => {
+      if (row.id !== rowId) return row;
+      replaced = true;
+      return {
+        ...row,
+        exercise: source.exercise,
+        sets: source.sets,
+        reps: source.reps,
+        weight: source.weight,
+        skip: source.skip,
+        highlight: source.highlight,
+      };
+    }),
+  }));
+  return replaced;
+}
+
 export async function setRowHighlight(
   db: GymLogDB,
   sessionId: string,
@@ -158,28 +185,6 @@ export async function insertBlankRowAtIndex(
   return insertRowWithSpec(db, sessionId, index, () =>
     createBlankRow(newId()),
   );
-}
-
-/**
- * Inserts a copy of `source` (all five cell texts + highlight) with a fresh
- * identity at `index`; used by Paste. Resolves to the new row's id.
- */
-export async function insertRowCopyAtIndex(
-  db: GymLogDB,
-  sessionId: string,
-  index: number,
-  source: WorkoutRow,
-  newId: () => string = uuid,
-): Promise<string | null> {
-  return insertRowWithSpec(db, sessionId, index, () => ({
-    ...createBlankRow(newId()),
-    exercise: source.exercise,
-    sets: source.sets,
-    reps: source.reps,
-    weight: source.weight,
-    skip: source.skip,
-    highlight: source.highlight,
-  }));
 }
 
 async function insertRowWithSpec(

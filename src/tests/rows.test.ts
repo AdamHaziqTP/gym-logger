@@ -192,37 +192,20 @@ describe("app-owned row clipboard", () => {
   it("stores and returns a defensive copy of the copied row", () => {
     expect(hasCopiedRow()).toBe(false);
 
-    const source = row({ id: "src", exercise: "Cut me", highlight: "mint" });
+    const source = row({ id: "src", exercise: "Copy me", highlight: "mint" });
     copyRowToClipboard(source);
 
     expect(hasCopiedRow()).toBe(true);
     const peeked = peekRowClipboard()!;
-    expect(peeked.exercise).toBe("Cut me");
+    expect(peeked.exercise).toBe("Copy me");
 
     // Mutating the returned copy must not corrupt the clipboard.
     peeked.exercise = "mutated";
-    expect(peekRowClipboard()!.exercise).toBe("Cut me");
+    expect(peekRowClipboard()!.exercise).toBe("Copy me");
 
     // Mutating the original must not corrupt it either.
     source.exercise = "changed after copy";
-    expect(peekRowClipboard()!.exercise).toBe("Cut me");
-  });
-
-  it("keeps data available for Cut even after the source row is deleted", () => {
-    const source = row({ id: "src", exercise: "Will be removed" });
-    copyRowToClipboard(source);
-
-    // Simulate the cut: the source row disappears from the session…
-    const { rows } = deleteRow([source, row({ id: "keep", exercise: "Keep" })], "src");
-    expect(rows.map((r) => r.id)).toEqual(["keep"]);
-
-    // …but the copied data survives in the app-owned clipboard.
-    expect(hasCopiedRow()).toBe(true);
-    expect(peekRowClipboard()!.exercise).toBe("Will be removed");
-
-    clearRowClipboard();
-    expect(hasCopiedRow()).toBe(false);
-    expect(peekRowClipboard()).toBeNull();
+    expect(peekRowClipboard()!.exercise).toBe("Copy me");
   });
 
   it("createBlankRow produces an empty row in the internal unhighlighted state (none)", () => {

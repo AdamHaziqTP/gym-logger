@@ -227,7 +227,6 @@ describe("row handle selection and menu", () => {
       "Add Row Below",
       "Duplicate Row",
       "Copy",
-      "Cut",
       "Colour",
       "Delete Row",
     ]) {
@@ -236,6 +235,7 @@ describe("row handle selection and menu", () => {
     // Paste exists but is disabled while nothing was copied.
     const paste = within(menu).getByRole("menuitem", { name: "Paste" });
     expect((paste as HTMLButtonElement).disabled).toBe(true);
+    expect(within(menu).queryByRole("menuitem", { name: "Cut" })).toBeNull();
 
     // Tapping outside the menu (the dimmed backdrop) dismisses it without
     // losing data or selection.
@@ -244,7 +244,7 @@ describe("row handle selection and menu", () => {
     expect(document.querySelector("tr.selected")).not.toBeNull();
   });
 
-  it("enables Paste once a row was copied and pastes its data below with a new identity", async () => {
+  it("enables Paste and replaces the selected row without changing its identity or count", async () => {
     await openSession();
 
     await openMenuForRow(0);
@@ -252,71 +252,38 @@ describe("row handle selection and menu", () => {
     expect(screen.queryByRole("menu")).toBeNull(); // command closes the menu
 
     // Reopen anywhere: Paste is now meaningful.
+    const before = await todaysSession();
+    const target = [...before.rows]
+      .sort((a, b) => a.position - b.position)
+      .at(3)!;
     await openMenuForRow(3);
     const paste = menuItem("Paste");
     expect(paste.disabled).toBe(false);
     fireEvent.click(paste);
 
-    // Pasted below row index 3 ("Dumbell Pullover").
+    // Paste replaces row index 3 ("Dumbell Pullover") in place.
     await waitFor(async () => {
       const session = await todaysSession();
-      expect(session.rows).toHaveLength(41);
+      expect(session.rows).toHaveLength(40);
     });
 
     const session = await todaysSession();
-    // Cloned rows carry fresh UUIDs, so original vs paste is told apart by
-    // position: the copied row sat at position 0, the paste landed at slot 4
-    // (below selected row index 3, "Dumbell Pullover").
-    const source = session.rows.find(
+    const copied = session.rows.find(
       (row) =>
         row.exercise === "Recline curl bench 30° IR uni" && row.position === 0,
     )!;
-    const pasted = session.rows.find(
+    const source = session.rows.find(
       (row) =>
-        row.exercise === "Recline curl bench 30° IR uni" && row.position === 4,
+        row.id === target.id,
     )!;
-    expect(pasted.id).not.toBe(source.id);
-    expect(pasted.sets).toBe(source.sets);
-    expect(pasted.reps).toBe(source.reps);
-    expect(pasted.weight).toBe(source.weight);
-    expect(pasted.skip).toBe(source.skip);
-    expect(pasted.highlight).toBe(source.highlight); // orange
-    expect(normalizedPositions(session.rows)).toEqual([...Array(41).keys()]);
-  });
-
-  it("Cut removes the source row without losing the copied data", async () => {
-    await openSession();
-
-    // Row index 2 = "Dumbell bilateral front raise" (blue).
-    await openMenuForRow(2);
-    fireEvent.click(menuItem("Cut"));
-
-    // Source row removed immediately…
-    await waitFor(async () => {
-      expect(screen.queryByDisplayValue("Dumbell bilateral front raise")).toBeNull();
-    });
-    let session = await todaysSession();
-    expect(session.rows).toHaveLength(39);
-    expect(normalizedPositions(session.rows)).toEqual([...Array(39).keys()]);
-    // …with the temporary Undo affordance (spec §7.4), no confirmation modal.
-    expect(screen.getByText("Row deleted")).toBeTruthy();
-
-    // Clipboard kept the cut data even though the source is gone.
-    await openMenuForRow(0);
-    expect(menuItem("Paste").disabled).toBe(false);
-    fireEvent.click(menuItem("Paste"));
-
-    await waitFor(async () => {
-      session = await todaysSession();
-      expect(session.rows).toHaveLength(40);
-    });
-    session = await todaysSession();
-    const restored = session.rows.find(
-      (row) => row.exercise === "Dumbell bilateral front raise",
-    )!;
-    expect(restored.id).not.toBe("r03"); // fresh identity
-    expect(restored.highlight).toBe("blue");
-    expect(restored.position).toBe(1);
+    expect(source.id).toBe(target.id);
+    expect(source.position).toBe(target.position);
+    expect(source.exercise).toBe(copied.exercise);
+    expect(source.sets).toBe(copied.sets);
+    expect(source.reps).toBe(copied.reps);
+    expect(source.weight).toBe(copied.weight);
+    expect(source.skip).toBe(copied.skip);
+    expect(source.highlight).toBe(copied.highlight);
     expect(normalizedPositions(session.rows)).toEqual([...Array(40).keys()]);
   });
 

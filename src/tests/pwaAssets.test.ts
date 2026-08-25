@@ -11,6 +11,7 @@ import { describe, expect, it } from "vitest";
  */
 
 const PUBLIC = resolve(process.cwd(), "public");
+const ICON_VERSION = "v=20260826-1";
 
 function readPublic(...segments: string[]): string {
   return readFileSync(resolve(PUBLIC, ...segments), "utf8");
@@ -60,7 +61,12 @@ describe("Web App Manifest (M06-T01)", () => {
       expect(icon.type).toBe("image/png");
       expect(String(icon.src).startsWith("/")).toBe(true);
 
-      const path = resolve(PUBLIC, String(icon.src).replace(/^\//, ""));
+      const iconUrl = String(icon.src);
+      expect(iconUrl).toContain(`?${ICON_VERSION}`);
+      const path = resolve(
+        PUBLIC,
+        iconUrl.split("?")[0].replace(/^\//, ""),
+      );
       expect(existsSync(path)).toBe(true);
 
       const buffer = readFileSync(path);
@@ -86,9 +92,9 @@ describe("index.html PWA wiring (M06-T01)", () => {
   const html = readFileSync(resolve(process.cwd(), "index.html"), "utf8");
 
   it("links the manifest, icons, and keeps the dark theme-color", () => {
-    expect(html).toMatch(/<link\s+rel="manifest"\s+href="\/manifest\.webmanifest"/);
-    expect(html).toMatch(/rel="apple-touch-icon"\s+href="\/apple-touch-icon\.png"/);
-    expect(html).toMatch(/rel="icon"[^>]*href="\/icons\/icon-192\.png"/);
+    expect(html).toContain(`/manifest.webmanifest?${ICON_VERSION}`);
+    expect(html).toContain(`/apple-touch-icon.png?${ICON_VERSION}`);
+    expect(html).toContain(`/icons/icon-192.png?${ICON_VERSION}`);
     expect(html).toMatch(/name="theme-color"\s+content="#000000"/);
   });
 

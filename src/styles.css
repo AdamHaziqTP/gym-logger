@@ -417,6 +417,10 @@ body {
   margin-top: 10px;
 }
 
+.snapshot-share-zone {
+  margin-top: 10px;
+}
+
 .notes-copy-button,
 .image-export-button {
   display: block;
@@ -447,6 +451,12 @@ body {
 }
 
 .copy-notes-status {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin: 8px 4px 0;
+}
+
+.snapshot-share-status {
   color: var(--text-dim);
   font-size: 13px;
   margin: 8px 4px 0;

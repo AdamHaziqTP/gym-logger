@@ -45,6 +45,29 @@ introduced.
   `http://192.168.1.49:5174/gym-logger-dev.cer` returned 200 over LAN.
 - Diff hygiene: **PASS** (`git diff --check`).
 
+## Supplementary framing-contract test
+
+The task also required focused tests asserting the delivery context receives
+the intended scale transform while keeping scale-1 behavior correct. The
+initial round pinned the 2× call on the supersampled path
+(`setTransform(2,0,0,2,0,0)`). This continuation adds one focused test that
+pins the 1× budget-fallback path as an exact identity
+(`setTransform(1,0,0,1,0,0)`, 760×6000 input) and proves the transform is
+issued BEFORE Canvg's first draw command (`["setTransform", "render"]`
+ordering), so the visible-pixel guard can never bless a top-left-only
+raster. No further source change was required.
+
+Re-verification after the added test:
+
+- Focused export file `src/tests/pngExport.test.ts`: **16/16 PASS**.
+- Full suite: **374/374 PASS** across 32 test files.
+- Production build (`tsc` + Vite): **PASS**.
+- `git diff --check`: **PASS**.
+- Canvg@4.0.3 source audit: exactly one `setTransform` in the bundle, gated
+  behind `vector-effect: non-scaling-stroke` save/restore (unused by the
+  generated SVG); every other transform composes, so the base raster-scale
+  matrix survives the whole render.
+
 ## Handoff
 
 Return to the existing consolidated iPhone 14 Pro Max checklist. Retest one

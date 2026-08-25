@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M06 — PWA polish and regression
-- Current task: M06-T05-FIX-EXPORT-FRAMING — automated checkpoint accepted; consolidated PWA/iPhone 14 Pro Max acceptance remains next; E-004 parked
+- Current task: M06-T07 final polish — automated checkpoint accepted; only fresh Home Screen icon re-add and direct Compact colour-snapshot share remain for human verification; E-004 parked
 - Status: HUMAN_REVIEW_REQUIRED (remaining PWA/device checks are open; E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE and does not block v1)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: Final consolidated iPhone 14 Pro Max retest after the M06-T05 framing correction at `https://192.168.1.49:4173/`; automated scope is accepted, while saved PNG framing, installability, offline, trust, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker.
-- Latest bounded task: M06-T05-FIX-EXPORT-FRAMING after M06-T06 actual Tuesday session migration + owner-supplied icon asset; Codex-verified automated scope is accepted and the existing consolidated iPhone gate remains open.
+- Human review gate: `orchestration/evidence/M06-T07-FINAL-HUMAN-CHECKLIST.md` at `https://192.168.1.49:4173/`; verify only the fresh cache-busted Home Screen icon and direct Compact colour-snapshot share. E-004 is parked and is not part of the v1 completion blocker.
+- Latest bounded task: M06-T07 final polish after the accepted M06-T06 migration and owner-supplied icon asset; Codex-verified automated scope is accepted and the two-check human gate remains open.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -139,6 +139,22 @@ Updated: 2026-08-26
 - M03-T03 was prepared and dispatched through the configured OX Alpha wrapper. OX was silent for the bounded window with no report or delta; Codex fallback implemented the optional HTML-file share route and recorded `orchestration/reports/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY.md`.
 - Recorded `orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md` and prepared `orchestration/tasks/E-004-NATIVE-NOTES-COLOUR-HELPER.md` from the authorized escalation.
 - E-004 task was dispatched through the configured OX Alpha wrapper; OX was silent for the bounded window. Codex fallback completed the isolated source proof and recorded `orchestration/reports/E-004-NATIVE-NOTES-COLOUR-HELPER.md` and `orchestration/reviews/E-004-NATIVE-NOTES-COLOUR-HELPER-codex-review.md`.
+
+## M06-T07 current checkpoint
+
+- The three bounded M06-T07 tasks were dispatched separately through the
+  verified Desktop DSH wrapper with the headless profile and
+  `openrouter/stealth/ox-alpha` routing. Each timed out without usable output,
+  report, or repository delta; this is recorded as a task-level worker timeout,
+  not OX unavailability.
+- Codex fallback implemented the Compact `Share Colour Snapshot` action,
+  selected-row Paste replacement, Cut removal, and cache-busted icon URLs.
+- Independent verification is green: 74/74 focused tests, 374/374 full tests,
+  production build, PWA/static assertions, and diff hygiene.
+- The remaining human gate is exactly the two checks in
+  `orchestration/evidence/M06-T07-FINAL-HUMAN-CHECKLIST.md`: fresh Home Screen
+  icon re-add and direct Compact colour-snapshot share. No desktop result is a
+  physical pass. E-004 remains parked and does not block v1.
 
 ## Final automated checkpoint
 

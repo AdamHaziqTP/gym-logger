@@ -250,4 +250,86 @@ export function ImageExportPanel({
   );
 }
 
+/**
+ * One-tap compact image handoff for the normal workout flow. The PNG is
+ * prepared when the session changes so the share call itself remains inside
+ * the user's tap activation on iOS. This is deliberately an image snapshot,
+ * not a replacement for the editable Copy to Notes path.
+ */
+export function CompactSnapshotShare({
+  session,
+}: {
+  session: WorkoutSession;
+}) {
+  const [pngBlob, setPngBlob] = useState<Blob | null>(null);
+  const [preparing, setPreparing] = useState(true);
+  const [delivering, setDelivering] = useState(false);
+  const [statusText, setStatusText] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    setPreparing(true);
+    setStatusText("");
+    setPngBlob(null);
+
+    const doc = buildImageLayout(session, "compact");
+    const svg = renderSessionSvg(doc);
+    void rasterizeSvgToPngBlob(svg, doc.width, doc.height).then((blob) => {
+      if (cancelled) return;
+      setPngBlob(blob);
+      setPreparing(false);
+      if (!blob) setStatusText(PNG_UNAVAILABLE_MESSAGE);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [session]);
+
+  const handleShare = () => {
+    if (!pngBlob || delivering) return;
+    const filename = exportImageFilename(session.dateLocal);
+
+    if (supportsFileShare()) {
+      setDelivering(true);
+      const file = new File([pngBlob], filename, { type: "image/png" });
+      void sharePngFile(file)
+        .then(
+          (outcome) => setStatusText(SHARE_STATUS[outcome]),
+          () => setStatusText(SHARE_STATUS.failed),
+        )
+        .finally(() => setDelivering(false));
+      return;
+    }
+
+    setStatusText(
+      triggerPngDownload(pngBlob, filename)
+        ? downloadStartedMessage(filename)
+        : DOWNLOAD_FAILED_MESSAGE,
+    );
+  };
+
+  return (
+    <section
+      className="snapshot-share-zone"
+      aria-label="Share colour snapshot"
+      data-export-style="compact"
+    >
+      <button
+        type="button"
+        className="image-export-button"
+        disabled={preparing || !pngBlob || delivering}
+        onClick={handleShare}
+      >
+        {preparing ? "Preparing Colour Snapshot…" : "Share Colour Snapshot"}
+      </button>
+      {statusText && (
+        <p className="snapshot-share-status" aria-live="polite">
+          {statusText}
+        </p>
+      )}
+    </section>
+  );
+}
+
 export default ImageExportPanel;

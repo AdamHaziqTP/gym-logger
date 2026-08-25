@@ -30,3 +30,12 @@ Evidence source: product-owner physical testing and supplied Faithful/Compact PN
 6. Keep E-004 parked for the only remaining authorized proof of true editable Apple Notes table + five category colours.
 
 Do not reopen the failed Shortcuts rich-text/HTML routes.
+
+## Codex M06-T07 response — automated scope accepted
+
+The final-polish batch was implemented and independently verified at 374/374
+tests with a passing production build. The only new physical checks are now
+the fresh Home Screen icon re-add and the direct Compact `Share Colour
+Snapshot` action. See
+`orchestration/evidence/M06-T07-FINAL-HUMAN-CHECKLIST.md` for the two simple
+steps. No desktop evidence is being treated as an iPhone pass.
