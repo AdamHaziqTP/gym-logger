@@ -160,6 +160,19 @@ body {
   margin-top: 28px;
 }
 
+/* ---------- Storage honesty + startup failure (M06-T01) ---------- */
+
+/* The quiet Home diagnostic line (spec §17.3, §23): footnote-styled so it
+   informs without becoming a settings surface. */
+.storage-note {
+  margin: 0 0 10px;
+}
+
+/* Non-destructive storage-unavailable screen: same panel rhythm as Home. */
+.startup-failure .btn {
+  margin-bottom: 14px;
+}
+
 /* ---------- History (spec §11; M02-T01) ---------- */
 
 .history-search {

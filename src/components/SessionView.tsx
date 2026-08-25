@@ -226,6 +226,11 @@ export function SessionView({ db, sessionId, onBack }: SessionViewProps) {
       window.removeEventListener("beforeunload", handleHide);
       flushSaves();
       if (undoToastTimer.current) clearTimeout(undoToastTimer.current);
+      // M06-T01-CORRECTION-01: a pending Saved→idle reset must not outlive the
+      // component — after unmount its late setState only surfaces as an
+      // unhandled error once the test environment is gone. Clear it here,
+      // alongside the undo toast timer, without touching in-flight saves.
+      if (savedResetTimer.current) clearTimeout(savedResetTimer.current);
     };
   }, [flushSaves]);
 

@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m06-t01-accepted",
+      "summary": "Codex independently accepted M06-T01 after the timer correction: 316 tests, clean build, diff audit, and trusted HTTPS PWA asset smoke; M06-T02 settings/style is next.",
+      "at": "2026-08-25T02:39:57.467Z"
+    },
+    {
+      "name": "correction-required",
+      "summary": "Codex found one unhandled delayed SessionView timer after full-suite teardown; M06 remains unaccepted and a narrow cleanup correction is ready.",
+      "at": "2026-08-25T02:23:59.816Z"
+    },
+    {
       "name": "task-ready-for-ox",
       "summary": "M06-T01 PWA polish/regression task is ready for OX after M05 backup/restore automated acceptance.",
       "at": "2026-08-24T18:32:24.176Z"
@@ -51,26 +61,16 @@
       "name": "m03-t01-e003-feasibility-task-prepared",
       "summary": "E-003 bounded feasibility task prepared: isolated RTF/file handoff and PWA Share Sheet/Shortcuts probe, with no production Copy-to-Notes change or native rewrite.",
       "at": "2026-08-24T16:14:17.515Z"
-    },
-    {
-      "name": "m03-t01-e003-open",
-      "summary": "E-003 opened: after three independently verified HTML payload strategies, Apple Notes still strips both category foreground and text-highlight colors while preserving the editable table/data. Awaiting product/technical route decision.",
-      "at": "2026-08-24T15:51:18.169Z"
-    },
-    {
-      "name": "m03-t01-fix-03-human-color-failure-escalated",
-      "summary": "FIX-03 secure iPhone retest still has editable table/data pass but no foreground or text-highlight colors; three bounded HTML representations failed, so E-003 is open for a product/technical decision.",
-      "at": "2026-08-24T15:51:03.064Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-24T18:32:24.177Z",
+  "lastPublishedAt": "2026-08-25T02:39:57.468Z",
   "lastEvent": {
-    "name": "task-ready-for-ox",
-    "summary": "M06-T01 PWA polish/regression task is ready for OX after M05 backup/restore automated acceptance.",
-    "at": "2026-08-24T18:32:24.176Z"
+    "name": "m06-t01-accepted",
+    "summary": "Codex independently accepted M06-T01 after the timer correction: 316 tests, clean build, diff audit, and trusted HTTPS PWA asset smoke; M06-T02 settings/style is next.",
+    "at": "2026-08-25T02:39:57.467Z"
   },
-  "syncRevision": 36,
+  "syncRevision": 38,
   "openEscalations": [
     {
       "id": "E-002",

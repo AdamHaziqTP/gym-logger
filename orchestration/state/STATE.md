@@ -7,8 +7,8 @@ Updated: 2026-08-25
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M06 — PWA polish and regression
-- Current task: M06-T01-PWA-POLISH-REGRESSION — offline shell and minimal polish
-- Status: READY_FOR_OX (M06-T01-PWA-POLISH-REGRESSION)
+- Current task: M06-T02-SETTINGS-THEME-STYLE — minimal settings and persisted export style
+- Status: READY_FOR_OX (M06-T02-SETTINGS-THEME-STYLE)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
 - Human review gate: E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.
@@ -53,6 +53,8 @@ Updated: 2026-08-25
 - Recorded iPhone visual defect: Home screen Copy Another Session button clips/overlaps the History button below it on iPhone 14 Pro Max.
 - Completed M03-T02 image export automated scope: Faithful/Compact deterministic PNG rendering, preview/download/share contract, and export controls; physical iPhone readability/save/share remain deferred.
 - Completed M05-T01 backup/restore automated scope: deterministic JSON export, strict validation, explicit replacement summary/confirmation, transactional session restore, and best-effort safety export; physical Files/share/restore remain deferred.
+- M06-T01 implementation was independently inspected and its focused tests/build passed, but the full suite exposed one genuine unhandled delayed SessionView timer after jsdom teardown; M06 remains unaccepted pending the bounded cleanup correction.
+- M06-T01 and its timer correction are now independently accepted: 316/316 tests, clean build, diff audit, and trusted HTTPS manifest/service-worker/icon smoke; physical install/offline/visual checks remain deferred.
 
 ## Final disposition
 
@@ -109,7 +111,7 @@ Updated: 2026-08-25
 ## Active task checkpoint
 
 - M05-T01 backup/restore automated scope accepted by Codex: 43/43 focused tests, 262/262 full suite, passing build, diff audit, and trusted HTTPS runtime smoke. Review: `orchestration/reviews/M05-T01-BACKUP-RESTORE-01-codex-review.md`.
-- Active task: `orchestration/tasks/M06-T01-PWA-POLISH-REGRESSION.md`
+- Active task: `orchestration/tasks/M06-T02-SETTINGS-THEME-STYLE.md`
 - Base implementation checkpoint: M05-T01 automated backup/restore checkpoint with Apple Notes color limitation documented.
-- Worker disposition: READY_FOR_OX — implement the bounded offline shell/PWA polish task only. Full-auto continuation is authorized.
-- Next action: invoke OX M06-T01, independently verify manifest/service worker/build/runtime, then continue while preserving physical iPhone checks for the consolidated final gate.
+- Worker disposition: READY_FOR_OX — implement the bounded settings/theme/default-image-style task only. Full-auto continuation is authorized.
+- Next action: invoke OX M06-T02, independently verify settings persistence/style initialization/build/runtime, then continue while preserving physical iPhone checks for the consolidated final gate.

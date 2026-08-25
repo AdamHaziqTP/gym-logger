@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -628,5 +628,67 @@ describe("current-session resume", () => {
       screen.getByRole("button", { name: /Continue Today's Session/ }),
     );
     expect(await screen.findByDisplayValue("Recline curl bench 30° IR uni")).toBeTruthy();
+  });
+});
+
+/* ------------- M06-T01-CORRECTION-01 saved-status timer lifecycle ------------- */
+
+describe("saved status timer cleanup", () => {
+  it("clears the delayed Saved→idle reset timer on unmount", async () => {
+    await openSession();
+
+    // Pass-through observation of timer scheduling so the 1500 ms Saved→idle
+    // reset handle (armed by a completed save in SessionView) can be identified
+    // without changing any timing behavior.
+    const realSetTimeout = globalThis.setTimeout.bind(globalThis);
+    let resetHandle: unknown;
+    const setSpy = vi
+      .spyOn(globalThis, "setTimeout")
+      .mockImplementation(((...args: unknown[]) => {
+        const handle = realSetTimeout(
+          ...(args as Parameters<typeof realSetTimeout>),
+        );
+        if (args.length > 1 && args[1] === 1500) {
+          resetHandle = handle;
+        }
+        return handle;
+      }) as unknown as typeof setTimeout);
+
+    try {
+      // An immediate save via the row colour command arms exactly one reset
+      // timer once the header flips to "Saved".
+      await openMenuForRow(17);
+      fireEvent.click(menuItem("Colour"));
+      const toolbar = await screen.findByRole("toolbar", { name: "Row colour" });
+      fireEvent.click(within(toolbar).getByRole("button", { name: "Legs" }));
+      await screen.findByText("Saved");
+      expect(resetHandle).toBeDefined();
+
+      // Unmount must clear that still-pending timer; otherwise its late
+      // setState fires after jsdom teardown and surfaces as an unhandled
+      // `window is not defined` error.
+      const realClearTimeout = globalThis.clearTimeout.bind(globalThis);
+      const clearedHandles: unknown[] = [];
+      const clearSpy = vi
+        .spyOn(globalThis, "clearTimeout")
+        .mockImplementation(((...args: unknown[]) => {
+          clearedHandles.push(args[0]);
+          return realClearTimeout(
+            ...(args as Parameters<typeof realClearTimeout>),
+          );
+        }) as unknown as typeof clearTimeout);
+
+      try {
+        cleanup();
+        expect(clearedHandles).toContain(resetHandle);
+      } finally {
+        clearSpy.mockRestore();
+      }
+    } finally {
+      setSpy.mockRestore();
+    }
+
+    // The afterEach cleanup below is now a no-op: nothing was left mounted,
+    // so no further lifecycle code can run outside the observed window.
   });
 });

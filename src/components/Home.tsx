@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { startTodaySession } from "../data/clone";
 import type { GymLogDB } from "../data/db";
 import { sortSessionsNewestFirst } from "../data/db";
 import { BackupSection } from "./BackupSection";
+import {
+  describeStorage,
+  readStorageSnapshot,
+  type StorageArea,
+} from "../domain/storageInfo";
 import { formatDateDisplay, todayLocalDate } from "../domain/dates";
 import { displaySummary } from "../domain/summary";
 
@@ -16,6 +21,8 @@ interface HomeProps {
   onOpenCopyAnother: () => void;
   /** Overrides today's local date (tests); defaults to the device date. */
   todayLocal?: string;
+  /** Injectable StorageManager for deterministic tests; default is real. */
+  storageArea?: StorageArea | null;
 }
 
 /** Sparse Home screen (spec §4.1, §13). No analytics cards, no gamification. */
@@ -25,9 +32,30 @@ export function Home({
   onOpenHistory,
   onOpenCopyAnother,
   todayLocal,
+  storageArea,
 }: HomeProps) {
   const sessions = useLiveQuery(() => db.sessions.toArray(), []) ?? [];
   const [starting, setStarting] = useState(false);
+  /**
+   * M06-T01 (spec §17.3, §23): one quiet truthful diagnostic line. Starts
+   * conservative and is refined only by what the Storage API actually
+   * reports — it never markets local storage as permanent.
+   */
+  const [storageNote, setStorageNote] = useState(
+    "On-device local storage (best-effort); your browser may still clear it.",
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    readStorageSnapshot(storageArea)
+      .then((snapshot) => {
+        if (!cancelled) setStorageNote(describeStorage(snapshot));
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [storageArea]);
 
   const today = todayLocal ?? todayLocalDate();
   const todaySession = sortSessionsNewestFirst(
@@ -138,6 +166,9 @@ export function Home({
       <BackupSection db={db} todayLocal={todayLocal} />
 
       <footer className="footnote">
+        <p className="storage-note" role="note">
+          {storageNote}
+        </p>
         Settings arrives in a later milestone.
         Your Apple Notes archive remains canonical.
       </footer>

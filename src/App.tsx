@@ -39,6 +39,14 @@ interface AppProps {
 export function App({ db, todayLocal }: AppProps) {
   const [ready, setReady] = useState(false);
   const [view, setView] = useState<View>({ name: "home" });
+  /**
+   * M06-T01 (spec §27.9): when local storage cannot open at startup the app
+   * must say so, non-destructively, instead of failing silently. `retryToken`
+   * re-runs the bootstrap in place (e.g. after the user frees browser storage
+   * or closes a conflicting tab); nothing is ever deleted on this path.
+   */
+  const [startupFailed, setStartupFailed] = useState(false);
+  const [retryToken, setRetryToken] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -58,7 +66,8 @@ export function App({ db, todayLocal }: AppProps) {
           setView({ name: "session", sessionId: todays[0].id, from: "home" });
         }
       } catch (error) {
-        console.error("Gym Logger: seeding failed", error);
+        console.error("Gym Logger: startup failed", error);
+        if (!cancelled) setStartupFailed(true);
       } finally {
         if (!cancelled) setReady(true);
       }
@@ -80,10 +89,44 @@ export function App({ db, todayLocal }: AppProps) {
     return () => {
       cancelled = true;
     };
-  }, [db, todayLocal]);
+  }, [db, todayLocal, retryToken]);
 
   if (!ready) {
     return <div className="boot" role="status" aria-label="Loading" />;
+  }
+
+  if (startupFailed) {
+    return (
+      <main className="screen">
+        <h1 className="app-title">Gym Log</h1>
+        <section
+          className="panel startup-failure"
+          role="alert"
+          aria-labelledby="startup-failure-label"
+        >
+          <h2 className="section-label" id="startup-failure-label">
+            Storage unavailable
+          </h2>
+          <p className="muted-line">
+            Gym Log couldn't open this device's local database, so saved
+            sessions couldn't be loaded. Nothing was deleted.
+          </p>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => setRetryToken((token) => token + 1)}
+          >
+            Try Again
+          </button>
+          <p className="footnote">
+            If this keeps happening, close other Gym Log tabs or check that your
+            browser isn't blocking site data. Once storage opens again, use
+            Export Backup to keep an extra copy — local storage is not a
+            permanent archive.
+          </p>
+        </section>
+      </main>
+    );
   }
 
   return view.name === "home" ? (
