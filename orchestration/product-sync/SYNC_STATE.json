@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "worker-timeout-and-proof-ready",
+      "summary": "M03-T04 WebKit native-selection-copy proof is ready for one target-iPhone paste; M06-T07 polish remains automated-green and colour recovery is reopened.",
+      "at": "2026-08-25T17:49:29.197Z"
+    },
+    {
       "name": "checkpoint-published",
       "summary": "M06-T05 framing checkpoint and M06-T06 migration verification counts are current; 374/374 tests, build, LAN runtime and certificate pass; target iPhone framing retest remains open.",
       "at": "2026-08-25T17:07:00.914Z"
@@ -56,21 +61,16 @@
       "name": "correction-accepted",
       "summary": "M06-T05 pixel-trace correction independently verified at 362/362; blank canvas blocked before File creation; one saved-image retest remains",
       "at": "2026-08-25T15:44:41.473Z"
-    },
-    {
-      "name": "correction-required",
-      "summary": "M06-T05 still fails: saved PNG remains fully transparent after bfa2fba; require pixel-level pre-share trace",
-      "at": "2026-08-25T15:40:48.936Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T17:07:00.914Z",
+  "lastPublishedAt": "2026-08-25T17:49:29.198Z",
   "lastEvent": {
-    "name": "checkpoint-published",
-    "summary": "M06-T05 framing checkpoint and M06-T06 migration verification counts are current; 374/374 tests, build, LAN runtime and certificate pass; target iPhone framing retest remains open.",
-    "at": "2026-08-25T17:07:00.914Z"
+    "name": "worker-timeout-and-proof-ready",
+    "summary": "M03-T04 WebKit native-selection-copy proof is ready for one target-iPhone paste; M06-T07 polish remains automated-green and colour recovery is reopened.",
+    "at": "2026-08-25T17:49:29.197Z"
   },
-  "syncRevision": 77,
+  "syncRevision": 78,
   "openEscalations": [],
   "chatNotifications": [
     {
