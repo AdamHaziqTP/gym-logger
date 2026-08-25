@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "checkpoint-published",
+      "summary": "M06-T05 framing checkpoint and M06-T06 migration verification counts are current; 374/374 tests, build, LAN runtime and certificate pass; target iPhone framing retest remains open.",
+      "at": "2026-08-25T17:07:00.914Z"
+    },
+    {
+      "name": "correction-accepted",
+      "summary": "M06-T05 PNG framing correction independently verified: 374/374 tests, build, HTTPS/certificate runtime, and diff audit pass; target iPhone framing retest remains open.",
+      "at": "2026-08-25T17:06:34.988Z"
+    },
+    {
       "name": "worker-completed",
       "summary": "M06-T06 actual session migration and supplied icon are Codex-verified; OX task timeout recorded; final iPhone gate remains open.",
       "at": "2026-08-25T16:56:16.625Z"
@@ -51,26 +61,16 @@
       "name": "correction-required",
       "summary": "M06-T05 still fails: saved PNG remains fully transparent after bfa2fba; require pixel-level pre-share trace",
       "at": "2026-08-25T15:40:48.936Z"
-    },
-    {
-      "name": "accepted-checkpoint",
-      "summary": "M06-T05 real-canvas PNG correction and failed Shortcut UI removal are current after merged evidence sync; one saved-image retest remains",
-      "at": "2026-08-25T15:28:58.212Z"
-    },
-    {
-      "name": "correction-accepted",
-      "summary": "M06-T05 transparent PNG root-cause fix and failed Shortcut UI removal independently verified; one saved-image retest remains",
-      "at": "2026-08-25T15:27:25.738Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T16:56:16.625Z",
+  "lastPublishedAt": "2026-08-25T17:07:00.914Z",
   "lastEvent": {
-    "name": "worker-completed",
-    "summary": "M06-T06 actual session migration and supplied icon are Codex-verified; OX task timeout recorded; final iPhone gate remains open.",
-    "at": "2026-08-25T16:56:16.625Z"
+    "name": "checkpoint-published",
+    "summary": "M06-T05 framing checkpoint and M06-T06 migration verification counts are current; 374/374 tests, build, LAN runtime and certificate pass; target iPhone framing retest remains open.",
+    "at": "2026-08-25T17:07:00.914Z"
   },
-  "syncRevision": 75,
+  "syncRevision": 77,
   "openEscalations": [],
   "chatNotifications": [
     {
