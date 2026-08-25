@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "final-environment-prepared",
+      "summary": "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance.",
+      "at": "2026-08-25T09:52:50.172Z"
+    },
+    {
       "name": "final-human-gate-ready",
       "summary": "Autonomous v1 readiness sweep complete after M06-T04 backup/settings restore correction. Only consolidated iPhone 14 Pro Max acceptance remains.",
       "at": "2026-08-25T05:42:34.586Z"
@@ -56,21 +61,16 @@
       "name": "correction-required",
       "summary": "Codex found one unhandled delayed SessionView timer after full-suite teardown; M06 remains unaccepted and a narrow cleanup correction is ready.",
       "at": "2026-08-25T02:23:59.816Z"
-    },
-    {
-      "name": "task-ready-for-ox",
-      "summary": "M06-T01 PWA polish/regression task is ready for OX after M05 backup/restore automated acceptance.",
-      "at": "2026-08-24T18:32:24.176Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T05:42:34.587Z",
+  "lastPublishedAt": "2026-08-25T09:52:50.172Z",
   "lastEvent": {
-    "name": "final-human-gate-ready",
-    "summary": "Autonomous v1 readiness sweep complete after M06-T04 backup/settings restore correction. Only consolidated iPhone 14 Pro Max acceptance remains.",
-    "at": "2026-08-25T05:42:34.586Z"
+    "name": "final-environment-prepared",
+    "summary": "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance.",
+    "at": "2026-08-25T09:52:50.172Z"
   },
-  "syncRevision": 47,
+  "syncRevision": 48,
   "openEscalations": [],
   "chatNotifications": [
     {

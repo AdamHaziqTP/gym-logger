@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T05:42:34.640Z",
+  "generatedAt": "2026-08-25T09:52:50.229Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "b305ee1 fix: restore backup settings metadata",
     "058b316 chore: complete v1 release readiness",
     "34b2419 feat: add persisted settings and theme",
     "fd466e7 chore: queue settings and theme task",
-    "6781b56 feat: finish PWA polish and queue settings",
-    "7e547f9 chore: queue M06 PWA polish task"
+    "6781b56 feat: finish PWA polish and queue settings"
   ],
   "codexVerification": [
     {
@@ -170,7 +170,7 @@
     "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
   ],
   "decisionsMadeSinceLastSync": [
-    "Autonomous v1 readiness sweep complete after M06-T04 backup/settings restore correction. Only consolidated iPhone 14 Pro Max acceptance remains."
+    "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance."
   ],
   "recordedDecisions": [
     {
@@ -221,27 +221,10 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "058b31658079f0b35366b9a8bac403bb56cdc8c1",
+    "commit": "b305ee126d12949b86d7031c75da7b81dfe6278b",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M README.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/REQUIREMENTS_MATRIX.md\n M orchestration/state/STATE.md\n M src/App.tsx\n M src/components/BackupSection.tsx\n M src/components/Home.tsx\n M src/data/backup.ts\n M src/domain/backup.ts\n M src/tests/backupDomain.test.ts\n M src/tests/backupRestore.test.tsx\n?? orchestration/reports/M06-T04-BACKUP-SETTINGS-RESTORE.md\n?? orchestration/reviews/M06-T04-BACKUP-SETTINGS-RESTORE-codex-review.md\n?? orchestration/tasks/M06-T04-BACKUP-SETTINGS-RESTORE.md",
-    "changedFiles": [
-      "README.md",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/state/REQUIREMENTS_MATRIX.md",
-      "orchestration/state/STATE.md",
-      "src/App.tsx",
-      "src/components/BackupSection.tsx",
-      "src/components/Home.tsx",
-      "src/data/backup.ts",
-      "src/domain/backup.ts",
-      "src/tests/backupDomain.test.ts",
-      "src/tests/backupRestore.test.tsx",
-      "orchestration/reports/M06-T04-BACKUP-SETTINGS-RESTORE.md",
-      "orchestration/reviews/M06-T04-BACKUP-SETTINGS-RESTORE-codex-review.md",
-      "orchestration/tasks/M06-T04-BACKUP-SETTINGS-RESTORE.md"
-    ]
+    "workingTree": "## main...origin/main",
+    "changedFiles": []
   },
   "builder": {
     "id": "ox-alpha",
@@ -260,11 +243,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "final-human-gate-ready",
-      "summary": "Autonomous v1 readiness sweep complete after M06-T04 backup/settings restore correction. Only consolidated iPhone 14 Pro Max acceptance remains.",
-      "at": "2026-08-25T05:42:34.586Z"
+      "name": "final-environment-prepared",
+      "summary": "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance.",
+      "at": "2026-08-25T09:52:50.172Z"
     },
-    "contextRevision": 47,
+    "contextRevision": 48,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
