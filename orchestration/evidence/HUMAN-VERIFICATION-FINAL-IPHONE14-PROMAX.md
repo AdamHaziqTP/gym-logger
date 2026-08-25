@@ -69,3 +69,9 @@ Route bounded autonomous corrections for:
 4. Replace the placeholder-like `G` Home Screen icon with a deliberate Gym Logger icon consistent with the existing minimal product identity.
 
 After independent automated verification, return to this same consolidated checklist. Do not discard or restart the pending items, and do not mark any device behavior passed from desktop evidence.
+
+## Retest infrastructure interruption — 2026-08-25 ~19:44 SGT
+
+- **BLOCKED — certificate download endpoint unreachable:** while beginning the M06-T05 consolidated retest, the product owner attempted to open `http://192.168.1.49:5174/gym-logger-dev.cer` on the iPhone and Safari reported that the server stopped responding / could not open the page.
+- Do not treat this as a certificate-trust result. The local certificate-serving process must be restarted or repaired on the workstation and the endpoint re-verified before the iPhone can install the new root CA.
+- No further trust/installability result should be recorded until the certificate endpoint is reachable again.
