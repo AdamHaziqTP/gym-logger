@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T10:25:44.688Z",
+  "generatedAt": "2026-08-25T10:27:25.332Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -38,8 +38,8 @@
     "milestone": "M06 — PWA polish and regression",
     "task": "FINAL-HUMAN-ACCEPTANCE — consolidated iPhone 14 Pro Max retest after M06-T05",
     "status": "HUMAN_REVIEW_REQUIRED (M06-T05 correction is accepted for automated scope; device gate remains open)",
-    "humanReviewGate": "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.",
-    "nextAction": "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
+    "humanReviewGate": "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. E-003 Apple Notes colour loss remains the accepted v1 limitation.",
+    "nextAction": "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. E-003 Apple Notes colour loss remains the accepted v1 limitation."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "f1a01a1 fix: resolve final iPhone gate failures",
+    "897109e docs: authorize correction loop for final iPhone failures",
+    "9f4b3a4 docs: record final iPhone export and HTTPS failures",
     "420984f chore: refresh final product sync checkpoint",
-    "b305ee1 fix: restore backup settings metadata",
-    "058b316 chore: complete v1 release readiness",
-    "34b2419 feat: add persisted settings and theme",
-    "fd466e7 chore: queue settings and theme task"
+    "b305ee1 fix: restore backup settings metadata"
   ],
   "codexVerification": [
     {
@@ -98,7 +98,7 @@
         "pass found real failures, and M06-T05 has been independently verified for",
         "below is being reclassified as passed by desktop evidence.",
         "Recorded failure batch:",
-        "only for failures."
+        "**FAIL — trusted HTTPS environment:** the app URL still presents Safari's `Connection Not Private` / `Not Secure` state on the iPhone even after the supplied certificate/profile was installed. The product owner reports having to manually choose to visit the site each time. This means the final trusted-origin/installability/offline gate is not yet validly exercised and the certificate/trust setup must be corrected before retesting."
       ]
     },
     {
@@ -168,16 +168,12 @@
     "E-001 historical DSH rate-limit condition is no longer the current blocker.",
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED: bounded feasibility work completed; v1 accepts editable rich Notes paste without category colours rather than introducing RTF/native/Shortcuts workflow friction.",
-    "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
+    "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. E-003 Apple Notes colour loss remains the accepted v1 limitation."
   ],
   "decisionsMadeSinceLastSync": [
-    "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/."
+    "M06-T05 is accepted for automated scope; final iPhone 14 Pro Max retest is ready at https://192.168.1.49:4173/ with the repaired root/leaf HTTPS setup. Apple Notes colour loss remains accepted v1."
   ],
   "recordedDecisions": [
-    {
-      "title": "Final legend decision — 2026-08-24",
-      "detail": ""
-    },
     {
       "title": "Human-gate deferral / full-auto authorization — 2026-08-24",
       "detail": ""
@@ -203,6 +199,10 @@
       "detail": "Continue full-auto through every bounded implementation milestone, correction, automated test, build check, runtime check, code review, and non-human acceptance step that can be completed from the authoritative product sources. **Do not stop at a human-only iPhone/visual gate if that gate can be safely deferred without creating architectural ambiguity or risking destructive work.** Record it as DEFERRED/PENDING and continue with independent branches/milestones."
     },
     {
+      "title": "Final iPhone failure correction authorization — 2026-08-25",
+      "detail": "Faithful export preview is blank/black. Compact export preview is blank/black."
+    },
+    {
       "title": "Final iPhone correction batch — 2026-08-25",
       "detail": ""
     }
@@ -222,28 +222,11 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "420984f191d8ab5953f8cb78d2a045fb0dc89e95",
+    "commit": "f1a01a177483c09a5cfa20ba61b0819a98fb9a84",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HTTPS-RICH-PASTE-SETUP.md\n M orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/DECISIONS.md\n M orchestration/state/STATE.md\n M public/apple-touch-icon.png\n M public/gym-logger-dev.cer\n M public/icons/icon-192.png\n M public/icons/icon-512.png\n M scripts/generate-icons.mjs\n M src/components/ImageExport.tsx\n M src/styles.css\n?? orchestration/reports/M06-T05-FINAL-IPHONE-CORRECTIONS.md\n?? orchestration/reviews/M06-T05-FINAL-IPHONE-CORRECTIONS-codex-review.md\n?? orchestration/tasks/M06-T05-FINAL-IPHONe-CORRECTIONS.md\n?? src/tests/imageExportPanel.test.tsx",
+    "workingTree": "## main...origin/main\n M orchestration/state/STATE.md",
     "changedFiles": [
-      "orchestration/evidence/HTTPS-RICH-PASTE-SETUP.md",
-      "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/state/DECISIONS.md",
-      "orchestration/state/STATE.md",
-      "public/apple-touch-icon.png",
-      "public/gym-logger-dev.cer",
-      "public/icons/icon-192.png",
-      "public/icons/icon-512.png",
-      "scripts/generate-icons.mjs",
-      "src/components/ImageExport.tsx",
-      "src/styles.css",
-      "orchestration/reports/M06-T05-FINAL-IPHONE-CORRECTIONS.md",
-      "orchestration/reviews/M06-T05-FINAL-IPHONE-CORRECTIONS-codex-review.md",
-      "orchestration/tasks/M06-T05-FINAL-IPHONe-CORRECTIONS.md",
-      "src/tests/imageExportPanel.test.tsx"
+      "orchestration/state/STATE.md"
     ]
   },
   "builder": {
@@ -263,11 +246,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "correction-accepted",
-      "summary": "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/.",
-      "at": "2026-08-25T10:25:44.640Z"
+      "name": "final-retest-ready",
+      "summary": "M06-T05 is accepted for automated scope; final iPhone 14 Pro Max retest is ready at https://192.168.1.49:4173/ with the repaired root/leaf HTTPS setup. Apple Notes colour loss remains accepted v1.",
+      "at": "2026-08-25T10:27:25.282Z"
     },
-    "contextRevision": 50,
+    "contextRevision": 51,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

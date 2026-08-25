@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "final-retest-ready",
+      "summary": "M06-T05 is accepted for automated scope; final iPhone 14 Pro Max retest is ready at https://192.168.1.49:4173/ with the repaired root/leaf HTTPS setup. Apple Notes colour loss remains accepted v1.",
+      "at": "2026-08-25T10:27:25.282Z"
+    },
+    {
       "name": "correction-accepted",
       "summary": "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/.",
       "at": "2026-08-25T10:25:44.640Z"
@@ -56,21 +61,16 @@
       "name": "correction-required",
       "summary": "M06-T02 worker stopped without report; Codex found two TypeScript errors and prepared a bounded settings/types/coverage correction.",
       "at": "2026-08-25T03:02:02.226Z"
-    },
-    {
-      "name": "task-ready-for-ox",
-      "summary": "M06-T02 settings/theme/default image-style task is ready after M06 PWA polish acceptance.",
-      "at": "2026-08-25T02:40:08.978Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T10:25:44.640Z",
+  "lastPublishedAt": "2026-08-25T10:27:25.283Z",
   "lastEvent": {
-    "name": "correction-accepted",
-    "summary": "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/.",
-    "at": "2026-08-25T10:25:44.640Z"
+    "name": "final-retest-ready",
+    "summary": "M06-T05 is accepted for automated scope; final iPhone 14 Pro Max retest is ready at https://192.168.1.49:4173/ with the repaired root/leaf HTTPS setup. Apple Notes colour loss remains accepted v1.",
+    "at": "2026-08-25T10:27:25.282Z"
   },
-  "syncRevision": 50,
+  "syncRevision": 51,
   "openEscalations": [],
   "chatNotifications": [
     {
