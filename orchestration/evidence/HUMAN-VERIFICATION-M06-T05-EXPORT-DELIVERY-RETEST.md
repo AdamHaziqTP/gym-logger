@@ -2,7 +2,7 @@
 
 Date: 2026-08-25
 Device: iPhone 14 Pro Max
-Status: `FAIL — SAVED PNG STILL FULLY TRANSPARENT AFTER REAL-CANVAS FIX`
+Status: `FAIL — PIXEL-GUARD CORRECTION REGRESSED PREVIEW AND SAVED OUTPUT STILL FAILS`
 
 Physical result supplied by the product owner during the consolidated PWA acceptance pass:
 
@@ -70,3 +70,13 @@ Blob-backed SVG source if the primary data URL does not populate pixels. The
 automated checkpoint is recorded separately; only the saved-image device
 criterion remains open for this correction. Faithful/Compact preview and
 mobile dismissal remain PASS and must not be repeated.
+
+## Retest after pixel-guard checkpoint `fa57dcb` — 2026-08-25 ~23:48 SGT
+
+The product owner physically retested the updated build and reported a new regression plus the original delivery failure:
+
+- **FAIL — preview regression:** the export preview now shows nothing. This regresses the previously passing Faithful/Compact preview behavior.
+- **FAIL — saved output:** the saved image still has the same blank/transparent failure on the target iPhone.
+- The product owner did **not** report seeing the specific `no visible pixels were verified` status text, so do not claim that the guard surfaced that exact message.
+
+This correction therefore fails the target-device gate and also violates the requirement to preserve the previously working preview path. The next attempt should not continue incrementally mutating the same WebKit canvas pipeline without a stronger architectural reason. Preserve/recover the known-good SVG preview first, then evaluate a materially different PNG rasterization strategy for iPhone rather than another small canvas timing/identity patch.
