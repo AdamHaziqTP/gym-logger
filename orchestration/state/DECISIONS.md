@@ -143,3 +143,18 @@ Home Screen icon appeared placeholder-like. These are bounded corrections, not
 new product scope. Route them through M06-T05, keep Apple Notes colour loss as
 the accepted v1 limitation, and request one consolidated retest only after
 independent automated verification and a repaired HTTPS setup.
+
+## Apple Notes colour recovery reopened — 2026-08-25
+
+The product owner has now explicitly asked to pursue a way to preserve the category highlight/text colours when transferring a workout into Apple Notes. This supersedes the earlier instruction not to run further colour experiments, but it does **not** invalidate the existing one-tap uncoloured rich-copy path; that path remains the reliable fallback/baseline.
+
+Authorize one new **bounded, practical colour-recovery branch** with the following order and constraints:
+
+1. **Preferred route: iOS Shortcuts rich-text handoff.** Build/test the lowest-friction PWA-to-Shortcuts flow that can take the session's self-contained HTML/rich representation, convert it using iOS Shortcuts rich-text capabilities, and create/append it to Apple Notes. The target is a real editable Notes table with correct data/order and the five category highlight/text colours.
+2. Keep the normal PWA `Copy to Notes` button unchanged until the coloured route is physically proven. If a coloured route succeeds, expose it as an optional clearly named action rather than silently replacing the reliable baseline.
+3. Do not require the product owner to understand RTF, MIME types, or manual file plumbing. Codex should make setup as close to one-time/one-tap as practical and provide exact simple device instructions only when a physical proof is ready.
+4. If the Shortcuts path cannot preserve both table editability and colours, stop that route and return evidence. Do not start an open-ended series of HTML variants already disproven by prior iPhone evidence.
+5. A native attributed-string/pasteboard helper may be proposed only as a **separate subsequent product decision** if Shortcuts fails; do not start a native rewrite or paid Apple Developer dependency automatically.
+6. Success requires target-iPhone evidence: editable Notes table, correct date/legend/order/values/summary/notes, and visible category colours. Image-only export is not a Copy-to-Notes success.
+
+This colour-recovery branch may proceed in parallel with the remaining final iPhone acceptance work. Failure of the optional coloured route must not regress the already working editable uncoloured Notes transfer.
