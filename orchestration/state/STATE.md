@@ -61,8 +61,8 @@ Updated: 2026-08-25
 - Full v1 readiness sweep found one genuine bounded gap: backup restore included metadata/settings in the file but `replaceAllSessions` left the device's existing metadata/settings untouched. M06-T04 corrected this contract and added coverage before returning to the final human gate.
 - M06-T04 is independently accepted: atomic sessions/settings restore, duplicate metadata rejection, live settings refresh, 45/45 focused backup tests, 352/352 full tests, clean build/diff, and trusted HTTPS runtime smoke.
 - M06-T05 correction is independently accepted for automated scope: SVG-backed export previews, reachable mobile close control, deliberate generated Gym Logger icon, repaired local root/leaf HTTPS chain, 354/354 tests, build, runtime smoke, and diff audit. The physical retest remains open.
-- M06-T05 saved-image delivery correction is independently accepted for automated scope: PNG serialization now prefers `toDataURL` with a guarded `toBlob` fallback; focused PNG coverage is 14/14, full suite is 361/361, build/runtime/diff checks pass, and preview/dismissal paths are unchanged. The saved-image result remains a single physical retest gate.
-- M03-T03 Shortcuts colour-recovery branch is independently accepted for automated scope: 41/41 focused tests, 359/359 full tests, build, diff audit, and HTTPS runtime smoke; the optional route is ready for target-iPhone proof and the existing uncoloured Copy to Notes path remains the fallback.
+- M06-T05 saved-image delivery correction was rejected by device evidence: Faithful 1520×4842 and Compact 1520×2456 outputs were fully transparent after `0cb9b46`. A second bounded correction now fixes the real-canvas draw/encode lifecycle; preview/dismissal remain accepted.
+- M03-T03 Shortcuts colour-recovery branch is physically closed: both append and rich-clipboard/manual-paste variants failed to preserve an editable table and colours. The failed Share for Notes Colours action is hidden from the normal v1 UI; helper/evidence remain preserved and E-004 remains the only authorized native proof.
 - Recorded the target-iPhone M03-T03 result as a genuine failure: Shortcuts flattened the content to plain text, lost all colours, and produced `Â·`/`Â°` mojibake. The Shortcuts branch is closed with no further variants authorized.
 - E-004 is authorized for exactly one isolated native attributed-string/pasteboard feasibility proof; the PWA and normal Copy to Notes path remain unchanged.
 - E-004 source proof is independently reviewed: 12/12 native harness checks, 359/359 PWA tests, build, and diff audit pass; Swift/Xcode compilation is unavailable on this Windows workstation.
@@ -95,6 +95,7 @@ Updated: 2026-08-25
 - The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending.
 - M03-T03 Shortcuts share, one-time setup, and colour-recovery proof are closed as a physical failure; the ordinary uncoloured Copy to Notes baseline remains accepted.
 - E-004 native-helper build/install/paste proof is BLOCKED/DEFERRED — NEEDS MAC/XCODE; preserve the helper and do not infer an Apple Notes result.
+- The post-`0cb9b46` saved-image retest found fully transparent Faithful and Compact PNGs. The active correction is `orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md`; do not mark PNG delivery passed from desktop evidence.
 
 ## Escalations
 
@@ -138,4 +139,4 @@ Updated: 2026-08-25
 - OX was dispatched twice through the verified Desktop DSH headless wrapper for M06-T03, but both invocations ended without a worker report or repository delta. The bounded task was completed from the authoritative task file and independently verified; this worker execution issue does not alter product acceptance.
 - Current gate: `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md` — one saved-image-only retest remains open after the PNG delivery correction.
 - M06-T05 and M03-T03 automated scope are accepted, with M03-T03 physically failed/closed. E-004 is parked; next action is the consolidated human-only PWA/iPhone 14 Pro Max pass at `https://192.168.1.49:4173/`.
-- M06-T05 saved-image delivery correction is accepted for automated scope in `orchestration/reviews/M06-T05-FIX-EXPORT-DELIVERY-codex-review.md`; next human action is to save/share one image and inspect the resulting iPhone image only.
+- M06-T05 saved-image delivery correction in `orchestration/reviews/M06-T05-FIX-EXPORT-DELIVERY-codex-review.md` was rejected by the target device. The next bounded correction is `orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md`; after independent verification, return one saved-image-only physical retest.

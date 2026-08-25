@@ -53,10 +53,14 @@ describe("rasterizeSvgToPngBlob", () => {
   });
 
   it("serializes the rendered canvas as a non-empty PNG before using the WebKit toBlob fallback", async () => {
-    const drawImage = vi.fn();
-    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
-      drawImage,
-    } as unknown as CanvasRenderingContext2D);
+    const drawImages: Array<ReturnType<typeof vi.fn>> = [];
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockImplementation(
+      () => {
+        const drawImage = vi.fn();
+        drawImages.push(drawImage);
+        return { drawImage } as unknown as CanvasRenderingContext2D;
+      },
+    );
     const toDataURL = vi
       .spyOn(HTMLCanvasElement.prototype, "toDataURL")
       .mockReturnValue(validPngDataUrl);
@@ -85,7 +89,10 @@ describe("rasterizeSvgToPngBlob", () => {
     expect(bytes.slice(0, 8)).toEqual(
       new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]),
     );
-    expect(drawImage).toHaveBeenCalledTimes(1);
+    // There must be exactly one canvas in this path: the canvas that receives
+    // drawImage is the canvas whose toDataURL bytes are delivered.
+    expect(drawImages).toHaveLength(1);
+    expect(drawImages[0]).toHaveBeenCalledTimes(1);
     expect(toDataURL).toHaveBeenCalledWith("image/png");
     expect(toBlob).not.toHaveBeenCalled();
   });

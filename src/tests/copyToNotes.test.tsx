@@ -142,6 +142,9 @@ describe("Copy to Notes action placement (AC-01)", () => {
     await openSession();
 
     expect(copyButton()).toBeTruthy();
+    expect(
+      screen.queryByRole("button", { name: "Share for Notes Colours" }),
+    ).toBeNull();
 
     // Screen order preserved: … table → Notes section → Copy-to-Notes → Delete.
     const notesSection = document.querySelector(".notes-section")!;

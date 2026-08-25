@@ -17,4 +17,14 @@ This fails the M03-T03 success criteria. The bounded Shortcuts route is closed r
 
 The existing standard **Copy to Notes** path remains the reliable baseline because it preserves the editable table/data/order, albeit without category colours.
 
+## Final clipboard-variant result
+
+The product owner also tested the remaining low-friction variant correctly:
+`Make Rich Text from HTML` followed by `Copy to Clipboard`, then manual paste
+into the existing Gym note. It produced **no editable table and no category
+colours**. This closes the practical web/Shortcuts branch; no further Shortcut
+or HTML variants are authorized. The failed `Share for Notes Colours` action
+is removed from the normal v1 UI, while its helper and evidence remain
+preserved for historical reference.
+
 Next product decision: whether to authorize one bounded native attributed-string / pasteboard helper feasibility proof. Such a proof must not replace the PWA or require a paid Apple Developer subscription as a v1 dependency. It should test whether native pasteboard representations can preserve both an editable Notes table and the five category colours on the target iPhone. If the native helper cannot prove that behavior with low enough friction, close colour recovery and retain the uncoloured editable-table baseline.

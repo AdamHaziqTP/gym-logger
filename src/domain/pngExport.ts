@@ -99,14 +99,7 @@ export async function rasterizeSvgToPngBlob(
   height: number,
 ): Promise<Blob | null> {
   if (typeof document === "undefined") return null;
-  let context: CanvasRenderingContext2D | null = null;
-  try {
-    const probe = document.createElement("canvas");
-    context = probe.getContext("2d");
-  } catch {
-    return null;
-  }
-  if (!context || typeof window === "undefined" || typeof Image !== "function") {
+  if (typeof window === "undefined" || typeof Image !== "function") {
     return null;
   }
 
@@ -114,6 +107,16 @@ export async function rasterizeSvgToPngBlob(
   const canvas = document.createElement("canvas");
   canvas.width = Math.max(1, Math.round(width * scale));
   canvas.height = Math.max(1, Math.round(height * scale));
+  let context: CanvasRenderingContext2D | null = null;
+  try {
+    // The draw target and the encoded target must be the same canvas. A
+    // separate capability probe here would leave the delivery canvas
+    // transparent even though the SVG preview remains visible.
+    context = canvas.getContext("2d");
+  } catch {
+    return null;
+  }
+  if (!context) return null;
 
   // Data URL keeps the image same-origin: the canvas stays untainted and
   // `toBlob`/`toDataURL` remain permitted. No object-URL lifecycle to manage.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T14:46:47.102Z",
+  "generatedAt": "2026-08-25T15:27:25.782Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,13 +56,21 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "44b1a09 chore: refresh product sync checkpoint",
     "0cb9b46 fix: harden iPhone PNG image delivery",
     "f1f4545 docs: record iPhone export delivery failure",
     "8fde227 docs: clarify slow iPhone launch observation",
-    "f4f4d07 docs: record final retest app unreachable",
-    "03d2e90 docs: park native helper and resume PWA gate"
+    "f4f4d07 docs: record final retest app unreachable"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M06-T05-FIX-EXPORT-TRANSPARENT-codex-review.md",
+      "result": [
+        "[x] Focused regression test fails if a separate probe canvas is introduced.",
+        "[x] Failed `Share for Notes Colours` action hidden from normal v1 UI.",
+        "[x] Build, runtime smoke, and diff audit pass."
+      ]
+    },
     {
       "path": "orchestration/reviews/M06-T05-FIX-EXPORT-DELIVERY-codex-review.md",
       "result": [
@@ -79,27 +87,9 @@
         "[x] Platform-neutral harness: 12/12 checks passed.",
         "[x] Existing PWA regression suite/build remain green: 359/359 and build pass."
       ]
-    },
-    {
-      "path": "orchestration/reviews/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY-codex-review.md",
-      "result": [
-        "[x] User dismissal and other share failures remain distinct.",
-        "[x] Focused tests pass: 41/41.",
-        "[x] Full suite passes: 359/359.",
-        "[x] Build, diff audit, and LAN HTTPS/static-asset smoke pass."
-      ]
     }
   ],
   "humanVerification": [
-    {
-      "path": "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
-      "result": [
-        "pass found real failures, and M06-T05 has been independently verified for",
-        "below is being reclassified as passed by desktop evidence.",
-        "Recorded failure batch:",
-        "**BLOCKED then RESOLVED — certificate server:** the certificate URL briefly"
-      ]
-    },
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
       "result": [
@@ -113,7 +103,17 @@
       "path": "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
       "result": [
         "Status: `FAIL — SHORTCUTS_ROUTE`",
-        "This fails the M03-T03 success criteria. The bounded Shortcuts route is closed rather than iterated through more HTML/Shortcuts variants, per the recorded product decision."
+        "This fails the M03-T03 success criteria. The bounded Shortcuts route is closed rather than iterated through more HTML/Shortcuts variants, per the recorded product decision.",
+        "or HTML variants are authorized. The failed `Share for Notes Colours` action"
+      ]
+    },
+    {
+      "path": "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
+      "result": [
+        "pass found real failures, and M06-T05 has been independently verified for",
+        "below is being reclassified as passed by desktop evidence.",
+        "Recorded failure batch:",
+        "**BLOCKED then RESOLVED — certificate server:** the certificate URL briefly"
       ]
     },
     {
@@ -179,7 +179,7 @@
     "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker."
   ],
   "decisionsMadeSinceLastSync": [
-    "M06-T05 saved-image delivery correction checkpoint 0cb9b46; one physical saved-image retest remains"
+    "M06-T05 transparent PNG root-cause fix and failed Shortcut UI removal independently verified; one saved-image retest remains"
   ],
   "recordedDecisions": [
     {
@@ -216,9 +216,9 @@
     }
   ],
   "relevantEvidence": [
-    "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
     "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
+    "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T01-E003.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M01-FIX-05.md",
@@ -231,12 +231,25 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "0cb9b46ba4388b2c18e9482598a62414e7d894bf",
+    "commit": "44b1a093b0802d6576f9a15d6871c51bb12b5be0",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md\n M orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M src/components/SessionView.tsx\n M src/domain/pngExport.ts\n M src/tests/copyToNotes.test.tsx\n M src/tests/pngExport.test.ts\n?? orchestration/reports/M06-T05-FIX-EXPORT-TRANSPARENT.md\n?? orchestration/reviews/M06-T05-FIX-EXPORT-TRANSPARENT-codex-review.md\n?? orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md",
     "changedFiles": [
+      "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
+      "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs"
+      "orchestration/product-orchestrator/bootstrap.mjs",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/STATE.md",
+      "src/components/SessionView.tsx",
+      "src/domain/pngExport.ts",
+      "src/tests/copyToNotes.test.tsx",
+      "src/tests/pngExport.test.ts",
+      "orchestration/reports/M06-T05-FIX-EXPORT-TRANSPARENT.md",
+      "orchestration/reviews/M06-T05-FIX-EXPORT-TRANSPARENT-codex-review.md",
+      "orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md"
     ]
   },
   "builder": {
@@ -256,11 +269,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "accepted-checkpoint",
-      "summary": "M06-T05 saved-image delivery correction checkpoint 0cb9b46; one physical saved-image retest remains",
-      "at": "2026-08-25T14:46:47.058Z"
+      "name": "correction-accepted",
+      "summary": "M06-T05 transparent PNG root-cause fix and failed Shortcut UI removal independently verified; one saved-image retest remains",
+      "at": "2026-08-25T15:27:25.738Z"
     },
-    "contextRevision": 62,
+    "contextRevision": 64,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

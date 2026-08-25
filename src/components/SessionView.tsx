@@ -34,12 +34,6 @@ import {
   writeNotesPayloadToClipboard,
   type ClipboardCopyOutcome,
 } from "../domain/notesClipboard";
-import {
-  buildNotesShortcutFile,
-  shareNotesShortcutFile,
-  supportsNotesShortcutShare,
-  type NotesShortcutOutcome,
-} from "../domain/notesShortcut";
 import { ImageExportPanel } from "./ImageExport";
 import type { ImageExportStyle } from "../domain/imageExport";
 import { orderedRows } from "../domain/rows";
@@ -69,17 +63,6 @@ const NOTES_COPY_STATUS: Record<NotesCopyState, string> = {
   "copied-rich": "Copied to Notes ✓",
   "copied-plain": "Copied as plain text (rich formatting unavailable)",
   failed: "Copy failed — clipboard unavailable",
-};
-
-const NOTES_SHORTCUT_STATUS: Record<
-  NotesShortcutOutcome | "idle" | "working",
-  string
-> = {
-  idle: "",
-  working: "Opening share sheet…",
-  shared: "Shared for Shortcuts ✓",
-  cancelled: "Share cancelled",
-  failed: "Could not share HTML file",
 };
 
 const COLUMN_ORDER: EditableRowField[] = [
@@ -142,12 +125,6 @@ export function SessionView({
 
   // Copy-to-Notes spike (spec §15; M03-T01): local clipboard only.
   const [notesCopyState, setNotesCopyState] = useState<NotesCopyState>("idle");
-  // Optional M03-T03 Shortcuts handoff; unlike Copy to Notes, this is only a
-  // share-sheet handoff and never claims that Notes completed the conversion.
-  const [notesShortcutState, setNotesShortcutState] = useState<
-    NotesShortcutOutcome | "idle" | "working"
-  >("idle");
-
   // Image export (spec §14; M03-T02-IMAGE-EXPORT-01): holds the visible-state
   // session snapshot captured when the user opened the export panel, or null
   // while the panel is closed. A snapshot (not live state) keeps the preview
@@ -612,30 +589,6 @@ export function SessionView({
     })();
   };
 
-  /**
-   * Optional colour-recovery handoff. The HTML file is created and handed to
-   * the OS from this tap; Shortcuts remains responsible for converting it to
-   * Rich Text and creating the Notes entry. Only the share-sheet result is
-   * reported here, so physical Notes proof remains a human gate.
-   */
-  const commandShareForNotesColours = () => {
-    if (notesShortcutState === "working") return;
-    setNotesShortcutState("working");
-    const payload = buildVisibleNotesPayload();
-    if (!payload) {
-      setNotesShortcutState("failed");
-      return;
-    }
-    void flushSaves();
-    const file = buildNotesShortcutFile(payload);
-    void shareNotesShortcutFile(file)
-      .then(setNotesShortcutState)
-      .catch((error) => {
-        console.error("Gym Logger: Shortcuts share failed", error);
-        setNotesShortcutState("failed");
-      });
-  };
-
   const selectedRow = sortedRows.find((row) => row.id === selectedRowId) ?? null;
   const summaryLine = displaySummary(session);
 
@@ -828,23 +781,6 @@ export function SessionView({
           <p className="copy-notes-status" role="status" aria-live="polite">
             {NOTES_COPY_STATUS[notesCopyState]}
           </p>
-        )}
-        {supportsNotesShortcutShare() && (
-          <>
-            <button
-              type="button"
-              className="notes-copy-button notes-shortcut-button"
-              onClick={commandShareForNotesColours}
-              disabled={notesShortcutState === "working"}
-            >
-              Share for Notes Colours
-            </button>
-            {notesShortcutState !== "idle" && (
-              <p className="copy-notes-status" role="status" aria-live="polite">
-                {NOTES_SHORTCUT_STATUS[notesShortcutState]}
-              </p>
-            )}
-          </>
         )}
       </section>
 
