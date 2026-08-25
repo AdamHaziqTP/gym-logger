@@ -5,7 +5,7 @@
  *
  * Rasterization: SVG document → <img> (data URL, same-origin so the canvas
  * never taints) → 2D canvas at the largest safe integer scale → PNG Blob
- * (`toBlob`, with a `toDataURL` fallback). Any missing piece resolves to
+ * (`toDataURL`, with a `toBlob` fallback). Any missing piece resolves to
  * `null`; callers must degrade truthfully instead of pretending a PNG exists.
  *
  * Delivery honesty contract (task requirement): an iOS share-sheet outcome is
@@ -65,19 +65,25 @@ function pngDataUrlToBlob(dataUrl: string): Blob | null {
 }
 
 function canvasToPngBlob(canvas: HTMLCanvasElement): Promise<Blob | null> {
+  // iOS WebKit can produce a visually corrupt file from canvas.toBlob for
+  // this SVG-backed path even when the on-screen SVG preview is correct.
+  // Prefer synchronous PNG serialization and retain toBlob as a fallback.
+  if (typeof canvas.toDataURL === "function") {
+    try {
+      const blob = pngDataUrlToBlob(canvas.toDataURL("image/png"));
+      if (blob) return Promise.resolve(blob);
+    } catch {
+      // Fall through to toBlob when synchronous serialization is unavailable.
+    }
+  }
   return new Promise((resolve) => {
     if (typeof canvas.toBlob === "function") {
       canvas.toBlob((blob) => {
-        if (blob) resolve(blob);
-        else resolve(pngDataUrlToBlob(canvas.toDataURL("image/png")));
+        resolve(blob?.type === "image/png" ? blob : null);
       }, "image/png");
       return;
     }
-    resolve(
-      typeof canvas.toDataURL === "function"
-        ? pngDataUrlToBlob(canvas.toDataURL("image/png"))
-        : null,
-    );
+    resolve(null);
   });
 }
 

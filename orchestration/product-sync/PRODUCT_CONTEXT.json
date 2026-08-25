@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T13:19:13.492Z",
+  "generatedAt": "2026-08-25T14:46:13.088Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,13 +56,22 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
-    "b91fcc0 docs: sync E-004 native proof state",
-    "145e22e feat: add bounded native Notes pasteboard proof",
-    "10e27c8 docs: authorize bounded native colour helper proof",
-    "81987e4 docs: record Shortcuts colour route failure",
-    "2a1a829 docs: append colour handoff to canonical Gym note"
+    "f1f4545 docs: record iPhone export delivery failure",
+    "8fde227 docs: clarify slow iPhone launch observation",
+    "f4f4d07 docs: record final retest app unreachable",
+    "03d2e90 docs: park native helper and resume PWA gate",
+    "b91fcc0 docs: sync E-004 native proof state"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M06-T05-FIX-EXPORT-DELIVERY-codex-review.md",
+      "result": [
+        "[x] Full suite passes: 361/361.",
+        "[x] Production build passes.",
+        "[x] Diff hygiene passes.",
+        "contract. The physical failure remains open because a desktop/browser test"
+      ]
+    },
     {
       "path": "orchestration/reviews/E-004-NATIVE-NOTES-COLOUR-HELPER-codex-review.md",
       "result": [
@@ -79,15 +88,6 @@
         "[x] Full suite passes: 359/359.",
         "[x] Build, diff audit, and LAN HTTPS/static-asset smoke pass."
       ]
-    },
-    {
-      "path": "orchestration/reviews/M06-T05-FINAL-IPHONE-CORRECTIONS-codex-review.md",
-      "result": [
-        "The correction is bounded to the five failures recorded by the final iPhone",
-        "Focused export/icon/Home coverage: **47/47 passed**.",
-        "Full suite: **354/354 passed**, with no unhandled test failures.",
-        "`npm run build`: **passed**."
-      ]
     }
   ],
   "humanVerification": [
@@ -98,6 +98,15 @@
         "below is being reclassified as passed by desktop evidence.",
         "Recorded failure batch:",
         "**BLOCKED then RESOLVED — certificate server:** the certificate URL briefly"
+      ]
+    },
+    {
+      "path": "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
+      "result": [
+        "Status: `PARTIAL PASS — PREVIEW/DISMISSAL FIXED; SAVED IMAGE FAILS`",
+        "Physical result supplied by the product owner during the consolidated PWA acceptance pass:",
+        "**PASS — Faithful preview:** the Faithful export preview now visibly renders the workout on the iPhone instead of showing the earlier blank/black preview.",
+        "**PASS — Compact preview:** the Compact export preview now visibly renders the workout on the iPhone instead of showing the earlier blank/black preview."
       ]
     },
     {
@@ -150,15 +159,6 @@
         "**HV-04 — FAIL:** Editing individual cells works, but the Notes-style row interaction is incomplete. The three-dot handle only exposes the colour picker. The approved command-level row behavior is missing: Add Row Above, Add Row Below, Duplicate Row, Copy, Cut, Paste where meaningful, Delete Row, and drag reorder.",
         "**HV-05 — FAIL:** The approved category legend is missing from the session header. The current row treatment also appears heavier/full-row than the finalized Notes-inspired visual rule; compare against §5.2 and the supplied references during correction and re-verification."
       ]
-    },
-    {
-      "path": "orchestration/evidence/HUMAN-VERIFICATION-M01.md",
-      "result": [
-        "Automated M01 verification is complete. Do not mark these items passed from desktop evidence alone. Record each result, device/browser/iOS version, date, and any screenshot or screen recording in the evidence folder.",
-        "## Not an M01 pass criterion",
-        "Rich Apple Notes paste and faithful/compact PNG/session export are not implemented or accepted in M01. They remain M03/M05 gates and must be tested on the target iPhone only after their implementation tasks are authorized. Do not mark them passed based on this checklist.",
-        "Return `HV-01` through `HV-05` as PASS, FAIL, or BLOCKED, with the exact step and evidence for each. A failure should include a screenshot and the observed-versus-expected behavior; a product ambiguity should be recorded as an escalation rather than patched ad hoc."
-      ]
     }
   ],
   "unresolvedDefects": [
@@ -168,7 +168,7 @@
     "Home responsive-layout defect: Copy Another Session visually clips/overlaps History on iPhone 14 Pro Max; correction required before final acceptance.",
     "Final iPhone 14 Pro Max install/offline/touch/layout/settings/PNG/backup/Notes checks in the consolidated checklist.",
     "Backup/restore physical Files/share/restore behavior remains deferred to the consolidated final iPhone pass.",
-    "M06-T05 physical preview rendering, mobile sheet dismissal, certificate/profile trust, and refreshed Home Screen icon appearance remain deferred to the consolidated final iPhone pass.",
+    "M06-T05 physical saved-image delivery remains deferred to the consolidated final iPhone pass. Faithful/Compact preview and mobile dismissal were already PASS in the latest device evidence and do not need repeating for this correction unless a regression appears.",
     "The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending."
   ],
   "activeEscalationsAndProductDecisionsNeeded": [
@@ -179,7 +179,7 @@
     "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker."
   ],
   "decisionsMadeSinceLastSync": [
-    "E-004 parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE; native helper preserved. PWA v1 final iPhone acceptance resumed independently at https://192.168.1.49:4173/."
+    "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains"
   ],
   "recordedDecisions": [
     {
@@ -217,13 +217,13 @@
   ],
   "relevantEvidence": [
     "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
+    "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
     "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T01-E003.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M01-FIX-05.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M01-FIX-04.md",
     "orchestration/evidence/M01-human-gate-2026-08-24.md",
-    "orchestration/evidence/HUMAN-VERIFICATION-M01.md",
     "references/IMG_5554.jpeg",
     "references/IMG_5553.png",
     "references/IMG_5552.png",
@@ -231,15 +231,22 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "b91fcc0f6f156817f4fa3cb165127502f5e63d13",
+    "commit": "f1f45459ad1cb42653f478cb059fccd3ac556654",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/state/DECISIONS.md\n M orchestration/state/STATE.md",
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M src/domain/pngExport.ts\n M src/tests/pngExport.test.ts\n?? orchestration/reports/M06-T05-FIX-EXPORT-DELIVERY.md\n?? orchestration/reviews/M06-T05-FIX-EXPORT-DELIVERY-codex-review.md\n?? orchestration/tasks/M06-T05-FIX-EXPORT-DELIVERY.md",
     "changedFiles": [
       "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
       "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/state/DECISIONS.md",
-      "orchestration/state/STATE.md"
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/STATE.md",
+      "src/domain/pngExport.ts",
+      "src/tests/pngExport.test.ts",
+      "orchestration/reports/M06-T05-FIX-EXPORT-DELIVERY.md",
+      "orchestration/reviews/M06-T05-FIX-EXPORT-DELIVERY-codex-review.md",
+      "orchestration/tasks/M06-T05-FIX-EXPORT-DELIVERY.md"
     ]
   },
   "builder": {
@@ -259,11 +266,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "final-pwa-gate-resumed",
-      "summary": "E-004 parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE; native helper preserved. PWA v1 final iPhone acceptance resumed independently at https://192.168.1.49:4173/.",
-      "at": "2026-08-25T13:19:13.438Z"
+      "name": "correction-accepted",
+      "summary": "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains",
+      "at": "2026-08-25T14:46:13.047Z"
     },
-    "contextRevision": 59,
+    "contextRevision": 61,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

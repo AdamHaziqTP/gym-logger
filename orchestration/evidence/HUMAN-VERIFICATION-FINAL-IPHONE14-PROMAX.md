@@ -122,3 +122,24 @@ After independent automated verification, return to this same consolidated check
 - **BLOCKED — installed Home Screen app currently does not open:** when the final PWA acceptance pass resumed, the product owner attempted to launch Gym Logger from the iPhone Home Screen and reported that the app does not open on-device.
 - Do not classify this as an application-code regression yet. The current test build depends on workstation-hosted LAN services, which have stopped previously; Codex must first verify whether the HTTPS preview on port 4173 and related LAN reachability are still alive.
 - Resume physical acceptance only after the test environment is independently confirmed reachable from the LAN again. If the services are healthy but the installed PWA still fails to launch, treat that as a genuine installability/offline defect and record exact device behavior before correction.
+
+## M06-T05 export delivery retest — 2026-08-25
+
+- **PASS — Faithful preview:** the rendered workout image is visible on the
+  target iPhone.
+- **PASS — Compact preview:** the rendered compact image is visible on the
+  target iPhone.
+- **PASS — mobile dismissal:** the export sheet can be closed reliably.
+- **FAIL — saved-image delivery:** the resulting saved image appeared
+  black/white-looking instead of matching the rendered workout image.
+
+The bounded correction is independently accepted for automated scope in
+`orchestration/reviews/M06-T05-FIX-EXPORT-DELIVERY-codex-review.md`. The
+workstation currently serves the retest build at
+`https://192.168.1.49:4173/`, and the certificate endpoint is reachable at
+`http://192.168.1.49:5174/gym-logger-dev.cer`.
+
+**Open human gate:** save/share one image from the corrected build and inspect
+the resulting iPhone image. Do not repeat Faithful preview, Compact preview,
+or mobile dismissal unless this correction reveals a regression. Do not mark
+the saved-image criterion passed from desktop evidence.

@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   chooseRasterScale,
+  rasterizeSvgToPngBlob,
   sharePngFile,
   supportsFileShare,
   triggerPngDownload,
@@ -30,6 +31,90 @@ describe("chooseRasterScale", () => {
 
   it("treats degenerate sizes conservatively", () => {
     expect(chooseRasterScale(0, 100)).toBe(1);
+  });
+});
+
+describe("rasterizeSvgToPngBlob", () => {
+  const validPngDataUrl =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
+
+  function readBlobBytes(blob: Blob): Promise<Uint8Array> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(new Uint8Array(reader.result as ArrayBuffer));
+      reader.onerror = () => reject(reader.error);
+      reader.readAsArrayBuffer(blob);
+    });
+  }
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  it("serializes the rendered canvas as a non-empty PNG before using the WebKit toBlob fallback", async () => {
+    const drawImage = vi.fn();
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
+      drawImage,
+    } as unknown as CanvasRenderingContext2D);
+    const toDataURL = vi
+      .spyOn(HTMLCanvasElement.prototype, "toDataURL")
+      .mockReturnValue(validPngDataUrl);
+    const toBlob = vi.spyOn(HTMLCanvasElement.prototype, "toBlob");
+
+    class FakeImage {
+      onload: (() => void) | null = null;
+      onerror: (() => void) | null = null;
+
+      set src(_value: string) {
+        queueMicrotask(() => this.onload?.());
+      }
+    }
+    vi.stubGlobal("Image", FakeImage);
+
+    const blob = await rasterizeSvgToPngBlob(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" />',
+      1,
+      1,
+    );
+
+    expect(blob).not.toBeNull();
+    expect(blob!.type).toBe("image/png");
+    const bytes = await readBlobBytes(blob!);
+    expect(bytes.byteLength).toBeGreaterThan(8);
+    expect(bytes.slice(0, 8)).toEqual(
+      new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]),
+    );
+    expect(drawImage).toHaveBeenCalledTimes(1);
+    expect(toDataURL).toHaveBeenCalledWith("image/png");
+    expect(toBlob).not.toHaveBeenCalled();
+  });
+
+  it("falls back to toBlob when synchronous PNG serialization is unavailable", async () => {
+    const fallbackBlob = new Blob(["png"], { type: "image/png" });
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
+      drawImage: vi.fn(),
+    } as unknown as CanvasRenderingContext2D);
+    vi.spyOn(HTMLCanvasElement.prototype, "toDataURL").mockImplementation(() => {
+      throw new Error("serialization unavailable");
+    });
+    vi.spyOn(HTMLCanvasElement.prototype, "toBlob").mockImplementation(
+      (callback) => callback(fallbackBlob),
+    );
+
+    class FakeImage {
+      onload: (() => void) | null = null;
+      onerror: (() => void) | null = null;
+
+      set src(_value: string) {
+        queueMicrotask(() => this.onload?.());
+      }
+    }
+    vi.stubGlobal("Image", FakeImage);
+
+    await expect(
+      rasterizeSvgToPngBlob("<svg />", 1, 1),
+    ).resolves.toBe(fallbackBlob);
   });
 });
 

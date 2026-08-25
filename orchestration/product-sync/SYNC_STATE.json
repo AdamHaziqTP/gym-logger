@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "correction-accepted",
+      "summary": "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains",
+      "at": "2026-08-25T14:46:13.047Z"
+    },
+    {
+      "name": "task-ready-for-ox",
+      "summary": "M06-T05 saved-image delivery correction is ready; preserve preview and dismissal",
+      "at": "2026-08-25T14:40:40.248Z"
+    },
+    {
       "name": "final-pwa-gate-resumed",
       "summary": "E-004 parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE; native helper preserved. PWA v1 final iPhone acceptance resumed independently at https://192.168.1.49:4173/.",
       "at": "2026-08-25T13:19:13.438Z"
@@ -51,26 +61,16 @@
       "name": "correction-accepted",
       "summary": "M06-T05 independently accepted for automated scope: 354/354 tests, build, HTTPS shell/certificate/icon smoke, and diff audit. Consolidated iPhone retest is ready at https://192.168.1.49:4173/.",
       "at": "2026-08-25T10:25:44.640Z"
-    },
-    {
-      "name": "correction-required",
-      "summary": "Consolidated iPhone 14 Pro Max gate found real failures in Faithful/Compact previews, mobile export dismissal, HTTPS trust, and Home Screen icon; M06-T05 correction batch queued.",
-      "at": "2026-08-25T10:13:23.734Z"
-    },
-    {
-      "name": "final-environment-prepared",
-      "summary": "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance.",
-      "at": "2026-08-25T09:52:50.172Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T13:19:13.438Z",
+  "lastPublishedAt": "2026-08-25T14:46:13.047Z",
   "lastEvent": {
-    "name": "final-pwa-gate-resumed",
-    "summary": "E-004 parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE; native helper preserved. PWA v1 final iPhone acceptance resumed independently at https://192.168.1.49:4173/.",
-    "at": "2026-08-25T13:19:13.438Z"
+    "name": "correction-accepted",
+    "summary": "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains",
+    "at": "2026-08-25T14:46:13.047Z"
   },
-  "syncRevision": 59,
+  "syncRevision": 61,
   "openEscalations": [],
   "chatNotifications": [
     {
