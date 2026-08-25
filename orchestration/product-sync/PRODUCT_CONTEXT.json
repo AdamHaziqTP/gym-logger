@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T22:35:31.088Z",
+  "generatedAt": "2026-08-25T22:36:24.028Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "45f9136 docs: reconcile blocked proof route evidence",
+    "2e2d007 Merge remote-tracking branch 'origin/main'",
+    "2b670f0 docs: publish served proof correction",
     "9c72b3f fix: serve native copy proof outside app shell",
-    "5511571 docs: publish reopened Notes colour proof",
-    "14db33d feat: add WebKit selection copy proof",
-    "9b1e33b feat: finish M06 final polish batch",
-    "2c23f97 docs: record final iPhone follow-up"
+    "75e633b docs: record selection-copy proof route blocked on iPhone"
   ],
   "codexVerification": [
     {
@@ -94,8 +94,10 @@
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T04-WEBKIT-SELECTION-COPY.md",
       "result": [
-        "Result: `PASS` / `FAIL` / `BLOCKED`",
-        "operation. They do not establish the Apple Notes result. If this fails or"
+        "Result: `BLOCKED — RETEST READY`",
+        "Historical blocked attempt — 2026-08-26:",
+        "That attempt did not exercise Apple Notes and is not a colour PASS or FAIL.",
+        "The service worker now bypasses `/feasibility/*` requests."
       ]
     },
     {
@@ -180,7 +182,7 @@
     "after the isolated M03-T04 proof is independently verified, perform one target-iPhone paste into the existing Gym note. M06-T07's icon/share checks remain deferred and batched. E-004 is reopened only as a later native evidence branch; no physical or colour pass is claimed."
   ],
   "decisionsMadeSinceLastSync": [
-    "M03-T04 proof now serves as standalone native-copy page over LAN HTTPS; /feasibility service-worker bypass added; 398/398 tests and build pass."
+    "Retired SPA-shell proof route recorded as blocked; native-copy proof now verified over LAN HTTPS with service-worker bypass and is ready for one iPhone retest."
   ],
   "recordedDecisions": [
     {
@@ -232,9 +234,9 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "9c72b3f5faa209ebb99c9fde62800eacc1d66b88",
+    "commit": "45f9136b13bb4862064f14d812d3437c6875cc25",
     "branch": "main",
-    "workingTree": "## main...origin/main [ahead 1]\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
+    "workingTree": "## main...origin/main [ahead 4]\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
       "orchestration/product-orchestrator/bootstrap.mjs"
@@ -257,11 +259,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "proof-served-body-corrected",
-      "summary": "M03-T04 proof now serves as standalone native-copy page over LAN HTTPS; /feasibility service-worker bypass added; 398/398 tests and build pass.",
-      "at": "2026-08-25T22:35:31.047Z"
+      "name": "proof-route-retest-ready",
+      "summary": "Retired SPA-shell proof route recorded as blocked; native-copy proof now verified over LAN HTTPS with service-worker bypass and is ready for one iPhone retest.",
+      "at": "2026-08-25T22:36:23.986Z"
     },
-    "contextRevision": 79,
+    "contextRevision": 80,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
