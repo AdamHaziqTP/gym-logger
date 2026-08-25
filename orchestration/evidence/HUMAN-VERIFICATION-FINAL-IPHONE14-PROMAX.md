@@ -83,6 +83,10 @@ One isolated native pasteboard source proof is recorded in
 yet ready for iPhone testing because this workstation has no Swift/Xcode
 toolchain to compile or sign it.
 
+E-004 is explicitly `BLOCKED/DEFERRED — NEEDS MAC/XCODE` and does not block
+completion of the otherwise accepted PWA v1. The consolidated PWA device gate
+continues independently.
+
 - PENDING — legitimate Mac/Xcode or equivalent iOS build/install route.
 - PENDING — target iPhone paste into the existing `Gym` note.
 - PENDING — editable table, all data/order/summary/notes, five colours, and

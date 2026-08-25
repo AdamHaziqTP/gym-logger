@@ -7,11 +7,11 @@ Updated: 2026-08-25
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M06 — PWA polish and regression
-- Current task: E-004 — bounded native Apple Notes colour-helper feasibility proof
-- Status: HUMAN_REVIEW_REQUIRED (E-004 source proof is complete, but Swift/Xcode compilation and target-device installation/paste remain blocked on an iOS toolchain)
+- Current task: FINAL-HUMAN-ACCEPTANCE — consolidated PWA/iPhone 14 Pro Max acceptance; E-004 parked
+- Status: HUMAN_REVIEW_REQUIRED (remaining PWA/device checks are open; E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE and does not block v1)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. E-004 native-helper pasteboard proof is blocked until a legitimate iOS build/install route exists.
+- Human review gate: Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -70,7 +70,7 @@ Updated: 2026-08-25
 
 - M01/FIX-05 automated verification remains the engineering baseline for continuation; its deferred physical-iPhone checks are not reclassified as PASS.
 - Product owner has authorized full-auto continuation through bounded milestones except where a genuinely unavoidable product/human gate exists.
-- The trusted-HTTPS iPhone result remains the v1 Notes-transfer baseline: real editable Notes table and all data/order PASS; the ordinary path strips category foreground/highlight colours. The optional M03-T03 Shortcuts route is pending target-device proof and must not regress this baseline.
+- The trusted-HTTPS iPhone result remains the v1 Notes-transfer baseline: real editable Notes table and all data/order PASS; the ordinary path strips category foreground/highlight colours. The M03-T03 Shortcuts route is closed after physical failure and must not regress this baseline.
 - M03-T03 Shortcuts is closed after physical failure. E-004 may test one minimal native pasteboard helper only; it must not become a native rewrite, paid Developer dependency, or recurring fragile workflow.
 - Preserve the HTTP synchronous plain-text fallback as a resilience path.
 - Do not alter the reliable one-tap uncoloured Copy to Notes baseline. E-004 is the single authorized native-helper proof; if it fails editable-table plus colour preservation or is too burdensome to install, close colour recovery and retain the uncoloured v1 baseline.
@@ -80,7 +80,7 @@ Updated: 2026-08-25
 - M05-T01 backup/restore, M06 release-readiness, and M06-T04 settings restore are accepted for automated scope. Stop only at the consolidated final iPhone 14 Pro Max gate in `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
 - The consolidated iPhone 14 Pro Max pass found real failures in both image-export previews, mobile export-sheet dismissal, local HTTPS trust, and the Home Screen icon. Route the bounded code/icon corrections through M06-T05 before requesting one consolidated retest; do not mark any physical behavior passed from desktop evidence.
 - M06-T05 is accepted for automated scope. The same consolidated checklist now awaits one physical retest at `https://192.168.1.49:4173/`; do not mark device behavior passed from desktop evidence.
-- M03-T03 target-iPhone proof is closed as failed; do not claim Apple Notes colours from the Shortcuts route or desktop evidence. E-004 target-iPhone proof remains pending only if the helper passes automated/source/installability review.
+- M03-T03 target-iPhone proof is closed as failed; do not claim Apple Notes colours from the Shortcuts route or desktop evidence. E-004 is parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE and remains preserved for a later legitimate toolchain.
 
 ## Deferred
 
@@ -93,14 +93,14 @@ Updated: 2026-08-25
 - M06-T05 physical preview rendering, mobile sheet dismissal, certificate/profile trust, and refreshed Home Screen icon appearance remain deferred to the consolidated final iPhone pass.
 - The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending.
 - M03-T03 Shortcuts share, one-time setup, and colour-recovery proof are closed as a physical failure; the ordinary uncoloured Copy to Notes baseline remains accepted.
-- E-004 native-helper build/install/paste proof remains pending; no Apple Notes result is inferred from source or desktop evidence.
+- E-004 native-helper build/install/paste proof is BLOCKED/DEFERRED — NEEDS MAC/XCODE; preserve the helper and do not infer an Apple Notes result.
 
 ## Escalations
 
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: trusted HTTPS verification completed.
 - E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.
-- E-004 is AUTHORIZED_FOR_BOUNDED_FEASIBILITY: exactly one isolated native attributed-string/pasteboard proof, with no PWA rewrite or paid Developer dependency.
+- E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE: preserve the one authorized isolated native proof; it does not block the remaining PWA v1 gate and requires no paid Developer dependency.
 
 ## Active task checkpoint
 
@@ -127,7 +127,7 @@ Updated: 2026-08-25
 - E-003 decision recorded: authorize one bounded non-HTML interoperability feasibility spike, then either adopt a proven low-friction route or accept uncolored editable-table paste as the documented v1 platform limitation.
 - E-003 feasibility harness completed and independently verified. Product owner did not adopt the auxiliary routes; the branch is closed with uncolored editable-table paste accepted for v1.
 - M03-T03 was prepared and dispatched through the configured OX Alpha wrapper. OX was silent for the bounded window with no report or delta; Codex fallback implemented the optional HTML-file share route and recorded `orchestration/reports/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY.md`.
-- Recorded `orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md` and prepared `orchestration/tasks/E-004-NATIVE-NOTES-COLOUR-HELPER.md` from the authorized escalation. Next action is one bounded OX Alpha native-helper dispatch.
+- Recorded `orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md` and prepared `orchestration/tasks/E-004-NATIVE-NOTES-COLOUR-HELPER.md` from the authorized escalation.
 - E-004 task was dispatched through the configured OX Alpha wrapper; OX was silent for the bounded window. Codex fallback completed the isolated source proof and recorded `orchestration/reports/E-004-NATIVE-NOTES-COLOUR-HELPER.md` and `orchestration/reviews/E-004-NATIVE-NOTES-COLOUR-HELPER-codex-review.md`.
 
 ## Final automated checkpoint
@@ -136,4 +136,4 @@ Updated: 2026-08-25
 - M06-T03 automated release-readiness scope accepted: 2/2 focused tests, 350/350 full suite, passing build, diff audit, trusted HTTPS runtime smoke, static deployment audit, documentation, and final-device checklist. Review: `orchestration/reviews/M06-T03-RELEASE-READINESS-codex-review.md`.
 - OX was dispatched twice through the verified Desktop DSH headless wrapper for M06-T03, but both invocations ended without a worker report or repository delta. The bounded task was completed from the authoritative task file and independently verified; this worker execution issue does not alter product acceptance.
 - Current gate: `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
-- M06-T05 and M03-T03 automated scope are accepted, with M03-T03 physically failed/closed. E-004 source proof is complete but blocked before compilation/install; only after that toolchain gate can the consolidated human-only iPhone 14 Pro Max pass resume.
+- M06-T05 and M03-T03 automated scope are accepted, with M03-T03 physically failed/closed. E-004 is parked; next action is the consolidated human-only PWA/iPhone 14 Pro Max pass at `https://192.168.1.49:4173/`.

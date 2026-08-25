@@ -179,3 +179,17 @@ Developer dependency, direct Notes automation, or an ongoing native workflow.
 If the helper cannot prove editable table plus colours, or installation burden
 is disproportionate, close E-004 and retain the standard uncoloured editable
 table as the v1 baseline.
+
+## E-004 parked pending legitimate iOS toolchain — 2026-08-25
+
+The native helper source proof is preserved, but this Windows workstation has
+no Swift/Xcode toolchain and therefore cannot compile, sign, install, or run
+the helper on the target iPhone. Park E-004 as
+`BLOCKED/DEFERRED — NEEDS MAC/XCODE`; do not classify the native idea as a
+failure, buy a service, or delete/redesign the proof.
+
+E-004 does not block completion of the otherwise accepted PWA v1. Resume the
+consolidated PWA/iPhone acceptance workflow for the remaining image export,
+dismissal, installability/trust, offline, Home icon/layout, table interaction,
+backup/restore, and ordinary uncoloured Notes-copy checks. Reopen E-004 only
+when a legitimate Mac/Xcode or equivalent iOS build/install route is available.

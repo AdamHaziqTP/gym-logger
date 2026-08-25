@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "final-pwa-gate-resumed",
+      "summary": "E-004 parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE; native helper preserved. PWA v1 final iPhone acceptance resumed independently at https://192.168.1.49:4173/.",
+      "at": "2026-08-25T13:19:13.438Z"
+    },
+    {
       "name": "e004-source-proof-blocked",
       "summary": "E-004 source proof pushed at 145e22e: 12/12 native harness checks, 359/359 PWA tests, and build pass; Swift/Xcode/iPhone proof remains blocked by the available workstation toolchain.",
       "at": "2026-08-25T13:06:01.883Z"
@@ -56,21 +61,16 @@
       "name": "final-environment-prepared",
       "summary": "Final b305ee1 checkpoint verified on main; product-sync republished before consolidated iPhone 14 Pro Max acceptance.",
       "at": "2026-08-25T09:52:50.172Z"
-    },
-    {
-      "name": "final-human-gate-ready",
-      "summary": "Autonomous v1 readiness sweep complete after M06-T04 backup/settings restore correction. Only consolidated iPhone 14 Pro Max acceptance remains.",
-      "at": "2026-08-25T05:42:34.586Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T13:06:01.884Z",
+  "lastPublishedAt": "2026-08-25T13:19:13.438Z",
   "lastEvent": {
-    "name": "e004-source-proof-blocked",
-    "summary": "E-004 source proof pushed at 145e22e: 12/12 native harness checks, 359/359 PWA tests, and build pass; Swift/Xcode/iPhone proof remains blocked by the available workstation toolchain.",
-    "at": "2026-08-25T13:06:01.883Z"
+    "name": "final-pwa-gate-resumed",
+    "summary": "E-004 parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE; native helper preserved. PWA v1 final iPhone acceptance resumed independently at https://192.168.1.49:4173/.",
+    "at": "2026-08-25T13:19:13.438Z"
   },
-  "syncRevision": 58,
+  "syncRevision": 59,
   "openEscalations": [],
   "chatNotifications": [
     {
