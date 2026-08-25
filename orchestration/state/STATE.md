@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M06 — PWA polish and regression
-- Current task: M06-T07 final polish — automated checkpoint accepted; only fresh Home Screen icon re-add and direct Compact colour-snapshot share remain for human verification; E-004 parked
+- Current task: M03-T04 WebKit native-selection-copy colour proof — M06-T07 polish checkpoint accepted; colour recovery is reopened under the new bounded investigation order
 - Status: HUMAN_REVIEW_REQUIRED (remaining PWA/device checks are open; E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE and does not block v1)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: `orchestration/evidence/M06-T07-FINAL-HUMAN-CHECKLIST.md` at `https://192.168.1.49:4173/`; verify only the fresh cache-busted Home Screen icon and direct Compact colour-snapshot share. E-004 is parked and is not part of the v1 completion blocker.
-- Latest bounded task: M06-T07 final polish after the accepted M06-T06 migration and owner-supplied icon asset; Codex-verified automated scope is accepted and the two-check human gate remains open.
+- Human review gate: after the isolated M03-T04 proof is independently verified, perform one target-iPhone paste into the existing Gym note. M06-T07's icon/share checks remain deferred and batched. E-004 is reopened only as a later native evidence branch; no physical or colour pass is claimed.
+- Latest bounded task: M03-T04 WebKit native-selection-copy proof after the accepted M06-T07 polish checkpoint; normal Copy to Notes remains unchanged while the isolated proof is prepared.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -155,6 +155,16 @@ Updated: 2026-08-26
   `orchestration/evidence/M06-T07-FINAL-HUMAN-CHECKLIST.md`: fresh Home Screen
   icon re-add and direct Compact colour-snapshot share. No desktop result is a
   physical pass. E-004 remains parked and does not block v1.
+
+## M03-T04 reopened colour investigation checkpoint
+
+- Product decision `Apple Notes colour recovery reopened — 2026-08-26` now
+  supersedes the prior colour-limitation disposition for this bounded branch.
+- First task: `orchestration/tasks/M03-T04-WEBKIT-SELECTION-COPY.md`.
+- Do not change production Copy to Notes or claim colours from desktop tests.
+- If the proof is ready, the next gate is one simple target-iPhone paste into
+  the existing `Gym` note; only that result determines whether the fingerprint
+  and native-helper branches proceed.
 
 ## Final automated checkpoint
 

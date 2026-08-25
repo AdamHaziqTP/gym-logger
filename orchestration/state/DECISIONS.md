@@ -218,3 +218,33 @@ DSH Desktop headless wrapper. Each produced no usable output or repository
 delta within its bounded task window, so Codex used the permitted fallback and
 independently verified the resulting batch. This is recorded as a task-level
 worker timeout, not as evidence that the wrapper or OX provider is unavailable.
+
+## Apple Notes colour recovery reopened — 2026-08-26
+
+The product owner explicitly reopens Apple Notes colour recovery as a
+high-priority bounded investigation. The previous v1 acceptance of uncoloured
+editable Notes paste is superseded for this investigation, but the existing
+normal `Copy to Notes` path remains the reliable fallback and must not regress.
+
+Investigate in this order:
+
+1. **WebKit native selection-copy proof:** render the canonical coloured table
+   as a real offscreen DOM tree, select it with a DOM `Range`, and invoke the
+   browser's native `document.execCommand("copy")` path inside the user gesture.
+   Do not intercept `copy`, call `clipboardData.setData`, or use
+   `ClipboardItem` in this proof.
+2. **Clipboard fingerprint:** if needed, inspect the web-visible clipboard
+   types and sanitized HTML from a small coloured table copied directly from
+   Apple Notes, then compare it with Gym Logger's generated payload.
+3. **Direct Shortcut bridge:** separately test
+   `shortcuts://run-shortcut?name=...&input=clipboard` with a Shortcut that
+   initially only appends Shortcut Input to the existing Gym note. Do not use
+   Get Text or Make Rich Text from HTML in this experiment.
+4. **Native helper / toolchain proof:** only after the web experiments,
+   extend E-004 to inspect and replay the real native pasteboard types, and
+   investigate a GitHub-hosted macOS build artifact for the isolated helper.
+
+No HTML styling permutation already tested is authorized. No native Gym Logger
+rewrite, paid Apple Developer membership, or automatic colour claim is
+authorized. Success still requires target-iPhone proof of an editable table,
+correct Unicode/data/order, and all five colours.

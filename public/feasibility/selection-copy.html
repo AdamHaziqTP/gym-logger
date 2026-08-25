@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Gym Logger — WebKit selection-copy proof</title>
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 16px; background: #000; color: #f2f2f7; font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; }
+      main { max-width: 720px; margin: 0 auto; }
+      .banner { border: 2px solid #ff9f0a; border-radius: 10px; padding: 14px; }
+      h1 { color: #ff9f0a; font-size: 18px; margin: 0 0 8px; }
+      p { color: #98989f; }
+      button { width: 100%; padding: 13px; border: 0; border-radius: 10px; background: #0a84ff; color: #fff; font-size: 17px; font-weight: 600; }
+      #status { min-height: 1.5em; color: #66d4cf; white-space: pre-wrap; }
+      #status.error { color: #ff453a; }
+      /* Real rendered content: positioned offscreen, with normal visibility. */
+      #selection-root { position: fixed; left: -10000px; top: 0; width: 760px; opacity: .01; user-select: text; -webkit-user-select: text; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="banner">
+        <h1>Experimental WebKit native-selection-copy proof</h1>
+        <p>This is not the normal Copy to Notes button. It asks Safari to copy a real rendered table selection using its own native copy path.</p>
+        <p>After tapping once, open the existing <strong>Gym</strong> note and paste. This page reports only whether the browser copy command ran; Apple Notes decides structure and colour fidelity.</p>
+        <button id="copy-selection" type="button">Copy rendered Gym table using Safari</button>
+        <p id="status" aria-live="polite"></p>
+      </section>
+    </main>
+    <div id="selection-root" aria-label="Rendered Gym Logger table used only for native selection copy"></div>
+    <script type="module">
+      import { FIXTURE_SESSION } from "./fixture.mjs";
+      import { buildSelectionCopyMarkup, copyRenderedSelection } from "./selectionCopy.mjs";
+
+      const root = document.querySelector("#selection-root");
+      const button = document.querySelector("#copy-selection");
+      const status = document.querySelector("#status");
+      root.innerHTML = buildSelectionCopyMarkup(FIXTURE_SESSION);
+
+      button.addEventListener("click", () => {
+        const copied = copyRenderedSelection(root);
+        status.className = copied ? "" : "error";
+        status.textContent = copied
+          ? "Browser copy command completed. Open Gym in Apple Notes and paste once."
+          : "Browser native copy command was unavailable or refused.";
+      });
+    </script>
+  </body>
+</html>
