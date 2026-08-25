@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "worker-diagnostic",
+      "summary": "DSH/OX recovery verified: unpatched smoke 16.65s PASS, patched smoke 25.33s PASS, larger worker task timeout 90.08s; classify task hang, not OX unavailable",
+      "at": "2026-08-25T16:19:55.786Z"
+    },
+    {
       "name": "accepted-checkpoint",
       "summary": "M06-T05 alternate pure-JS rasterizer checkpoint d8f19e9; one saved-image-only iPhone retest remains",
       "at": "2026-08-25T15:59:58.014Z"
@@ -56,21 +61,16 @@
       "name": "accepted-checkpoint",
       "summary": "M06-T05 saved-image delivery correction checkpoint 0cb9b46; one physical saved-image retest remains",
       "at": "2026-08-25T14:46:47.058Z"
-    },
-    {
-      "name": "correction-accepted",
-      "summary": "M06-T05 saved-image delivery correction independently verified; one physical saved-image retest remains",
-      "at": "2026-08-25T14:46:13.047Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T15:59:58.014Z",
+  "lastPublishedAt": "2026-08-25T16:19:55.786Z",
   "lastEvent": {
-    "name": "accepted-checkpoint",
-    "summary": "M06-T05 alternate pure-JS rasterizer checkpoint d8f19e9; one saved-image-only iPhone retest remains",
-    "at": "2026-08-25T15:59:58.014Z"
+    "name": "worker-diagnostic",
+    "summary": "DSH/OX recovery verified: unpatched smoke 16.65s PASS, patched smoke 25.33s PASS, larger worker task timeout 90.08s; classify task hang, not OX unavailable",
+    "at": "2026-08-25T16:19:55.786Z"
   },
-  "syncRevision": 72,
+  "syncRevision": 73,
   "openEscalations": [],
   "chatNotifications": [
     {
