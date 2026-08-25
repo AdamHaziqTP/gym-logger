@@ -28,7 +28,37 @@ Notes` button for this result, and do not run the old Shortcut conversion.
    - Arms orange, Back purple, Chest mint, Delts blue, and Legs pink;
    - unhighlighted rows staying plain.
 
-Result: `BLOCKED — RETEST READY`
+Result: `FAIL — STRUCTURE/DATA SURVIVE; COLOURS STRIPPED`
+
+## Physical retest — 2026-08-26
+
+The product owner opened the corrected `/feasibility/native-copy.html` proof,
+used **Copy proof session via native selection path**, and pasted the result
+into the existing Apple Notes `Gym` note.
+
+Observed result from the supplied iPhone screenshot:
+
+- **PASS — real editable table structure survives.** The pasted content is a
+  normal Notes table with the expected five workout columns.
+- **PASS — proof fixture content survives.** The short `Sunday 23 Aug` fixture,
+  its representative rows, summary, and bottom notes are present. The shorter
+  session is intentional: this isolated fixture covers all five categories,
+  unhighlighted rows, free-form/Unicode values, and summary overrides without
+  copying the full live 40-row workout.
+- **FAIL — category colours do not survive.** The pasted table is uniformly
+  uncoloured in Apple Notes despite the source fixture containing Arms orange,
+  Back purple, Chest mint, Delts blue, and Legs pink.
+- No new mojibake or flattened-text failure is visible in the supplied result;
+  the regression is specifically colour fidelity.
+
+Therefore the distinct WebKit rendered-selection/native-copy route does not
+recover Apple Notes category colours. This is a genuine target-iPhone colour
+failure, not a serving/setup failure and not the normal production
+`Copy to Notes` path.
+
+Per the bounded investigation order, leave normal `Copy to Notes` unchanged
+and advance to the **Notes clipboard fingerprint** branch. Do not spend another
+round changing HTML/CSS on this selection-copy route.
 
 Historical blocked attempt — 2026-08-26:
 
@@ -45,9 +75,10 @@ Correction status:
 - Fresh `dist` and the exact LAN response were independently checked for the
   experimental title/button and absence of the React shell.
 - The service worker now bypasses `/feasibility/*` requests.
-- M03-T04 is ready for the single retest using the current Proof URL above.
+- The corrected proof was then physically exercised and failed only on colour
+  fidelity as recorded above.
 
 Desktop tests only establish that the proof requested the native browser copy
-operation. They do not establish the Apple Notes result. If this fails or
-colours are absent after the proof page is genuinely served, leave the normal
-Copy to Notes path unchanged; the next bounded branch is the Notes clipboard fingerprint.
+operation. They do not establish the Apple Notes result. The target-iPhone
+result above closes M03-T04 as a colour failure; the next bounded branch is the
+Notes clipboard fingerprint.
