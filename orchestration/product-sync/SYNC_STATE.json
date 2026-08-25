@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "accepted-checkpoint",
+      "summary": "M06-T05 pixel-level PNG guard checkpoint f7cead6; one saved-image-only iPhone retest remains",
+      "at": "2026-08-25T15:44:57.085Z"
+    },
+    {
       "name": "correction-accepted",
       "summary": "M06-T05 pixel-trace correction independently verified at 362/362; blank canvas blocked before File creation; one saved-image retest remains",
       "at": "2026-08-25T15:44:41.473Z"
@@ -56,21 +61,16 @@
       "name": "human-gate-blocked",
       "summary": "E-004 native helper source proof completed with 12/12 harness checks, but Swift/Xcode compilation and iPhone installation are blocked on this Windows workstation; no PWA changes made.",
       "at": "2026-08-25T13:05:36.185Z"
-    },
-    {
-      "name": "task-ready-for-ox",
-      "summary": "E-004 authorized: one bounded isolated native pasteboard helper proof after M03-T03 Shortcuts physically failed; keep PWA and uncoloured Copy to Notes unchanged.",
-      "at": "2026-08-25T12:56:54.811Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T15:44:41.474Z",
+  "lastPublishedAt": "2026-08-25T15:44:57.086Z",
   "lastEvent": {
-    "name": "correction-accepted",
-    "summary": "M06-T05 pixel-trace correction independently verified at 362/362; blank canvas blocked before File creation; one saved-image retest remains",
-    "at": "2026-08-25T15:44:41.473Z"
+    "name": "accepted-checkpoint",
+    "summary": "M06-T05 pixel-level PNG guard checkpoint f7cead6; one saved-image-only iPhone retest remains",
+    "at": "2026-08-25T15:44:57.085Z"
   },
-  "syncRevision": 67,
+  "syncRevision": 68,
   "openEscalations": [],
   "chatNotifications": [
     {
