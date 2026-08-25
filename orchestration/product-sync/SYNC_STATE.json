@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "worker-diagnostic-checkpoint",
+      "summary": "Worker diagnostic report committed at 5b6122e; wrapper and patched smoke pass, larger worker task timeout classified",
+      "at": "2026-08-25T16:20:15.161Z"
+    },
+    {
       "name": "worker-diagnostic",
       "summary": "DSH/OX recovery verified: unpatched smoke 16.65s PASS, patched smoke 25.33s PASS, larger worker task timeout 90.08s; classify task hang, not OX unavailable",
       "at": "2026-08-25T16:19:55.786Z"
@@ -56,21 +61,16 @@
       "name": "correction-required",
       "summary": "M06-T05 saved PNGs are fully transparent on iPhone; route real-canvas fix and hide failed Shortcut action",
       "at": "2026-08-25T15:23:23.930Z"
-    },
-    {
-      "name": "accepted-checkpoint",
-      "summary": "M06-T05 saved-image delivery correction checkpoint 0cb9b46; one physical saved-image retest remains",
-      "at": "2026-08-25T14:46:47.058Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T16:19:55.786Z",
+  "lastPublishedAt": "2026-08-25T16:20:15.162Z",
   "lastEvent": {
-    "name": "worker-diagnostic",
-    "summary": "DSH/OX recovery verified: unpatched smoke 16.65s PASS, patched smoke 25.33s PASS, larger worker task timeout 90.08s; classify task hang, not OX unavailable",
-    "at": "2026-08-25T16:19:55.786Z"
+    "name": "worker-diagnostic-checkpoint",
+    "summary": "Worker diagnostic report committed at 5b6122e; wrapper and patched smoke pass, larger worker task timeout classified",
+    "at": "2026-08-25T16:20:15.161Z"
   },
-  "syncRevision": 73,
+  "syncRevision": 74,
   "openEscalations": [],
   "chatNotifications": [
     {

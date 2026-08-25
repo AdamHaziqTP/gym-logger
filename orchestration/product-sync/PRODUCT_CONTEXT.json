@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T16:19:55.830Z",
+  "generatedAt": "2026-08-25T16:20:15.204Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "5b6122e docs: diagnose DSH OX worker timeout",
     "9cf5286 chore: refresh alternate raster checkpoint",
     "d8f19e9 feat: use offline JavaScript SVG rasterizer",
     "fa5d9a3 docs: record pixel-guard iPhone regression",
-    "fa57dcb chore: refresh final PNG guard context",
-    "c176437 fix: explain blocked blank PNG delivery"
+    "fa57dcb chore: refresh final PNG guard context"
   ],
   "codexVerification": [
     {
@@ -179,7 +179,7 @@
     "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker."
   ],
   "decisionsMadeSinceLastSync": [
-    "DSH/OX recovery verified: unpatched smoke 16.65s PASS, patched smoke 25.33s PASS, larger worker task timeout 90.08s; classify task hang, not OX unavailable"
+    "Worker diagnostic report committed at 5b6122e; wrapper and patched smoke pass, larger worker task timeout classified"
   ],
   "recordedDecisions": [
     {
@@ -231,14 +231,12 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "9cf5286467c79388ad9d4ae2c1e4010ef86bd477",
+    "commit": "5b6122e96d8615e3f9fd42346e6d03969bc35432",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/state/STATE.md\n?? orchestration/reports/OX-DSH-RECOVERY-2026-08-26.md",
+    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/state/STATE.md",
-      "orchestration/reports/OX-DSH-RECOVERY-2026-08-26.md"
+      "orchestration/product-orchestrator/bootstrap.mjs"
     ]
   },
   "builder": {
@@ -258,11 +256,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "worker-diagnostic",
-      "summary": "DSH/OX recovery verified: unpatched smoke 16.65s PASS, patched smoke 25.33s PASS, larger worker task timeout 90.08s; classify task hang, not OX unavailable",
-      "at": "2026-08-25T16:19:55.786Z"
+      "name": "worker-diagnostic-checkpoint",
+      "summary": "Worker diagnostic report committed at 5b6122e; wrapper and patched smoke pass, larger worker task timeout classified",
+      "at": "2026-08-25T16:20:15.161Z"
     },
-    "contextRevision": 73,
+    "contextRevision": 74,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
