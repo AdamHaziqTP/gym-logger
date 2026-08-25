@@ -14,8 +14,8 @@
 - [x] Unidentified Wednesday data is not deleted.
 - [x] Next-date cloning inherits Tuesday values/highlights and clears Skip/notes under the existing policy when Tuesday is the newest session.
 - [x] Supplied icon is used by the PWA icon endpoints; the original asset is preserved as a reference.
-- [x] Focused tests: 3/3 pass.
-- [x] Full tests: 365/365 pass.
+- [x] Focused migration tests: 12/12 pass, including App startup integration.
+- [x] Full tests: 374/374 pass across 32 test files.
 - [x] Build, HTTPS shell/manifest, certificate endpoint, and diff hygiene pass.
 - [ ] Existing-device IndexedDB migration and iPhone Home Screen presentation: deferred to the consolidated human pass.
 
