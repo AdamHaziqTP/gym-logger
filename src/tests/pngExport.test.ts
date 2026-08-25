@@ -62,6 +62,7 @@ describe("rasterizeSvgToPngBlob", () => {
   it("serializes the rendered canvas as a non-empty PNG before using the WebKit toBlob fallback", async () => {
     const context = {
       clearRect: vi.fn(),
+      setTransform: vi.fn(),
       getImageData: () => ({
         data: new Uint8ClampedArray([255, 255, 255, 255]),
       }),
@@ -87,6 +88,7 @@ describe("rasterizeSvgToPngBlob", () => {
       new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]),
     );
     expect(renderer).toHaveBeenCalledTimes(1);
+    expect(context.setTransform).toHaveBeenCalledWith(2, 0, 0, 2, 0, 0);
     expect(renderer).toHaveBeenCalledWith(
       context,
       expect.any(String),
@@ -101,6 +103,7 @@ describe("rasterizeSvgToPngBlob", () => {
     const toBlob = vi.spyOn(HTMLCanvasElement.prototype, "toBlob");
     const context = {
       clearRect: vi.fn(),
+      setTransform: vi.fn(),
       getImageData: () => ({
         data: new Uint8ClampedArray([0, 0, 0, 0]),
       }),
@@ -122,6 +125,7 @@ describe("rasterizeSvgToPngBlob", () => {
     const fallbackBlob = new Blob(["png"], { type: "image/png" });
     vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
       clearRect: vi.fn(),
+      setTransform: vi.fn(),
       getImageData: () => ({
         data: new Uint8ClampedArray([255, 255, 255, 255]),
       }),
@@ -137,6 +141,47 @@ describe("rasterizeSvgToPngBlob", () => {
     await expect(
       rasterizeSvgToPngBlob("<svg />", 1, 1),
     ).resolves.toBe(fallbackBlob);
+  });
+
+  it("frames the SVG onto the delivery canvas: identity scale at 1x, issued before render", async () => {
+    const order: string[] = [];
+    const context = {
+      setTransform: vi.fn(() => {
+        order.push("setTransform");
+      }),
+      clearRect: vi.fn(),
+      getImageData: () => ({
+        data: new Uint8ClampedArray([255, 255, 255, 255]),
+      }),
+    } as unknown as CanvasRenderingContext2D;
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(context);
+    vi.spyOn(Canvg, "fromString").mockReturnValue({
+      render: vi.fn(async () => {
+        order.push("render");
+      }),
+    } as unknown as Canvg);
+    const toDataURL = vi
+      .spyOn(HTMLCanvasElement.prototype, "toDataURL")
+      .mockReturnValue(validPngDataUrl);
+
+    // 760×6000 exceeds the pixel budget at 2x → scale falls back to 1,
+    // where the framing transform must still be an exact identity so the
+    // previously verified 1x delivery behavior stays byte-identical.
+    await expect(
+      rasterizeSvgToPngBlob(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="760" height="6000" />',
+        760,
+        6000,
+      ),
+    ).resolves.not.toBeNull();
+
+    expect(context.setTransform).toHaveBeenCalledTimes(1);
+    expect(context.setTransform).toHaveBeenCalledWith(1, 0, 0, 1, 0, 0);
+    // The framing transform must precede every drawing command; otherwise
+    // only the logical top-left quadrant would hold pixels when the
+    // visible-pixel guard and PNG serialization run.
+    expect(order).toEqual(["setTransform", "render"]);
+    expect(toDataURL).toHaveBeenCalledWith("image/png");
   });
 });
 

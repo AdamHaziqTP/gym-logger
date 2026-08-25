@@ -140,6 +140,11 @@ export async function rasterizeSvgToPngBlob(
     // Canvg parses the known standalone SVG and issues ordinary Canvas 2D
     // drawing calls. This avoids the failing iOS WebKit SVG-image drawImage
     // bridge while keeping the renderer client-side and offline-first.
+    // The SVG is expressed in logical pixels, while the delivery canvas is
+    // supersampled. Scale the exact delivery context before Canvg draws;
+    // otherwise iOS receives a correctly rasterized image occupying only the
+    // top-left logical-size portion of the larger 2x PNG.
+    context.setTransform(scale, 0, 0, scale, 0, 0);
     const renderer = Canvg.fromString(context, svg, {
       window,
       DOMParser,

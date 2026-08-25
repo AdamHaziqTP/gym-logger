@@ -5,7 +5,7 @@ Status: **ACCEPTED — Codex-verified automated scope; physical device migration
 
 ## Outcome
 
-The product-owner supplied Tuesday 25 Aug 2026 workout is now an authoritative repository reference and a one-time live IndexedDB migration. The migration uses the stable ID `actual-tuesday-25-aug-2026` and the marker `migration.actual-session-2026-08-25.v1`.
+The product-owner supplied Tuesday 25 Aug 2026 workout is now an authoritative repository reference and a one-time live IndexedDB migration. The migration uses the stable ID `actual-2026-08-25` and the marker `migration.actual-session-2026-08-25.v1`.
 
 It inserts the 40-row, 40-set workout without replacing Sunday history or unrelated metadata. Reopening the app after the marker is written is a no-op. An unidentified Wednesday record is deliberately preserved; the existing History → session → Delete Session flow remains the smallest safe cleanup path if that record is confirmed as a development clone.
 
@@ -33,12 +33,14 @@ The supplied 1024px Gym Logger icon was also installed as the PWA 512px, 192px, 
 
 Verification:
 
-- Focused migration tests: **3/3 PASS**.
-- Full suite: **365/365 PASS** across 32 test files.
+- Focused migration tests: **12/12 PASS**, including App startup integration.
+- Full suite: **374/374 PASS** across 32 test files.
 - Production build: **PASS** (`tsc` + Vite; service-worker stamp generated).
 - HTTPS runtime: **PASS** — `https://192.168.1.49:4173/` and `/manifest.webmanifest` returned 200.
 - Certificate endpoint: **PASS** — `http://192.168.1.49:5174/gym-logger-dev.cer` returned 200 over the LAN address.
 - Diff hygiene: **PASS** (`git diff --check`).
+
+The product-sync bridge later supplied a newer version of the same authoritative reference and a new physical export result. The remote reference was reconciled into this checkpoint without discarding its provenance fields; the new PNG framing defect is tracked separately below and does not change the migration acceptance.
 
 ## Deferred / not claimed
 

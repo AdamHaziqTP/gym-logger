@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M06 — PWA polish and regression
-- Current task: FINAL-HUMAN-ACCEPTANCE — consolidated PWA/iPhone 14 Pro Max acceptance; E-004 parked
+- Current task: M06-T05-FIX-EXPORT-FRAMING — automated checkpoint accepted; consolidated PWA/iPhone 14 Pro Max acceptance remains next; E-004 parked
 - Status: HUMAN_REVIEW_REQUIRED (remaining PWA/device checks are open; E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE and does not block v1)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker.
-- Latest bounded task: M06-T06 actual Tuesday session migration + owner-supplied icon asset; Codex-verified automated scope is accepted and the existing consolidated iPhone gate remains open.
+- Human review gate: Final consolidated iPhone 14 Pro Max retest after the M06-T05 framing correction at `https://192.168.1.49:4173/`; automated scope is accepted, while saved PNG framing, installability, offline, trust, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker.
+- Latest bounded task: M06-T05-FIX-EXPORT-FRAMING after M06-T06 actual Tuesday session migration + owner-supplied icon asset; Codex-verified automated scope is accepted and the existing consolidated iPhone gate remains open.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -70,6 +70,8 @@ Updated: 2026-08-26
 - E-004 is authorized for exactly one isolated native attributed-string/pasteboard feasibility proof; the PWA and normal Copy to Notes path remain unchanged.
 - E-004 source proof is independently reviewed: 12/12 native harness checks, 359/359 PWA tests, build, and diff audit pass; Swift/Xcode compilation is unavailable on this Windows workstation.
 - M06-T06 actual Tuesday session migration is independently accepted: exact 40-row source, transactional once-only marker, Sunday/unrelated-data preservation, Wednesday safety, next-session cloning, supplied icon assets, 365/365 full tests, build, HTTPS runtime, certificate endpoint, and diff audit pass. Physical IndexedDB/Home Screen verification remains deferred.
+- Product-sync later recorded a genuine M06-T05 export geometry defect: Canvg now produces visible Faithful/Compact PNGs on the target iPhone, but both are framed too small in the top-left with large unused black space. Route a bounded framing/crop correction only; preserve the working Canvg rasterizer, visible pixels, colours, preview, and save/share path.
+- M06-T05 framing correction is independently accepted for automated scope: the delivery canvas now applies the selected raster scale before Canvg renders; focused PNG/migration coverage is 27/27, full suite is 374/374, build/runtime/certificate/diff checks pass, and the target-iPhone saved-image framing result remains open.
 
 ## Final disposition
 
@@ -97,6 +99,7 @@ Updated: 2026-08-26
 - Final iPhone 14 Pro Max install/offline/touch/layout/settings/PNG/backup/Notes checks in the consolidated checklist.
 - Backup/restore physical Files/share/restore behavior remains deferred to the consolidated final iPhone pass.
 - M06-T05 physical saved-image delivery remains deferred to the consolidated final iPhone pass. Faithful/Compact preview and mobile dismissal were already PASS in the latest device evidence and do not need repeating for this correction unless a regression appears.
+- M06-T05 framing is the current physical export gate: retest one Faithful and one Compact saved PNG for visible content and correct full-frame geometry. Preview and mobile dismissal remain accepted from the latest physical evidence unless they regress.
 - The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending.
 - M03-T03 Shortcuts share, one-time setup, and colour-recovery proof are closed as a physical failure; the ordinary uncoloured Copy to Notes baseline remains accepted.
 - E-004 native-helper build/install/paste proof is BLOCKED/DEFERRED — NEEDS MAC/XCODE; preserve the helper and do not infer an Apple Notes result.
@@ -149,3 +152,5 @@ Updated: 2026-08-26
 - The alternate raster correction is recorded in `orchestration/reviews/M06-T05-FIX-EXPORT-ALTERNATE-RASTER-codex-review.md`; return one saved-image-only physical retest. Do not repeat preview or dismissal unless they regress again.
 - DSH/OX recovery diagnostic on 2026-08-26 is recorded in `orchestration/reports/OX-DSH-RECOVERY-2026-08-26.md`: fresh unpatched smoke passed in 16.65s, fresh patched smoke passed in 25.33s, and a fresh larger multi-file worker review timed out at 90.08s with empty stdout/stderr. Classify this as a worker-task hang/timeout, not OX unavailability; preserve the verified Desktop wrapper route and keep fallback emergency-only.
 - M06-T06 accepted automated checkpoint: `orchestration/reviews/M06-T06-ACTUAL-SESSION-MIGRATION-codex-review.md`; current human gate remains `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
+- New product evidence: `orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md` now records PNG visibility PASS but framing/crop FAIL after `9cf5286`; do not treat the export branch as physically accepted.
+- New automated evidence: `orchestration/evidence/M06-T05-FIX-EXPORT-FRAMING-AUTOMATED.md` records the independently verified geometry correction; physical acceptance remains intentionally unclaimed.
