@@ -2,7 +2,7 @@
 
 Date: 2026-08-25
 Device: iPhone 14 Pro Max
-Status: `FAIL — SAVED PNG REMAINS FULLY TRANSPARENT AFTER 0cb9b46`
+Status: `FAIL — SAVED PNG STILL FULLY TRANSPARENT AFTER REAL-CANVAS FIX`
 
 Physical result supplied by the product owner during the consolidated PWA acceptance pass:
 
@@ -30,6 +30,7 @@ The preview and mobile dismissal results remain PASS and do not need repeating.
 The next correction must prove that the SVG is drawn into the same canvas whose
 PNG bytes are serialized; a valid PNG signature, dimensions, MIME type, Blob,
 or resolved share promise alone is insufficient.
+
 ## Retest after correction checkpoint `0cb9b46`
 
 The product owner physically retested both Faithful and Compact saved outputs after the PNG delivery correction was pushed and product-sync refreshed.
@@ -43,3 +44,19 @@ The product owner physically retested both Faithful and Compact saved outputs af
 - Previously passed in-app preview and mobile Close behavior remain accepted unless a subsequent correction regresses them.
 
 Route another bounded correction specifically around iPhone rasterization/PNG serialization. The correction must verify non-transparent pixel content in the produced bitmap, not only file signature, dimensions, MIME type, or successful Blob creation. Preserve the working SVG preview and dismissal behavior. After independent automated verification, return only the saved-image branch for physical retest.
+
+## Retest after real-canvas correction / checkpoint `bfa2fba` — 2026-08-25 ~23:37 SGT
+
+The product owner physically retested one saved export from the updated build after the real-canvas correction (`1e893a0`, product-sync checkpoint `bfa2fba`). The saved file is still blank in Photos.
+
+Direct inspection of the newly supplied PNG confirms the failure persists:
+
+- Dimensions: `1520 × 2456`.
+- Format: RGBA PNG.
+- Red, green, and blue channels are all `0` for every pixel.
+- Alpha is also `0` for every pixel.
+- Therefore the saved PNG is again **fully transparent**.
+
+This means the real-canvas correction did not resolve the target-iPhone saved-output path despite the source-level root-cause hypothesis and green automated checks. Do not repeat preview or dismissal checks; those remain PASS unless a later correction regresses them.
+
+Next correction must trace the exact iPhone path from the successfully rendered preview/SVG through rasterization, canvas pixel population, PNG byte extraction, `File`/`Blob` construction, Web Share / save handoff, and the final payload received by Photos. Add a device-relevant diagnostic or a deterministic pre-share assertion that proves the exact canvas being serialized contains non-zero alpha / visible pixels before the file is handed to iOS. Do not accept another correction based solely on code-path inspection or desktop PNG structure tests.
