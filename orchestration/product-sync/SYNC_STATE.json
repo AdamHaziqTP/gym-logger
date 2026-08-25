@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "task-ready-for-ox",
+      "summary": "M06-T02 settings/theme/default image-style task is ready after M06 PWA polish acceptance.",
+      "at": "2026-08-25T02:40:08.978Z"
+    },
+    {
       "name": "m06-t01-accepted",
       "summary": "Codex independently accepted M06-T01 after the timer correction: 316 tests, clean build, diff audit, and trusted HTTPS PWA asset smoke; M06-T02 settings/style is next.",
       "at": "2026-08-25T02:39:57.467Z"
@@ -56,21 +61,16 @@
       "name": "builder-correction-prepared",
       "summary": "FEAS-01 independent verification found two isolated honesty/defensiveness failures; FEAS-02 correction prepared.",
       "at": "2026-08-24T16:44:07.721Z"
-    },
-    {
-      "name": "m03-t01-e003-feasibility-task-prepared",
-      "summary": "E-003 bounded feasibility task prepared: isolated RTF/file handoff and PWA Share Sheet/Shortcuts probe, with no production Copy-to-Notes change or native rewrite.",
-      "at": "2026-08-24T16:14:17.515Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T02:39:57.468Z",
+  "lastPublishedAt": "2026-08-25T02:40:08.978Z",
   "lastEvent": {
-    "name": "m06-t01-accepted",
-    "summary": "Codex independently accepted M06-T01 after the timer correction: 316 tests, clean build, diff audit, and trusted HTTPS PWA asset smoke; M06-T02 settings/style is next.",
-    "at": "2026-08-25T02:39:57.467Z"
+    "name": "task-ready-for-ox",
+    "summary": "M06-T02 settings/theme/default image-style task is ready after M06 PWA polish acceptance.",
+    "at": "2026-08-25T02:40:08.978Z"
   },
-  "syncRevision": 38,
+  "syncRevision": 39,
   "openEscalations": [
     {
       "id": "E-002",

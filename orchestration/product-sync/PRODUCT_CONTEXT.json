@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T02:39:57.515Z",
+  "generatedAt": "2026-08-25T02:40:09.021Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "6781b56 feat: finish PWA polish and queue settings",
     "7e547f9 chore: queue M06 PWA polish task",
     "7ed919f feat: add local backup and restore",
     "d400b93 feat: add Faithful and Compact PNG export",
-    "b734f3c test: cover Home action layout",
-    "8443010 fix: separate Home secondary actions"
+    "b734f3c test: cover Home action layout"
   ],
   "codexVerification": [
     {
@@ -161,7 +161,7 @@
     "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
   ],
   "decisionsMadeSinceLastSync": [
-    "Codex independently accepted M06-T01 after the timer correction: 316 tests, clean build, diff audit, and trusted HTTPS PWA asset smoke; M06-T02 settings/style is next."
+    "M06-T02 settings/theme/default image-style task is ready after M06 PWA polish acceptance."
   ],
   "recordedDecisions": [
     {
@@ -211,31 +211,10 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "7e547f97abec61828fac704b48d631c35c114279",
+    "commit": "6781b56f47ca5759fece8560a19ad217d1099b50",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M index.html\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M src/App.tsx\n M src/components/Home.tsx\n M src/components/SessionView.tsx\n M src/main.tsx\n M src/styles.css\n M src/tests/sessionInteraction.test.tsx\n M vite.config.ts\n?? orchestration/reports/M06-T01-CORRECTION-01-SESSION-TIMER-CLEANUP.md\n?? orchestration/reports/M06-T01-PWA-POLISH-REGRESSION.md\n?? orchestration/reviews/M06-T01-PWA-POLISH-REGRESSION-codex-review.md\n?? orchestration/tasks/M06-T01-CORRECTION-01-SESSION-TIMER-CLEANUP.md\n?? orchestration/tasks/M06-T02-SETTINGS-THEME-STYLE.md\n?? public/apple-touch-icon.png\n?? public/icons/\n?? public/manifest.webmanifest\n?? public/sw.js\n?? scripts/\n?? src/domain/storageInfo.ts\n?? src/pwa/\n?? src/tests/pwaAssets.test.ts\n?? src/tests/serviceWorkerRegistration.test.ts\n?? src/tests/serviceWorkerRuntime.test.ts\n?? src/tests/startupFailure.test.tsx\n?? src/tests/storageInfo.test.ts",
-    "changedFiles": [
-      "index.html",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/state/STATE.md",
-      "src/App.tsx",
-      "src/components/Home.tsx",
-      "src/components/SessionView.tsx",
-      "src/main.tsx",
-      "src/styles.css",
-      "src/tests/sessionInteraction.test.tsx",
-      "vite.config.ts",
-      "orchestration/reports/M06-T01-CORRECTION-01-SESSION-TIMER-CLEANUP.md",
-      "orchestration/reports/M06-T01-PWA-POLISH-REGRESSION.md",
-      "orchestration/reviews/M06-T01-PWA-POLISH-REGRESSION-codex-review.md",
-      "orchestration/tasks/M06-T01-CORRECTION-01-SESSION-TIMER-CLEANUP.md",
-      "orchestration/tasks/M06-T02-SETTINGS-THEME-STYLE.md",
-      "public/apple-touch-icon.png",
-      "public/icons/",
-      "public/manifest.webmanifest"
-    ]
+    "workingTree": "## main...origin/main",
+    "changedFiles": []
   },
   "builder": {
     "id": "ox-alpha",
@@ -254,11 +233,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m06-t01-accepted",
-      "summary": "Codex independently accepted M06-T01 after the timer correction: 316 tests, clean build, diff audit, and trusted HTTPS PWA asset smoke; M06-T02 settings/style is next.",
-      "at": "2026-08-25T02:39:57.467Z"
+      "name": "task-ready-for-ox",
+      "summary": "M06-T02 settings/theme/default image-style task is ready after M06 PWA polish acceptance.",
+      "at": "2026-08-25T02:40:08.978Z"
     },
-    "contextRevision": 38,
+    "contextRevision": 39,
     "openEscalations": [
       {
         "id": "E-002",
