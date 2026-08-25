@@ -2,7 +2,7 @@
 
 Date: 2026-08-25
 Device: iPhone 14 Pro Max
-Status: `FAIL — PIXEL-GUARD CORRECTION REGRESSED PREVIEW AND SAVED OUTPUT STILL FAILS`
+Status: `PARTIAL PASS — PNG NOW VISIBLE; FRAMING/CROP FAILS`
 
 Physical result supplied by the product owner during the consolidated PWA acceptance pass:
 
@@ -89,3 +89,18 @@ Canvg parses the known standalone SVG and emits ordinary Canvas 2D drawing
 operations; the exact canvas is still checked for visible pixels before PNG
 encoding. Automated checks are green, but no desktop result is treated as
 proof of iPhone Photos output. Return one saved-image-only device retest.
+
+## Retest after Canvg alternate raster / checkpoint `9cf5286` — 2026-08-26 ~00:32 SGT
+
+The product owner physically retested both exported variants and supplied the actual saved PNGs.
+
+**Major progress: PNG visibility is now PASS.** Both exported files contain the rendered workout, correct dark background, category colours, headers, and table content. The previous fully-transparent/blank PNG failure is resolved on the target iPhone.
+
+However, **final image framing/cropping is FAIL**:
+
+- Compact output: `1520 × 2456`; visible workout content occupies only about `736 × 1162` pixels near the top-left, leaving roughly half the canvas width and more than half the canvas height as unused black space.
+- Faithful output: `1520 × 4842`; visible workout content occupies only about `712 × 2325` pixels near the top-left, again leaving large unused black space to the right and below.
+- The workout is therefore rendered too small and anchored to the top-left instead of being cropped/framed tightly to the intended export composition.
+- This is not another rasterization failure: visible pixels, colours, text, rows, and overall image generation now work.
+
+Route a bounded **export geometry/framing correction only**. Preserve the Canvg rasterizer, pixel guard, working preview path, save/share path, colours, and full workout content. The correction should make the final PNG canvas/viewBox/output dimensions match the intended rendered content bounds plus deliberate margins, so the workout fills the image naturally rather than occupying roughly the top-left quarter. Do not regress back to the prior SVG-image `drawImage` implementation.
