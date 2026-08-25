@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "accepted-checkpoint",
+      "summary": "M06-T05 real-canvas PNG correction and failed Shortcut UI removal are current after merged evidence sync; one saved-image retest remains",
+      "at": "2026-08-25T15:28:58.212Z"
+    },
+    {
       "name": "correction-accepted",
       "summary": "M06-T05 transparent PNG root-cause fix and failed Shortcut UI removal independently verified; one saved-image retest remains",
       "at": "2026-08-25T15:27:25.738Z"
@@ -56,21 +61,16 @@
       "name": "final-human-gate-ready",
       "summary": "M03-T03 is accepted for automated scope after 41 focused and 359 full tests, build, diff audit, and HTTPS smoke; one consolidated iPhone 14 Pro Max pass now includes the optional Shortcuts colour route and all prior deferred checks.",
       "at": "2026-08-25T12:24:28.296Z"
-    },
-    {
-      "name": "task-ready-for-ox",
-      "summary": "M03-T03 bounded iOS Shortcuts colour-recovery feasibility is ready for OX Alpha; preserve the uncoloured Copy to Notes baseline and keep final iPhone checks deferred.",
-      "at": "2026-08-25T12:17:01.787Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T15:27:25.739Z",
+  "lastPublishedAt": "2026-08-25T15:28:58.213Z",
   "lastEvent": {
-    "name": "correction-accepted",
-    "summary": "M06-T05 transparent PNG root-cause fix and failed Shortcut UI removal independently verified; one saved-image retest remains",
-    "at": "2026-08-25T15:27:25.738Z"
+    "name": "accepted-checkpoint",
+    "summary": "M06-T05 real-canvas PNG correction and failed Shortcut UI removal are current after merged evidence sync; one saved-image retest remains",
+    "at": "2026-08-25T15:28:58.212Z"
   },
-  "syncRevision": 64,
+  "syncRevision": 65,
   "openEscalations": [],
   "chatNotifications": [
     {

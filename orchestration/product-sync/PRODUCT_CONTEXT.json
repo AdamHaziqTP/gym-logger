@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T15:27:25.782Z",
+  "generatedAt": "2026-08-25T15:28:58.255Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
-    "44b1a09 chore: refresh product sync checkpoint",
-    "0cb9b46 fix: harden iPhone PNG image delivery",
-    "f1f4545 docs: record iPhone export delivery failure",
-    "8fde227 docs: clarify slow iPhone launch observation",
-    "f4f4d07 docs: record final retest app unreachable"
+    "c0e37f9 Merge remote-tracking branch 'origin/main'",
+    "1e893a0 fix: use real canvas for iPhone PNG export",
+    "4fe6ea0 docs: record rich clipboard shortcut failure",
+    "b78601d docs: confirm Shortcuts setup was correct",
+    "d8a43b1 docs: record transparent PNG retest failure"
   ],
   "codexVerification": [
     {
@@ -93,7 +93,7 @@
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
       "result": [
-        "Status: `PARTIAL PASS — PREVIEW/DISMISSAL FIXED; SAVED IMAGE FAILS`",
+        "Status: `FAIL — SAVED PNG REMAINS FULLY TRANSPARENT AFTER 0cb9b46`",
         "Physical result supplied by the product owner during the consolidated PWA acceptance pass:",
         "**PASS — Faithful preview:** the Faithful export preview now visibly renders the workout on the iPhone instead of showing the earlier blank/black preview.",
         "**PASS — Compact preview:** the Compact export preview now visibly renders the workout on the iPhone instead of showing the earlier blank/black preview."
@@ -103,7 +103,8 @@
       "path": "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
       "result": [
         "Status: `FAIL — SHORTCUTS_ROUTE`",
-        "This fails the M03-T03 success criteria. The bounded Shortcuts route is closed rather than iterated through more HTML/Shortcuts variants, per the recorded product decision.",
+        "The corresponding Apple Notes screenshot still shows flattened text and mojibake. Therefore this is a route/platform failure, not a setup error by the product owner.",
+        "Result: **FAIL — no table and no category colours**. The clipboard variant therefore does not recover either the editable table structure or the five-colour navigation treatment.",
         "or HTML variants are authorized. The failed `Share for Notes Colours` action"
       ]
     },
@@ -179,7 +180,7 @@
     "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining PWA device checks remain pending. E-004 is parked and is not part of the v1 completion blocker."
   ],
   "decisionsMadeSinceLastSync": [
-    "M06-T05 transparent PNG root-cause fix and failed Shortcut UI removal independently verified; one saved-image retest remains"
+    "M06-T05 real-canvas PNG correction and failed Shortcut UI removal are current after merged evidence sync; one saved-image retest remains"
   ],
   "recordedDecisions": [
     {
@@ -231,25 +232,12 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "44b1a093b0802d6576f9a15d6871c51bb12b5be0",
+    "commit": "c0e37f92e803be4f3ffe299e7bbfde773f47823d",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md\n M orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/STATE.md\n M src/components/SessionView.tsx\n M src/domain/pngExport.ts\n M src/tests/copyToNotes.test.tsx\n M src/tests/pngExport.test.ts\n?? orchestration/reports/M06-T05-FIX-EXPORT-TRANSPARENT.md\n?? orchestration/reviews/M06-T05-FIX-EXPORT-TRANSPARENT-codex-review.md\n?? orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md",
+    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
-      "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
-      "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/state/STATE.md",
-      "src/components/SessionView.tsx",
-      "src/domain/pngExport.ts",
-      "src/tests/copyToNotes.test.tsx",
-      "src/tests/pngExport.test.ts",
-      "orchestration/reports/M06-T05-FIX-EXPORT-TRANSPARENT.md",
-      "orchestration/reviews/M06-T05-FIX-EXPORT-TRANSPARENT-codex-review.md",
-      "orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md"
+      "orchestration/product-orchestrator/bootstrap.mjs"
     ]
   },
   "builder": {
@@ -269,11 +257,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "correction-accepted",
-      "summary": "M06-T05 transparent PNG root-cause fix and failed Shortcut UI removal independently verified; one saved-image retest remains",
-      "at": "2026-08-25T15:27:25.738Z"
+      "name": "accepted-checkpoint",
+      "summary": "M06-T05 real-canvas PNG correction and failed Shortcut UI removal are current after merged evidence sync; one saved-image retest remains",
+      "at": "2026-08-25T15:28:58.212Z"
     },
-    "contextRevision": 64,
+    "contextRevision": 65,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
