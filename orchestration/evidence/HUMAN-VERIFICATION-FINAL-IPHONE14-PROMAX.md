@@ -20,6 +20,15 @@ Correction status: `M06-T05 ACCEPTED_FOR_AUTOMATED_SCOPE`. Use the rebuilt
 trusted HTTPS URL `https://192.168.1.49:4173/` for one consolidated retest. Do
 not ask for individual intermediate checks.
 
+## Retest infrastructure event
+
+- **BLOCKED then RESOLVED — certificate server:** the certificate URL briefly
+  refused connections because the workstation's port-5174 static server had
+  stopped. Codex restarted it bound to `0.0.0.0` and independently verified
+  `http://192.168.1.49:5174/gym-logger-dev.cer` over the LAN with HTTP 200,
+  serving the new **Gym Logger Local Root CA** certificate. The app server was
+  also restarted and verified at `https://192.168.1.49:4173/`.
+
 For the Home Screen icon check, remove the old Home Screen bookmark before
 adding the refreshed build again so iOS does not continue displaying its cached
 icon. The certificate installation steps remain in

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T10:27:25.332Z",
+  "generatedAt": "2026-08-25T11:46:43.243Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "013d776 docs: point product sync to final iPhone retest",
     "f1a01a1 fix: resolve final iPhone gate failures",
     "897109e docs: authorize correction loop for final iPhone failures",
     "9f4b3a4 docs: record final iPhone export and HTTPS failures",
-    "420984f chore: refresh final product sync checkpoint",
-    "b305ee1 fix: restore backup settings metadata"
+    "420984f chore: refresh final product sync checkpoint"
   ],
   "codexVerification": [
     {
@@ -98,7 +98,7 @@
         "pass found real failures, and M06-T05 has been independently verified for",
         "below is being reclassified as passed by desktop evidence.",
         "Recorded failure batch:",
-        "**FAIL — trusted HTTPS environment:** the app URL still presents Safari's `Connection Not Private` / `Not Secure` state on the iPhone even after the supplied certificate/profile was installed. The product owner reports having to manually choose to visit the site each time. This means the final trusted-origin/installability/offline gate is not yet validly exercised and the certificate/trust setup must be corrected before retesting."
+        "**BLOCKED then RESOLVED — certificate server:** the certificate URL briefly"
       ]
     },
     {
@@ -162,7 +162,8 @@
     "Home responsive-layout defect: Copy Another Session visually clips/overlaps History on iPhone 14 Pro Max; correction required before final acceptance.",
     "Final iPhone 14 Pro Max install/offline/touch/layout/settings/PNG/backup/Notes checks in the consolidated checklist.",
     "Backup/restore physical Files/share/restore behavior remains deferred to the consolidated final iPhone pass.",
-    "M06-T05 physical preview rendering, mobile sheet dismissal, certificate/profile trust, and refreshed Home Screen icon appearance remain deferred to the consolidated final iPhone pass."
+    "M06-T05 physical preview rendering, mobile sheet dismissal, certificate/profile trust, and refreshed Home Screen icon appearance remain deferred to the consolidated final iPhone pass.",
+    "The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending."
   ],
   "activeEscalationsAndProductDecisionsNeeded": [
     "E-001 historical DSH rate-limit condition is no longer the current blocker.",
@@ -171,7 +172,7 @@
     "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. E-003 Apple Notes colour loss remains the accepted v1 limitation."
   ],
   "decisionsMadeSinceLastSync": [
-    "M06-T05 is accepted for automated scope; final iPhone 14 Pro Max retest is ready at https://192.168.1.49:4173/ with the repaired root/leaf HTTPS setup. Apple Notes colour loss remains accepted v1."
+    "Port 5174 certificate server was restarted and verified over LAN; HTTPS app on 4173 was also restarted and verified. The final iPhone trust result remains pending."
   ],
   "recordedDecisions": [
     {
@@ -222,10 +223,11 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "f1a01a177483c09a5cfa20ba61b0819a98fb9a84",
+    "commit": "013d7760632f09602f7dd38ea0f4b9fbcde8516a",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/state/STATE.md",
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md\n M orchestration/state/STATE.md",
     "changedFiles": [
+      "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
       "orchestration/state/STATE.md"
     ]
   },
@@ -246,11 +248,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "final-retest-ready",
-      "summary": "M06-T05 is accepted for automated scope; final iPhone 14 Pro Max retest is ready at https://192.168.1.49:4173/ with the repaired root/leaf HTTPS setup. Apple Notes colour loss remains accepted v1.",
-      "at": "2026-08-25T10:27:25.282Z"
+      "name": "final-retest-infrastructure-restored",
+      "summary": "Port 5174 certificate server was restarted and verified over LAN; HTTPS app on 4173 was also restarted and verified. The final iPhone trust result remains pending.",
+      "at": "2026-08-25T11:46:43.177Z"
     },
-    "contextRevision": 51,
+    "contextRevision": 52,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "final-retest-infrastructure-restored",
+      "summary": "Port 5174 certificate server was restarted and verified over LAN; HTTPS app on 4173 was also restarted and verified. The final iPhone trust result remains pending.",
+      "at": "2026-08-25T11:46:43.177Z"
+    },
+    {
       "name": "final-retest-ready",
       "summary": "M06-T05 is accepted for automated scope; final iPhone 14 Pro Max retest is ready at https://192.168.1.49:4173/ with the repaired root/leaf HTTPS setup. Apple Notes colour loss remains accepted v1.",
       "at": "2026-08-25T10:27:25.282Z"
@@ -56,21 +61,16 @@
       "name": "m06-t02-accepted",
       "summary": "Codex independently accepted M06-T02 after correction: 32 settings tests, 348 full tests, clean build/diff, and HTTPS shell/manifest/service-worker smoke; M06-T03 release readiness is next.",
       "at": "2026-08-25T03:22:04.888Z"
-    },
-    {
-      "name": "correction-required",
-      "summary": "M06-T02 worker stopped without report; Codex found two TypeScript errors and prepared a bounded settings/types/coverage correction.",
-      "at": "2026-08-25T03:02:02.226Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T10:27:25.283Z",
+  "lastPublishedAt": "2026-08-25T11:46:43.178Z",
   "lastEvent": {
-    "name": "final-retest-ready",
-    "summary": "M06-T05 is accepted for automated scope; final iPhone 14 Pro Max retest is ready at https://192.168.1.49:4173/ with the repaired root/leaf HTTPS setup. Apple Notes colour loss remains accepted v1.",
-    "at": "2026-08-25T10:27:25.282Z"
+    "name": "final-retest-infrastructure-restored",
+    "summary": "Port 5174 certificate server was restarted and verified over LAN; HTTPS app on 4173 was also restarted and verified. The final iPhone trust result remains pending.",
+    "at": "2026-08-25T11:46:43.177Z"
   },
-  "syncRevision": 51,
+  "syncRevision": 52,
   "openEscalations": [],
   "chatNotifications": [
     {

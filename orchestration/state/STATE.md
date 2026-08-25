@@ -85,6 +85,7 @@ Updated: 2026-08-25
 - Final iPhone 14 Pro Max install/offline/touch/layout/settings/PNG/backup/Notes checks in the consolidated checklist.
 - Backup/restore physical Files/share/restore behavior remains deferred to the consolidated final iPhone pass.
 - M06-T05 physical preview rendering, mobile sheet dismissal, certificate/profile trust, and refreshed Home Screen icon appearance remain deferred to the consolidated final iPhone pass.
+- The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending.
 
 ## Escalations
 
