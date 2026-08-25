@@ -158,3 +158,24 @@ Authorize one new **bounded, practical colour-recovery branch** with the followi
 6. Success requires target-iPhone evidence: editable Notes table, correct date/legend/order/values/summary/notes, and visible category colours. Image-only export is not a Copy-to-Notes success.
 
 This colour-recovery branch may proceed in parallel with the remaining final iPhone acceptance work. Failure of the optional coloured route must not regress the already working editable uncoloured Notes transfer.
+
+## E-004 native Apple Notes colour-helper proof — 2026-08-25
+
+The target-iPhone M03-T03 Shortcuts route is now physically failed and closed.
+It flattened the workout into plain text, lost all five colours, and mangled
+Unicode such as `·` and `°` into `Â·` and `Â°`. Do not iterate that Shortcut or
+try more HTML variants.
+
+Authorize exactly one bounded native attributed-string/pasteboard feasibility
+proof. The helper must remain isolated from the PWA and normal `Copy to Notes`
+path, use the canonical session fixture, and test native Unicode, HTML, and
+RTF/pasteboard representations against the existing Apple Notes `Gym` note.
+It must prove a real editable table, correct data/order/summary/notes, all five
+category colours, and correct Unicode on the target iPhone before any colour
+claim is accepted.
+
+This is not authorization for a native Gym Logger rewrite, a paid Apple
+Developer dependency, direct Notes automation, or an ongoing native workflow.
+If the helper cannot prove editable table plus colours, or installation burden
+is disproportionate, close E-004 and retain the standard uncoloured editable
+table as the v1 baseline.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T12:25:09.446Z",
+  "generatedAt": "2026-08-25T13:05:36.226Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -36,10 +36,10 @@
   },
   "current": {
     "milestone": "M06 — PWA polish and regression",
-    "task": "FINAL-HUMAN-ACCEPTANCE — consolidated iPhone 14 Pro Max retest including M03-T03 Shortcuts proof",
-    "status": "HUMAN_REVIEW_REQUIRED (M03-T03 automated scope is accepted; target-device interoperability and the existing final-device checks remain unpassed)",
-    "humanReviewGate": "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. M03-T03 optional Shortcuts execution and Apple Notes colour proof are included in this same final pass.",
-    "nextAction": "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. M03-T03 optional Shortcuts execution and Apple Notes colour proof are included in this same final pass."
+    "task": "E-004 — bounded native Apple Notes colour-helper feasibility proof",
+    "status": "HUMAN_REVIEW_REQUIRED (E-004 source proof is complete, but Swift/Xcode compilation and target-device installation/paste remain blocked on an iOS toolchain)",
+    "humanReviewGate": "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. E-004 native-helper pasteboard proof is blocked until a legitimate iOS build/install route exists.",
+    "nextAction": "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. E-004 native-helper pasteboard proof is blocked until a legitimate iOS build/install route exists."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,13 +56,21 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
-    "d93400f feat: prepare Shortcuts Notes colour handoff",
-    "8710fd8 docs: reopen optional Apple Notes colour path",
-    "91ba3f0 docs: record one-time iPhone trust warning",
-    "fb8d9f1 docs: record final retest infrastructure recovery",
-    "1050fff docs: record unreachable certificate download server"
+    "10e27c8 docs: authorize bounded native colour helper proof",
+    "81987e4 docs: record Shortcuts colour route failure",
+    "2a1a829 docs: append colour handoff to canonical Gym note",
+    "fd7f025 docs: refresh Gym Logger product sync checkpoint",
+    "d93400f feat: prepare Shortcuts Notes colour handoff"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/E-004-NATIVE-NOTES-COLOUR-HELPER-codex-review.md",
+      "result": [
+        "Review status: `SOURCE-VERIFIED; DEVICE-PROOF-BLOCKED`",
+        "[x] Platform-neutral harness: 12/12 checks passed.",
+        "[x] Existing PWA regression suite/build remain green: 359/359 and build pass."
+      ]
+    },
     {
       "path": "orchestration/reviews/M03-T03-SHORTCUTS-COLOUR-FEASIBILITY-codex-review.md",
       "result": [
@@ -80,15 +88,6 @@
         "Full suite: **354/354 passed**, with no unhandled test failures.",
         "`npm run build`: **passed**."
       ]
-    },
-    {
-      "path": "orchestration/reviews/M06-T04-BACKUP-SETTINGS-RESTORE-codex-review.md",
-      "result": [
-        "The correction is bounded to the verified backup contract:",
-        "Confirmed restore passes imported metadata and refreshes App-level settings.",
-        "Duplicate metadata keys are rejected before any write.",
-        "rejection, and the existing exact session restore path."
-      ]
     }
   ],
   "humanVerification": [
@@ -99,6 +98,13 @@
         "below is being reclassified as passed by desktop evidence.",
         "Recorded failure batch:",
         "**BLOCKED then RESOLVED — certificate server:** the certificate URL briefly"
+      ]
+    },
+    {
+      "path": "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
+      "result": [
+        "Status: `FAIL — SHORTCUTS_ROUTE`",
+        "This fails the M03-T03 success criteria. The bounded Shortcuts route is closed rather than iterated through more HTML/Shortcuts variants, per the recorded product decision."
       ]
     },
     {
@@ -168,17 +174,14 @@
   "activeEscalationsAndProductDecisionsNeeded": [
     "E-001 historical DSH rate-limit condition is no longer the current blocker.",
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
-    "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; the product owner explicitly reopened one bounded Shortcuts route on 2026-08-25. Native-helper work still requires a separate decision if the target-device proof fails.",
-    "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. M03-T03 optional Shortcuts execution and Apple Notes colour proof are included in this same final pass."
+    "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
+    "E-004 is AUTHORIZED_FOR_BOUNDED_FEASIBILITY: exactly one isolated native attributed-string/pasteboard proof, with no PWA rewrite or paid Developer dependency.",
+    "Final consolidated iPhone 14 Pro Max retest after M06-T05 at `https://192.168.1.49:4173/`; automated scope is accepted, while physical preview, dismissal, trust, installability, offline, and remaining device checks remain pending. E-004 native-helper pasteboard proof is blocked until a legitimate iOS build/install route exists."
   ],
   "decisionsMadeSinceLastSync": [
-    "M03-T03 accepted for automated scope and pushed at d93400f; product context refreshed for the consolidated iPhone 14 Pro Max pass including optional Shortcuts colour proof."
+    "E-004 native helper source proof completed with 12/12 harness checks, but Swift/Xcode compilation and iPhone installation are blocked on this Windows workstation; no PWA changes made."
   ],
   "recordedDecisions": [
-    {
-      "title": "E-002 rich Apple Notes paste decision — 2026-08-24",
-      "detail": ""
-    },
     {
       "title": "E-003 Apple Notes colour interoperability decision — 2026-08-25",
       "detail": ""
@@ -206,10 +209,15 @@
     {
       "title": "Apple Notes colour recovery reopened — 2026-08-25",
       "detail": ""
+    },
+    {
+      "title": "E-004 native Apple Notes colour-helper proof — 2026-08-25",
+      "detail": ""
     }
   ],
   "relevantEvidence": [
     "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
+    "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T01-E003.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T01.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M01-FIX-05.md",
@@ -223,12 +231,22 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "d93400f27be38fe7dd0afb48d853c329219c54b7",
+    "commit": "10e27c866747b121db209614db15c896e565d827",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/DECISIONS.md\n M orchestration/state/STATE.md\n?? orchestration/feasibility/E-004-native/\n?? orchestration/reports/E-004-NATIVE-NOTES-COLOUR-HELPER.md\n?? orchestration/reviews/E-004-NATIVE-NOTES-COLOUR-HELPER-codex-review.md\n?? orchestration/tasks/E-004-NATIVE-NOTES-COLOUR-HELPER.md",
     "changedFiles": [
+      "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs"
+      "orchestration/product-orchestrator/bootstrap.mjs",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/DECISIONS.md",
+      "orchestration/state/STATE.md",
+      "orchestration/feasibility/E-004-native/",
+      "orchestration/reports/E-004-NATIVE-NOTES-COLOUR-HELPER.md",
+      "orchestration/reviews/E-004-NATIVE-NOTES-COLOUR-HELPER-codex-review.md",
+      "orchestration/tasks/E-004-NATIVE-NOTES-COLOUR-HELPER.md"
     ]
   },
   "builder": {
@@ -248,11 +266,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "accepted-checkpoint",
-      "summary": "M03-T03 accepted for automated scope and pushed at d93400f; product context refreshed for the consolidated iPhone 14 Pro Max pass including optional Shortcuts colour proof.",
-      "at": "2026-08-25T12:25:09.390Z"
+      "name": "human-gate-blocked",
+      "summary": "E-004 native helper source proof completed with 12/12 harness checks, but Swift/Xcode compilation and iPhone installation are blocked on this Windows workstation; no PWA changes made.",
+      "at": "2026-08-25T13:05:36.185Z"
     },
-    "contextRevision": 55,
+    "contextRevision": 57,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

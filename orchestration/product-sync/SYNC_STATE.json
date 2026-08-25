@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "human-gate-blocked",
+      "summary": "E-004 native helper source proof completed with 12/12 harness checks, but Swift/Xcode compilation and iPhone installation are blocked on this Windows workstation; no PWA changes made.",
+      "at": "2026-08-25T13:05:36.185Z"
+    },
+    {
+      "name": "task-ready-for-ox",
+      "summary": "E-004 authorized: one bounded isolated native pasteboard helper proof after M03-T03 Shortcuts physically failed; keep PWA and uncoloured Copy to Notes unchanged.",
+      "at": "2026-08-25T12:56:54.811Z"
+    },
+    {
       "name": "accepted-checkpoint",
       "summary": "M03-T03 accepted for automated scope and pushed at d93400f; product context refreshed for the consolidated iPhone 14 Pro Max pass including optional Shortcuts colour proof.",
       "at": "2026-08-25T12:25:09.390Z"
@@ -51,26 +61,16 @@
       "name": "m06-t04-accepted",
       "summary": "M06-T04 accepted: atomic backup sessions/settings restore, duplicate metadata validation, live settings refresh, 352/352 tests, build, and HTTPS smoke. Final iPhone gate restored.",
       "at": "2026-08-25T05:42:01.076Z"
-    },
-    {
-      "name": "correction-required",
-      "summary": "Full v1 readiness sweep found a real backup gap: restore does not replace backed-up metadata/settings. M06-T04 correction is ready for OX.",
-      "at": "2026-08-25T05:34:58.339Z"
-    },
-    {
-      "name": "final-human-gate-ready",
-      "summary": "M06 automated scope is complete; consolidated iPhone 14 Pro Max acceptance is the only remaining v1 gate.",
-      "at": "2026-08-25T03:40:36.020Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T12:25:09.391Z",
+  "lastPublishedAt": "2026-08-25T13:05:36.185Z",
   "lastEvent": {
-    "name": "accepted-checkpoint",
-    "summary": "M03-T03 accepted for automated scope and pushed at d93400f; product context refreshed for the consolidated iPhone 14 Pro Max pass including optional Shortcuts colour proof.",
-    "at": "2026-08-25T12:25:09.390Z"
+    "name": "human-gate-blocked",
+    "summary": "E-004 native helper source proof completed with 12/12 harness checks, but Swift/Xcode compilation and iPhone installation are blocked on this Windows workstation; no PWA changes made.",
+    "at": "2026-08-25T13:05:36.185Z"
   },
-  "syncRevision": 55,
+  "syncRevision": 57,
   "openEscalations": [],
   "chatNotifications": [
     {

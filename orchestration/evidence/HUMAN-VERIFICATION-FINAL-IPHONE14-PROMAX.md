@@ -68,25 +68,27 @@ Evidence source: product-owner observations and two screenshots supplied in the 
 - The plain text session content pasted into the product conversation on 2026-08-25 is not evidence about colour survival because plain text cannot carry the visual formatting. Do not infer a new Notes colour result from that transcript alone.
 - PENDING — final Copy to Notes retest after the trusted HTTPS origin is actually trusted on-device; verify editable table, date, legend, order, values, summary override, multiline notes, and free-form text. Missing category colours are not currently a v1 failure under the recorded decision.
 
-## Optional M03-T03 Shortcuts colour-recovery proof
+## M03-T03 Shortcuts colour-recovery result — CLOSED
 
-The product owner explicitly reopened the colour branch on 2026-08-25. The
-optional PWA action **Share for Notes Colours** is now ready for the same final
-iPhone pass. It hands a self-contained `Gym-Logger-Notes.html` file to the
-iPhone share sheet; the one-time Shortcut setup is recorded in
-`orchestration/evidence/M03-T03-SHORTCUTS-SETUP.md`.
+The target iPhone physically exercised the optional **Share for Notes Colours**
+route. It appended flattened plain text rather than an editable Notes table,
+lost all five colours, and produced `Â·`/`Â°` mojibake. The bounded Shortcuts
+branch is closed; no further Shortcut or HTML variants are authorized. Full
+details are in `orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md`.
 
-- PENDING — create the one-time **Gym Logger Notes Colours** Shortcut.
-- PENDING — share a real session through the optional action and select that
-  Shortcut.
-- PENDING — confirm the result is a real editable Apple Notes table with the
-  correct date, five-entry legend, order, values, summary, and notes.
-- PENDING — confirm Arms, Back, Chest, Delts, and Legs retain their intended
-  text/highlight colours; unhighlighted rows remain uncoloured.
-- If the Shortcut creates only an attachment/plain text or loses colours,
-  close this bounded branch and request a separate native-helper decision.
+## E-004 native helper gate
 
-Desktop evidence does not pass any of these items.
+One isolated native pasteboard source proof is recorded in
+`orchestration/feasibility/E-004-native/`. It is not a PWA change and is not
+yet ready for iPhone testing because this workstation has no Swift/Xcode
+toolchain to compile or sign it.
+
+- PENDING — legitimate Mac/Xcode or equivalent iOS build/install route.
+- PENDING — target iPhone paste into the existing `Gym` note.
+- PENDING — editable table, all data/order/summary/notes, five colours, and
+  correct Unicode.
+- If compilation/install burden is disproportionate, or any target criterion
+  fails, close E-004 and retain the ordinary uncoloured editable-table path.
 
 ## Correction disposition
 
