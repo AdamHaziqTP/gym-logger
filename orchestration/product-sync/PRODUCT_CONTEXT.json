@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T03:40:36.069Z",
+  "generatedAt": "2026-08-25T05:42:34.640Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -37,7 +37,7 @@
   "current": {
     "milestone": "M06 — PWA polish and regression",
     "task": "FINAL-HUMAN-ACCEPTANCE — consolidated iPhone 14 Pro Max v1 pass",
-    "status": "HUMAN_REVIEW_REQUIRED (automated v1 scope complete; final device gate remains)",
+    "status": "HUMAN_REVIEW_REQUIRED (autonomous v1 readiness sweep complete; final device gate remains)",
     "humanReviewGate": "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance.",
     "nextAction": "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
   },
@@ -56,13 +56,22 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "058b316 chore: complete v1 release readiness",
     "34b2419 feat: add persisted settings and theme",
     "fd466e7 chore: queue settings and theme task",
     "6781b56 feat: finish PWA polish and queue settings",
-    "7e547f9 chore: queue M06 PWA polish task",
-    "7ed919f feat: add local backup and restore"
+    "7e547f9 chore: queue M06 PWA polish task"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M06-T04-BACKUP-SETTINGS-RESTORE-codex-review.md",
+      "result": [
+        "The correction is bounded to the verified backup contract:",
+        "Confirmed restore passes imported metadata and refreshes App-level settings.",
+        "Duplicate metadata keys are rejected before any write.",
+        "rejection, and the existing exact session restore path."
+      ]
+    },
     {
       "path": "orchestration/reviews/M06-T03-RELEASE-READINESS-codex-review.md",
       "result": [
@@ -79,15 +88,6 @@
         "Full suite: **348/348 passed**, zero unhandled errors.",
         "Production build: passed; service-worker cache stamp and 17-asset precache",
         "Diff hygiene: `git diff --check` passed."
-      ]
-    },
-    {
-      "path": "orchestration/reviews/M06-T01-PWA-POLISH-REGRESSION-codex-review.md",
-      "result": [
-        "SessionView status-timer leak exposed by the full-suite run; M06 now passes the",
-        "Focused SessionView suite: **14/14 passed**.",
-        "Full suite: **316/316 passed** across 26 files, with **zero unhandled errors**.",
-        "`npm run build`: **passed**; TypeScript/Vite clean, deterministic service"
       ]
     }
   ],
@@ -170,7 +170,7 @@
     "E-003 is closed by product decision. Standard trusted-HTTPS Copy to Notes preserves editable table/data/order but Apple Notes strips category colours; this is accepted as a documented v1 limitation. M01 FIX-05 physical-iPhone checks remain BLOCKED/DEFERRED for final end-to-end acceptance."
   ],
   "decisionsMadeSinceLastSync": [
-    "M06 automated scope is complete; consolidated iPhone 14 Pro Max acceptance is the only remaining v1 gate."
+    "Autonomous v1 readiness sweep complete after M06-T04 backup/settings restore correction. Only consolidated iPhone 14 Pro Max acceptance remains."
   ],
   "recordedDecisions": [
     {
@@ -221,9 +221,9 @@
     "references/IMG_5550.png"
   ],
   "gitCheckpoint": {
-    "commit": "34b2419ce7e35efa6c5bb9422e805d10118d0c59",
+    "commit": "058b31658079f0b35366b9a8bac403bb56cdc8c1",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M README.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/REQUIREMENTS_MATRIX.md\n M orchestration/state/STATE.md\n?? orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md\n?? orchestration/reports/M06-T03-RELEASE-READINESS.md\n?? orchestration/reviews/M06-T03-RELEASE-READINESS-codex-review.md\n?? src/tests/releaseReadiness.test.ts",
+    "workingTree": "## main...origin/main\n M README.md\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/REQUIREMENTS_MATRIX.md\n M orchestration/state/STATE.md\n M src/App.tsx\n M src/components/BackupSection.tsx\n M src/components/Home.tsx\n M src/data/backup.ts\n M src/domain/backup.ts\n M src/tests/backupDomain.test.ts\n M src/tests/backupRestore.test.tsx\n?? orchestration/reports/M06-T04-BACKUP-SETTINGS-RESTORE.md\n?? orchestration/reviews/M06-T04-BACKUP-SETTINGS-RESTORE-codex-review.md\n?? orchestration/tasks/M06-T04-BACKUP-SETTINGS-RESTORE.md",
     "changedFiles": [
       "README.md",
       "orchestration/product-sync/PRODUCT_CONTEXT.json",
@@ -231,10 +231,16 @@
       "orchestration/product-sync/SYNC_STATE.json",
       "orchestration/state/REQUIREMENTS_MATRIX.md",
       "orchestration/state/STATE.md",
-      "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
-      "orchestration/reports/M06-T03-RELEASE-READINESS.md",
-      "orchestration/reviews/M06-T03-RELEASE-READINESS-codex-review.md",
-      "src/tests/releaseReadiness.test.ts"
+      "src/App.tsx",
+      "src/components/BackupSection.tsx",
+      "src/components/Home.tsx",
+      "src/data/backup.ts",
+      "src/domain/backup.ts",
+      "src/tests/backupDomain.test.ts",
+      "src/tests/backupRestore.test.tsx",
+      "orchestration/reports/M06-T04-BACKUP-SETTINGS-RESTORE.md",
+      "orchestration/reviews/M06-T04-BACKUP-SETTINGS-RESTORE-codex-review.md",
+      "orchestration/tasks/M06-T04-BACKUP-SETTINGS-RESTORE.md"
     ]
   },
   "builder": {
@@ -255,10 +261,10 @@
   "synchronization": {
     "lastEvent": {
       "name": "final-human-gate-ready",
-      "summary": "M06 automated scope is complete; consolidated iPhone 14 Pro Max acceptance is the only remaining v1 gate.",
-      "at": "2026-08-25T03:40:36.020Z"
+      "summary": "Autonomous v1 readiness sweep complete after M06-T04 backup/settings restore correction. Only consolidated iPhone 14 Pro Max acceptance remains.",
+      "at": "2026-08-25T05:42:34.586Z"
     },
-    "contextRevision": 44,
+    "contextRevision": 47,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

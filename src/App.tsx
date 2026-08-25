@@ -147,6 +147,12 @@ export function App({ db, todayLocal }: AppProps) {
     });
   };
 
+  const refreshSettingsAfterRestore = async () => {
+    const restored = await readAppSettings(db);
+    setSettings(restored);
+    applyThemePreference(restored.theme);
+  };
+
   if (!ready) {
     return <div className="boot" role="status" aria-label="Loading" />;
   }
@@ -194,6 +200,7 @@ export function App({ db, todayLocal }: AppProps) {
       onOpenHistory={() => setView({ name: "history" })}
       onOpenCopyAnother={() => setView({ name: "copy" })}
       onOpenSettings={() => setView({ name: "settings" })}
+      onRestored={refreshSettingsAfterRestore}
       todayLocal={todayLocal}
     />
   ) : view.name === "history" ? (

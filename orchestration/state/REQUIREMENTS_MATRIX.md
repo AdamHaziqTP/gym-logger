@@ -9,7 +9,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-003 | No account, backend, cloud sync, analytics, AI, timers, checklists, programs, streaks, or fitness-platform features. | Spec §§2.3, 32 | All | VERIFIED (source/build audit) | M06-T03 review |
 | REQ-004 | iPhone-first installable PWA with native pivot only for a proven blocked capability. | Spec §3 | M01/M06 | VERIFIED (automated; device pending) | M06-T01 manifest/service worker review; final install gate |
 | REQ-005 | Home shows Today, Last Workout, Start/Continue, Copy Another, History, Settings. | Spec §§4.1, 13 | M02 | VERIFIED (automated; device pending) | M06-T02 review; final visual gate |
-| REQ-006 | Start today's session uses local phone date and creates exactly one session. | Spec §§4.2, 27.1-27.3; A1-A4 | M01-M02 | PLANNED | — |
+| REQ-006 | Start today's session uses local phone date and creates exactly one session. | Spec §§4.2, 27.1-27.3; A1-A4 | M01-M02 | VERIFIED (automated; device pending) | clone/App tests; final device gate |
 | REQ-007 | Clone rows, order, text, and highlights; do not blank Reps/Weight. | Spec §§4.2, 12.3; A2 | M01-M02 | VERIFIED (automated) | M02-T02-FIX-01 Codex review; 91/91 |
 | REQ-008 | Skip remains plain text, is not auto-dimmed/deleted, and counts in totals. | Spec §8; D1-D5 | M01-M05 | VERIFIED (automated; device pending) | export/summary tests; final device gate |
 | REQ-009 | Summary supports calculated values plus manual overrides including 40/39 fixture mismatch. | Spec §9; E1-E3 | M01-M02 | VERIFIED (automated) | M02-T04 Codex review; 105/105 |
@@ -30,7 +30,7 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 | REQ-024 | Never claim rich Notes structure/color works without target-iPhone paste evidence. | Spec §§15.4-15.6, 32 | M03 | VERIFIED (policy; color limitation accepted) | E-003 closed; standard rich paste keeps editable table/data/order, Notes strips category colours |
 | REQ-025 | Faithful and Compact full-session PNG export handle 40+ rows, preserve colors and notes. | Spec §14; I1-I6 | M03/M05 | VERIFIED (automated; device pending) | image/export tests; final device gate |
 | REQ-026 | Compact export hides Skip only when all Skip cells are empty. | Spec §§14.1, 30; D4-D5 | M05 | VERIFIED (automated; device pending) | image/export tests; final device gate |
-| REQ-027 | Backup JSON includes schema, sessions, rows, highlights, settings, metadata and restores exactly. | Spec §18; J1-J5 | M03/M05 | VERIFIED (automated; device pending) | M05-T01 review; 43 focused / 262 full at checkpoint |
+| REQ-027 | Backup JSON includes schema, sessions, rows, highlights, settings, metadata and restores exactly. | Spec §18; J1-J5 | M03/M05/M06 | VERIFIED (automated; device pending) | M06-T04 review; 45 focused / 352 full; final device gate |
 | REQ-028 | Historical import is deferred; do not clean or invent data from `text 2.txt`. | Spec §19, §35 | M07 | DEFERRED | — |
 | REQ-029 | IDs use UUIDs; local date is separate from primary key; positions normalize to 0..n-1. | Spec §20 | M01 | VERIFIED (automated) | schema/seed/clone tests |
 | REQ-030 | Suggested stack is React + TypeScript + Vite + IndexedDB/Dexie + small CSS/PWA layer. | Spec §21 | M01 | VERIFIED (automated) | build/runtime |

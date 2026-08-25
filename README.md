@@ -30,7 +30,8 @@ the installed app and editing flow in airplane mode on the target iPhone.
 ## Backup and Apple Notes
 
 Settings provides a local JSON backup export and validated replacement restore;
-the restore flow creates a safety export before replacing local data. Copy to
+the restore flow creates a safety export before replacing local sessions and
+settings metadata atomically. Copy to
 Notes uses the trusted HTTPS rich path when available and retains a plain-text
 fallback. On iPhone, Apple Notes accepts the editable table and preserves the
 values/order, but strips Gym Logger's category foreground/highlight colours.

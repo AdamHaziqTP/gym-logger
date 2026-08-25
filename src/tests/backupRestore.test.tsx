@@ -14,6 +14,7 @@ import {
   parseBackupJson,
   validateBackupObject,
 } from "../domain/backup";
+import { readAppSettings } from "../data/settings";
 import type { WorkoutSession } from "../domain/types";
 
 /* ---------------------------------------------------------------------- */
@@ -163,6 +164,23 @@ function validImportJson(): string {
     null,
     2,
   );
+}
+
+function validImportWithSettingsJson(): string {
+  const parsed = JSON.parse(validImportJson()) as Record<string, unknown>;
+  parsed.meta = [
+    {
+      key: "settings.theme",
+      value: "light",
+      at: "2026-08-25T00:00:00.000Z",
+    },
+    {
+      key: "settings.defaultImageStyle",
+      value: "faithful",
+      at: "2026-08-25T00:00:01.000Z",
+    },
+  ];
+  return JSON.stringify(parsed);
 }
 
 describe("Home backup entry points (requirement 5)", () => {
@@ -381,6 +399,36 @@ describe("Import validation leaves data untouched (requirement 2)", () => {
   });
 });
 
+describe("Restore replaces settings metadata atomically", () => {
+  it("restores theme/style metadata and refreshes the running App settings", async () => {
+    await openHome();
+    pickFile("settings-backup.json", validImportWithSettingsJson());
+    const dialog = await screen.findByRole("alertdialog");
+    fireEvent.click(within(dialog).getByRole("button", { name: "Replace All Data" }));
+
+    await screen.findByText(/Restored 2 sessions/);
+    await waitFor(async () => {
+      await expect(readAppSettings(db)).resolves.toMatchObject({
+        theme: "light",
+        defaultImageStyle: "faithful",
+      });
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Settings" }));
+    expect(
+      (await screen.findByRole("button", { name: "Light" })).getAttribute(
+        "aria-pressed",
+      ),
+    ).toBe("true");
+    expect(
+      screen.getByRole("button", { name: "Faithful" }).getAttribute(
+        "aria-pressed",
+      ),
+    ).toBe("true");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("light");
+  });
+});
+
 describe("Pre-replacement summary and explicit confirm (requirement 4)", () => {
   it("shows the file's facts and replaces nothing before the explicit confirm", async () => {
     await openHome();
@@ -444,9 +492,10 @@ describe("Confirmed replacement restores exactly (J2–J5, requirement 3)", () =
     expect(restoredA!.updatedAt).toBe("2026-07-04T09:30:00.000Z");
     expect(await db.sessions.get("import-b")).toEqual(expected[1]);
 
-    // Local metadata is preserved, not replaced (documented decision).
+    // The imported metadata is authoritative: this valid fixture has no
+    // metadata, so the previous seed marker is removed by exact restore.
     const seededFrom = await db.meta.get("seededFrom");
-    expect(seededFrom?.value).toContain("seed/latest-session.example.json");
+    expect(seededFrom).toBeUndefined();
 
     // The safety export of the PREVIOUS data ran BEFORE replacement: the
     // anchor click observed the old session still in place and its bytes

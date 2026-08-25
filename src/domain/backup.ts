@@ -240,6 +240,7 @@ export function validateBackupObject(value: unknown): BackupParseResult {
   }
 
   const meta: BackupMetaRecord[] = [];
+  const seenMeta = new Set<string>();
   if (value.meta !== undefined) {
     if (!Array.isArray(value.meta)) {
       return { ok: false, error: "meta must be a list of settings records." };
@@ -257,6 +258,13 @@ export function validateBackupObject(value: unknown): BackupParseResult {
           error: `meta[${index}] is not a {key, value, at} settings record.`,
         };
       }
+      if (seenMeta.has(record.key)) {
+        return {
+          ok: false,
+          error: `Duplicate metadata key ${JSON.stringify(record.key)} in the backup.`,
+        };
+      }
+      seenMeta.add(record.key);
       meta.push({ key: record.key, value: record.value, at: record.at });
     }
   }

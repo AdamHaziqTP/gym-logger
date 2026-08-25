@@ -1,7 +1,7 @@
 import type { BackupFile } from "../domain/backup";
 import { buildBackupDocument } from "../domain/backup";
 import type { WorkoutSession } from "../domain/types";
-import type { GymLogDB } from "./db";
+import type { GymLogDB, MetaRecord } from "./db";
 
 /**
  * Dexie-backed backup collection and restore (spec §18; task
@@ -51,5 +51,25 @@ export async function replaceAllSessions(
     if (sessions.length > 0) {
       await db.sessions.bulkPut(sessions);
     }
+  });
+}
+
+/**
+ * Full validated backup replacement: sessions AND the metadata/settings
+ * records carried by the file. Both tables share one transaction so a failed
+ * restore cannot leave the app with new sessions and old preferences (or the
+ * reverse). Records are written verbatim; the caller has already validated
+ * their shape.
+ */
+export async function replaceAllData(
+  db: GymLogDB,
+  sessions: WorkoutSession[],
+  meta: MetaRecord[],
+): Promise<void> {
+  await db.transaction("rw", db.sessions, db.meta, async () => {
+    await db.sessions.clear();
+    await db.meta.clear();
+    if (sessions.length > 0) await db.sessions.bulkPut(sessions);
+    if (meta.length > 0) await db.meta.bulkPut(meta);
   });
 }

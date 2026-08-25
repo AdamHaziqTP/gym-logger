@@ -21,6 +21,8 @@ interface HomeProps {
   onOpenCopyAnother: () => void;
   /** Opens the Settings screen (spec §§4.1, 23; M06-T02). */
   onOpenSettings: () => void;
+  /** Refreshes App-level settings after a backup replacement. */
+  onRestored?: () => void | Promise<void>;
   /** Overrides today's local date (tests); defaults to the device date. */
   todayLocal?: string;
   /** Injectable StorageManager for deterministic tests; default is real. */
@@ -34,6 +36,7 @@ export function Home({
   onOpenHistory,
   onOpenCopyAnother,
   onOpenSettings,
+  onRestored,
   todayLocal,
   storageArea,
 }: HomeProps) {
@@ -166,7 +169,7 @@ export function Home({
           small labeled section of its own so the existing .home-actions pair
           above stays exactly two buttons, and the sparse layout keeps its
           Today / Last Workout / actions rhythm. */}
-      <BackupSection db={db} todayLocal={todayLocal} />
+      <BackupSection db={db} todayLocal={todayLocal} onRestored={onRestored} />
 
       {/* Settings entry (spec §§4.1, 13, 23; M06-T02): one quiet full-width
           control in its own section — the same rhythm as the backup section

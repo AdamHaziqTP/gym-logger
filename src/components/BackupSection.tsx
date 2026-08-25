@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import type { GymLogDB } from "../data/db";
-import { collectBackup, replaceAllSessions } from "../data/backup";
+import { collectBackup, replaceAllData } from "../data/backup";
 import {
   deliverBackupJson,
   backupFilename,
@@ -52,10 +52,13 @@ interface PendingImport {
 export function BackupSection({
   db,
   todayLocal,
+  onRestored,
 }: {
   db: GymLogDB;
   /** Overrides today's local date (tests); defaults to the device date. */
   todayLocal?: string;
+  /** Lets App refresh in-memory settings after metadata replacement. */
+  onRestored?: () => void | Promise<void>;
 }) {
   const [statusText, setStatusText] = useState("");
   const [errorText, setErrorText] = useState("");
@@ -144,7 +147,8 @@ export function BackupSection({
         console.error("Gym Logger: safety backup failed", safetyError);
       }
 
-      await replaceAllSessions(db, pendingImport.data.sessions);
+      await replaceAllData(db, pendingImport.data.sessions, pendingImport.data.meta);
+      await onRestored?.();
       const count = pendingImport.data.sessions.length;
       setStatusText(
         `Restored ${count} ${count === 1 ? "session" : "sessions"} from ${pendingImport.fileName}. ${safetyNote}`,

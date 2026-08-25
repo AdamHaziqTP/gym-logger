@@ -4,6 +4,21 @@
   "events": [
     {
       "name": "final-human-gate-ready",
+      "summary": "Autonomous v1 readiness sweep complete after M06-T04 backup/settings restore correction. Only consolidated iPhone 14 Pro Max acceptance remains.",
+      "at": "2026-08-25T05:42:34.586Z"
+    },
+    {
+      "name": "m06-t04-accepted",
+      "summary": "M06-T04 accepted: atomic backup sessions/settings restore, duplicate metadata validation, live settings refresh, 352/352 tests, build, and HTTPS smoke. Final iPhone gate restored.",
+      "at": "2026-08-25T05:42:01.076Z"
+    },
+    {
+      "name": "correction-required",
+      "summary": "Full v1 readiness sweep found a real backup gap: restore does not replace backed-up metadata/settings. M06-T04 correction is ready for OX.",
+      "at": "2026-08-25T05:34:58.339Z"
+    },
+    {
+      "name": "final-human-gate-ready",
       "summary": "M06 automated scope is complete; consolidated iPhone 14 Pro Max acceptance is the only remaining v1 gate.",
       "at": "2026-08-25T03:40:36.020Z"
     },
@@ -46,31 +61,16 @@
       "name": "task-ready-for-ox",
       "summary": "M06-T01 PWA polish/regression task is ready for OX after M05 backup/restore automated acceptance.",
       "at": "2026-08-24T18:32:24.176Z"
-    },
-    {
-      "name": "backup-restore-accepted",
-      "summary": "Codex independently accepted M05-T01 automated backup/restore scope: 43 focused tests, 262 full tests, build, diff audit, and trusted HTTPS runtime smoke pass; physical Files/share/restore remains deferred.",
-      "at": "2026-08-24T18:32:04.948Z"
-    },
-    {
-      "name": "image-export-accepted-backup-task-prepared",
-      "summary": "Image export independently accepted: 29/29 focused, 219/219 full suite, build, diff audit, HTTPS smoke pass; iPhone image/save/share deferred. M05 backup/restore task prepared.",
-      "at": "2026-08-24T18:00:18.177Z"
-    },
-    {
-      "name": "image-export-correction-prepared",
-      "summary": "Codex found 6 focused export test failures plus TypeScript test errors; correction prepared to preserve wrapping/losslessness while repairing verification contracts.",
-      "at": "2026-08-24T17:44:11.891Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T03:40:36.021Z",
+  "lastPublishedAt": "2026-08-25T05:42:34.587Z",
   "lastEvent": {
     "name": "final-human-gate-ready",
-    "summary": "M06 automated scope is complete; consolidated iPhone 14 Pro Max acceptance is the only remaining v1 gate.",
-    "at": "2026-08-25T03:40:36.020Z"
+    "summary": "Autonomous v1 readiness sweep complete after M06-T04 backup/settings restore correction. Only consolidated iPhone 14 Pro Max acceptance remains.",
+    "at": "2026-08-25T05:42:34.586Z"
   },
-  "syncRevision": 44,
+  "syncRevision": 47,
   "openEscalations": [],
   "chatNotifications": [
     {

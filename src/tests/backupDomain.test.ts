@@ -402,6 +402,19 @@ describe("parse/validate refuses bad input without coercion", () => {
     );
   });
 
+  it("rejects duplicate metadata keys instead of silently collapsing settings", () => {
+    expectRejected(
+      {
+        ...validDoc,
+        meta: [
+          { key: "settings.theme", value: "dark", at: "2026-08-25T00:00:00.000Z" },
+          { key: "settings.theme", value: "light", at: "2026-08-25T00:00:01.000Z" },
+        ],
+      },
+      "Duplicate metadata key",
+    );
+  });
+
   it("rejects malformed meta but accepts absent meta", () => {
     expectRejected({ ...validDoc, meta: "meta" }, "settings records");
     expectRejected(
