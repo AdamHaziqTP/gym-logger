@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "worker-completed",
+      "summary": "M06-T06 actual session migration and supplied icon are Codex-verified; OX task timeout recorded; final iPhone gate remains open.",
+      "at": "2026-08-25T16:56:16.625Z"
+    },
+    {
       "name": "worker-diagnostic-checkpoint",
       "summary": "Worker diagnostic report committed at 5b6122e; wrapper and patched smoke pass, larger worker task timeout classified",
       "at": "2026-08-25T16:20:15.161Z"
@@ -56,21 +61,16 @@
       "name": "correction-accepted",
       "summary": "M06-T05 transparent PNG root-cause fix and failed Shortcut UI removal independently verified; one saved-image retest remains",
       "at": "2026-08-25T15:27:25.738Z"
-    },
-    {
-      "name": "correction-required",
-      "summary": "M06-T05 saved PNGs are fully transparent on iPhone; route real-canvas fix and hide failed Shortcut action",
-      "at": "2026-08-25T15:23:23.930Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T16:20:15.162Z",
+  "lastPublishedAt": "2026-08-25T16:56:16.625Z",
   "lastEvent": {
-    "name": "worker-diagnostic-checkpoint",
-    "summary": "Worker diagnostic report committed at 5b6122e; wrapper and patched smoke pass, larger worker task timeout classified",
-    "at": "2026-08-25T16:20:15.161Z"
+    "name": "worker-completed",
+    "summary": "M06-T06 actual session migration and supplied icon are Codex-verified; OX task timeout recorded; final iPhone gate remains open.",
+    "at": "2026-08-25T16:56:16.625Z"
   },
-  "syncRevision": 74,
+  "syncRevision": 75,
   "openEscalations": [],
   "chatNotifications": [
     {
