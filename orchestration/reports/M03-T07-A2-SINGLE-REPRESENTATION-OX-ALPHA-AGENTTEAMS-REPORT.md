@@ -34,5 +34,7 @@ No production PWA file or normal Copy to Notes path changed.
 - `git diff --check`: PASS;
 - `src/` and `public/` production diff: none.
 
-The hosted macOS/Xcode build must be rerun after this Swift change. No physical
-single-type result is claimed by this report.
+The hosted macOS/Xcode build was rerun successfully as workflow
+`32952585740` ([run details](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32952585740)).
+Codex verified the resulting IPA contains the helper app and bundled fixture.
+No physical single-type result is claimed by this report.

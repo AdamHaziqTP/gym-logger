@@ -27,6 +27,9 @@ sufficient until it is pasted into Apple Notes on the iPhone 14 Pro Max.
 - [x] DSH AgentTeams/OX Alpha was attempted through the verified Desktop
       wrapper; the fresh task timed out silently and the bounded Codex fallback
       was independently verified. This is not classified as OX unavailable.
+- [x] Hosted macOS/Xcode workflow `32952585740` compiled and packaged the A2
+      helper; Codex verified the IPA contains the helper app and bundled
+      fixture.
 
 ## Remaining gate
 

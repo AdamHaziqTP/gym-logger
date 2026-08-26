@@ -97,3 +97,16 @@ colours, values/order/notes, and Unicode. The helper must not be treated as
 successful merely because it placed bytes on the clipboard. Do not begin a
 generated Gym Logger payload or Shortcut append until at least one single type
 or minimal sufficient set passes this complete-fidelity check.
+
+## Phase A2 helper build — ready for device testing
+
+The single-representation helper update was rebuilt successfully on hosted
+macOS/Xcode:
+
+- Run: [32952585740](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32952585740)
+- Artifact: `GymLoggerPasteboardHelper-unsigned`
+- Codex verification: IPA contains `Payload/GymLoggerPasteboardHelper.app`,
+  `Info.plist`, and `latest-session.example.json`.
+
+This build result proves compilation and packaging only. It does not claim the
+single-type replay works in Apple Notes.

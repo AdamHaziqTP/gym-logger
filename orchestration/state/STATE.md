@@ -322,7 +322,7 @@ Updated: 2026-08-26
   `src/` or `public/` production changes. The DSH `/agent-teams` implementation
   attempt timed out with no delta; the configured wrapper/plugin remain
   available and the narrow fallback is recorded.
-- Current human gate: install the freshly rebuilt helper, capture a small
+- Historical Phase A gate: install the freshly rebuilt helper, capture a small
   coloured Notes table, inspect it, then run each displayed removal variant and
   paste it back into Notes. Record table editability, five colours, values/order,
   and Unicode in
@@ -354,6 +354,9 @@ Updated: 2026-08-26
   `com.apple.webarchive`, `com.apple.notes.richtext`, and
   `public.utf8-plain-text` when present. Record table editability, all five
   colours, values/order/notes, and Unicode in the Phase A evidence file.
+- The fresh A2 helper build is ready from hosted macOS/Xcode workflow
+  `32952585740`; Codex verified its unsigned IPA contents. This does not claim
+  installation or Apple Notes behavior.
 - Do not start generated Gym payload synthesis or Shortcut append until A2
   identifies at least one sufficient representation or closes the branch with
   evidence. Keep the PWA `Copy to Notes` path unchanged.

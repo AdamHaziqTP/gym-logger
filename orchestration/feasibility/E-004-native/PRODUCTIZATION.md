@@ -86,7 +86,8 @@ iPhone.
 
 The next gate is the single-representation sufficiency pass described in
 `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md`.
-The updated A2 helper must be rebuilt on hosted macOS/Xcode before installation.
+The updated A2 helper is ready from hosted macOS/Xcode workflow `32952585740`;
+the artifact contains the single-representation controls and bundled fixture.
 Only after that result should the project attempt a generated Gym Logger
 payload. It must not alter the normal PWA Notes path while the proof is
 inconclusive.
