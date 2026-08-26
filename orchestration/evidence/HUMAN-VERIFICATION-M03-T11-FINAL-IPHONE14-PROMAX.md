@@ -1,49 +1,56 @@
 # M03-T11 — final one-app IPA iPhone 14 Pro Max gate
 
-Status: `HUMAN_REVIEW_REQUIRED — HOSTED IPA READY`
+Status: `PASS — PRODUCT OWNER ACCEPTED FINAL BUILD`
 
-This checklist must be completed on the physical iPhone 14 Pro Max. Desktop
-tests, source inspection, and hosted packaging do not close these items.
+Final hosted IPA: `GymLogger-unsigned.ipa` from workflow run `32990579200`.
 
-## Install and independence
+This was the final physical iPhone 14 Pro Max gate. Desktop tests, source
+inspection, and hosted packaging were not used to substitute for the device
+result.
 
-- [ ] Install the fresh `GymLogger-unsigned.ipa` in the existing permitted
-      LiveContainer/SideStore workflow.
-- [ ] Launch Gym Logger without Safari, a LAN server, a separate helper app,
-      or a Shortcut.
-- [ ] Confirm the installed app uses the deliberate Gym Logger icon.
+## Final human result — 2026-08-27
 
-## Session and persistence
+After installing and testing the final M03-T11 build on the target iPhone, the
+product owner reported:
 
-- [ ] Confirm Tuesday 25 Aug (`actual-2026-08-25`) is the real Last Workout /
-      clone baseline when no later legitimate session exists.
-- [ ] Open/edit a session, including a free-form value and Notes entry; kill
-      and relaunch the IPA; confirm the edits persist.
-- [ ] Confirm row editing, reordering, row commands, category colours,
-      summary override, history, settings/theme, and offline launch remain
-      usable.
-- [ ] Confirm backup/export/import still works on-device.
+> "yes i tested works great"
 
-## Final session actions
+The immediately preceding acceptance request specifically covered the final
+one-app behavior: removal of the obsolete Notes/image-export UI, direct Compact
+snapshot save to Photos, the coloured editable Apple Notes handoff, persistence,
+and independence from the PC/LAN/helper workflow. No final-build failure was
+reported.
 
-- [ ] Confirm ordinary `Copy to Notes` is absent.
-- [ ] Confirm the old `Export Image`, preview, Compact/Faithful selector, and
-      `Share Colour Snapshot` UI are absent.
-- [ ] Tap `Save Colour Snapshot` once. Confirm the truthful saving status,
-      Photos permission behavior, and that the resulting Compact PNG appears
-      directly in Photos with visible content, correct geometry, and colours.
-- [ ] Tap `Copy Coloured Notes & Open Notes`. In the existing `Gym` note, paste
-      once. Confirm a real editable table, correct order/content/summary/notes,
-      Unicode, spaced legend labels, and all five legend/row colours:
-      Arms orange, Back purple, Chest mint, Delts blue, Legs pink.
+The product owner then confirmed the app is considered finished.
+
+## Accepted final product behavior
+
+- single installable Gym Logger IPA for normal use;
+- no Safari/LAN server or separate pasteboard helper required;
+- `Copy Coloured Notes & Open Notes` prepares the proven coloured native
+  clipboard and opens Notes; one manual Paste remains the intentional final
+  insertion step;
+- obsolete ordinary `Copy to Notes` is removed from the normal UI;
+- obsolete Export Image preview / Compact-Faithful selector is removed from the
+  normal UI;
+- `Save Colour Snapshot` uses the preferred Compact render and saves directly
+  to Photos rather than routing through Files/share-sheet delivery;
+- authoritative Tuesday 25 Aug session remains the production baseline when no
+  legitimate later session exists;
+- local/offline Gym Logger workflow is accepted for daily use.
+
+## Evidence discipline
+
+The final message was an overall device acceptance rather than a line-by-line
+repetition of every historical checkbox. This record therefore does not invent
+individual observations beyond what the product owner reported; it records the
+explicit final physical acceptance of the completed build after the requested
+M03-T11 checks.
 
 ## Result record
 
 - Device: iPhone 14 Pro Max
-- iOS/Safari or LiveContainer version: ____________________
 - IPA/workflow run: `32990579200`
-- Result: `PENDING`
-- Failures/screenshots/notes: _____________________________________________
-
-If any item fails, record the exact symptom and stop that branch; do not infer
-success for the other device-only items.
+- Result: `PASS`
+- Product disposition: `COMPLETE / ACCEPTED`
+- Reported final-build failures: none
