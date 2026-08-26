@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Canvg } from "canvg";
 import {
+  blobToBase64,
   chooseRasterScale,
   rasterizeSvgToPngBlob,
   sharePngFile,
@@ -32,6 +33,14 @@ describe("chooseRasterScale", () => {
 
   it("treats degenerate sizes conservatively", () => {
     expect(chooseRasterScale(0, 100)).toBe(1);
+  });
+});
+
+describe("blobToBase64", () => {
+  it("encodes the exact PNG bytes for the native bridge", async () => {
+    const bytes = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]);
+    const encoded = await blobToBase64(new Blob([bytes], { type: "image/png" }));
+    expect(encoded).toBe("iVBORw0KGgo=");
   });
 });
 

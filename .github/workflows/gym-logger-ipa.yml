@@ -88,6 +88,7 @@ jobs:
           display_name="$(plist_value CFBundleDisplayName)"
           short_version="$(plist_value CFBundleShortVersionString)"
           bundle_version="$(plist_value CFBundleVersion)"
+          photos_usage="$(plist_value NSPhotoLibraryAddUsageDescription)"
 
           test "$executable" = "GymLogger"
           test -n "$bundle_identifier"
@@ -96,6 +97,7 @@ jobs:
           test "$display_name" = "Gym Logger"
           test -n "$short_version"
           test -n "$bundle_version"
+          test -n "$photos_usage"
           /usr/bin/plutil -convert xml1 -o - "$plist_path" | grep -Fq 'GymLoggerIcon-512'
           unzip -Z1 "$ipa_path" | grep -Fxq "Payload/GymLogger.app/$executable"
           unzip -Z1 "$ipa_path" | grep -Fxq "Payload/GymLogger.app/WebApp/index.html"

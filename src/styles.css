@@ -403,12 +403,12 @@ body {
   outline-offset: 2px;
 }
 
-/* ---------- Copy to Notes export (spec §15; M03-T01) ---------- */
+/* ---------- Session export actions (spec §15; M03-T11) ---------- */
 
 /* Quiet local clipboard action at the end of the session screen, styled like
    the other full-width rows; only the status text distinguishes outcomes.
-   M03-T02-IMAGE-EXPORT-01: the §14 Export Image control shares the exact same
-   quiet full-width row treatment so the two local exports read as siblings. */
+   M03-T11: the Compact Photos action shares the same quiet full-width row
+   treatment as the Notes handoff. */
 .export-zone {
   margin-top: 18px;
 }
@@ -417,7 +417,7 @@ body {
   margin-top: 10px;
 }
 
-.snapshot-share-zone {
+.snapshot-save-zone {
   margin-top: 10px;
 }
 
@@ -456,7 +456,7 @@ body {
   margin: 8px 4px 0;
 }
 
-.snapshot-share-status {
+.snapshot-save-status {
   color: var(--text-dim);
   font-size: 13px;
   margin: 8px 4px 0;

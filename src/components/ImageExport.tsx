@@ -7,12 +7,17 @@ import {
 } from "../domain/imageExport";
 import {
   deliveryButtonLabel,
+  blobToBase64,
   rasterizeSvgToPngBlob,
   sharePngFile,
   supportsFileShare,
   triggerPngDownload,
   type ShareOutcome,
 } from "../domain/pngExport";
+import {
+  listenForEmbeddedNativeStatus,
+  sendColourSnapshotToEmbeddedBridge,
+} from "../domain/embeddedNativeBridge";
 import type { WorkoutSession } from "../domain/types";
 
 /**
@@ -251,80 +256,87 @@ export function ImageExportPanel({
 }
 
 /**
- * One-tap compact image handoff for the normal workout flow. The PNG is
- * prepared when the session changes so the share call itself remains inside
- * the user's tap activation on iOS. This is deliberately an image snapshot,
- * not a replacement for the editable Copy to Notes path.
+ * One-tap Compact image handoff for the normal workout flow. Rendering starts
+ * from the visible session at tap time, including uncontrolled edits that have
+ * not reached IndexedDB yet. The native bridge owns the final Photos write
+ * and reports completion, permission denial, or failure back to the UI.
  */
-export function CompactSnapshotShare({
+export const PHOTO_SAVE_STATUS = {
+  saving: "Saving…",
+  saved: "Saved to Photos ✓",
+  denied: "Photos permission denied",
+  failed: "Save failed",
+} as const;
+
+export function CompactSnapshotSave({
   session,
+  getVisibleSession,
 }: {
   session: WorkoutSession;
+  getVisibleSession?: () => WorkoutSession | null;
 }) {
-  const [pngBlob, setPngBlob] = useState<Blob | null>(null);
-  const [preparing, setPreparing] = useState(true);
-  const [delivering, setDelivering] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [statusText, setStatusText] = useState("");
 
   useEffect(() => {
-    let cancelled = false;
-    setPreparing(true);
-    setStatusText("");
-    setPngBlob(null);
-
-    const doc = buildImageLayout(session, "compact");
-    const svg = renderSessionSvg(doc);
-    void rasterizeSvgToPngBlob(svg, doc.width, doc.height).then((blob) => {
-      if (cancelled) return;
-      setPngBlob(blob);
-      setPreparing(false);
-      if (!blob) setStatusText(PNG_UNAVAILABLE_MESSAGE);
+    return listenForEmbeddedNativeStatus((status, action) => {
+      if (action !== "saveColourSnapshot") return;
+      if (status === "saving") {
+        setSaving(true);
+        setStatusText(PHOTO_SAVE_STATUS.saving);
+      } else if (status === "saved") {
+        setSaving(false);
+        setStatusText(PHOTO_SAVE_STATUS.saved);
+      } else if (status === "denied") {
+        setSaving(false);
+        setStatusText(PHOTO_SAVE_STATUS.denied);
+      } else if (status === "failed") {
+        setSaving(false);
+        setStatusText(PHOTO_SAVE_STATUS.failed);
+      }
     });
+  }, []);
 
-    return () => {
-      cancelled = true;
-    };
-  }, [session]);
+  const handleSave = () => {
+    if (saving) return;
+    const visibleSession = getVisibleSession?.() ?? session;
+    const doc = buildImageLayout(visibleSession, "compact");
+    const svg = renderSessionSvg(doc);
+    const filename = exportImageFilename(visibleSession.dateLocal);
 
-  const handleShare = () => {
-    if (!pngBlob || delivering) return;
-    const filename = exportImageFilename(session.dateLocal);
-
-    if (supportsFileShare()) {
-      setDelivering(true);
-      const file = new File([pngBlob], filename, { type: "image/png" });
-      void sharePngFile(file)
-        .then(
-          (outcome) => setStatusText(SHARE_STATUS[outcome]),
-          () => setStatusText(SHARE_STATUS.failed),
-        )
-        .finally(() => setDelivering(false));
-      return;
-    }
-
-    setStatusText(
-      triggerPngDownload(pngBlob, filename)
-        ? downloadStartedMessage(filename)
-        : DOWNLOAD_FAILED_MESSAGE,
-    );
+    setSaving(true);
+    setStatusText(PHOTO_SAVE_STATUS.saving);
+    void (async () => {
+      const blob = await rasterizeSvgToPngBlob(svg, doc.width, doc.height);
+      if (!blob) {
+        setSaving(false);
+        setStatusText(PHOTO_SAVE_STATUS.failed);
+        return;
+      }
+      const pngBase64 = await blobToBase64(blob);
+      if (!pngBase64 || !sendColourSnapshotToEmbeddedBridge(pngBase64, filename)) {
+        setSaving(false);
+        setStatusText(PHOTO_SAVE_STATUS.failed);
+      }
+    })();
   };
 
   return (
     <section
-      className="snapshot-share-zone"
-      aria-label="Share colour snapshot"
+      className="snapshot-save-zone"
+      aria-label="Save colour snapshot"
       data-export-style="compact"
     >
       <button
         type="button"
         className="image-export-button"
-        disabled={preparing || !pngBlob || delivering}
-        onClick={handleShare}
+        disabled={saving}
+        onClick={handleSave}
       >
-        {preparing ? "Preparing Colour Snapshot…" : "Share Colour Snapshot"}
+        Save Colour Snapshot
       </button>
       {statusText && (
-        <p className="snapshot-share-status" aria-live="polite">
+        <p className="snapshot-save-status" role="status" aria-live="polite">
           {statusText}
         </p>
       )}

@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, beforeAll, describe, expect, it, vi } from "vitest";
 import Dexie from "dexie";
 import { App } from "../App";
@@ -14,9 +14,8 @@ import {
 /* ---------------------------------------------------------------------- */
 /* Focused Settings flow coverage (spec §§22–23; M06-T02 CORRECTION-01):  */
 /* Home → Settings navigation, immediate theme application + persistence  */
-/* (including the System media-query contract), Default Image Style       */
-/* persistence seeding Export Image's initial selection while the panel   */
-/* toggle stays per-export, About copy, and safe defaults for invalid     */
+/* (including the System media-query contract), retired image-style UI      */
+/* absence, About copy, and safe defaults for invalid stored metadata.      */
 /* stored metadata. jsdom cannot prove physical light-mode pixels; the    */
 /* stylesheet CONTRACT is pinned instead.                                 */
 /* ---------------------------------------------------------------------- */
@@ -60,22 +59,8 @@ async function openSettings() {
   expect(await screen.findByRole("heading", { name: "Settings" })).toBeTruthy();
 }
 
-/** Launches on Home, then opens the seeded historical session via View. */
-async function openSeededSession() {
-  render(<App db={db} todayLocal={TODAY} />);
-  expect(await screen.findByText(/40 sets · 39 exercises/)).toBeTruthy();
-  fireEvent.click(screen.getByRole("button", { name: "View" }));
-  expect(
-    await screen.findByRole("heading", { name: "Sunday 23 Aug" }),
-  ).toBeTruthy();
-}
-
 function themeGroup(): HTMLElement {
   return screen.getByRole("group", { name: "Theme" });
-}
-
-function imageStyleGroup(): HTMLElement {
-  return screen.getByRole("group", { name: "Default image style" });
 }
 
 function groupButton(group: HTMLElement, name: string): HTMLButtonElement {
@@ -91,7 +76,6 @@ async function storedMetaValue(key: string): Promise<string | undefined> {
   return record?.value;
 }
 
-/** Polls until the persisted meta value equals `expected`. */
 async function waitForStoredMeta(key: string, expected: string) {
   await waitFor(async () => {
     expect(await storedMetaValue(key)).toBe(expected);
@@ -119,11 +103,11 @@ describe("Home → Settings navigation (spec §§4.1, 23)", () => {
     ).toBeTruthy();
   });
 
-  it("renders exactly the two preference groups plus About", async () => {
+  it("renders the theme preference plus About, without retired image style UI", async () => {
     await openSettings();
 
     expect(themeGroup()).toBeTruthy();
-    expect(imageStyleGroup()).toBeTruthy();
+    expect(screen.queryByRole("group", { name: "Default image style" })).toBeNull();
 
     // Spec §22 hint and §23 About wording.
     expect(
@@ -203,7 +187,7 @@ describe("theme choices apply immediately and persist", () => {
 });
 
 describe("safe defaults for missing/invalid metadata", () => {
-  it("ignores unrecognized stored values and shows System/Compact", async () => {
+  it("ignores unrecognized stored values and shows System", async () => {
     await db.meta.bulkPut([
       { key: THEME_META_KEY, value: "blue", at: "2026-08-25T06:00:00.000Z" },
       {
@@ -216,67 +200,8 @@ describe("safe defaults for missing/invalid metadata", () => {
     await openSettings();
 
     expect(pressedValue(groupButton(themeGroup(), "System"))).toBe("true");
-    expect(pressedValue(groupButton(imageStyleGroup(), "Compact"))).toBe("true");
+    expect(screen.queryByRole("button", { name: "Faithful" })).toBeNull();
     expect(document.documentElement.getAttribute("data-theme")).toBeNull();
-  });
-});
-
-describe("Default Image Style seeds Export Image (spec §14.1)", () => {
-  function exportStyleGroup(): HTMLElement {
-    return screen.getByRole("group", { name: "Export style" });
-  }
-
-  /** Opens the export overlay and waits for its preview lifecycle to settle. */
-  async function openExportPanel() {
-    await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: "Export Image" }));
-    });
-    expect(exportStyleGroup()).toBeTruthy();
-    await screen.findByAltText(/Full-session export preview,/);
-  }
-
-  it("starts Compact when the preference was never changed", async () => {
-    await openSeededSession();
-
-    await openExportPanel();
-    expect(pressedValue(groupButton(exportStyleGroup(), "Compact"))).toBe("true");
-    expect(pressedValue(groupButton(exportStyleGroup(), "Faithful"))).toBe(
-      "false",
-    );
-  });
-
-  it("initializes from the persisted choice; per-export toggling never rewrites it", async () => {
-    await openSettings();
-    fireEvent.click(groupButton(imageStyleGroup(), "Faithful"));
-    expect(pressedValue(groupButton(imageStyleGroup(), "Faithful"))).toBe("true");
-    await waitForStoredMeta(IMAGE_STYLE_META_KEY, "faithful");
-
-    // Back Home → reopen the seeded session → open Export Image.
-    fireEvent.click(screen.getByRole("button", { name: "‹ Gym Log" }));
-    fireEvent.click(await screen.findByRole("button", { name: "View" }));
-    expect(
-      await screen.findByRole("heading", { name: "Sunday 23 Aug" }),
-    ).toBeTruthy();
-    await openExportPanel();
-
-    // Seeded from the persisted preference, not hard-coded Compact.
-    expect(pressedValue(groupButton(exportStyleGroup(), "Faithful"))).toBe("true");
-    expect(
-      screen.getByAltText("Full-session export preview, faithful style"),
-    ).toBeTruthy();
-
-    // The panel toggle stays PER-EXPORT: switching here must not persist.
-    await act(async () => {
-      fireEvent.click(groupButton(exportStyleGroup(), "Compact"));
-    });
-    expect(pressedValue(groupButton(exportStyleGroup(), "Compact"))).toBe("true");
-    await screen.findByAltText("Full-session export preview, compact style");
-    expect(await storedMetaValue(IMAGE_STYLE_META_KEY)).toBe("faithful");
-
-    // Closing discards the per-export choice; reopening re-seeds from storage.
-    fireEvent.click(screen.getByRole("button", { name: "Close" }));
-    await openExportPanel();
-    expect(pressedValue(groupButton(exportStyleGroup(), "Faithful"))).toBe("true");
   });
 });
 

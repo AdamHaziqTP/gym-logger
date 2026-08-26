@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  CompactSnapshotShare,
+  CompactSnapshotSave,
   ImageExportPanel,
 } from "../components/ImageExport";
 import { seedSessionFromFixture } from "../data/fixture";
@@ -53,20 +53,21 @@ describe("ImageExportPanel final-gate corrections", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it("exposes the direct Compact colour snapshot action without replacing Notes copy", async () => {
+  it("exposes only the direct Compact colour snapshot action", async () => {
     render(
-      <CompactSnapshotShare
+      <CompactSnapshotSave
         session={seedSessionFromFixture("2026-08-24T08:00:00.000Z")}
       />,
     );
 
-    const button = await screen.findByRole("button", {
-      name: "Share Colour Snapshot",
+    const button = screen.getByRole("button", {
+      name: "Save Colour Snapshot",
     });
-    expect((button as HTMLButtonElement).disabled).toBe(true);
+    expect((button as HTMLButtonElement).disabled).toBe(false);
     expect(
       button.closest("[data-export-style='compact']"),
     ).not.toBeNull();
-    expect(screen.getByText(/no visible pixels were verified/i)).toBeTruthy();
+    expect(screen.queryByRole("img")).toBeNull();
+    expect(screen.queryByRole("group", { name: "Export style" })).toBeNull();
   });
 });

@@ -82,6 +82,39 @@ function pngDataUrlToBlob(dataUrl: string): Blob | null {
   }
 }
 
+/** Encodes PNG bytes for the in-process native bridge without a data URL. */
+export async function blobToBase64(blob: Blob): Promise<string | null> {
+  try {
+    const buffer =
+      typeof blob.arrayBuffer === "function"
+        ? await blob.arrayBuffer()
+        : await new Promise<ArrayBuffer>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result as ArrayBuffer);
+            reader.onerror = () => reject(reader.error);
+            reader.readAsArrayBuffer(blob);
+          });
+    const bytes = new Uint8Array(buffer);
+    const alphabet =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let encoded = "";
+    for (let index = 0; index < bytes.length; index += 3) {
+      const first = bytes[index] ?? 0;
+      const second = bytes[index + 1];
+      const third = bytes[index + 2];
+      encoded += alphabet[first >> 2];
+      encoded += alphabet[((first & 3) << 4) | ((second ?? 0) >> 4)];
+      encoded += second === undefined
+        ? "="
+        : alphabet[((second & 15) << 2) | ((third ?? 0) >> 6)];
+      encoded += third === undefined ? "=" : alphabet[third & 63];
+    }
+    return encoded;
+  } catch {
+    return null;
+  }
+}
+
 function canvasToPngBlob(canvas: HTMLCanvasElement): Promise<Blob | null> {
   // iOS WebKit can produce a visually corrupt file from canvas.toBlob for
   // this SVG-backed path even when the on-screen SVG preview is correct.

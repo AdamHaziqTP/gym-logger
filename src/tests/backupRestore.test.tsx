@@ -420,11 +420,9 @@ describe("Restore replaces settings metadata atomically", () => {
         "aria-pressed",
       ),
     ).toBe("true");
-    expect(
-      screen.getByRole("button", { name: "Faithful" }).getAttribute(
-        "aria-pressed",
-      ),
-    ).toBe("true");
+    // The legacy image-style metadata remains restorable for backup
+    // compatibility, but the retired Faithful selector is no longer exposed.
+    expect(screen.queryByRole("button", { name: "Faithful" })).toBeNull();
     expect(document.documentElement.getAttribute("data-theme")).toBe("light");
   });
 });

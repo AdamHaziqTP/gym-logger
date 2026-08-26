@@ -27,14 +27,6 @@ import {
   peekRowClipboard,
 } from "../domain/rowClipboard";
 import {
-  buildNotesPayload,
-  type NotesPayload,
-} from "../domain/notesExport";
-import {
-  writeNotesPayloadToClipboard,
-  type ClipboardCopyOutcome,
-} from "../domain/notesClipboard";
-import {
   launchNativeHelper,
   writeNativeHelperHandoffToClipboard,
 } from "../domain/nativeHelperHandoff";
@@ -42,8 +34,7 @@ import {
   listenForEmbeddedNativeStatus,
   sendNativeHandoffToEmbeddedBridge,
 } from "../domain/embeddedNativeBridge";
-import { CompactSnapshotShare, ImageExportPanel } from "./ImageExport";
-import type { ImageExportStyle } from "../domain/imageExport";
+import { CompactSnapshotSave } from "./ImageExport";
 import { orderedRows } from "../domain/rows";
 import type {
   Highlight,
@@ -58,21 +49,8 @@ const UNDO_TOAST_MS = 5000;
 /** Pointer travel before a handle press becomes a drag instead of a tap. */
 const DRAG_THRESHOLD_PX = 8;
 
-/**
- * Copy-to-Notes action states (spec §15; M03-T01). `copied-rich` is the only
- * state that may show the spec's success copy; plain fallback and failure are
- * always worded so they cannot be mistaken for full success (AC-03).
- */
-type NotesCopyState = "idle" | "working" | ClipboardCopyOutcome;
+/** Native Notes handoff states; the embedded shell reports completion. */
 type NativeHandoffState = "idle" | "working" | "prepared" | "manual" | "failed";
-
-const NOTES_COPY_STATUS: Record<NotesCopyState, string> = {
-  idle: "",
-  working: "Copying…",
-  "copied-rich": "Copied to Notes ✓",
-  "copied-plain": "Copied as plain text (rich formatting unavailable)",
-  failed: "Copy failed — clipboard unavailable",
-};
 
 const NATIVE_HANDOFF_STATUS: Record<NativeHandoffState, string> = {
   idle: "",
@@ -102,11 +80,6 @@ const COLUMN_LABELS: Record<EditableRowField, string> = {
 interface SessionViewProps {
   db: GymLogDB;
   sessionId: string;
-  /**
-   * M06-T02 (spec §14.1): the persisted Default Image Style seeds the export
-   * panel's initial selection; the panel's own toggle stays per-export.
-   */
-  defaultImageStyle?: ImageExportStyle;
   onBack: () => void;
 }
 
@@ -119,7 +92,6 @@ interface SessionViewProps {
 export function SessionView({
   db,
   sessionId,
-  defaultImageStyle = "compact",
   onBack,
 }: SessionViewProps) {
   const session = useLiveQuery(
@@ -141,20 +113,11 @@ export function SessionView({
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [deletingSession, setDeletingSession] = useState(false);
 
-  // Copy-to-Notes spike (spec §15; M03-T01): local clipboard only.
-  const [notesCopyState, setNotesCopyState] = useState<NotesCopyState>("idle");
   // Optional native handoff: the helper generates the proven coloured,
   // editable flat-RTFD representation; the browser only transports session
   // JSON and opens the helper.
   const [nativeHandoffState, setNativeHandoffState] =
     useState<NativeHandoffState>("idle");
-  // Image export (spec §14; M03-T02-IMAGE-EXPORT-01): holds the visible-state
-  // session snapshot captured when the user opened the export panel, or null
-  // while the panel is closed. A snapshot (not live state) keeps the preview
-  // stable while the modal blocks editing.
-  const [imageExportSession, setImageExportSession] =
-    useState<WorkoutSession | null>(null);
-
   // Drag-reorder state (spec §§7.2, 7.5): press on the SELECTED handle arms a
   // potential drag; movement past the threshold drags, release without it is
   // the tap that opens the row menu.
@@ -192,7 +155,8 @@ export function SessionView({
   // Swift reports the actual result, including the manual-open fallback.
   useEffect(
     () =>
-      listenForEmbeddedNativeStatus((status) => {
+      listenForEmbeddedNativeStatus((status, action) => {
+        if (action && action !== "prepareColouredNotes") return;
         if (status === "prepared" || status === "manual" || status === "failed") {
           setNativeHandoffState(status);
         }
@@ -527,14 +491,13 @@ export function SessionView({
     }
   };
 
-  /* --------------- Copy to Notes export (spec §15; M03-T01) -------------- */
+  /* --------------- Visible-state export helpers ------------------------- */
 
   /**
    * Builds the session as the screen shows it RIGHT NOW: the cell inputs and
    * the notes textarea are uncontrolled, so their DOM values are the truth
-   * for edits that may not be persisted yet. Shared by every export path
-   * (Copy-to-Notes and the §14 image export), so both always agree with what
-   * the user sees.
+   * for edits that may not be persisted yet. Both export actions use this
+   * same visible-state rule.
    */
   const buildVisibleSession = (): WorkoutSession | null => {
     if (!session) return null;
@@ -580,46 +543,6 @@ export function SessionView({
     };
   };
 
-  /**
-   * Builds the export payload from what the screen shows RIGHT NOW.
-   * Synchronous by design (FIX-01): constructing the payload inside the tap
-   * gesture lets the first clipboard attempt start in the same task,
-   * preserving user activation.
-   */
-  const buildVisibleNotesPayload = (): NotesPayload | null => {
-    const visibleSession = buildVisibleSession();
-    return visibleSession ? buildNotesPayload(visibleSession) : null;
-  };
-
-  const commandCopyToNotes = () => {
-    if (notesCopyState === "working") return; // double-tap guard (§27.2)
-    setNotesCopyState("working");
-
-    // FIX-01: capture the payload and start the clipboard attempt
-    // synchronously inside this tap. Nothing may be awaited between the
-    // gesture and the first clipboard call — iOS/Safari drops transient user
-    // activation across awaited tasks, which surfaced as `Copy failed —
-    // clipboard unavailable` on the http://LAN device test.
-    const payload = buildVisibleNotesPayload();
-    if (!payload) {
-      setNotesCopyState("failed");
-      return;
-    }
-    // Persistence converges without gating the clipboard on IndexedDB: the
-    // payload already carries the latest visible edits verbatim.
-    void flushSaves();
-
-    void (async () => {
-      try {
-        const outcome = await writeNotesPayloadToClipboard(payload);
-        setNotesCopyState(outcome);
-      } catch (error) {
-        console.error("Gym Logger: copy to Notes failed", error);
-        setNotesCopyState("failed");
-      }
-    })();
-  };
-
   const commandPrepareNativeNotesCopy = () => {
     if (nativeHandoffState === "working") return;
     const visibleSession = buildVisibleSession();
@@ -638,7 +561,6 @@ export function SessionView({
     // Keeping this before the browser clipboard fallback avoids requiring a
     // secure web origin or a second helper app inside the native shell.
     if (sendNativeHandoffToEmbeddedBridge(visibleSession)) {
-      setNativeHandoffState("prepared");
       return;
     }
 
@@ -648,8 +570,8 @@ export function SessionView({
           setNativeHandoffState("failed");
           return;
         }
-        setNativeHandoffState("prepared");
         launchNativeHelper();
+        setNativeHandoffState("manual");
       })
       .catch(() => setNativeHandoffState("failed"));
   };
@@ -828,32 +750,18 @@ export function SessionView({
         />
       </section>
 
-      {/* Copy to Notes (spec §15; M03-T01 spike): one quiet local clipboard
-          action at the end of the screen, before the destructive zone. The
-          status line is explicit — plain-text fallback and failure states
-          never present as a rich success (AC-03). No Apple Notes append or
-          cloud involvement happens here (§2.2). */}
-      <section className="export-zone" aria-label="Copy session for Apple Notes">
-        <button
-          type="button"
-          className="notes-copy-button"
-          onClick={commandCopyToNotes}
-          disabled={notesCopyState === "working"}
-        >
-          Copy to Notes
-        </button>
-        {notesCopyState !== "idle" && (
-          <p className="copy-notes-status" role="status" aria-live="polite">
-            {NOTES_COPY_STATUS[notesCopyState]}
-          </p>
-        )}
+      {/* The native coloured Notes path is the sole Notes-copy action. */}
+      <section
+        className="export-zone"
+        aria-label="Copy coloured Notes and open Notes"
+      >
         <button
           type="button"
           className="notes-copy-button notes-shortcut-button"
           onClick={commandPrepareNativeNotesCopy}
           disabled={nativeHandoffState === "working"}
         >
-          Prepare Coloured Notes Copy
+          Copy Coloured Notes &amp; Open Notes
         </button>
         {nativeHandoffState !== "idle" && (
           <p className="copy-notes-status" role="status" aria-live="polite">
@@ -862,21 +770,12 @@ export function SessionView({
         )}
       </section>
 
-      {/* Image export (spec §14; M03-T02-IMAGE-EXPORT-01): one quiet local
-          action beside Copy to Notes. Opening it snapshots the visible state
-          (same DOM-truth rule as Copy-to-Notes); nothing is uploaded and no
-          native dependency is involved — SVG→PNG in-page, then share/download. */}
-      <CompactSnapshotShare session={session} />
-
-      <section className="image-export-zone" aria-label="Export session image">
-        <button
-          type="button"
-          className="image-export-button"
-          onClick={() => setImageExportSession(buildVisibleSession() ?? session)}
-        >
-          Export Image
-        </button>
-      </section>
+      {/* Compact is the only image action. It captures the visible DOM state
+          at tap time and native completion determines its status. */}
+      <CompactSnapshotSave
+        session={session}
+        getVisibleSession={buildVisibleSession}
+      />
 
       {/* Whole-session delete entry point (spec §11.4; M02-T03): one quiet
           destructive row at the end of the screen — discoverable without
@@ -913,18 +812,6 @@ export function SessionView({
           current={selectedRow.highlight}
           onPick={handleHighlightPick}
           onClose={() => setColourOpen(false)}
-        />
-      )}
-
-      {/* Image export overlay (spec §14): style choice, live preview of the
-          exact document that will be delivered, and a truthful save/share
-          step. Rendering the snapshot blocks nothing else; closing discards
-          it without touching any record. */}
-      {imageExportSession && (
-        <ImageExportPanel
-          session={imageExportSession}
-          initialStyle={defaultImageStyle}
-          onClose={() => setImageExportSession(null)}
         />
       )}
 

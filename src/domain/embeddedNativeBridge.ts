@@ -18,10 +18,24 @@ interface EmbeddedWebKitWindow extends Window {
   };
 }
 
-export type EmbeddedNativeStatus = "prepared" | "manual" | "failed" | "copied";
+export type EmbeddedNativeAction =
+  | "prepareColouredNotes"
+  | "copyNotesPayload"
+  | "saveColourSnapshot";
+export type EmbeddedNativeStatus =
+  | "saving"
+  | "saved"
+  | "denied"
+  | "prepared"
+  | "manual"
+  | "failed"
+  | "copied";
 export const EMBEDDED_NATIVE_STATUS_EVENT = "gymlogger-native-status";
 
 const EMBEDDED_NATIVE_STATUSES: ReadonlySet<string> = new Set([
+  "saving",
+  "saved",
+  "denied",
   "prepared",
   "manual",
   "failed",
@@ -44,14 +58,28 @@ export function hasEmbeddedNativeBridge(): boolean {
  * not; callers must wait for this event before showing success.
  */
 export function listenForEmbeddedNativeStatus(
-  onStatus: (status: EmbeddedNativeStatus) => void,
+  onStatus: (
+    status: EmbeddedNativeStatus,
+    action?: EmbeddedNativeAction,
+  ) => void,
 ): () => void {
   if (typeof window === "undefined") return () => undefined;
 
   const handleStatus = (event: Event) => {
-    const status = (event as CustomEvent<{ status?: unknown }>).detail?.status;
+    const detail = (event as CustomEvent<{
+      action?: unknown;
+      status?: unknown;
+    }>).detail;
+    const status = detail?.status;
     if (typeof status === "string" && EMBEDDED_NATIVE_STATUSES.has(status)) {
-      onStatus(status as EmbeddedNativeStatus);
+      const action =
+        typeof detail?.action === "string" &&
+        (detail.action === "prepareColouredNotes" ||
+          detail.action === "copyNotesPayload" ||
+          detail.action === "saveColourSnapshot")
+          ? detail.action
+          : undefined;
+      onStatus(status as EmbeddedNativeStatus, action);
     }
   };
 
@@ -77,7 +105,7 @@ export function sendNativeHandoffToEmbeddedBridge(
   }
 }
 
-/** Keeps ordinary Copy to Notes usable inside the bundled shell. */
+/** Keeps the legacy rich Notes payload bridge available for compatibility. */
 export function writeNotesPayloadToEmbeddedNative(
   payload: NotesPayload,
 ): boolean {
@@ -89,6 +117,26 @@ export function writeNotesPayloadToEmbeddedNative(
       action: "copyNotesPayload",
       html: payload.html,
       plainText: payload.text,
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** Sends a rendered Compact PNG to native for a direct Photos save. */
+export function sendColourSnapshotToEmbeddedBridge(
+  pngBase64: string,
+  filename: string,
+): boolean {
+  const handler = nativeHandler();
+  if (!handler) return false;
+
+  try {
+    handler.postMessage({
+      action: "saveColourSnapshot",
+      filename,
+      pngBase64,
     });
     return true;
   } catch {

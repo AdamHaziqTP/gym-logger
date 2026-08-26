@@ -6,12 +6,11 @@ import { SessionView } from "./components/SessionView";
 import { Settings } from "./components/Settings";
 import type { GymLogDB } from "./data/db";
 import { createDb, sortSessionsNewestFirst } from "./data/db";
-import { readAppSettings, saveDefaultImageStyleSetting, saveThemeSetting } from "./data/settings";
+import { readAppSettings, saveThemeSetting } from "./data/settings";
 import {
   applyThemePreference,
   DEFAULT_SETTINGS,
   type AppSettings,
-  type ImageStyleSetting,
   type ThemeSetting,
 } from "./domain/settings";
 import { ensureSeeded } from "./data/seed";
@@ -139,18 +138,6 @@ export function App({ db, todayLocal, runLiveMigrations = false }: AppProps) {
     });
   };
 
-  /** Same contract for the default image style preference. */
-  const changeDefaultImageStyle = (style: ImageStyleSetting) => {
-    setSettings((current) =>
-      current.defaultImageStyle === style
-        ? current
-        : { ...current, defaultImageStyle: style },
-    );
-    saveDefaultImageStyleSetting(db, style).catch((error) => {
-      console.error("Gym Logger: could not save image style setting", error);
-    });
-  };
-
   const refreshSettingsAfterRestore = async () => {
     const restored = await readAppSettings(db);
     setSettings(restored);
@@ -232,14 +219,12 @@ export function App({ db, todayLocal, runLiveMigrations = false }: AppProps) {
     <Settings
       settings={settings}
       onChangeTheme={changeTheme}
-      onChangeDefaultImageStyle={changeDefaultImageStyle}
       onBack={() => setView({ name: "home" })}
     />
   ) : (
     <SessionView
       db={db}
       sessionId={view.sessionId}
-      defaultImageStyle={settings.defaultImageStyle}
       onBack={() =>
         setView(view.from === "history" ? { name: "history" } : { name: "home" })
       }

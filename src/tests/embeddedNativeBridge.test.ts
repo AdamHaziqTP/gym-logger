@@ -3,6 +3,7 @@ import {
   EMBEDDED_NATIVE_STATUS_EVENT,
   hasEmbeddedNativeBridge,
   listenForEmbeddedNativeStatus,
+  sendColourSnapshotToEmbeddedBridge,
   sendNativeHandoffToEmbeddedBridge,
   writeNotesPayloadToEmbeddedNative,
 } from "../domain/embeddedNativeBridge";
@@ -91,10 +92,27 @@ describe("embedded native iOS bridge", () => {
     ]);
   });
 
-  it("accepts native completion and manual-open statuses, ignoring unknown values", () => {
+  it("sends Compact PNG bytes and filename to the native Photos action", () => {
+    const messages = installBridge();
+
+    expect(
+      sendColourSnapshotToEmbeddedBridge("iVBORw0KGgo=", "Gym-2026-08-25.png"),
+    ).toBe(true);
+    expect(messages).toEqual([
+      {
+        action: "saveColourSnapshot",
+        filename: "Gym-2026-08-25.png",
+        pngBase64: "iVBORw0KGgo=",
+      },
+    ]);
+  });
+
+  it("accepts action-scoped native statuses and ignores unknown values", () => {
     const statuses: string[] = [];
-    const unsubscribe = listenForEmbeddedNativeStatus((status) => {
+    const actions: Array<string | undefined> = [];
+    const unsubscribe = listenForEmbeddedNativeStatus((status, action) => {
       statuses.push(status);
+      actions.push(action);
     });
 
     window.dispatchEvent(
@@ -115,5 +133,22 @@ describe("embedded native iOS bridge", () => {
     );
 
     expect(statuses).toEqual(["manual"]);
+    expect(actions).toEqual([undefined]);
+  });
+
+  it("accepts the Photos saving lifecycle", () => {
+    const statuses: string[] = [];
+    const unsubscribe = listenForEmbeddedNativeStatus((status, action) => {
+      if (action === "saveColourSnapshot") statuses.push(status);
+    });
+    for (const status of ["saving", "saved", "denied", "failed"] as const) {
+      window.dispatchEvent(
+        new CustomEvent(EMBEDDED_NATIVE_STATUS_EVENT, {
+          detail: { action: "saveColourSnapshot", status },
+        }),
+      );
+    }
+    unsubscribe();
+    expect(statuses).toEqual(["saving", "saved", "denied", "failed"]);
   });
 });

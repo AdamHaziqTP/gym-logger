@@ -2,7 +2,7 @@ import type { NotesPayload } from "./notesExport";
 
 /**
  * Optional PWA -> iOS Shortcuts handoff. This is deliberately separate from
- * the normal clipboard writer: the existing Copy to Notes path remains the
+ * the normal clipboard writer: the legacy helper remains available as a
  * dependable uncoloured fallback until a real device proves this route.
  */
 export type NotesShortcutOutcome = "shared" | "cancelled" | "failed";
