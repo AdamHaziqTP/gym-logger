@@ -4,6 +4,23 @@ import UniformTypeIdentifiers
 
 struct FixtureFile: Decodable { let session: FixtureSession }
 
+/// The production PWA sends this small envelope as plain JSON to the helper.
+/// The helper intentionally ignores transport-only fields such as id and
+/// timestamps; the visible workout content remains the source of truth.
+struct NativeHandoffEnvelope: Decodable {
+    let schemaVersion: Int
+    let source: String
+    let displayDate: String
+    let session: NativeHandoffSession
+}
+
+struct NativeHandoffSession: Decodable {
+    let dateLocal: String
+    let rows: [FixtureRow]
+    let notes: String
+    let summaryOverride: FixtureSummary?
+}
+
 struct FixtureSession: Decodable {
     let dateLocal: String
     let displayDate: String
@@ -50,10 +67,16 @@ struct NativePasteboardPayload {
 }
 
 enum NativePayloadError: LocalizedError {
+    case invalidHandoff
+    case unsupportedHandoff
     case flatRTFDSerializationFailed
 
     var errorDescription: String? {
         switch self {
+        case .invalidHandoff:
+            return "The Gym Logger handoff is not valid JSON for this helper."
+        case .unsupportedHandoff:
+            return "This Gym Logger handoff version or source is not supported."
         case .flatRTFDSerializationFailed:
             return "The generated flat-RTFD container could not be serialized."
         }
@@ -61,6 +84,8 @@ enum NativePayloadError: LocalizedError {
 }
 
 enum NativePayloadBuilder {
+    static let handoffSchemaVersion = 1
+    static let handoffSource = "gym-logger-pwa"
     private static let categories = ["Arms", "Back", "Chest", "Delts", "Legs"]
     private static let foreground: [String: String] = [
         "orange": "#ff9230", "purple": "#db34f2", "mint": "#00dac3",
@@ -83,6 +108,47 @@ enum NativePayloadBuilder {
             throw NSError(domain: "GymLoggerPasteboardHelper", code: 1)
         }
         return try JSONDecoder().decode(FixtureFile.self, from: Data(contentsOf: url)).session
+    }
+
+    static func decodeHandoff(_ text: String) throws -> FixtureSession {
+        guard let data = text.data(using: .utf8) else {
+            throw NativePayloadError.invalidHandoff
+        }
+        let envelope: NativeHandoffEnvelope
+        do {
+            envelope = try JSONDecoder().decode(NativeHandoffEnvelope.self, from: data)
+        } catch {
+            throw NativePayloadError.invalidHandoff
+        }
+        guard envelope.schemaVersion == handoffSchemaVersion,
+              envelope.source == handoffSource,
+              !envelope.displayDate.isEmpty,
+              !envelope.session.dateLocal.isEmpty else {
+            throw NativePayloadError.unsupportedHandoff
+        }
+        return FixtureSession(
+            dateLocal: envelope.session.dateLocal,
+            displayDate: envelope.displayDate,
+            summary: envelope.session.summaryOverride ?? FixtureSummary(
+                setsDisplayOverride: nil,
+                exercisesDisplayOverride: nil
+            ),
+            rows: envelope.session.rows,
+            notes: envelope.session.notes
+        )
+    }
+
+    /// Reads only the transport JSON written by the production PWA. Once a
+    /// generated payload is prepared the clipboard no longer has this string,
+    /// so returning to the app cannot accidentally re-run the handoff.
+    static func loadHandoffFromPasteboard() throws -> FixtureSession? {
+        guard let text = UIPasteboard.general.string, !text.isEmpty else {
+            return nil
+        }
+        guard text.contains("\"schemaVersion\"") && text.contains("\"gym-logger-pwa\"") else {
+            return nil
+        }
+        return try decodeHandoff(text)
     }
 
     static func makePayload(session: FixtureSession) throws -> NativePasteboardPayload {
@@ -175,7 +241,11 @@ enum NativePayloadBuilder {
     private static func makeNotesLegend() -> String {
         notesLegend.map { entry in
             "\(notesHighlightPrefix(for: entry.highlight))\(rtfEscape(entry.label))\(notesHighlightReset)"
-        }.joined(separator: " ")
+        // Each coloured label is a separate RTF run. A non-breaking-space
+        // control keeps the visible separators when Notes normalizes those
+        // runs during paste; a literal separator was previously dropped by
+        // the Shortcut append path.
+        }.joined(separator: "\\~")
     }
 
     private static func makeRTF(session: FixtureSession, rows: [FixtureRow], summary: String) -> String {

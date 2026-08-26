@@ -382,3 +382,28 @@ only `Append Shortcut Input to Gym`. Do not use Get Text, HTML conversion, or
 any flattening action. Keep the existing PWA and ordinary Copy to Notes path
 unchanged. Do not claim Shortcut append success until the target iPhone proves
 editable table, all five colours, content/order, summary, notes, and Unicode.
+
+## M03-T08 Phase C closed; M03-T09 manual native paste handoff — 2026-08-26
+
+The target iPhone proved that Shortcut `Append Shortcut Input to Gym` reaches
+the correct note and keeps a table, but strips the native colour formatting and
+concatenates the legend labels. Close that automatic append route; do not run
+more Shortcut conversion variants or HTML experiments.
+
+Keep the proven direct native flat-RTFD → manual Paste route. Authorize the
+narrow product handoff: the PWA may send the selected/current `WorkoutSession`
+as versioned JSON to the isolated helper, which generates the Apple-shaped
+`com.apple.flat-rtfd` clipboard item and opens Notes when possible. One manual
+Paste is an explicit part of this optional colour-preserving workflow.
+
+The ordinary PWA `Copy to Notes` path remains unchanged as the reliable
+editable-table/data fallback. The helper's bundled Sunday fixture remains
+diagnostic-only; the production path must consume the real session selected in
+the PWA. Preserve the locked `actual-2026-08-25` Tuesday latest-session
+requirement and never let the fixture become the app's latest session.
+
+The separate legend-label spacing correction is included in the helper
+generator: the five labels are individually Apple-highlighted and separated by
+RTF non-breaking spaces. The next and only required product gate is one real
+Tuesday production-session paste on the target iPhone after a fresh hosted
+macOS/Xcode helper build. No device result is inferred from desktop evidence.

@@ -3,10 +3,12 @@ import UIKit
 
 @MainActor
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var status = "Copy a small coloured table in Apple Notes, then inspect it here."
     @State private var shareURLs: [URL] = []
     @State private var removalCandidates: [String] = []
     @State private var sufficiencyCandidates: [String] = []
+    @State private var handoffSession: FixtureSession?
 
     var body: some View {
         ScrollView {
@@ -52,19 +54,30 @@ struct ContentView: View {
                 }
 
                 Divider()
-                Text("Generated Gym Logger payload proof").font(.headline)
-                Text("Builds a new 40-row workout payload from the bundled Gym Logger fixture and places only flat-RTFD on the clipboard for Apple Notes testing.")
+                Text("Production Gym Logger handoff").font(.headline)
+                Text("When Gym Logger opens this helper, it sends the selected session as JSON. The helper then generates the coloured editable Notes payload from that real session.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                if let handoffSession {
+                    Text("Received \(handoffSession.displayDate) from Gym Logger (\(handoffSession.rows.count) rows).")
+                        .font(.footnote)
+                    Button("Prepare Coloured Clipboard & Open Notes") {
+                        prepareHandoffSession()
+                    }
+                    .buttonStyle(.borderedProminent)
+                } else {
+                    Text("No production session is waiting. Use the optional PWA action from an open session to send one here.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+
+                Divider()
+                Text("Isolated fixture proof").font(.headline)
+                Text("Builds a new 40-row workout from the bundled fixture only. This is retained for native-format diagnostics and is not the production handoff.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 Button("Copy Generated Gym Session (flat-RTFD only)") { copySession() }
                     .buttonStyle(.bordered)
-
-                Text("Phase C Shortcut proof").font(.headline)
-                Text("One-time setup: create a Shortcut named Gym Logger to Gym with only ‘Append Shortcut Input to Gym’. This proof keeps the native flat-RTFD clipboard item intact; it does not convert it to text or HTML.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                Button("Generate & Run Gym Logger to Gym Shortcut") { copySessionAndRunShortcut() }
-                    .buttonStyle(.borderedProminent)
 
                 Text(status).font(.footnote).foregroundStyle(.secondary)
             }
@@ -75,6 +88,10 @@ struct ContentView: View {
             set: { if !$0 { shareURLs = [] } }
         )) {
             ShareSheet(items: shareURLs.map { $0 as Any })
+        }
+        .onAppear { consumeHandoffIfPresent() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { consumeHandoffIfPresent() }
         }
     }
 
@@ -144,27 +161,47 @@ struct ContentView: View {
         }
     }
 
-    private func copySessionAndRunShortcut() {
+    private func consumeHandoffIfPresent() {
+        guard handoffSession == nil else { return }
         do {
-            let session = try NativePayloadBuilder.loadFixture()
+            guard let received = try NativePayloadBuilder.loadHandoffFromPasteboard() else { return }
+            handoffSession = received
+            status = "Received \(received.displayDate) from Gym Logger. Preparing the coloured editable Notes clipboard."
+            prepareSession(received, openNotes: true)
+        } catch {
+            status = "Gym Logger handoff could not be read: \(error.localizedDescription)"
+        }
+    }
+
+    private func prepareHandoffSession() {
+        guard let handoffSession else {
+            status = "No Gym Logger session handoff is available yet."
+            return
+        }
+        prepareSession(handoffSession, openNotes: true)
+    }
+
+    private func prepareSession(_ session: FixtureSession, openNotes: Bool) {
+        do {
             let payload = try NativePayloadBuilder.makePayload(session: session)
             UIPasteboard.general.setItems(
                 [payload.flatRTFDPasteboardItem],
                 options: [.expirationDate: Date().addingTimeInterval(600)]
             )
-            guard let url = URL(string: "shortcuts://run-shortcut?name=Gym%20Logger%20to%20Gym&input=clipboard") else {
-                status = "Clipboard prepared, but the Gym Logger to Gym Shortcut URL is invalid."
+            status = openNotes
+                ? "Coloured clipboard prepared. Opening Notes; paste once into the Gym note."
+                : "Coloured clipboard prepared. Open Notes and paste once."
+            guard openNotes, let url = URL(string: "mobilenotes://") else {
                 return
             }
-            status = "Native flat-RTFD clipboard prepared. Opening Gym Logger to Gym; verify the existing Gym note after the Shortcut runs."
             UIApplication.shared.open(url, options: [:]) { didOpen in
                 guard !didOpen else { return }
                 Task { @MainActor in
-                    status = "Clipboard prepared, but iOS could not open Gym Logger to Gym. Check that the Shortcut exists with only Append Shortcut Input to Gym."
+                    status = "Coloured clipboard prepared. iOS could not open Notes automatically; open Notes manually and paste once into the Gym note."
                 }
             }
         } catch {
-            status = "Could not prepare the generated native Notes payload."
+            status = "Could not prepare the native Notes payload from this session."
         }
     }
 }

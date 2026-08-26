@@ -34,6 +34,10 @@ import {
   writeNotesPayloadToClipboard,
   type ClipboardCopyOutcome,
 } from "../domain/notesClipboard";
+import {
+  launchNativeHelper,
+  writeNativeHelperHandoffToClipboard,
+} from "../domain/nativeHelperHandoff";
 import { CompactSnapshotShare, ImageExportPanel } from "./ImageExport";
 import type { ImageExportStyle } from "../domain/imageExport";
 import { orderedRows } from "../domain/rows";
@@ -56,6 +60,7 @@ const DRAG_THRESHOLD_PX = 8;
  * always worded so they cannot be mistaken for full success (AC-03).
  */
 type NotesCopyState = "idle" | "working" | ClipboardCopyOutcome;
+type NativeHandoffState = "idle" | "working" | "prepared" | "failed";
 
 const NOTES_COPY_STATUS: Record<NotesCopyState, string> = {
   idle: "",
@@ -63,6 +68,15 @@ const NOTES_COPY_STATUS: Record<NotesCopyState, string> = {
   "copied-rich": "Copied to Notes ✓",
   "copied-plain": "Copied as plain text (rich formatting unavailable)",
   failed: "Copy failed — clipboard unavailable",
+};
+
+const NATIVE_HANDOFF_STATUS: Record<NativeHandoffState, string> = {
+  idle: "",
+  working: "Preparing coloured Notes copy…",
+  prepared:
+    "Clipboard prepared. Opening the helper; paste once in Notes. If it does not open, launch Gym Logger Pasteboard Proof manually.",
+  failed:
+    "Could not prepare the native Notes copy. Install Gym Logger Pasteboard Proof and try again.",
 };
 
 const COLUMN_ORDER: EditableRowField[] = [
@@ -125,6 +139,11 @@ export function SessionView({
 
   // Copy-to-Notes spike (spec §15; M03-T01): local clipboard only.
   const [notesCopyState, setNotesCopyState] = useState<NotesCopyState>("idle");
+  // Optional native handoff: the helper generates the proven coloured,
+  // editable flat-RTFD representation; the browser only transports session
+  // JSON and opens the helper.
+  const [nativeHandoffState, setNativeHandoffState] =
+    useState<NativeHandoffState>("idle");
   // Image export (spec §14; M03-T02-IMAGE-EXPORT-01): holds the visible-state
   // session snapshot captured when the user opened the export panel, or null
   // while the panel is closed. A snapshot (not live state) keeps the preview
@@ -584,6 +603,31 @@ export function SessionView({
     })();
   };
 
+  const commandPrepareNativeNotesCopy = () => {
+    if (nativeHandoffState === "working") return;
+    const visibleSession = buildVisibleSession();
+    if (!visibleSession) {
+      setNativeHandoffState("failed");
+      return;
+    }
+
+    setNativeHandoffState("working");
+    // The helper needs the values currently visible in the editor, including
+    // unsaved free-form edits. Saving is allowed to converge independently;
+    // the handoff payload is captured before any await.
+    void flushSaves();
+    void writeNativeHelperHandoffToClipboard(visibleSession)
+      .then((copied) => {
+        if (!copied) {
+          setNativeHandoffState("failed");
+          return;
+        }
+        setNativeHandoffState("prepared");
+        launchNativeHelper();
+      })
+      .catch(() => setNativeHandoffState("failed"));
+  };
+
   const selectedRow = sortedRows.find((row) => row.id === selectedRowId) ?? null;
   const summaryLine = displaySummary(session);
 
@@ -775,6 +819,19 @@ export function SessionView({
         {notesCopyState !== "idle" && (
           <p className="copy-notes-status" role="status" aria-live="polite">
             {NOTES_COPY_STATUS[notesCopyState]}
+          </p>
+        )}
+        <button
+          type="button"
+          className="notes-copy-button notes-shortcut-button"
+          onClick={commandPrepareNativeNotesCopy}
+          disabled={nativeHandoffState === "working"}
+        >
+          Prepare Coloured Notes Copy
+        </button>
+        {nativeHandoffState !== "idle" && (
+          <p className="copy-notes-status" role="status" aria-live="polite">
+            {NATIVE_HANDOFF_STATUS[nativeHandoffState]}
           </p>
         )}
       </section>

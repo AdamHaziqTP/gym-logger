@@ -2,7 +2,7 @@
 
 Updated: 2026-08-26
 
-Status: `PHASE C READY — NATIVE FLAT-RTFD SHORTCUT APPEND DEVICE PROOF REQUIRED`
+Status: `M03-T09 READY — REAL PRODUCTION-SESSION MANUAL-PASTE DEVICE PROOF REQUIRED`
 
 ## Verified capability
 
@@ -100,20 +100,15 @@ append as a separate bounded proof.
 
 ## Boundary that remains unproven
 
-The proof did not generate a new Gym Logger workout. The helper's synthetic
-fixture action writes ordinary `public.utf8-plain-text`, `public.html`, and
-`public.rtf` representations; the repository has no target-device evidence
-that those synthesized representations preserve Notes colours. The supplied
-report also does not include the raw captured payloads needed to safely inspect
-or transform the Apple-private/native representation.
+The B2 fixture proof established the generated Apple-shaped flat-RTFD format,
+but the real production-session transport and paste have not yet been tested
+on the target iPhone. The current code is designed to generate the payload
+from the PWA handoff rather than replay captured Notes bytes; that claim still
+requires the M03-T09 device gate.
 
-Consequently, none of these claims is currently justified:
-
-- the PWA can directly inject the colour-bearing native Notes representation;
-- a JSON/share/custom-URL handoff alone creates a coloured editable Notes
-  table;
-- replacing text inside a captured private payload is safe or deterministic;
-- a helper can append a generated workout directly to the existing `Gym` note.
+The failed Shortcut append route is not part of the remaining proof. Its table
+survival does not imply colour survival, and it must not be restored as an
+automatic path.
 
 ## Route evaluation
 
@@ -122,27 +117,36 @@ Consequently, none of these claims is currently justified:
 | Normal PWA `Copy to Notes` | Keep in production | Real editable table and data/order are proven; Notes colour loss is the accepted baseline. |
 | Compact colour snapshot | Keep in production | Preserves the visual colour treatment as an image, but is not an editable Notes table. |
 | Exact native capture/replay | Preserve as isolated proof | Colours and editability are proven only for the captured Notes item itself. |
-| PWA JSON/share handoff to helper | Not productized | It would safely move data only; no colour-bearing generated native payload is proven. |
+| PWA JSON handoff to helper | Ready for one target-device proof | The helper now consumes the selected session and generates a fresh flat-RTFD item; real production-session paste remains unproven. |
 | Private-payload transformation | Deferred | Requires the actual raw capture plus bounded transformation tests and a new target-iPhone generated-workout proof. |
-| Direct Notes append/custom URL automation | Not claimed | No supported, tested path exists in the current isolated helper, and automatic append is not a v1 dependency. |
+| Direct Notes append/custom URL automation | Closed after `cda3a58` | Shortcut append stripped colours and concatenated the legend; retain one manual Paste after helper preparation. |
 
-## Current product recommendation
+## Phase C result and productized fallback
 
-Ship the PWA v1 behavior already accepted: use `Copy to Notes` for the
-editable table/data path and Compact colour snapshot when the visual category
-treatment matters. Keep the native helper and hosted build artifacts for a
-later, explicitly bounded investigation. Do not add a misleading
-`Export to Notes (Colours)` button until a newly generated Gym Logger session
-has passed the same editable-table/five-colour/Unicode test on the target
-iPhone.
+Phase C was physically tested at `cda3a58`. Shortcut `Append Shortcut Input to
+Gym` reached the correct existing note and preserved a table, but stripped all
+colours and concatenated the legend labels. Close that route and do not repeat
+Shortcut conversion experiments.
 
-## Current next gate and re-open criteria
+The productized route is now intentionally one step simpler:
 
-The next gate is the Phase C Shortcut append proof described in
-`orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-C-SHORTCUT-APPEND.md`.
-Install the latest hosted macOS/Xcode helper artifact, create the one-time
-`Gym Logger to Gym` Shortcut with only `Append Shortcut Input to Gym`, then use
-the helper's Phase C action. Do not interpret direct B2 paste success as proof
-that Shortcut append preserves the native representation. If append strips
-fidelity, retain the helper's perfect-clipboard/manual-paste fallback and do
-not alter the PWA path.
+1. The PWA's **Prepare Coloured Notes Copy** action serializes the currently
+   visible/selected session as a versioned JSON handoff.
+2. The installed helper consumes that JSON and generates a fresh
+   Apple Notes-shaped `com.apple.flat-rtfd` item with the five coloured legend
+   labels and coloured workout rows.
+3. The helper opens Notes when iOS permits it; otherwise it leaves the
+   clipboard ready and tells the user to open Notes manually.
+4. The user pastes once into the existing `Gym` note.
+
+The normal browser `Copy to Notes` action remains unchanged and is the fallback
+for users without the helper. The helper fixture button remains isolated
+diagnostic functionality and is not used by the production handoff.
+
+## Current gate
+
+Install the newest hosted macOS/Xcode helper artifact and run
+`orchestration/evidence/HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`
+using the real Tuesday `actual-2026-08-25` session from the PWA. Do not claim
+the production route passed until one target-iPhone paste proves the editable
+table, content/order, Unicode, summary/notes, and all five legend/row colours.

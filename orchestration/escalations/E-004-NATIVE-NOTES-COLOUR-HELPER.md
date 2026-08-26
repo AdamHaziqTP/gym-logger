@@ -1,6 +1,6 @@
 # E-004 — Native Apple Notes colour helper feasibility
 
-Status: `AUTHORIZED_FOR_BOUNDED_FEASIBILITY`
+Status: `M03-T09 READY_FOR_REAL_SESSION_DEVICE_PROOF`
 Date: 2026-08-25
 
 ## Trigger
@@ -65,3 +65,21 @@ representation.
 The GitHub-hosted macOS/Xcode workflow is reopened to produce a truthful build
 artifact or an explicit build blocker. No paid Developer dependency, native
 rewrite, or production `Copy to Notes` change is authorized.
+
+## M03-T08 result; M03-T09 fallback — 2026-08-26
+
+Phase C was physically tested and failed at `cda3a58`: Shortcut append reached
+the correct note and preserved a table, but stripped colours and concatenated
+the legend. Close automatic append and do not iterate Shortcut or browser HTML
+routes further.
+
+The next bounded route is authorized and implemented: the production PWA sends
+the selected/current session as a versioned JSON clipboard handoff to the
+helper; the helper generates a fresh Apple Notes-shaped flat-RTFD item, writes
+only `com.apple.flat-rtfd`, and opens Notes when possible. The user pastes once
+manually. The bundled fixture remains diagnostic-only.
+
+The new helper build and its real-session result still require a hosted
+macOS/Xcode package and one target-iPhone proof. This is not a native rewrite,
+does not require a paid Developer membership, and does not alter ordinary PWA
+`Copy to Notes`.

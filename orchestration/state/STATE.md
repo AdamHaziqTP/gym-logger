@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
-- Current task: M03-T08 Phase C native flat-RTFD Shortcut append proof
-- Status: HUMAN_REVIEW_REQUIRED — PHASE C HELPER BUILD READY
+- Current task: M03-T09 real production-session native manual-paste handoff
+- Status: READY_FOR_HOSTED_BUILD_AND_HUMAN_GATE
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: B2 core passed on the iPhone 14 Pro Max at `d0544c5` (editable generated table, all five row colours, content, and Unicode). Install the fresh Phase C helper, verify the five coloured legend labels, configure the one-action `Gym Logger to Gym` Shortcut with only `Append Shortcut Input to Gym`, and verify direct append preserves the editable coloured table, content/order, summary, notes, and Unicode.
-- Latest bounded task: M03-T08 Phase C native handoff; production PWA and normal Copy to Notes remain unchanged.
+- Human review gate: install the newest hosted helper, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`.
+- Latest bounded task: M03-T09 real-session native manual-paste handoff; production PWA ordinary Copy to Notes remains unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -80,6 +80,9 @@ Updated: 2026-08-26
 - B2 target-iPhone result is accepted for core feasibility at `d0544c5`: generated data pasted as an editable table with all five row/category colours, correct content/order/summary/notes/Unicode; only the separate legend labels were uncoloured.
 - The bounded M03-T08 Phase C task was attempted through a fresh DSH Desktop headless `/agent-teams` dispatch with the configured OpenRouter/stealth/ox-alpha patch. It produced no stdout or delta for 150 seconds and was terminated as a task-level worker timeout; Codex fallback added the legend polish and Shortcut proof action.
 - Codex independently verified the Phase C source contract, 410/410 PWA tests, production build, and diff hygiene. Hosted macOS/Xcode run `32961489740` independently compiled and packaged the updated helper from `6d28fec`; the Phase C device gate is now open.
+- Phase C was physically closed at `cda3a58`: Shortcut append reached the correct `Gym` note and preserved a table, but stripped colours and concatenated the legend. No further Shortcut or HTML conversion variants are authorized.
+- M03-T09 OX Alpha dispatch timed out without output or a usable delta in the bounded approximately 150-second DSH Desktop window. Codex fallback implemented the narrow manual-paste handoff and recorded the worker classification in `orchestration/reports/M03-T09-NATIVE-MANUAL-PASTE-HANDOFF-OX-ALPHA-REPORT.md`.
+- M03-T09 is independently green for the PWA/native contract: 412/412 PWA tests, production build, native static contract, and handoff-specific review. The native Swift compile requires the hosted macOS/Xcode workflow and the target iPhone result remains open.
 
 ## Final disposition
 
@@ -110,7 +113,7 @@ Updated: 2026-08-26
 - M06-T05 framing is the current physical export gate: retest one Faithful and one Compact saved PNG for visible content and correct full-frame geometry. Preview and mobile dismissal remain accepted from the latest physical evidence unless they regress.
 - The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending.
 - M03-T03 Shortcuts share, one-time setup, and colour-recovery proof are closed as a physical failure; the ordinary uncoloured Copy to Notes baseline remains accepted.
-- E-004 B2 generated Gym Logger payload passed at `d0544c5`; the current gate is Phase C Shortcut append. Preserve the helper and do not infer Shortcut append fidelity from captured-payload replay.
+- E-004 B2 generated Gym Logger fixture payload passed at `d0544c5`; Phase C Shortcut append failed at `cda3a58` and is closed. The current gate is the real-session native manual-paste handoff; preserve the helper and do not infer production fidelity from fixture or captured-payload replay.
 - The post-`0cb9b46` saved-image retest found fully transparent Faithful and Compact PNGs. The active correction is `orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md`; do not mark PNG delivery passed from desktop evidence.
 
 ## Escalations
@@ -444,3 +447,22 @@ Updated: 2026-08-26
   note for an editable table, five legend/row colours, correct content/order,
   summary, notes, and Unicode. No Shortcut append success is inferred until
   this physical result is recorded.
+
+## M03-T09 real production-session native manual-paste handoff — 2026-08-26
+
+- Phase C is closed after target-iPhone evidence at `cda3a58`: Shortcut append
+  preserved table structure but stripped colours and concatenated the legend.
+- The bounded replacement keeps one manual Paste as an explicit user action.
+  The PWA serializes the selected/current session as a versioned JSON handoff;
+  the native helper validates it, generates Apple Notes-shaped flat-RTFD, and
+  attempts to open Notes.
+- The real-session route is separate from the bundled Sunday fixture proof and
+  must not change the locked Tuesday `actual-2026-08-25` latest-session
+  migration behavior.
+- Codex fallback implementation is independently verified at 412/412 PWA
+  tests, passing production build, native contract audit, and diff hygiene.
+  Hosted macOS/Xcode packaging is required for this changed Swift helper.
+- Current human gate: install the newest hosted helper, open the real Tuesday
+  session in the PWA, tap `Prepare Coloured Notes Copy`, paste once into the
+  existing `Gym` note, and record the checklist in
+  `orchestration/evidence/HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`.
