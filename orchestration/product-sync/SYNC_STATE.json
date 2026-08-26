@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "checkpoint-accepted",
+      "summary": "Phase A helper build and removal-variant gate are current at the latest main checkpoint.",
+      "at": "2026-08-26T08:10:43.521Z"
+    },
+    {
       "name": "worker-ready",
       "summary": "Hosted Phase A helper build 32946246114 is ready; one target-iPhone removal-variant gate remains.",
       "at": "2026-08-26T08:10:16.030Z"
@@ -56,21 +61,16 @@
       "name": "m03-t05-human-gate-ready",
       "summary": "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch.",
       "at": "2026-08-25T22:53:02.246Z"
-    },
-    {
-      "name": "m03-t05-fingerprint-ready",
-      "summary": "M03-T05 standalone Notes clipboard fingerprint is independently verified and ready for one target-iPhone capture; M03-T04 native selection-copy colour failure is closed and E-004 native inspection remains staged behind the result.",
-      "at": "2026-08-25T22:52:45.308Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T08:10:16.031Z",
+  "lastPublishedAt": "2026-08-26T08:10:43.522Z",
   "lastEvent": {
-    "name": "worker-ready",
-    "summary": "Hosted Phase A helper build 32946246114 is ready; one target-iPhone removal-variant gate remains.",
-    "at": "2026-08-26T08:10:16.030Z"
+    "name": "checkpoint-accepted",
+    "summary": "Phase A helper build and removal-variant gate are current at the latest main checkpoint.",
+    "at": "2026-08-26T08:10:43.521Z"
   },
-  "syncRevision": 92,
+  "syncRevision": 93,
   "openEscalations": [],
   "chatNotifications": [
     {
