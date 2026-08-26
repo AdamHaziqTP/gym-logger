@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t09-device-proof-ready",
+      "summary": "Hosted macOS/Xcode run 32972463589 compiled and packaged the real-session helper from 53d322c. M03-T09 now waits only for one target-iPhone production-session manual-paste proof.",
+      "at": "2026-08-26T13:10:27.376Z"
+    },
+    {
+      "name": "m03-t09-manual-paste-gate-ready",
+      "summary": "Phase C Shortcut append closed after cda3a58; M03-T09 real-session native manual-paste handoff is implemented and independently verified. Hosted helper run 32972463589 is ready for one target-iPhone production-session paste.",
+      "at": "2026-08-26T13:09:56.649Z"
+    },
+    {
       "name": "phase-c-ready",
       "summary": "B2 generated coloured-table proof accepted at d0544c5; Phase C native flat-RTFD Shortcut append gate is ready from hosted helper run 32961489740.",
       "at": "2026-08-26T11:06:30.964Z"
@@ -51,26 +61,16 @@
       "name": "checkpoint-accepted",
       "summary": "Phase A helper build and removal-variant gate are current at the latest main checkpoint.",
       "at": "2026-08-26T08:10:43.521Z"
-    },
-    {
-      "name": "worker-ready",
-      "summary": "Hosted Phase A helper build 32946246114 is ready; one target-iPhone removal-variant gate remains.",
-      "at": "2026-08-26T08:10:16.030Z"
-    },
-    {
-      "name": "checkpoint-accepted",
-      "summary": "Phase A native pasteboard removal harness independently verified; target iPhone removal-variant proof is the next gate.",
-      "at": "2026-08-26T08:08:14.740Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T11:06:30.965Z",
+  "lastPublishedAt": "2026-08-26T13:10:27.377Z",
   "lastEvent": {
-    "name": "phase-c-ready",
-    "summary": "B2 generated coloured-table proof accepted at d0544c5; Phase C native flat-RTFD Shortcut append gate is ready from hosted helper run 32961489740.",
-    "at": "2026-08-26T11:06:30.964Z"
+    "name": "m03-t09-device-proof-ready",
+    "summary": "Hosted macOS/Xcode run 32972463589 compiled and packaged the real-session helper from 53d322c. M03-T09 now waits only for one target-iPhone production-session manual-paste proof.",
+    "at": "2026-08-26T13:10:27.376Z"
   },
-  "syncRevision": 102,
+  "syncRevision": 104,
   "openEscalations": [],
   "chatNotifications": [
     {
