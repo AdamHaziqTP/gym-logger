@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M06 — PWA polish and regression
-- Current task: M03-T05 Notes clipboard fingerprint — M03-T04 native selection-copy proof closed after target-iPhone colour failure
-- Status: HUMAN_REVIEW_REQUIRED (M03-T05 diagnostic ready; M03-T04 colour failure closed; E-004 native inspection staged behind the result)
+- Current task: M03-T06 exact Apple Notes HTML replay proof — M03-T05 exposed colour-bearing Notes HTML in the browser-visible clipboard
+- Status: HUMAN_REVIEW_REQUIRED (M03-T06 exact replay ready; normal Copy to Notes unchanged; E-004 native inspection remains behind replay evidence)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: after M03-T05 is independently verified and served over HTTPS, copy a small coloured table directly in Apple Notes, return to the diagnostic page, tap Inspect Notes Clipboard, and download the fingerprint JSON. Do not claim colours from the diagnostic alone. M06-T07 icon/share checks remain deferred and batched.
-- Latest bounded task: M03-T05 isolated web-visible Notes clipboard fingerprint after M03-T04 target-iPhone failure; normal Copy to Notes remains unchanged.
+- Human review gate: after M03-T06 is independently verified and served over HTTPS, tap Replay captured Notes HTML, paste into Apple Notes, and report editable table structure plus all five category colours. Do not claim replay success from desktop evidence. M06-T07 icon/share checks remain deferred and batched.
+- Latest bounded task: M03-T06 isolated exact replay of the supplied Apple Notes HTML/text clipboard representations; normal Copy to Notes remains unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -130,6 +130,22 @@ Updated: 2026-08-26
   `Copy to Notes` or advance E-004 until this web-visible result is reviewed.
 - M06-T07 icon/share and the remaining consolidated iPhone checks remain
   deferred and batched; no device behavior is passed from desktop evidence.
+
+## M03-T06 current checkpoint — 2026-08-26
+
+- The product owner supplied the M03-T05 fingerprint JSON from the target
+  iPhone. It is preserved byte-for-byte at
+  `orchestration/evidence/fixtures/M03-T05-apple-notes-clipboard-fingerprint.json`
+  and mirrored under `public/feasibility/` for the isolated proof page.
+- The captured clipboard is `ok`, with `text/html` and `text/plain`. The HTML
+  is 184,878 UTF-8 bytes and contains Apple Notes table markup, Apple-specific
+  classes, and all five exact foreground/background colour tokens.
+- M03-T05 therefore resolves the web-visible fingerprint gate in favour of a
+  bounded exact replay experiment. Do not advance E-004 native inspection yet.
+- The next gate is `orchestration/evidence/HUMAN-VERIFICATION-M03-T06-EXACT-NOTES-HTML-REPLAY.md`:
+  tap the isolated replay button, paste into Apple Notes, and check editable
+  table structure plus all five colours. No production clipboard behavior is
+  changed or accepted from automation.
 
 - Prepared `orchestration/tasks/M02-T01.md` from the approved M02 plan. It is limited to History listing/search and editable historical sessions; Copy Another Session, delete confirmation, and summary override UI remain later bounded tasks.
 - Base checkpoint for the worker: `f173046`.

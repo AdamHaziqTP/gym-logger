@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-25T22:53:02.289Z",
+  "generatedAt": "2026-08-26T02:34:40.020Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -36,10 +36,10 @@
   },
   "current": {
     "milestone": "M06 — PWA polish and regression",
-    "task": "M03-T05 Notes clipboard fingerprint — M03-T04 native selection-copy proof closed after target-iPhone colour failure",
-    "status": "HUMAN_REVIEW_REQUIRED (M03-T05 diagnostic ready; M03-T04 colour failure closed; E-004 native inspection staged behind the result)",
-    "humanReviewGate": "after M03-T05 is independently verified and served over HTTPS, copy a small coloured table directly in Apple Notes, return to the diagnostic page, tap Inspect Notes Clipboard, and download the fingerprint JSON. Do not claim colours from the diagnostic alone. M06-T07 icon/share checks remain deferred and batched.",
-    "nextAction": "after M03-T05 is independently verified and served over HTTPS, copy a small coloured table directly in Apple Notes, return to the diagnostic page, tap Inspect Notes Clipboard, and download the fingerprint JSON. Do not claim colours from the diagnostic alone. M06-T07 icon/share checks remain deferred and batched."
+    "task": "M03-T06 exact Apple Notes HTML replay proof — M03-T05 exposed colour-bearing Notes HTML in the browser-visible clipboard",
+    "status": "HUMAN_REVIEW_REQUIRED (M03-T06 exact replay ready; normal Copy to Notes unchanged; E-004 native inspection remains behind replay evidence)",
+    "humanReviewGate": "after M03-T06 is independently verified and served over HTTPS, tap Replay captured Notes HTML, paste into Apple Notes, and report editable table structure plus all five category colours. Do not claim replay success from desktop evidence. M06-T07 icon/share checks remain deferred and batched.",
+    "nextAction": "after M03-T06 is independently verified and served over HTTPS, tap Replay captured Notes HTML, paste into Apple Notes, and report editable table structure plus all five category colours. Do not claim replay success from desktop evidence. M06-T07 icon/share checks remain deferred and batched."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,13 +56,22 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "cc59e56 feat: add Notes clipboard fingerprint proof",
     "3d44df4 docs: record M03-T04 iPhone colour failure",
     "0df613e docs: publish proof retest readiness",
     "45f9136 docs: reconcile blocked proof route evidence",
-    "2e2d007 Merge remote-tracking branch 'origin/main'",
-    "2b670f0 docs: publish served proof correction"
+    "2e2d007 Merge remote-tracking branch 'origin/main'"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M03-T06-EXACT-NOTES-HTML-REPLAY-codex-review.md",
+      "result": [
+        "Decision: **ACCEPTED for isolated automated scope; target-iPhone paste remains pending**",
+        "Focused replay tests: **6/6 PASS**.",
+        "Full suite: **410/410 PASS** across 35 test files.",
+        "Production build: **PASS**; Vite emitted the replay page/fixture and"
+      ]
+    },
     {
       "path": "orchestration/reviews/M03-T05-NOTES-CLIPBOARD-FINGERPRINT-codex-review.md",
       "result": [
@@ -80,20 +89,21 @@
         "focused service-worker coverage passes.",
         "Production build: PASS, including service-worker stamp `v-800b87d5` and all"
       ]
-    },
-    {
-      "path": "orchestration/reviews/M03-T04-WEBKIT-SELECTION-COPY-codex-review.md",
-      "result": [
-        "Decision: **ACCEPTED for isolated automated scope; pending target-iPhone paste**",
-        "Production build: PASS",
-        "Not accepted from automation: Apple Notes editable-table structure, Unicode,"
-      ]
     }
   ],
   "humanVerification": [
     {
+      "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T06-EXACT-NOTES-HTML-REPLAY.md",
+      "result": [
+        "- editable table structure: PASS/FAIL;",
+        "- Arms orange, Back purple, Chest mint, Delts blue, Legs pink: PASS/FAIL;",
+        "- date, legend, row order, values, summary, notes, and Unicode: PASS/FAIL;"
+      ]
+    },
+    {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
       "result": [
+        "Status: `PASS — FINGERPRINT CAPTURED; EXACT REPLAY NEXT`",
         "Delts, and Legs colours. Do not copy a password or other sensitive text.",
         "reproducible. No colour success or failure should be inferred until the JSON"
       ]
@@ -151,15 +161,6 @@
         "Recorded failure batch:",
         "**BLOCKED then RESOLVED — certificate server:** the certificate URL briefly"
       ]
-    },
-    {
-      "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T01-E003.md",
-      "result": [
-        "The auxiliary RTF/file/Shortcuts routes were **not fully exercised**, so this record does not claim that every technically possible route failed.",
-        "**PASS:** editable Apple Notes table.",
-        "**PASS:** correct values and row order.",
-        "**PASS:** summary/data fidelity from the previously verified rich path."
-      ]
     }
   ],
   "unresolvedDefects": [
@@ -177,16 +178,12 @@
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
     "E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE: preserve the one authorized isolated native proof; it does not block the remaining PWA v1 gate and requires no paid Developer dependency.",
-    "after M03-T05 is independently verified and served over HTTPS, copy a small coloured table directly in Apple Notes, return to the diagnostic page, tap Inspect Notes Clipboard, and download the fingerprint JSON. Do not claim colours from the diagnostic alone. M06-T07 icon/share checks remain deferred and batched."
+    "after M03-T06 is independently verified and served over HTTPS, tap Replay captured Notes HTML, paste into Apple Notes, and report editable table structure plus all five category colours. Do not claim replay success from desktop evidence. M06-T07 icon/share checks remain deferred and batched."
   ],
   "decisionsMadeSinceLastSync": [
-    "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch."
+    "M03-T05 fingerprint showed Apple Notes colour-bearing HTML; M03-T06 exact replay is independently verified and ready for one target-iPhone paste. E-004 native inspection remains staged behind the physical replay result."
   ],
   "recordedDecisions": [
-    {
-      "title": "Final iPhone failure correction authorization — 2026-08-25",
-      "detail": "Faithful export preview is blank/black. Compact export preview is blank/black."
-    },
     {
       "title": "Final iPhone correction batch — 2026-08-25",
       "detail": ""
@@ -214,9 +211,14 @@
     {
       "title": "M03-T04 closed; proceed to Notes clipboard fingerprint — 2026-08-26",
       "detail": ""
+    },
+    {
+      "title": "M03-T05 fingerprint result; exact HTML replay next — 2026-08-26",
+      "detail": ""
     }
   ],
   "relevantEvidence": [
+    "orchestration/evidence/HUMAN-VERIFICATION-M03-T06-EXACT-NOTES-HTML-REPLAY.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T04-WEBKIT-SELECTION-COPY.md",
     "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX-2026-08-26.md",
@@ -224,7 +226,6 @@
     "orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md",
     "orchestration/evidence/M03-T03-HUMAN-SHORTCUTS-RESULT.md",
     "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md",
-    "orchestration/evidence/HUMAN-VERIFICATION-M03-T01-E003.md",
     "references/gym_logger_app_icon_1024.png",
     "references/IMG_5554.jpeg",
     "references/IMG_5553.png",
@@ -232,27 +233,26 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "3d44df4e281335f4a7dcba07a24ca46639463f72",
+    "commit": "cc59e563479ffb3bd6bcdab28ee6e36dc18149e1",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/escalations/E-004-NATIVE-NOTES-COLOUR-HELPER.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/DECISIONS.md\n M orchestration/state/REQUIREMENTS_MATRIX.md\n M orchestration/state/STATE.md\n?? orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md\n?? orchestration/reports/M03-T05-OX-ALPHA-REPORT.md\n?? orchestration/reviews/M03-T05-NOTES-CLIPBOARD-FINGERPRINT-codex-review.md\n?? orchestration/tasks/M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md\n?? public/feasibility/notes-clipboard-fingerprint.html\n?? public/feasibility/notesClipboardFingerprint.mjs\n?? public/feasibility/notesClipboardFingerprintApp.js\n?? src/tests/notesClipboardFingerprint.test.mjs",
+    "workingTree": "## main...origin/main\n M orchestration/escalations/E-004-NATIVE-NOTES-COLOUR-HELPER.md\n M orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/state/DECISIONS.md\n M orchestration/state/STATE.md\n?? orchestration/evidence/HUMAN-VERIFICATION-M03-T06-EXACT-NOTES-HTML-REPLAY.md\n?? orchestration/evidence/fixtures/\n?? orchestration/reports/M03-T06-OX-ALPHA-REPORT.md\n?? orchestration/reviews/M03-T06-EXACT-NOTES-HTML-REPLAY-codex-review.md\n?? orchestration/tasks/M03-T06-EXACT-NOTES-HTML-REPLAY.md\n?? public/feasibility/notes-clipboard-fingerprint.json\n?? public/feasibility/notes-html-replay.html\n?? public/feasibility/notesClipboardReplay.mjs\n?? public/feasibility/notesClipboardReplayApp.js\n?? src/tests/notesClipboardReplay.test.mjs",
     "changedFiles": [
       "orchestration/escalations/E-004-NATIVE-NOTES-COLOUR-HELPER.md",
+      "orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
       "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
       "orchestration/state/DECISIONS.md",
-      "orchestration/state/REQUIREMENTS_MATRIX.md",
       "orchestration/state/STATE.md",
-      "orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
-      "orchestration/reports/M03-T05-OX-ALPHA-REPORT.md",
-      "orchestration/reviews/M03-T05-NOTES-CLIPBOARD-FINGERPRINT-codex-review.md",
-      "orchestration/tasks/M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
-      "public/feasibility/notes-clipboard-fingerprint.html",
-      "public/feasibility/notesClipboardFingerprint.mjs",
-      "public/feasibility/notesClipboardFingerprintApp.js",
-      "src/tests/notesClipboardFingerprint.test.mjs"
+      "orchestration/evidence/HUMAN-VERIFICATION-M03-T06-EXACT-NOTES-HTML-REPLAY.md",
+      "orchestration/evidence/fixtures/",
+      "orchestration/reports/M03-T06-OX-ALPHA-REPORT.md",
+      "orchestration/reviews/M03-T06-EXACT-NOTES-HTML-REPLAY-codex-review.md",
+      "orchestration/tasks/M03-T06-EXACT-NOTES-HTML-REPLAY.md",
+      "public/feasibility/notes-clipboard-fingerprint.json",
+      "public/feasibility/notes-html-replay.html",
+      "public/feasibility/notesClipboardReplay.mjs",
+      "public/feasibility/notesClipboardReplayApp.js",
+      "src/tests/notesClipboardReplay.test.mjs"
     ]
   },
   "builder": {
@@ -272,11 +272,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t05-human-gate-ready",
-      "summary": "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch.",
-      "at": "2026-08-25T22:53:02.246Z"
+      "name": "m03-t06-exact-html-replay-ready",
+      "summary": "M03-T05 fingerprint showed Apple Notes colour-bearing HTML; M03-T06 exact replay is independently verified and ready for one target-iPhone paste. E-004 native inspection remains staged behind the physical replay result.",
+      "at": "2026-08-26T02:34:39.964Z"
     },
-    "contextRevision": 82,
+    "contextRevision": 83,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

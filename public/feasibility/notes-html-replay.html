@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101114" />
+    <title>Gym Logger — exact Apple Notes HTML replay</title>
+    <style>
+      :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      body { margin: 0; min-height: 100vh; background: #101114; color: #f3f4f6; }
+      main { box-sizing: border-box; width: min(760px, 100%); margin: 0 auto; padding: 32px 20px 48px; }
+      h1 { margin: 0 0 12px; font-size: 28px; }
+      p, li { color: #b5b8c2; line-height: 1.55; }
+      .notice { padding: 14px 16px; border: 1px solid #385d88; border-radius: 12px; background: #111e30; color: #b8d9ff; }
+      button { min-height: 48px; padding: 12px 18px; border: 0; border-radius: 12px; background: #1683f5; color: white; font: inherit; font-weight: 700; }
+      button:disabled { opacity: .6; }
+      #replay-status { min-height: 24px; margin: 18px 0 8px; color: #83d7be; }
+      #replay-status[data-state="error"] { color: #ff9b9b; }
+      #fixture-details { color: #9296a3; overflow-wrap: anywhere; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Exact Apple Notes HTML replay</h1>
+      <p>This is an isolated experiment, not the Gym Logger app and not the normal Copy to Notes action.</p>
+      <p class="notice"><strong>What it does:</strong> it writes the exact captured <code>text/html</code> and matching <code>text/plain</code> representations that Apple Notes exposed. It does not sanitize or regenerate the HTML.</p>
+      <ol>
+        <li>Wait until the captured payload says it is ready.</li>
+        <li>Tap <strong>Replay captured Notes HTML</strong> once.</li>
+        <li>Return to the existing Apple Notes <strong>Gym</strong> note and paste.</li>
+        <li>Check table editability, all five colours, Unicode, order, values, summary, and notes.</li>
+      </ol>
+      <p id="fixture-details">Loading the captured Notes payload…</p>
+      <button id="replay-captured-notes-html" type="button" disabled>Replay captured Notes HTML</button>
+      <p id="replay-status" role="status">Waiting for the captured payload.</p>
+    </main>
+    <script type="module" src="./notesClipboardReplayApp.js"></script>
+  </body>
+</html>

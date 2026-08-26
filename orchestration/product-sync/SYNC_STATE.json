@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t06-exact-html-replay-ready",
+      "summary": "M03-T05 fingerprint showed Apple Notes colour-bearing HTML; M03-T06 exact replay is independently verified and ready for one target-iPhone paste. E-004 native inspection remains staged behind the physical replay result.",
+      "at": "2026-08-26T02:34:39.964Z"
+    },
+    {
       "name": "m03-t05-human-gate-ready",
       "summary": "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch.",
       "at": "2026-08-25T22:53:02.246Z"
@@ -56,21 +61,16 @@
       "name": "accepted-checkpoint",
       "summary": "M06-T05 alternate pure-JS rasterizer checkpoint d8f19e9; one saved-image-only iPhone retest remains",
       "at": "2026-08-25T15:59:58.014Z"
-    },
-    {
-      "name": "correction-accepted",
-      "summary": "M06-T05 alternate offline pure-JS raster checkpoint independently verified at 362/362; one saved-image-only iPhone retest remains",
-      "at": "2026-08-25T15:59:40.746Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-25T22:53:02.247Z",
+  "lastPublishedAt": "2026-08-26T02:34:39.964Z",
   "lastEvent": {
-    "name": "m03-t05-human-gate-ready",
-    "summary": "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch.",
-    "at": "2026-08-25T22:53:02.246Z"
+    "name": "m03-t06-exact-html-replay-ready",
+    "summary": "M03-T05 fingerprint showed Apple Notes colour-bearing HTML; M03-T06 exact replay is independently verified and ready for one target-iPhone paste. E-004 native inspection remains staged behind the physical replay result.",
+    "at": "2026-08-26T02:34:39.964Z"
   },
-  "syncRevision": 82,
+  "syncRevision": 83,
   "openEscalations": [],
   "chatNotifications": [
     {

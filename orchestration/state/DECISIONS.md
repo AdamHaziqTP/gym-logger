@@ -268,3 +268,26 @@ If the Notes-origin web-visible payload contains no colour-bearing
 representation, advance the already-authorized E-004 native helper branch to
 inspect and replay the actual native pasteboard. Do not claim colour support
 from desktop evidence or from the fingerprint alone.
+
+## M03-T05 fingerprint result; exact HTML replay next — 2026-08-26
+
+The product owner supplied a valid target-iPhone fingerprint JSON. Apple Notes
+exposed `text/html` and `text/plain`; the HTML is 184,878 UTF-8 bytes and
+contains an actual table plus explicit Apple Notes colour-bearing markup.
+Observed exact tokens include Arms `rgb(255, 146, 48)` with
+`rgba(255, 146, 48, 0.15)`, Back `rgb(219, 52, 242)`, Chest
+`rgb(0, 218, 195)`, Delts `rgb(0, 145, 255)`, and Legs `rgb(255, 55, 95)`,
+with matching translucent backgrounds.
+
+This is evidence about the browser-visible source representation, not yet
+evidence that Safari is allowed to write it back with equal fidelity. Preserve
+the complete fixture unchanged and run exactly one isolated replay using the
+captured HTML and matching plain text in a `ClipboardItem`. Do not sanitize,
+regenerate, simplify, substitute colour tokens, or change production `Copy to
+Notes` before the physical replay result exists.
+
+If exact replay preserves an editable table and all five colours, compare the
+captured HTML with the existing generator and then implement only a bounded
+Notes-compatible generator. If exact replay fails, record that browser-read
+HTML is not equivalent to a writable Notes pasteboard representation and only
+then advance E-004 native inspection.

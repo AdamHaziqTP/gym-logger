@@ -41,3 +41,8 @@ required first. If Stage 1 cannot expose colour-bearing web representations,
 advance this helper to native pasteboard inspection/replay and investigate a
 GitHub-hosted macOS build plus a free-account device-test route. This remains
 a bounded feasibility proof, not a PWA rewrite or paid Developer dependency.
+
+The M03-T05 fingerprint did expose colour-bearing HTML, so E-004 is held
+behind the single M03-T06 exact replay proof. If the byte-equivalent replay
+fails on the target iPhone, E-004 becomes the next authorized branch; until
+then, do not build or package the native helper.
