@@ -71,13 +71,9 @@
       "reason": "Product owner disabled OX Alpha for remaining Gym Logger work; use Codex subagents/fallback for any follow-up instead."
     }
   ],
-  "lastPublishedAt": "2026-08-26T16:51:46.697Z",
-  "lastEvent": {
-    "name": "m03-t11-hosted-ipa-ready",
-    "summary": "Hosted all-in-one IPA run 32990579200 passed after the Photos API correction; only the consolidated iPhone 14 Pro Max gate remains.",
-    "at": "2026-08-26T16:51:46.696Z"
-  },
-  "syncRevision": 117,
+  "lastPublishedAt": "2026-08-26T16:52:03.574Z",
+  "lastEvent": null,
+  "syncRevision": 118,
   "openEscalations": [],
   "chatNotifications": [
     {

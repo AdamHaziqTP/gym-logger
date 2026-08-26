@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T16:51:46.750Z",
+  "generatedAt": "2026-08-26T16:52:03.625Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "cecbf65 docs: publish M03-T11 hosted IPA gate",
     "0a38596 docs: open M03-T11 iPhone acceptance gate",
     "76a32c5 fix: use current Photos asset creation API",
     "2af5d41 docs: publish M03-T11 product context",
-    "6a62d28 docs: record M03-T11 IPA UX checkpoint",
-    "fbcb062 feat: save compact snapshots directly to Photos"
+    "6a62d28 docs: record M03-T11 IPA UX checkpoint"
   ],
   "codexVerification": [
     {
@@ -181,9 +181,7 @@
     "E-004 Phase A/A2, B2, and M03-T09 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss. The one-app IPA authorization supersedes the PWA-only delivery constraint for M03-T10; no paid Developer dependency is authorized, and the single-app target-iPhone gate remains open until the device checklist is complete.",
     "install the single `GymLogger-unsigned.ipa` artifact from hosted run `32990579200` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate."
   ],
-  "decisionsMadeSinceLastSync": [
-    "Hosted all-in-one IPA run 32990579200 passed after the Photos API correction; only the consolidated iPhone 14 Pro Max gate remains."
-  ],
+  "decisionsMadeSinceLastSync": [],
   "recordedDecisions": [
     {
       "title": "M03-T04 closed; proceed to Notes clipboard fingerprint — 2026-08-26",
@@ -234,9 +232,9 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "0a38596ef990498f4364ff3f5e1f68b1a1a2d371",
+    "commit": "cecbf653e54d495561e2a8f04eff50bd5409fed4",
     "branch": "main",
-    "workingTree": "## main...origin/main [ahead 1]\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
+    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
       "orchestration/product-orchestrator/bootstrap.mjs"
@@ -258,12 +256,8 @@
     "patchPath": "orchestration/product-sync/generated/active-worker.patch.yml"
   },
   "synchronization": {
-    "lastEvent": {
-      "name": "m03-t11-hosted-ipa-ready",
-      "summary": "Hosted all-in-one IPA run 32990579200 passed after the Photos API correction; only the consolidated iPhone 14 Pro Max gate remains.",
-      "at": "2026-08-26T16:51:46.696Z"
-    },
-    "contextRevision": 117,
+    "lastEvent": null,
+    "contextRevision": 118,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
