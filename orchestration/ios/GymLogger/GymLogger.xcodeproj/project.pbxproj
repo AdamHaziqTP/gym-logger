@@ -16,14 +16,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A10200010000000000000001 /* GymLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLoggerApp.swift; sourceTree = "<group>"; };
-		A10200020000000000000002 /* GymLoggerWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLoggerWebView.swift; sourceTree = "<group>"; };
-		A10200030000000000000003 /* PasteboardPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../../E-004-native/GymLoggerPasteboardHelper/PasteboardPayload.swift; sourceTree = "<group>"; };
+		A10200010000000000000001 /* GymLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLogger/GymLoggerApp.swift; sourceTree = "<group>"; };
+		A10200020000000000000002 /* GymLoggerWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLogger/GymLoggerWebView.swift; sourceTree = "<group>"; };
+		A10200030000000000000003 /* PasteboardPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../../feasibility/E-004-native/GymLoggerPasteboardHelper/PasteboardPayload.swift; sourceTree = "<group>"; };
 		A10200040000000000000004 /* WebApp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebApp; sourceTree = "<group>"; };
 		A10200050000000000000005 /* GymLoggerIcon-192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GymLoggerIcon-192.png; sourceTree = "<group>"; };
 		A10200060000000000000006 /* GymLoggerIcon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GymLoggerIcon-512.png; sourceTree = "<group>"; };
 		A10200070000000000000007 /* GymLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A10200080000000000000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10200080000000000000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GymLogger/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

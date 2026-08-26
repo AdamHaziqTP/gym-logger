@@ -16,7 +16,7 @@ const workflow = readFileSync(resolve(root, ".github", "workflows", "gym-logger-
 const checks = [
   ["one-app Xcode target", project.includes("name = GymLogger") && project.includes("GymLogger.app")],
   ["bundled web-app resource", project.includes("WebApp") && project.includes("WebApp in Resources")],
-  ["shared proven Notes generator", project.includes("../../E-004-native/GymLoggerPasteboardHelper/PasteboardPayload.swift") && native.includes("NativePayloadBuilder")],
+  ["shared proven Notes generator", project.includes("../../feasibility/E-004-native/GymLoggerPasteboardHelper/PasteboardPayload.swift") && native.includes("NativePayloadBuilder")],
   ["native in-process message handler", native.includes("gymLoggerNative") && native.includes("WKScriptMessageHandler")],
   ["native coloured handoff", native.includes("prepareColouredNotes") && native.includes("flatRTFDPasteboardItem")],
   ["native ordinary Notes fallback", native.includes("copyNotesPayload") && native.includes("UTType.html.identifier")],
