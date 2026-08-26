@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T08:10:43.583Z",
+  "generatedAt": "2026-08-26T09:24:05.124Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -36,10 +36,10 @@
   },
   "current": {
     "milestone": "M03 — Apple Notes colour-recovery feasibility",
-    "task": "M03-T07 native coloured Notes handoff productization",
-    "status": "HUMAN_REVIEW_REQUIRED — PHASE A REMOVAL VARIANTS READY",
-    "humanReviewGate": "E-004 Phase A removal-variant proof on the iPhone 14 Pro Max. The product owner reported exact native Notes capture/replay PASS; do not infer generated Gym Logger export success from that captured-payload replay. Use the fresh helper build and record each non-empty captured representation variant before Phase B/C.",
-    "nextAction": "E-004 Phase A removal-variant proof on the iPhone 14 Pro Max. The product owner reported exact native Notes capture/replay PASS; do not infer generated Gym Logger export success from that captured-payload replay. Use the fresh helper build and record each non-empty captured representation variant before Phase B/C."
+    "task": "M03-T07-A2 single-representation native Notes sufficiency",
+    "status": "HUMAN_REVIEW_REQUIRED — SINGLE-REPRESENTATION VARIANTS READY",
+    "humanReviewGate": "E-004 Phase A2 single-representation sufficiency proof on the iPhone 14 Pro Max. Phase A removal variants all passed, but that only proves redundancy. Use the fresh helper build and record each displayed `Replay ONLY <type>` variant before Phase B/C.",
+    "nextAction": "E-004 Phase A2 single-representation sufficiency proof on the iPhone 14 Pro Max. Phase A removal variants all passed, but that only proves redundancy. Use the fresh helper build and record each displayed `Replay ONLY <type>` variant before Phase B/C."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,13 +56,22 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
-    "f740600 chore: sync Phase A device gate",
-    "7224089 docs: publish Phase A helper build gate",
-    "3564769 chore: publish native removal gate context",
-    "6cb1cc3 feat: prepare native pasteboard removal variants",
-    "f4b7b3f chore: refresh product sync after handoff review"
+    "82bebec docs: record native sufficiency gate",
+    "7338348 feat: add native clipboard sufficiency variants",
+    "c34bcc5 docs: record Phase A removal variant results",
+    "61a69b6 chore: align product sync with latest checkpoint",
+    "f740600 chore: sync Phase A device gate"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M03-T07-A2-SINGLE-REPRESENTATION-codex-review.md",
+      "result": [
+        "[x] Phase A removal evidence remains recorded as a physical PASS for all",
+        "[x] Blank, missing, and unreadable requested types fail without a full-capture",
+        "[x] Native contract checks: 23/23 PASS.",
+        "[x] PWA regression suite: 410/410 PASS; `npm run build`: PASS;"
+      ]
+    },
     {
       "path": "orchestration/reviews/M03-T07-NATIVE-COLOUR-HANDOFF-codex-review.md",
       "result": [
@@ -78,24 +87,16 @@
         "artifact and verified the app bundle and fixture inside the IPA.",
         "[x] PWA regression suite: 410/410 tests pass."
       ]
-    },
-    {
-      "path": "orchestration/reviews/M03-T06-EXACT-NOTES-HTML-REPLAY-codex-review.md",
-      "result": [
-        "Decision: **ACCEPTED for isolated automated scope; target-iPhone paste remains pending**",
-        "Focused replay tests: **6/6 PASS**.",
-        "Full suite: **410/410 PASS** across 35 test files.",
-        "Production build: **PASS**; Vite emitted the replay page/fixture and"
-      ]
     }
   ],
   "humanVerification": [
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md",
       "result": [
-        "For each displayed type identifier, report `PASS` only when the pasted result",
-        "captured set. If replay is not possible, report `BLOCKED` with the visible",
-        "blocked until this result identifies a viable minimum representation or closes"
+        "Status: `PASS — EVERY SINGLE-REPRESENTATION REMOVAL PRESERVES FULL FIDELITY; NO UNIQUE NECESSARY TYPE IDENTIFIED`",
+        "Replay without `com.apple.notes.richtext`: **PASS — all working**.",
+        "Replay without `com.apple.flat-rtfd`: **PASS — all working**.",
+        "Replay without `public.html`: **PASS — all working**."
       ]
     },
     {
@@ -175,10 +176,10 @@
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
     "E-004 Phase A is active and requires a fresh hosted-helper build plus one target-iPhone removal-variant pass; generated payload synthesis remains deferred and no paid Developer dependency is authorized.",
-    "E-004 Phase A removal-variant proof on the iPhone 14 Pro Max. The product owner reported exact native Notes capture/replay PASS; do not infer generated Gym Logger export success from that captured-payload replay. Use the fresh helper build and record each non-empty captured representation variant before Phase B/C."
+    "E-004 Phase A2 single-representation sufficiency proof on the iPhone 14 Pro Max. Phase A removal variants all passed, but that only proves redundancy. Use the fresh helper build and record each displayed `Replay ONLY <type>` variant before Phase B/C."
   ],
   "decisionsMadeSinceLastSync": [
-    "Phase A helper build and removal-variant gate are current at the latest main checkpoint."
+    "A2 single-representation helper is built and ready for one target-iPhone sufficiency gate."
   ],
   "recordedDecisions": [
     {
@@ -230,7 +231,7 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "f7406004358c27106a046709374d7c0b6f4ec557",
+    "commit": "82bebecbc039ef39ea46a1e307e90c6bee506ee4",
     "branch": "main",
     "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
@@ -255,11 +256,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "checkpoint-accepted",
-      "summary": "Phase A helper build and removal-variant gate are current at the latest main checkpoint.",
-      "at": "2026-08-26T08:10:43.521Z"
+      "name": "worker-ready",
+      "summary": "A2 single-representation helper is built and ready for one target-iPhone sufficiency gate.",
+      "at": "2026-08-26T09:24:05.067Z"
     },
-    "contextRevision": 93,
+    "contextRevision": 94,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

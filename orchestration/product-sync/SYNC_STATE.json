@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "worker-ready",
+      "summary": "A2 single-representation helper is built and ready for one target-iPhone sufficiency gate.",
+      "at": "2026-08-26T09:24:05.067Z"
+    },
+    {
       "name": "checkpoint-accepted",
       "summary": "Phase A helper build and removal-variant gate are current at the latest main checkpoint.",
       "at": "2026-08-26T08:10:43.521Z"
@@ -56,21 +61,16 @@
       "name": "m03-t06-exact-html-replay-ready",
       "summary": "M03-T05 fingerprint showed Apple Notes colour-bearing HTML; M03-T06 exact replay is independently verified and ready for one target-iPhone paste. E-004 native inspection remains staged behind the physical replay result.",
       "at": "2026-08-26T02:34:39.964Z"
-    },
-    {
-      "name": "m03-t05-human-gate-ready",
-      "summary": "M03-T05 is ready for one iPhone clipboard capture from Apple Notes; inspect the downloaded JSON before advancing the staged E-004 native branch.",
-      "at": "2026-08-25T22:53:02.246Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T08:10:43.522Z",
+  "lastPublishedAt": "2026-08-26T09:24:05.068Z",
   "lastEvent": {
-    "name": "checkpoint-accepted",
-    "summary": "Phase A helper build and removal-variant gate are current at the latest main checkpoint.",
-    "at": "2026-08-26T08:10:43.521Z"
+    "name": "worker-ready",
+    "summary": "A2 single-representation helper is built and ready for one target-iPhone sufficiency gate.",
+    "at": "2026-08-26T09:24:05.067Z"
   },
-  "syncRevision": 93,
+  "syncRevision": 94,
   "openEscalations": [],
   "chatNotifications": [
     {
