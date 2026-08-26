@@ -26,12 +26,14 @@ Updated: 2026-08-26
 - One-app static contract: **PASS — 18/18 checks**.
 - Native E-004 harness: **PASS — 55/55 checks**.
 - `git diff --check`: **PASS**.
-- Hosted macOS/Xcode compilation and packaged IPA assertions: **PENDING**;
-  the workflow is `.github/workflows/gym-logger-ipa.yml`.
+- Hosted macOS/Xcode compilation and packaged IPA assertions: **PASS** in run
+  [`32982786740`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32982786740).
+  The artifact has `CFBundleExecutable=GymLogger`, bundle ID
+  `com.gymlogger.app`, package type `APPL`, name/display/version metadata,
+  the executable, `WebApp/index.html`, and both deliberate icon assets.
 
 ## Acceptance boundary
 
-This review accepts the Windows-verifiable source contract and fallback
-implementation for hosted packaging. It does not claim Swift compilation,
-IPA installation, iOS persistence, or Apple Notes behavior until the hosted
-artifact and target-iPhone gate are complete.
+This review accepts the source contract and hosted IPA packaging for the next
+device gate. It does not claim IPA installation, iOS persistence, or Apple
+Notes behavior until the target-iPhone checklist is completed.

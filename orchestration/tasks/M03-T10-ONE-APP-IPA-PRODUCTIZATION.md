@@ -1,6 +1,6 @@
 # M03-T10 — One-app Gym Logger IPA productization
 
-Status: `IN_PROGRESS — CODEX FALLBACK IMPLEMENTATION; HOSTED BUILD PENDING`
+Status: `IMPLEMENTED — HOSTED IPA READY FOR TARGET-IPHONE GATE`
 
 ## Authority
 
@@ -46,6 +46,14 @@ Tuesday latest-session bootstrap, local persistence across relaunch, native
 coloured handoff, one-paste editable coloured Notes output, Unicode/data
 fidelity, and no core regressions. Desktop evidence cannot close those
 physical checks.
+
+## Verification result
+
+The hosted workflow run
+[`32982786740`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32982786740)
+passed on macOS/Xcode after two bounded CI/project-reference corrections. It
+compiled the unsigned iOS app, packaged `GymLogger-unsigned.ipa`, and asserted
+the complete bundle identity, executable, bundled web app, and icon assets.
 
 ## Worker policy
 
