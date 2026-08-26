@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "worker-ready",
+      "summary": "Phase B generated flat-RTFD helper build 32956758287 is ready; target-iPhone generated workout paste is the next gate.",
+      "at": "2026-08-26T10:10:30.810Z"
+    },
+    {
       "name": "checkpoint-accepted",
       "summary": "A2 helper build 32952585740 is ready; single-representation iPhone sufficiency is the sole next gate.",
       "at": "2026-08-26T09:24:17.725Z"
@@ -56,21 +61,16 @@
       "name": "e004-native-helper-device-gate",
       "summary": "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed.",
       "at": "2026-08-26T03:10:32.076Z"
-    },
-    {
-      "name": "e004-native-helper-ready",
-      "summary": "M03-T06 closed after exact Notes HTML replay stripped colours; E-004 native pasteboard inspection/replay helper and hosted macOS build are ready for one iPhone 14 Pro Max proof. Hosted run 32925095555 succeeded; no device colour result claimed.",
-      "at": "2026-08-26T03:09:27.085Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T09:24:17.726Z",
+  "lastPublishedAt": "2026-08-26T10:10:30.811Z",
   "lastEvent": {
-    "name": "checkpoint-accepted",
-    "summary": "A2 helper build 32952585740 is ready; single-representation iPhone sufficiency is the sole next gate.",
-    "at": "2026-08-26T09:24:17.725Z"
+    "name": "worker-ready",
+    "summary": "Phase B generated flat-RTFD helper build 32956758287 is ready; target-iPhone generated workout paste is the next gate.",
+    "at": "2026-08-26T10:10:30.810Z"
   },
-  "syncRevision": 95,
+  "syncRevision": 96,
   "openEscalations": [],
   "chatNotifications": [
     {
