@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T03:10:32.135Z",
+  "generatedAt": "2026-08-26T07:09:39.913Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -36,10 +36,10 @@
   },
   "current": {
     "milestone": "M03 — Apple Notes colour-recovery feasibility",
-    "task": "E-004 native Apple Notes pasteboard inspection and exact replay",
-    "status": "HUMAN_REVIEW_REQUIRED (E-004 helper artifact ready; native Notes inspection/replay pending)",
-    "humanReviewGate": "obtain the unsigned helper artifact from the successful hosted build, sign/install it through a legitimate iOS test route, then copy a small five-colour table in Apple Notes, inspect/replay the native pasteboard, and report editable table structure, colours, Unicode, and data fidelity. Do not claim success from desktop or hosted build evidence.",
-    "nextAction": "obtain the unsigned helper artifact from the successful hosted build, sign/install it through a legitimate iOS test route, then copy a small five-colour table in Apple Notes, inspect/replay the native pasteboard, and report editable table structure, colours, Unicode, and data fidelity. Do not claim success from desktop or hosted build evidence."
+    "task": "M03-T07 native coloured Notes handoff productization",
+    "status": "ACCEPTED FOR NATIVE CAPTURE/REPLAY; GENERATED GYM PAYLOAD PRODUCTIZATION PENDING",
+    "humanReviewGate": "none for the accepted v1 PWA path. The product owner reported exact native Notes capture/replay PASS on the iPhone 14 Pro Max; do not infer generated Gym Logger export success from that captured-payload replay.",
+    "nextAction": "M01/FIX-05 automated verification remains the engineering baseline for continuation; its deferred physical-iPhone checks are not reclassified as PASS."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,13 +56,19 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "fc0fcdb docs: record native Notes replay proof and queue handoff",
+    "92f104c chore: refresh E-004 device gate context",
     "9f4665e chore: sync E-004 native helper context",
     "8713188 docs: record native helper build gate",
-    "38fea43 fix: package hosted native helper build output",
-    "008453c fix: isolate native helper pasteboard UI on main actor",
-    "e519c05 fix: correct native helper project paths"
+    "38fea43 fix: package hosted native helper build output"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M03-T07-NATIVE-COLOUR-HANDOFF-codex-review.md",
+      "result": [
+        "generated-workout paste test must pass on the iPhone 14 Pro Max. Until then,"
+      ]
+    },
     {
       "path": "orchestration/reviews/E-004-NATIVE-CLIPBOARD-INSPECTION-codex-review.md",
       "result": [
@@ -80,22 +86,15 @@
         "Full suite: **410/410 PASS** across 35 test files.",
         "Production build: **PASS**; Vite emitted the replay page/fixture and"
       ]
-    },
-    {
-      "path": "orchestration/reviews/M03-T05-NOTES-CLIPBOARD-FINGERPRINT-codex-review.md",
-      "result": [
-        "Decision: **ACCEPTED for isolated automated scope; target-iPhone clipboard capture remains pending**",
-        "Focused diagnostic tests: **6/6 PASS**.",
-        "Full suite: **404/404 PASS** across 34 test files.",
-        "Production build: **PASS**; Vite emitted the diagnostic assets and stamped"
-      ]
     }
   ],
   "humanVerification": [
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-E-004-NATIVE-CLIPBOARD-INSPECTION.md",
       "result": [
-        "Status: `HUMAN_REVIEW_REQUIRED — SIGNING/INSTALLATION AND DEVICE PASTE PENDING`"
+        "Status: `PASS — NATIVE CAPTURE/REPLAY FIDELITY PROVEN; GYM PAYLOAD SYNTHESIS PENDING`",
+        "shared capture. That omission is not treated as a failure because exact replay",
+        "separately generated workout payload passes the same target-iPhone test."
       ]
     },
     {
@@ -176,20 +175,12 @@
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
     "E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE: preserve the one authorized isolated native proof; it does not block the remaining PWA v1 gate and requires no paid Developer dependency.",
-    "obtain the unsigned helper artifact from the successful hosted build, sign/install it through a legitimate iOS test route, then copy a small five-colour table in Apple Notes, inspect/replay the native pasteboard, and report editable table structure, colours, Unicode, and data fidelity. Do not claim success from desktop or hosted build evidence."
+    "none for the accepted v1 PWA path. The product owner reported exact native Notes capture/replay PASS on the iPhone 14 Pro Max; do not infer generated Gym Logger export success from that captured-payload replay."
   ],
   "decisionsMadeSinceLastSync": [
-    "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed."
+    "M03-T07 closed after Codex review: exact native Notes capture/replay is proven, but generated Gym Logger coloured export is not safely productizable from the available evidence; keep v1 production unchanged."
   ],
   "recordedDecisions": [
-    {
-      "title": "Apple Notes colour recovery reopened — 2026-08-25",
-      "detail": ""
-    },
-    {
-      "title": "E-004 native Apple Notes colour-helper proof — 2026-08-25",
-      "detail": ""
-    },
     {
       "title": "E-004 parked pending legitimate iOS toolchain — 2026-08-25",
       "detail": ""
@@ -213,6 +204,14 @@
     {
       "title": "M03-T06 closed; advance E-004 native pasteboard inspection — 2026-08-26",
       "detail": ""
+    },
+    {
+      "title": "E-004 native capture/replay result — 2026-08-26",
+      "detail": "keep the normal PWA `Copy to Notes` path unchanged; keep the isolated helper and hosted build artifacts preserved;"
+    },
+    {
+      "title": "M03-T07 native route productization disposition — 2026-08-26",
+      "detail": ""
     }
   ],
   "relevantEvidence": [
@@ -231,12 +230,23 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "9f4665e923c0704dd74e60db13c3a96b8674585c",
+    "commit": "fc0fcdb71936796ce16e742b1c353285b7fe964f",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
+    "workingTree": "## main...origin/main [ahead 1]\n M .gitignore\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/DECISIONS.md\n M orchestration/state/REQUIREMENTS_MATRIX.md\n M orchestration/state/STATE.md\n M orchestration/tasks/M03-T07-NATIVE-COLOUR-HANDOFF-PRODUCTIZATION.md\n?? orchestration/feasibility/E-004-native/PRODUCTIZATION.md\n?? orchestration/reports/M03-T07-NATIVE-COLOUR-HANDOFF-OX-ALPHA-AGENTTEAMS-REPORT.md\n?? orchestration/reviews/M03-T07-NATIVE-COLOUR-HANDOFF-codex-review.md",
     "changedFiles": [
+      ".gitignore",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs"
+      "orchestration/product-orchestrator/bootstrap.mjs",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/DECISIONS.md",
+      "orchestration/state/REQUIREMENTS_MATRIX.md",
+      "orchestration/state/STATE.md",
+      "orchestration/tasks/M03-T07-NATIVE-COLOUR-HANDOFF-PRODUCTIZATION.md",
+      "orchestration/feasibility/E-004-native/PRODUCTIZATION.md",
+      "orchestration/reports/M03-T07-NATIVE-COLOUR-HANDOFF-OX-ALPHA-AGENTTEAMS-REPORT.md",
+      "orchestration/reviews/M03-T07-NATIVE-COLOUR-HANDOFF-codex-review.md"
     ]
   },
   "builder": {
@@ -256,11 +266,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "e004-native-helper-device-gate",
-      "summary": "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed.",
-      "at": "2026-08-26T03:10:32.076Z"
+      "name": "m03-t07-closed",
+      "summary": "M03-T07 closed after Codex review: exact native Notes capture/replay is proven, but generated Gym Logger coloured export is not safely productizable from the available evidence; keep v1 production unchanged.",
+      "at": "2026-08-26T07:09:39.853Z"
     },
-    "contextRevision": 85,
+    "contextRevision": 88,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

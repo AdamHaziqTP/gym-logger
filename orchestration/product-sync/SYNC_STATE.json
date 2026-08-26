@@ -3,6 +3,21 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t07-closed",
+      "summary": "M03-T07 closed after Codex review: exact native Notes capture/replay is proven, but generated Gym Logger coloured export is not safely productizable from the available evidence; keep v1 production unchanged.",
+      "at": "2026-08-26T07:09:39.853Z"
+    },
+    {
+      "name": "worker-timeout-and-disposition-recorded",
+      "summary": "E-004 native capture/replay is physically reported PASS; M03-T07 productization found no safe generated-colour route, so production remains unchanged and the native helper proof is preserved.",
+      "at": "2026-08-26T07:08:41.214Z"
+    },
+    {
+      "name": "human-gate-recorded",
+      "summary": "E-004 exact native Notes capture/replay reported PASS on iPhone 14 Pro Max; queue bounded Gym Logger handoff productization without changing normal Copy to Notes.",
+      "at": "2026-08-26T06:59:12.401Z"
+    },
+    {
       "name": "e004-native-helper-device-gate",
       "summary": "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed.",
       "at": "2026-08-26T03:10:32.076Z"
@@ -46,31 +61,16 @@
       "name": "checkpoint-published",
       "summary": "M06-T05 framing checkpoint and M06-T06 migration verification counts are current; 374/374 tests, build, LAN runtime and certificate pass; target iPhone framing retest remains open.",
       "at": "2026-08-25T17:07:00.914Z"
-    },
-    {
-      "name": "correction-accepted",
-      "summary": "M06-T05 PNG framing correction independently verified: 374/374 tests, build, HTTPS/certificate runtime, and diff audit pass; target iPhone framing retest remains open.",
-      "at": "2026-08-25T17:06:34.988Z"
-    },
-    {
-      "name": "worker-completed",
-      "summary": "M06-T06 actual session migration and supplied icon are Codex-verified; OX task timeout recorded; final iPhone gate remains open.",
-      "at": "2026-08-25T16:56:16.625Z"
-    },
-    {
-      "name": "worker-diagnostic-checkpoint",
-      "summary": "Worker diagnostic report committed at 5b6122e; wrapper and patched smoke pass, larger worker task timeout classified",
-      "at": "2026-08-25T16:20:15.161Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T03:10:32.076Z",
+  "lastPublishedAt": "2026-08-26T07:09:39.854Z",
   "lastEvent": {
-    "name": "e004-native-helper-device-gate",
-    "summary": "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed.",
-    "at": "2026-08-26T03:10:32.076Z"
+    "name": "m03-t07-closed",
+    "summary": "M03-T07 closed after Codex review: exact native Notes capture/replay is proven, but generated Gym Logger coloured export is not safely productizable from the available evidence; keep v1 production unchanged.",
+    "at": "2026-08-26T07:09:39.853Z"
   },
-  "syncRevision": 85,
+  "syncRevision": 88,
   "openEscalations": [],
   "chatNotifications": [
     {

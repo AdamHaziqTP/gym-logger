@@ -1,6 +1,6 @@
 # M03-T07 — Native coloured Notes handoff productization
 
-Status: `READY_FOR_OX`
+Status: `CLOSED — NO SAFE PRODUCTION CHANGE; LIMITATION DOCUMENTED`
 Owner: OX Alpha builder, Codex acceptance
 Scope: bounded productization feasibility; no native rewrite
 
@@ -41,3 +41,27 @@ single manual paste over any claim of unsupported direct Notes automation.
 - bounded files/reports/tests only;
 - Codex can independently run all applicable checks;
 - any new iPhone check is recorded as one consolidated gate, not assumed PASS.
+
+## Worker execution note
+
+The DSH headless profile was extended with the installed AgentTeams bundle and
+`/agent-teams` was dispatched to OX Alpha. The productization session remained
+silent for the bounded window and produced no usable output or delta. A
+separate smoke team did spawn an OX Alpha investigator that completed its
+read-only task, but the captain returned no final productization report. See
+`orchestration/reports/M03-T07-NATIVE-COLOUR-HANDOFF-OX-ALPHA-AGENTTEAMS-REPORT.md`.
+This is an infrastructure timeout, not an implementation result.
+
+## Codex disposition
+
+The bounded review found no safe production change that would turn the proven
+captured-Notes replay into a generated Gym Logger coloured export. The current
+helper can replay an exact captured Apple Notes item, while its synthetic
+fixture builder still emits ordinary plain/HTML/RTF representations whose
+colour fidelity in Notes is unproven. Transforming a captured private payload
+without the raw capture and a target-iPhone proof would be guesswork.
+
+The task is therefore closed with the limitation documented in
+`orchestration/feasibility/E-004-native/PRODUCTIZATION.md`. The PWA's normal
+editable uncoloured `Copy to Notes` path, Compact colour snapshot, and the
+isolated native helper remain preserved.

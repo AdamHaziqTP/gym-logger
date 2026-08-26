@@ -334,3 +334,18 @@ PWA-to-helper handoff. Therefore:
   is physically pasted into Notes and verified on the target iPhone; and
 - do not expand this into a native rewrite, paid Developer requirement, or
   open-ended Notes reverse-engineering effort.
+
+## M03-T07 native route productization disposition — 2026-08-26
+
+The bounded review after the successful native capture/replay proof found no
+safe implementation that can generate a new Gym Logger workout in the proven
+colour-preserving native Notes format. The existing helper can replay an exact
+captured Notes item, but its synthetic plain/HTML/RTF builder is not a proven
+colour-bearing generated route, and the raw native capture needed for a
+deterministic transformation is not present in the repository.
+
+Close M03-T07 without changing production code. Keep the ordinary editable
+uncoloured PWA Notes path and Compact colour snapshot. Preserve E-004 as an
+isolated proof. Do not add a coloured Notes export action or claim direct Notes
+append. Re-open only if the raw capture is available and a new bounded
+generated-workout target-iPhone proof is authorized.

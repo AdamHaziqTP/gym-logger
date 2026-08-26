@@ -5,3 +5,5 @@ dist/
 certs/*.pfx
 certs/*.password
 certs/*.cer
+# DSH AgentTeams runtime state is local session data, not product source.
+.agent-teams/

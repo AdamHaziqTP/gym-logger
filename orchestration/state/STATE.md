@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
-- Current task: E-004 native Apple Notes pasteboard inspection and exact replay
+- Current task: M03-T07 native coloured Notes handoff productization
 - Status: ACCEPTED FOR NATIVE CAPTURE/REPLAY; GENERATED GYM PAYLOAD PRODUCTIZATION PENDING
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: the product owner reported the helper installed on the iPhone 14 Pro Max and exact replay preserved an editable table, all five colours, data/order, and Unicode. Do not infer generated Gym Logger export success from this captured-payload replay.
-- Latest bounded task: E-004 native clipboard inspection/replay plus GitHub-hosted macOS/Xcode build preparation; production PWA and normal Copy to Notes remain unchanged.
+- Human review gate: none for the accepted v1 PWA path. The product owner reported exact native Notes capture/replay PASS on the iPhone 14 Pro Max; do not infer generated Gym Logger export success from that captured-payload replay.
+- Latest bounded task: M03-T07 native handoff productization; production PWA and normal Copy to Notes remain unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -289,3 +289,16 @@ Updated: 2026-08-26
 - Preserve the existing PWA Copy to Notes path and the isolated helper. Queue a
   separate bounded productization feasibility task before changing production
   clipboard behavior.
+
+## M03-T07 productization disposition — 2026-08-26
+
+- The bounded productization review found no safe production change that turns
+  exact captured-Notes replay into a generated Gym Logger coloured export.
+- A PWA JSON/share handoff would move data but would not prove a colour-bearing
+  native Notes payload. Transforming Apple-private payloads without the raw
+  capture and a generated-workout target-iPhone proof would be guesswork.
+- M03-T07 is closed with the limitation documented in
+  `orchestration/feasibility/E-004-native/PRODUCTIZATION.md`.
+- Keep normal editable uncoloured `Copy to Notes`, Compact colour snapshot, and
+  the isolated native helper. Do not add a misleading coloured Notes export
+  button.

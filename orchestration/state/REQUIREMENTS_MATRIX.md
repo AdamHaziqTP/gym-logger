@@ -46,4 +46,9 @@ Source precedence: finalized `GYM_LOGGER_SPEC.md` first, supplied references/fix
 
 M01 remains limited to its first-slice intent, with FIX-05 physical checks explicitly deferred rather than passed. M02-T01 through M02-T04, M03 clipboard/image work, M05 backup/export, M06 PWA/settings/release-readiness, and M06-T07 final-polish work are accepted for automated scope where their reviews say so. The remaining v1 device gate is limited to a fresh Home Screen icon install and direct Compact colour-snapshot share check; no requirement may be marked physically verified by desktop evidence alone.
 
-The normal editable Notes-table path remains accepted for table/data/order, but Apple Notes colour transfer is not accepted as solved. M03-T04's distinct WebKit native selection-copy route physically failed on colours, so M03-T05 must fingerprint the web-visible Notes clipboard before E-004 native inspection is advanced.
+The normal PWA editable Notes-table path remains accepted for table/data/order,
+but browser-generated Gym Logger colour transfer is not accepted as solved.
+M03-T04's distinct WebKit native selection-copy route physically failed on
+colours. E-004 exact native capture/replay is now physically proven for an
+existing Notes payload, while generated Gym Logger native export remains
+unproven.
