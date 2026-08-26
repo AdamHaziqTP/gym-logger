@@ -313,3 +313,24 @@ Reopen the GitHub-hosted macOS/Xcode build route for this isolated helper. A
 free-account/device-test route is allowed for this one-time feasibility proof;
 no paid Apple Developer membership, native PWA rewrite, or change to the
 production Copy to Notes path is authorized.
+
+## E-004 native capture/replay result — 2026-08-26
+
+The product owner supplied target-iPhone evidence that the helper captured a
+coloured Apple Notes table and replayed it back into Notes with an editable
+table, all five category colours, correct data/order, and Unicode intact.
+This resolves the **exact native capture/replay** question in favour of the
+native route.
+
+This result does not prove that a newly generated Gym Logger workout can be
+synthesized into the same native representation, and it does not prove a
+PWA-to-helper handoff. Therefore:
+
+- keep the normal PWA `Copy to Notes` path unchanged;
+- keep the isolated helper and hosted build artifacts preserved;
+- allow one bounded productization task to evaluate the smallest honest
+  structured-data handoff and user flow;
+- do not claim automatic coloured Gym Logger export until a generated workout
+  is physically pasted into Notes and verified on the target iPhone; and
+- do not expand this into a native rewrite, paid Developer requirement, or
+  open-ended Notes reverse-engineering effort.

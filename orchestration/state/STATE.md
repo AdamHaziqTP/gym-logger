@@ -8,10 +8,10 @@ Updated: 2026-08-26
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
 - Current task: E-004 native Apple Notes pasteboard inspection and exact replay
-- Status: HUMAN_REVIEW_REQUIRED (E-004 helper artifact ready; native Notes inspection/replay pending)
+- Status: ACCEPTED FOR NATIVE CAPTURE/REPLAY; GENERATED GYM PAYLOAD PRODUCTIZATION PENDING
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: obtain the unsigned helper artifact from the successful hosted build, sign/install it through a legitimate iOS test route, then copy a small five-colour table in Apple Notes, inspect/replay the native pasteboard, and report editable table structure, colours, Unicode, and data fidelity. Do not claim success from desktop or hosted build evidence.
+- Human review gate: the product owner reported the helper installed on the iPhone 14 Pro Max and exact replay preserved an editable table, all five colours, data/order, and Unicode. Do not infer generated Gym Logger export success from this captured-payload replay.
 - Latest bounded task: E-004 native clipboard inspection/replay plus GitHub-hosted macOS/Xcode build preparation; production PWA and normal Copy to Notes remain unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
@@ -267,12 +267,25 @@ Updated: 2026-08-26
   the IPA ZIP contains `Payload/GymLoggerPasteboardHelper.app`, the bundled
   `latest-session.example.json`, and `Info.plist`. This proves the hosted build
   route, not iPhone installation or Apple Notes behavior.
-- E-004 is now `READY_FOR_TARGET_IPHONE_PROOF` with signing/install still a
-  human/toolchain step. The artifact run is available at
-  `https://github.com/AdamHaziqTP/gym-logger/actions/runs/32925095555`.
+- E-004 is now accepted for exact native capture/replay. The product owner
+  reported that the helper was installed on the iPhone 14 Pro Max and that
+  replay preserved editable table structure, all five colours, data/order,
+  and Unicode. This does not prove a newly generated Gym Logger payload.
 - Current E-004 gate:
   `orchestration/evidence/HUMAN-VERIFICATION-E-004-NATIVE-CLIPBOARD-INSPECTION.md`.
-  It remains `BLOCKED/DEFERRED — HOSTED IOS BUILD PENDING`; after a truthful
-  build/install route exists, the single physical test is Notes copy → native
-  inspection → exact replay → paste into `Gym` and report table, colours,
-  Unicode, and data fidelity.
+  The next bounded task is to productize or honestly document the handoff from
+  Gym Logger data to the proven native helper; no PWA generated-colour claim is
+  accepted until a separate target-iPhone paste proves it.
+
+## E-004 native replay result — 2026-08-26
+
+- The product owner supplied a target-iPhone result: Inspect Notes Clipboard
+  captured a coloured Apple Notes table and Replay Captured Clipboard pasted it
+  back with editable table structure, all five colours, correct data/order,
+  and Unicode intact.
+- This closes the native capture/replay feasibility question as PASS. It does
+  not establish that the helper can synthesize a new Gym Logger workout in the
+  same native format, or that the PWA can launch/hand off to it automatically.
+- Preserve the existing PWA Copy to Notes path and the isolated helper. Queue a
+  separate bounded productization feasibility task before changing production
+  clipboard behavior.

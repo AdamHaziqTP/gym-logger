@@ -1,10 +1,28 @@
 # E-004 native Apple Notes clipboard inspection/replay
 
-Status: `HUMAN_REVIEW_REQUIRED — SIGNING/INSTALLATION AND DEVICE PASTE PENDING`
+Status: `PASS — NATIVE CAPTURE/REPLAY FIDELITY PROVEN; GYM PAYLOAD SYNTHESIS PENDING`
 
-This is the single physical gate for the bounded E-004 colour-recovery proof.
-No Apple Notes result is claimed from the Swift source, desktop harness, or a
-hosted macOS build.
+This was the single physical gate for the bounded E-004 colour-recovery proof.
+The product owner supplied the target-iPhone result in the attached report
+referenced by this task. No Apple Notes result is claimed from the Swift
+source, desktop harness, or a hosted macOS build alone.
+
+## Recorded target-iPhone result
+
+The product owner reported that the helper was installed on an iPhone 14 Pro
+Max and that an Apple Notes coloured table was captured, replayed, and pasted
+back into Notes successfully. The result preserved an editable table, all five
+category colours, correct values and row order, and Unicode. This proves
+**native Notes capture/replay fidelity**.
+
+The report also identified one zero-byte/omitted private type payload in the
+shared capture. That omission is not treated as a failure because exact replay
+already preserved the required result. The raw manifest/capture is not present
+in this repository and must not be reconstructed or over-interpreted.
+
+This does not yet prove that Gym Logger can synthesize a new workout payload in
+the same native format, nor that the PWA can hand a generated workout to the
+helper automatically.
 
 ## Why this gate exists
 
@@ -32,10 +50,10 @@ Record separately:
 - Unicode fidelity without mojibake;
 - any type identifiers or raw payloads that were omitted.
 
-Only the actual paste result can identify whether a native representation
-preserves the colours. If exact replay succeeds, a later bounded removal test
-may identify the minimum representation. Do not synthesize a Gym Logger native
-payload before that result exists.
+The exact paste result above identifies that the captured native representation
+preserves the colours. A later bounded removal test may identify the minimum
+representation. Do not claim generated Gym Logger colour export until a
+separately generated workout payload passes the same target-iPhone test.
 
 ## Build boundary
 
@@ -52,5 +70,7 @@ https://github.com/AdamHaziqTP/gym-logger/actions/runs/32925095555
 
 Download the `GymLoggerPasteboardHelper-unsigned` artifact from that run. The
 repository-side check confirmed the IPA contains the helper app and bundled
-fixture. This is the only remaining human/toolchain gate for E-004; the hosted
-build itself is not a colour result.
+fixture. The hosted build itself is not a colour result. The remaining E-004
+work is a bounded productization feasibility task: choose an honest,
+low-friction way for Gym Logger data to reach the helper, or document that the
+proven route remains an isolated diagnostic/manual workflow.

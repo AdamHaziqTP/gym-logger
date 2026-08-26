@@ -2,11 +2,13 @@
 
 ## Review disposition
 
-`READY_FOR_TARGET_IPHONE_PROOF`
+`ACCEPTED — TARGET-IPHONE NATIVE CAPTURE/REPLAY PROOF`
 
-The isolated helper implementation is complete for the next feasibility
-boundary. It is not an accepted Apple Notes colour solution and is not part of
-the PWA production path.
+The isolated helper implementation and the supplied target-iPhone evidence
+complete the native capture/replay feasibility boundary. Exact captured Notes
+content replay preserved an editable table, five colours, data/order, and
+Unicode. This is not yet an accepted automatic Gym Logger coloured-export
+workflow and is not part of the PWA production path.
 
 ## Independent checks
 
@@ -45,8 +47,12 @@ the PWA production path.
 - [ ] Swift/Xcode compilation: not run on this Windows workstation.
 - [x] Hosted macOS/Xcode compilation and unsigned packaging are verified by
       run `32925095555`.
-- [ ] iOS installation: not run.
-- [ ] Apple Notes editable-table, Unicode, or five-colour result: not run.
+- [x] iOS installation and helper use: reported complete by the product owner
+      on the iPhone 14 Pro Max; Codex does not independently operate the phone.
+- [x] Apple Notes editable-table, Unicode, and five-colour exact replay:
+      reported PASS by the product owner.
+- [ ] Gym Logger-generated native payload: not proven.
+- [ ] PWA-to-helper handoff/productized user flow: not implemented or proven.
 
 ## OX execution
 
@@ -57,7 +63,8 @@ allows fallback after a concrete worker timeout. The result is recorded in
 
 ## Next boundary
 
-Use the successful hosted artifact from run `32925095555` through a legitimate
-iOS test-signing/install route, then issue the one target-iPhone
-inspection/replay gate. Do not infer colour support from the hosted build or
-from the native payload source.
+Treat native capture/replay as proven for the exact captured Notes payload.
+The next bounded task may investigate productization, but must keep the PWA's
+working uncoloured editable-table path unchanged and must not claim that a
+generated Gym Logger session preserves Notes colours until a separate target-
+iPhone paste result proves it.
