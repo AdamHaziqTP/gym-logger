@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T13:10:55.695Z",
+  "generatedAt": "2026-08-26T13:13:06.667Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "89955d7 docs: point M03-T09 at final helper build",
+    "08f894b fix: preserve production handoff summary overrides",
+    "55d1904 docs: sync final M03-T09 checkpoint",
     "6b944e1 docs: finalize native handoff verification gate",
-    "99f336c docs: publish M03-T09 device proof gate",
-    "53d322c feat: wire production session native Notes handoff",
-    "cda3a58 docs: record Phase C Shortcut colour failure",
-    "9e52943 docs: lock Tuesday as production latest session"
+    "99f336c docs: publish M03-T09 device proof gate"
   ],
   "codexVerification": [
     {
@@ -181,7 +181,7 @@
     "install the newest hosted helper, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`."
   ],
   "decisionsMadeSinceLastSync": [
-    "M03-T09 native helper is built and independently verified; only one real Tuesday production-session iPhone paste remains before accepting the optional colour-preserving manual workflow."
+    "Final M03-T09 helper build 32972780014 is packaged from 08f894b and product-sync is ready for one real Tuesday production-session manual-paste proof."
   ],
   "recordedDecisions": [
     {
@@ -233,7 +233,7 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "6b944e1eb606832f412e0a7ef3da6da1d43c17dc",
+    "commit": "89955d7e1193c0d1b839d51d6f92652508045b3f",
     "branch": "main",
     "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
@@ -258,11 +258,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t09-final-device-gate",
-      "summary": "M03-T09 native helper is built and independently verified; only one real Tuesday production-session iPhone paste remains before accepting the optional colour-preserving manual workflow.",
-      "at": "2026-08-26T13:10:55.648Z"
+      "name": "m03-t09-final-helper-build-ready",
+      "summary": "Final M03-T09 helper build 32972780014 is packaged from 08f894b and product-sync is ready for one real Tuesday production-session manual-paste proof.",
+      "at": "2026-08-26T13:13:06.615Z"
     },
-    "contextRevision": 105,
+    "contextRevision": 106,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
