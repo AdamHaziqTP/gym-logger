@@ -1,6 +1,6 @@
 # E-004 Phase A — native representation-removal variants
 
-Status: `HUMAN_REVIEW_REQUIRED — UPDATED HELPER BUILD READY`
+Status: `PASS — EVERY SINGLE-REPRESENTATION REMOVAL PRESERVES FULL FIDELITY; NO UNIQUE NECESSARY TYPE IDENTIFIED`
 Device: iPhone 14 Pro Max
 Purpose: identify whether one captured native pasteboard representation is
 necessary for Apple Notes to preserve an editable coloured table.
@@ -24,7 +24,33 @@ This test uses a fresh capture made from Apple Notes on the device. It does not
 claim that Gym Logger can yet generate the colour-bearing representation. Do
 not change the production PWA `Copy to Notes` path while this proof is open.
 
-## Test procedure
+## Human device result — 2026-08-26
+
+The product owner installed the fresh Phase A helper, captured a coloured Apple
+Notes table, and exercised every displayed `Replay without <type>` variant.
+Every variant preserved the editable table, all five category colours, and the
+content/Unicode fidelity expected from the full native replay.
+
+Recorded results:
+
+- Replay without `com.apple.notes.richtext`: **PASS — all working**.
+- Replay without `com.apple.flat-rtfd`: **PASS — all working**.
+- Replay without `public.html`: **PASS — all working**.
+- Replay without `com.apple.webarchive`: **PASS — all working**.
+- Replay without `public.utf8-plain-text`: **PASS — all working**.
+- Replay without `public.rtf`: **PASS — all working**.
+
+No single non-empty representation is therefore individually necessary when
+all of the other captured representations remain present.
+
+This result does **not** identify the minimum sufficient representation or set.
+The remaining representations are redundant enough that removing any one of
+them still leaves Apple Notes with a fidelity-preserving alternative. The next
+bounded experiment should test **single-representation-only** replay (or an
+equivalent grouped-elimination search) to identify which representations are
+individually sufficient before generated Gym Logger payload work begins.
+
+## Original test procedure
 
 1. Install and open the newly rebuilt **Gym Logger Pasteboard Proof** helper.
 2. In Apple Notes, copy a small editable table containing Arms, Back, Chest,
@@ -45,15 +71,9 @@ not change the production PWA `Copy to Notes` path while this proof is open.
    the complete captured replay still behaves as before. This is a control,
    not a replacement for the removal variants.
 
-## Result to report
+## Disposition
 
-For each displayed type identifier, report `PASS` only when the pasted result
-keeps the editable table and all five colours with correct content/Unicode.
-If removing one representation loses colour or table fidelity, identify that
-type. If every removal loses colour, the colour-bearing set is the complete
-captured set. If replay is not possible, report `BLOCKED` with the visible
-helper error and do not infer a result.
-
-The Phase B generated Gym Logger payload and Phase C Shortcut append remain
-blocked until this result identifies a viable minimum representation or closes
-the native colour branch with evidence.
+Phase A removal testing is complete and shows representation redundancy. Phase
+B generated Gym Logger payload and Phase C Shortcut append remain blocked until
+a minimum sufficient native representation or representation set is identified
+by the next bounded sufficiency test.
