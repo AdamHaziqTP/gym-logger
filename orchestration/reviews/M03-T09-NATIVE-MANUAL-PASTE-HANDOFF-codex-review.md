@@ -30,7 +30,7 @@ Updated: 2026-08-26
 - `git diff --check`: pending final checkpoint after orchestration docs are
   updated.
 - Swift/Xcode compile and packaging: **PASS** via hosted macOS/Xcode workflow
-  `32972463589` on commit `53d322c`; the artifact contains the helper app,
+  `32972780014` on commit `08f894b`; the artifact contains the helper app,
   bundled fixture, and registered `gymloggerpasteboardproof` URL scheme. This
   proves packaging only, not the Apple Notes or target-device result.
 
