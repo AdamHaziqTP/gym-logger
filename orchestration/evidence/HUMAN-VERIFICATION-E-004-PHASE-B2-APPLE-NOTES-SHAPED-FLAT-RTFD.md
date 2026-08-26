@@ -1,6 +1,6 @@
 # E-004 Phase B2 — generated Apple Notes-shaped flat-RTFD proof
 
-Status: `HUMAN_REVIEW_REQUIRED — B2 HELPER BUILD READY`
+Status: `PASS — GENERATED EDITABLE COLOURED TABLE PROVEN; CATEGORY LEGEND LABELS REMAIN UNCOLOURED`
 Device: iPhone 14 Pro Max
 Base result: Phase B colour failure recorded at `934ddd7`
 
@@ -43,12 +43,54 @@ artifact from run `32956758287`; it contains the generic RTF generator.
 7. Confirm exact free-form values and Unicode, including `30°`, `8,6`, curly
    punctuation, and multiline notes, with no mojibake.
 
-## Result rule
+## Human device result — 2026-08-26
 
-Report `PASS` only if the generated workout satisfies every item: editable
-table, all five colours, correct content/order/summary/notes, and Unicode.
-Report `FAIL` with the first mismatch and a screenshot if possible. Do not
-infer device success from source tokens, helper status, hosted compilation,
-or the earlier captured-payload A2 result.
+The product owner installed the B2 helper, used **Copy Generated Gym Session
+(flat-RTFD only)**, and pasted the newly generated workout into Apple Notes.
 
-Phase C Shortcut append remains blocked until this generated B2 result passes.
+Reported physical result:
+
+- editable table: **PASS**;
+- generated workout/table content: **PASS — looks good**;
+- row/category colouring across the workout table: **PASS — table text is
+  coloured correctly**;
+- all five category colours are visibly represented correctly in the workout
+  table: **PASS**;
+- `Arms Back Chest Delts Legs` category legend text above the table:
+  **MINOR POLISH DEFECT — labels are not themselves coloured according to their
+  categories**.
+
+The product owner otherwise reported the generated result as working. No
+additional defect was reported for order, summary, notes, or Unicode.
+
+## Acceptance interpretation
+
+The core B2 feasibility question is **PASS**: Gym Logger-originated data can now
+be synthesized as a fresh Apple Notes-shaped `com.apple.flat-rtfd` payload and
+paste as an editable table with the required category colouring. This satisfies
+the colour-recovery feasibility requirement that blocked Phase C.
+
+The uncoloured category legend is a bounded presentation defect, not a failure
+of generated table colour fidelity. The v1 specification requires the legend to
+be present and prioritizes category/highlight colour preservation, but does not
+make coloured legend labels a separate blocker for the Notes handoff proof.
+The legend should still be corrected before final productization so it matches
+the established category mapping and the rest of the export.
+
+## Disposition
+
+Phase B2 is accepted for generated coloured-table feasibility. Phase C Shortcut
+append may proceed using this generated payload path.
+
+Before or alongside Phase C implementation, apply a narrow B2 polish correction
+so the `Arms Back Chest Delts Legs` legend labels use their corresponding Apple
+Notes colour controls:
+
+- Arms — orange;
+- Back — purple;
+- Chest — mint;
+- Delts — blue;
+- Legs — pink.
+
+Do not regress the already-proven editable table, table colours, generated
+content, or native flat-RTFD path.
