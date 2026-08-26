@@ -23,6 +23,8 @@ const checks = [
   ["local bundled web transport", native.includes("WKURLSchemeHandler") && native.includes("gymlogger://app/") && native.includes("WebApp")],
   ["Gym Logger SwiftUI shell", app.includes("struct GymLoggerApp") && app.includes("GymLoggerWebView()")],
   ["embedded bridge action contract", bridge.includes("prepareColouredNotes") && bridge.includes("copyNotesPayload")],
+  ["web listens for native completion", bridge.includes("listenForEmbeddedNativeStatus") && sessionView.includes("listenForEmbeddedNativeStatus")],
+  ["native reports Notes-open/manual fallback", native.includes("UIApplication.shared.open(url, options: [:])") && native.includes('didOpen ? "prepared" : "manual"')],
   ["coloured action prefers in-process bridge", sessionView.includes("sendNativeHandoffToEmbeddedBridge(visibleSession)")],
   ["ordinary Copy to Notes prefers native bridge", notesClipboard.includes("writeNotesPayloadToEmbeddedNative(payload)")],
   ["Tuesday migration remains in web app", migration.includes("migrateActualSession") && migration.includes("ACTUAL_SESSION_2026-08-25.json")],

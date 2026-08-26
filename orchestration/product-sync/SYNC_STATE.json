@@ -1,7 +1,27 @@
 {
   "schemaVersion": 1,
-  "activeBuilder": "ox-alpha",
+  "activeBuilder": "openrouter-free",
   "events": [
+    {
+      "name": "m03-t10-codex-correction-hosted-rebuild-pending",
+      "summary": "Codex corrected native handoff completion reporting; local verification is green and a fresh hosted IPA rebuild is required before the consolidated iPhone gate.",
+      "at": "2026-08-26T15:30:12.259Z"
+    },
+    {
+      "name": "m03-t10-codex-only-follow-up",
+      "summary": "All-in-one IPA is packaged and verified; OX Alpha is disabled and remaining work is the single target-iPhone acceptance gate.",
+      "at": "2026-08-26T15:24:27.185Z"
+    },
+    {
+      "name": "builder-switched",
+      "summary": "Builder changed from OX Alpha to OpenRouter Free Models Router: Product owner disabled OX Alpha for remaining Gym Logger work; use Codex subagents/fallback for any follow-up instead.",
+      "at": "2026-08-26T15:22:39.013Z"
+    },
+    {
+      "name": "m03-t10-one-app-ipa-device-gate",
+      "summary": "All-in-one Gym Logger IPA built and independently verified; target iPhone 14 Pro Max gate is now open from hosted run 32982786740.",
+      "at": "2026-08-26T15:18:41.948Z"
+    },
     {
       "name": "m03-t09-pwa-access-ready",
       "summary": "Current Gym Logger PWA is reachable at https://192.168.1.49:4173/ over LAN HTTPS with Tuesday actual-session migration and Prepare Coloured Notes Copy; the native helper remains installed separately.",
@@ -41,36 +61,23 @@
       "name": "phase-c-ready",
       "summary": "B2 generated coloured-table proof accepted at d0544c5; Phase C native flat-RTFD Shortcut append gate is ready from hosted helper run 32961489740.",
       "at": "2026-08-26T11:06:30.964Z"
-    },
-    {
-      "name": "m03-t07-b2-device-gate-ready",
-      "summary": "B2 helper source from 249e216 was packaged by hosted run 32959270742; gate documentation is current at d03678b and target-iPhone generated-workout paste is the only open gate.",
-      "at": "2026-08-26T10:43:14.198Z"
-    },
-    {
-      "name": "m03-t07-b2-device-gate-ready",
-      "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742 at checkpoint 6ef703c; target-iPhone generated-workout paste is the only open gate.",
-      "at": "2026-08-26T10:42:50.996Z"
-    },
-    {
-      "name": "m03-t07-b2-device-gate-ready",
-      "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742; target-iPhone generated-workout paste is the only open gate.",
-      "at": "2026-08-26T10:42:22.041Z"
-    },
-    {
-      "name": "m03-t07-b2-device-gate-ready",
-      "summary": "B2 generated Apple Notes-shaped flat-RTFD helper is independently verified and packaged; target-iPhone generated-workout paste is the only open gate.",
-      "at": "2026-08-26T10:40:00.534Z"
     }
   ],
-  "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T14:02:55.099Z",
+  "builderChanges": [
+    {
+      "at": "2026-08-26T15:22:39.008Z",
+      "from": "ox-alpha",
+      "to": "openrouter-free",
+      "reason": "Product owner disabled OX Alpha for remaining Gym Logger work; use Codex subagents/fallback for any follow-up instead."
+    }
+  ],
+  "lastPublishedAt": "2026-08-26T15:30:12.260Z",
   "lastEvent": {
-    "name": "m03-t09-pwa-access-ready",
-    "summary": "Current Gym Logger PWA is reachable at https://192.168.1.49:4173/ over LAN HTTPS with Tuesday actual-session migration and Prepare Coloured Notes Copy; the native helper remains installed separately.",
-    "at": "2026-08-26T14:02:55.098Z"
+    "name": "m03-t10-codex-correction-hosted-rebuild-pending",
+    "summary": "Codex corrected native handoff completion reporting; local verification is green and a fresh hosted IPA rebuild is required before the consolidated iPhone gate.",
+    "at": "2026-08-26T15:30:12.259Z"
   },
-  "syncRevision": 109,
+  "syncRevision": 113,
   "openEscalations": [],
   "chatNotifications": [
     {

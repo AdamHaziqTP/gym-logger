@@ -21,13 +21,19 @@ Updated: 2026-08-26
 
 ## Independent verification
 
-- PWA suite: **PASS — 415/415 tests, 37 files**.
+- PWA suite: **PASS — 416/416 tests, 37 files**.
 - `npm run build`: **PASS**.
-- One-app static contract: **PASS — 18/18 checks**.
+- One-app static contract: **PASS — 20/20 checks**.
 - Native E-004 harness: **PASS — 55/55 checks**.
 - `git diff --check`: **PASS**.
-- Hosted macOS/Xcode compilation and packaged IPA assertions: **PASS** in run
-  [`32982786740`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32982786740).
+- The Codex source audit found and corrected a real completion-state defect:
+  the embedded UI now waits for Swift's asynchronous clipboard/Notes-open
+  result and reports a truthful manual-open fallback when Notes cannot be
+  opened. The static contract and bridge unit coverage now assert this.
+- Hosted macOS/Xcode compilation and packaged IPA assertions: **PASS** in the
+  prior run
+  [`32982786740`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32982786740);
+  a fresh hosted rebuild is required to publish this final source correction.
   The artifact has `CFBundleExecutable=GymLogger`, bundle ID
   `com.gymlogger.app`, package type `APPL`, name/display/version metadata,
   the executable, `WebApp/index.html`, and both deliberate icon assets.

@@ -18,6 +18,16 @@ interface EmbeddedWebKitWindow extends Window {
   };
 }
 
+export type EmbeddedNativeStatus = "prepared" | "manual" | "failed" | "copied";
+export const EMBEDDED_NATIVE_STATUS_EVENT = "gymlogger-native-status";
+
+const EMBEDDED_NATIVE_STATUSES: ReadonlySet<string> = new Set([
+  "prepared",
+  "manual",
+  "failed",
+  "copied",
+]);
+
 function nativeHandler(): NativeMessageHandler | null {
   if (typeof window === "undefined") return null;
   return (window as EmbeddedWebKitWindow).webkit?.messageHandlers
@@ -26,6 +36,27 @@ function nativeHandler(): NativeMessageHandler | null {
 
 export function hasEmbeddedNativeBridge(): boolean {
   return nativeHandler() !== null;
+}
+
+/**
+ * Subscribes to the native shell's completion result. The bridge post itself
+ * is synchronous, but Swift work (payload generation and Notes opening) is
+ * not; callers must wait for this event before showing success.
+ */
+export function listenForEmbeddedNativeStatus(
+  onStatus: (status: EmbeddedNativeStatus) => void,
+): () => void {
+  if (typeof window === "undefined") return () => undefined;
+
+  const handleStatus = (event: Event) => {
+    const status = (event as CustomEvent<{ status?: unknown }>).detail?.status;
+    if (typeof status === "string" && EMBEDDED_NATIVE_STATUSES.has(status)) {
+      onStatus(status as EmbeddedNativeStatus);
+    }
+  };
+
+  window.addEventListener(EMBEDDED_NATIVE_STATUS_EVENT, handleStatus);
+  return () => window.removeEventListener(EMBEDDED_NATIVE_STATUS_EVENT, handleStatus);
 }
 
 /** Sends the visible session directly to Swift without a clipboard hop. */

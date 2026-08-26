@@ -1,4 +1,4 @@
 - id: agent-default-model
   config:
     provider: openrouter
-    model: stealth/ox-alpha
+    model: openrouter/free

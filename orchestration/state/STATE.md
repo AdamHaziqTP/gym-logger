@@ -5,13 +5,13 @@ Updated: 2026-08-26
 ## Current status
 
 - Project: Gym Logger
-- Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
+- Control mode: Codex orchestrator → Codex fallback/subagents → Codex verification
 - Current milestone: M03 — one-app iOS productization
 - Current task: M03-T10 one-app Gym Logger IPA productization
-- Status: HUMAN_REVIEW_REQUIRED — HOSTED ALL-IN-ONE IPA READY
+- Status: CODEX_VERIFIED — HOSTED REBUILD REQUIRED BEFORE DEVICE GATE
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: install the single `GymLogger-unsigned.ipa` artifact from hosted run `32982786740` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.
+- Human review gate: after the fresh hosted rebuild, install the single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.
 - Latest bounded task: M03-T10 one-app IPA productization; M03-T09 native manual-paste proof remains the implementation baseline.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
@@ -89,7 +89,7 @@ Updated: 2026-08-26
 - The target iPhone blocked M03-T09 before launch because the `32972780014` IPA had a malformed packaged `Info.plist`. Packaging correction `040fbb2` restored the complete bundle identity and added IPA-level CI assertions; the replacement artifact is ready for the same single physical proof.
 - The temporary PWA-access blocker is resolved for this workstation session: `https://192.168.1.49:4173/` returns the current production app shell, manifest, and M03-T09 handoff action over LAN HTTPS. The server must remain running while the iPhone test is performed; this is a reachable LAN test deployment, not a public hosting claim.
 - M03-T10 one-app IPA productization is implemented in the Codex fallback after a concrete DSH packaged-loader infrastructure failure. The existing React/TypeScript app is bundled in a local WKWebView shell, the proven native flat-RTFD generator is wired through an in-process bridge, and the Tuesday migration remains in the web bundle.
-- M03-T10 independent verification is green: 415/415 PWA tests, production build, one-app static contract, native E-004 harness, diff hygiene, and hosted macOS/Xcode IPA assertions in run `32982786740`; target-iPhone installation and behavior remain human-gated.
+- M03-T10 independent verification is green locally: 416/416 PWA tests, production build, 20/20 one-app static contract, 55/55 native E-004 harness, and diff hygiene. The embedded handoff now waits for Swift completion and reports manual-open fallback truthfully. A fresh hosted macOS/Xcode rebuild is required before reopening the device gate; target-iPhone installation and behavior remain human-gated.
 
 ## Final disposition
 
@@ -111,7 +111,7 @@ Updated: 2026-08-26
 ## Deferred
 
 - M01 FIX-05 physical-iPhone HV-01 through HV-05: BLOCKED/DEFERRED due unreachable temporary LAN/local-host runtime; final acceptance still required later.
-- Apple Notes category colour transfer: accepted v1 limitation; standard rich paste preserves editable table/data/order but not category foreground/highlight colours.
+- Standard browser/PWA rich paste into Apple Notes remains the accepted uncoloured fallback; the native one-app M03-T09 route separately proved editable table plus five category colours, with one manual Paste.
 - Faithful and Compact tall PNG export on the target iPhone.
 - Home responsive-layout defect: Copy Another Session visually clips/overlaps History on iPhone 14 Pro Max; correction required before final acceptance.
 - Final iPhone 14 Pro Max install/offline/touch/layout/settings/PNG/backup/Notes checks in the consolidated checklist.
@@ -129,7 +129,7 @@ Updated: 2026-08-26
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: trusted HTTPS verification completed.
 - E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.
-- E-004 Phase A/A2, B2, and M03-T09 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss. The one-app IPA authorization now supersedes the PWA-only delivery constraint for M03-T10; no paid Developer dependency is authorized, and the single-app target-iPhone gate remains open until hosted packaging is complete.
+- E-004 Phase A/A2, B2, and M03-T09 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss. The one-app IPA authorization supersedes the PWA-only delivery constraint for M03-T10; no paid Developer dependency is authorized, and the single-app target-iPhone gate remains open until the device checklist is complete.
 
 ## Active task checkpoint
 
@@ -478,6 +478,6 @@ Updated: 2026-08-26
 ## M03-T10 one-app Gym Logger IPA productization — 2026-08-26
 
 - Product authorization at `orchestration/state/ONE-APP-IPA-AUTHORIZATION-2026-08-26.md` explicitly combines the existing React/TypeScript UI and the proven native flat-RTFD generator in one IPA.
-- OX Alpha was attempted through the DSH Desktop wrapper and failed before worker start because the packaged DSH plugin tree could not apply the `cordis:include` loader entry. This is recorded as infrastructure failure in `orchestration/reports/M03-T10-ONE-APP-IPA-OX-ALPHA-REPORT.md`; Codex fallback is in scope.
+- OX Alpha was attempted through the DSH Desktop wrapper and failed before worker start because the packaged DSH plugin tree could not apply the `cordis:include` loader entry. This is recorded as infrastructure failure in `orchestration/reports/M03-T10-ONE-APP-IPA-OX-ALPHA-REPORT.md`; no further OX Alpha dispatches are authorized for this task, and Codex fallback/subagents own follow-up review.
 - Codex added an in-process WebKit bridge, a bundled offline WKWebView shell, the existing Tuesday migration in the web bundle, and hosted macOS/Xcode IPA packaging with artifact assertions. The source review is `orchestration/reviews/M03-T10-ONE-APP-IPA-CODEX-REVIEW.md`.
-- Current acceptance gate: install the hosted `GymLogger-unsigned.ipa` from run `32982786740` and complete the single device checklist in `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md`. No iPhone behavior is inferred from these source/desktop checks.
+- Current acceptance gate: after the fresh hosted rebuild, install the hosted `GymLogger-unsigned.ipa` and complete the single device checklist in `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md`. No iPhone behavior is inferred from these source/desktop checks.

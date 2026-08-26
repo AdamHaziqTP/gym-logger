@@ -1,6 +1,8 @@
 import { afterEach, describe, expect, it } from "vitest";
 import {
+  EMBEDDED_NATIVE_STATUS_EVENT,
   hasEmbeddedNativeBridge,
+  listenForEmbeddedNativeStatus,
   sendNativeHandoffToEmbeddedBridge,
   writeNotesPayloadToEmbeddedNative,
 } from "../domain/embeddedNativeBridge";
@@ -87,5 +89,31 @@ describe("embedded native iOS bridge", () => {
         plainText: notesPayload.text,
       },
     ]);
+  });
+
+  it("accepts native completion and manual-open statuses, ignoring unknown values", () => {
+    const statuses: string[] = [];
+    const unsubscribe = listenForEmbeddedNativeStatus((status) => {
+      statuses.push(status);
+    });
+
+    window.dispatchEvent(
+      new CustomEvent(EMBEDDED_NATIVE_STATUS_EVENT, {
+        detail: { status: "manual" },
+      }),
+    );
+    window.dispatchEvent(
+      new CustomEvent(EMBEDDED_NATIVE_STATUS_EVENT, {
+        detail: { status: "unexpected" },
+      }),
+    );
+    unsubscribe();
+    window.dispatchEvent(
+      new CustomEvent(EMBEDDED_NATIVE_STATUS_EVENT, {
+        detail: { status: "failed" },
+      }),
+    );
+
+    expect(statuses).toEqual(["manual"]);
   });
 });

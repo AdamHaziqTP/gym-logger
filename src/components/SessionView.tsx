@@ -38,7 +38,10 @@ import {
   launchNativeHelper,
   writeNativeHelperHandoffToClipboard,
 } from "../domain/nativeHelperHandoff";
-import { sendNativeHandoffToEmbeddedBridge } from "../domain/embeddedNativeBridge";
+import {
+  listenForEmbeddedNativeStatus,
+  sendNativeHandoffToEmbeddedBridge,
+} from "../domain/embeddedNativeBridge";
 import { CompactSnapshotShare, ImageExportPanel } from "./ImageExport";
 import type { ImageExportStyle } from "../domain/imageExport";
 import { orderedRows } from "../domain/rows";
@@ -61,7 +64,7 @@ const DRAG_THRESHOLD_PX = 8;
  * always worded so they cannot be mistaken for full success (AC-03).
  */
 type NotesCopyState = "idle" | "working" | ClipboardCopyOutcome;
-type NativeHandoffState = "idle" | "working" | "prepared" | "failed";
+type NativeHandoffState = "idle" | "working" | "prepared" | "manual" | "failed";
 
 const NOTES_COPY_STATUS: Record<NotesCopyState, string> = {
   idle: "",
@@ -74,10 +77,10 @@ const NOTES_COPY_STATUS: Record<NotesCopyState, string> = {
 const NATIVE_HANDOFF_STATUS: Record<NativeHandoffState, string> = {
   idle: "",
   working: "Preparing coloured Notes copy…",
-  prepared:
-    "Clipboard prepared. Opening the helper; paste once in Notes. If it does not open, launch Gym Logger Pasteboard Proof manually.",
-  failed:
-    "Could not prepare the native Notes copy. Install Gym Logger Pasteboard Proof and try again.",
+  prepared: "Clipboard prepared. Notes opened; paste once in the Gym note.",
+  manual:
+    "Clipboard prepared. Open Notes manually and paste once in the Gym note.",
+  failed: "Could not prepare the coloured Notes copy. Try again.",
 };
 
 const COLUMN_ORDER: EditableRowField[] = [
@@ -183,6 +186,19 @@ export function SessionView({
   // flush can wait for them (pagehide, unmount, and the copy-to-Notes
   // persistence sweep) instead of racing an in-flight write.
   const activeSaves = useRef<Set<Promise<void>>>(new Set());
+
+  // Native payload generation and Notes opening complete asynchronously after
+  // the WebKit message is posted. Do not show a prepared/success state until
+  // Swift reports the actual result, including the manual-open fallback.
+  useEffect(
+    () =>
+      listenForEmbeddedNativeStatus((status) => {
+        if (status === "prepared" || status === "manual" || status === "failed") {
+          setNativeHandoffState(status);
+        }
+      }),
+    [],
+  );
 
   const runSave = useCallback((operation: () => Promise<void>): Promise<void> => {
     const run = async () => {

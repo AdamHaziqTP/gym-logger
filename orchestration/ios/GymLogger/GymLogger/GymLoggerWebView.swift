@@ -69,7 +69,6 @@ struct GymLoggerWebView: UIViewRepresentable {
                     [payload.flatRTFDPasteboardItem],
                     options: [.expirationDate: Date().addingTimeInterval(600)]
                 )
-                notify("prepared")
                 openNotes()
             } catch {
                 notify("failed")
@@ -89,8 +88,15 @@ struct GymLoggerWebView: UIViewRepresentable {
         }
 
         private func openNotes() {
-            guard let url = URL(string: "mobilenotes://") else { return }
-            UIApplication.shared.open(url, options: [:])
+            guard let url = URL(string: "mobilenotes://") else {
+                notify("manual")
+                return
+            }
+            UIApplication.shared.open(url, options: [:]) { [weak self] didOpen in
+                DispatchQueue.main.async {
+                    self?.notify(didOpen ? "prepared" : "manual")
+                }
+            }
         }
 
         private func notify(_ status: String) {

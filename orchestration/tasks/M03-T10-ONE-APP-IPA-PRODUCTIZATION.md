@@ -1,6 +1,6 @@
 # M03-T10 — One-app Gym Logger IPA productization
 
-Status: `IMPLEMENTED — HOSTED IPA READY FOR TARGET-IPHONE GATE`
+Status: `IMPLEMENTED — SOURCE CORRECTION VERIFIED; HOSTED REBUILD PENDING`
 
 ## Authority
 
@@ -49,11 +49,17 @@ physical checks.
 
 ## Verification result
 
-The hosted workflow run
+The prior hosted workflow run
 [`32982786740`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32982786740)
 passed on macOS/Xcode after two bounded CI/project-reference corrections. It
 compiled the unsigned iOS app, packaged `GymLogger-unsigned.ipa`, and asserted
 the complete bundle identity, executable, bundled web app, and icon assets.
+
+After the source audit found that the web UI could report a prepared handoff
+before Swift had confirmed Notes opening, Codex added an asynchronous native
+status callback and truthful manual-open fallback. The local verification is
+green; the hosted workflow must publish a fresh artifact containing this
+correction before the target-iPhone gate is reopened.
 
 ## Worker policy
 
