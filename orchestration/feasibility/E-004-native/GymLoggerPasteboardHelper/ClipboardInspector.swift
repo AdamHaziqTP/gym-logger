@@ -37,6 +37,7 @@ struct ClipboardCapturePackage {
 enum ClipboardInspectorError: LocalizedError {
     case noCapture
     case unreadableRepresentation(String)
+    case missingRepresentation(String)
     case invalidCapture
 
     var errorDescription: String? {
@@ -45,6 +46,8 @@ enum ClipboardInspectorError: LocalizedError {
             return "No captured Notes clipboard is available yet."
         case let .unreadableRepresentation(typeIdentifier):
             return "The clipboard representation \(typeIdentifier) could not be read."
+        case let .missingRepresentation(typeIdentifier):
+            return "No readable captured representation exists for \(typeIdentifier)."
         case .invalidCapture:
             return "The saved clipboard capture is incomplete."
         }
@@ -207,6 +210,46 @@ enum NativeClipboardInspector {
             }
             guard !item.isEmpty else { throw ClipboardInspectorError.invalidCapture }
             items.append(item)
+        }
+
+        UIPasteboard.general.setItems(
+            items,
+            options: [.expirationDate: Date().addingTimeInterval(600)]
+        )
+    }
+
+    @MainActor
+    static func replayLatestCapture(onlyTypeIdentifier: String) throws {
+        let requestedType = onlyTypeIdentifier.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !requestedType.isEmpty else { throw ClipboardInspectorError.invalidCapture }
+        guard let directoryURL = latestCaptureDirectory() else { throw ClipboardInspectorError.noCapture }
+        let manifest = try loadManifest(from: directoryURL)
+        var items: [[String: Any]] = []
+        var foundReadableRepresentation = false
+
+        for capturedItem in manifest.items {
+            var item: [String: Any] = [:]
+            for representation in capturedItem.representations {
+                guard representation.typeIdentifier == requestedType,
+                      item[representation.typeIdentifier] == nil,
+                      let relativePath = representation.relativePath,
+                      (representation.byteLength ?? 0) > 0 else { continue }
+                let data = try Data(contentsOf: directoryURL.appendingPathComponent(relativePath))
+                if representation.valueKind == "string", let value = String(data: data, encoding: .utf8) {
+                    item[representation.typeIdentifier] = value
+                } else {
+                    item[representation.typeIdentifier] = data
+                }
+                foundReadableRepresentation = true
+            }
+            guard !item.isEmpty else {
+                throw ClipboardInspectorError.missingRepresentation(requestedType)
+            }
+            items.append(item)
+        }
+
+        guard foundReadableRepresentation else {
+            throw ClipboardInspectorError.missingRepresentation(requestedType)
         }
 
         UIPasteboard.general.setItems(

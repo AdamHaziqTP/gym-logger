@@ -6,6 +6,7 @@ struct ContentView: View {
     @State private var status = "Copy a small coloured table in Apple Notes, then inspect it here."
     @State private var shareURLs: [URL] = []
     @State private var removalCandidates: [String] = []
+    @State private var sufficiencyCandidates: [String] = []
 
     var body: some View {
         ScrollView {
@@ -36,6 +37,20 @@ struct ContentView: View {
                     }
                 }
 
+                if !sufficiencyCandidates.isEmpty {
+                    Divider()
+                    Text("Single-representation sufficiency variants").font(.headline)
+                    Text("Replay one captured representation by itself, then paste into Notes. Each button keeps only the named non-empty representation.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                    ForEach(sufficiencyCandidates, id: \.self) { typeIdentifier in
+                        Button("Replay ONLY \(typeIdentifier)") {
+                            replayOnly(typeIdentifier)
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                }
+
                 Divider()
                 Text("Synthetic fixture (historical comparison only)").font(.headline)
                 Button("Copy Gym Session to Pasteboard") { copySession() }
@@ -59,7 +74,9 @@ struct ContentView: View {
             do {
                 let package = try await NativeClipboardInspector.inspect()
                 let readableCount = package.manifest.items.flatMap(\.representations).filter { $0.relativePath != nil }.count
-                removalCandidates = try NativeClipboardInspector.latestCaptureTypeIdentifiers()
+                let candidates = try NativeClipboardInspector.latestCaptureTypeIdentifiers()
+                removalCandidates = candidates
+                sufficiencyCandidates = candidates
                 status = "Captured \(package.manifest.itemCount) item(s), \(readableCount) readable representation(s). Share the report or replay it into Notes."
             } catch {
                 status = "Inspection failed: \(error.localizedDescription)"
@@ -82,6 +99,15 @@ struct ContentView: View {
             status = "Replayed without \(typeIdentifier). Open the Gym note and paste once, then record whether the table, colours, and Unicode survived."
         } catch {
             status = "Variant replay failed: \(error.localizedDescription)"
+        }
+    }
+
+    private func replayOnly(_ typeIdentifier: String) {
+        do {
+            try NativeClipboardInspector.replayLatestCapture(onlyTypeIdentifier: typeIdentifier)
+            status = "Replayed only \(typeIdentifier). Open the temporary Gym note and paste once, then record table, colours, content, and Unicode."
+        } catch {
+            status = "Single-representation replay failed: \(error.localizedDescription)"
         }
     }
 

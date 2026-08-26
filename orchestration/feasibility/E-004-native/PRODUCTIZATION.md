@@ -2,7 +2,7 @@
 
 Updated: 2026-08-26
 
-Status: `PHASE A READY — REPRESENTATION-REMOVAL DEVICE PROOF REQUIRED`
+Status: `PHASE A2 READY — SINGLE-REPRESENTATION DEVICE PROOF REQUIRED`
 
 ## Verified capability
 
@@ -28,6 +28,21 @@ colour-bearing until the owner pastes that variant back into Apple Notes on the
 iPhone 14 Pro Max and records the result. Phase B generated-workout synthesis
 and Phase C Shortcut append remain blocked until Phase A identifies a useful
 minimum representation, or the branch is closed with evidence.
+
+## Reopened Phase A2 — single-representation sufficiency
+
+Phase A showed that removing any one representation still left a
+fidelity-preserving alternative. The helper now exposes the complementary
+experiment: after inspection, it offers one `Replay ONLY <type>` action for
+each unique readable, non-empty type in the fresh capture. The action writes
+only that exact captured representation for every captured item and preserves
+the captured item order. Missing or unreadable requested types fail clearly;
+they never fall back to the complete capture.
+
+The preferred target types are `public.rtf`, `com.apple.flat-rtfd`,
+`public.html`, `com.apple.webarchive`, `com.apple.notes.richtext`, and
+`public.utf8-plain-text`, when present in the device capture. The helper remains
+dynamic so the physical test can cover the identifiers Apple actually exposes.
 
 ## Boundary that remains unproven
 
@@ -69,11 +84,9 @@ iPhone.
 
 ## Current next gate and re-open criteria
 
-The next gate is one fresh helper build on the target iPhone, followed by the
-one-at-a-time removal variants described in
+The next gate is the single-representation sufficiency pass described in
 `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md`.
-The updated helper was rebuilt successfully in hosted workflow run
-`32946246114`; the artifact contains the Phase A controls and bundled fixture.
+The updated A2 helper must be rebuilt on hosted macOS/Xcode before installation.
 Only after that result should the project attempt a generated Gym Logger
 payload. It must not alter the normal PWA Notes path while the proof is
 inconclusive.

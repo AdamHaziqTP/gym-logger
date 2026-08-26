@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
-- Current task: M03-T07 native coloured Notes handoff productization
-- Status: HUMAN_REVIEW_REQUIRED — PHASE A REMOVAL VARIANTS READY
+- Current task: M03-T07-A2 single-representation native Notes sufficiency
+- Status: HUMAN_REVIEW_REQUIRED — SINGLE-REPRESENTATION VARIANTS READY
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: E-004 Phase A removal-variant proof on the iPhone 14 Pro Max. The product owner reported exact native Notes capture/replay PASS; do not infer generated Gym Logger export success from that captured-payload replay. Use the fresh helper build and record each non-empty captured representation variant before Phase B/C.
-- Latest bounded task: M03-T07 native handoff productization; production PWA and normal Copy to Notes remain unchanged.
+- Human review gate: E-004 Phase A2 single-representation sufficiency proof on the iPhone 14 Pro Max. Phase A removal variants all passed, but that only proves redundancy. Use the fresh helper build and record each displayed `Replay ONLY <type>` variant before Phase B/C.
+- Latest bounded task: M03-T07-A2 native handoff sufficiency; production PWA and normal Copy to Notes remain unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -333,3 +333,27 @@ Updated: 2026-08-26
 - Do not start generated Gym payload synthesis or Shortcut append until this
   Phase A result identifies a viable minimum representation. Keep the PWA
   `Copy to Notes` path unchanged.
+
+## M03-T07-A2 single-representation sufficiency — 2026-08-26
+
+- Phase A device evidence is accepted: every tested `Replay without <type>`
+  variant preserved editable table structure, all five colours, content, and
+  Unicode. No single type was uniquely necessary in the complete captured set.
+- The next bounded experiment is single-type sufficiency. The helper now
+  exposes `Replay ONLY <type>` for each unique readable, non-empty captured
+  representation and writes only that type for every captured item.
+- The helper rejects blank, missing, or unreadable requested types instead of
+  silently replaying the full capture, and preserves captured item order.
+- Codex independently verified the native contract at 23/23 checks, the PWA
+  suite at 410/410 tests, `npm run build`, `git diff --check`, and no `src/` or
+  `public/` production changes. A fresh DSH `/agent-teams` implementation
+  attempt timed out with no delta; the bounded fallback is recorded.
+- Current human gate: install the fresh A2 helper build, capture the small
+  coloured Notes table, tap Inspect, then run each displayed `Replay ONLY`
+  variant—prioritizing `public.rtf`, `com.apple.flat-rtfd`, `public.html`,
+  `com.apple.webarchive`, `com.apple.notes.richtext`, and
+  `public.utf8-plain-text` when present. Record table editability, all five
+  colours, values/order/notes, and Unicode in the Phase A evidence file.
+- Do not start generated Gym payload synthesis or Shortcut append until A2
+  identifies at least one sufficient representation or closes the branch with
+  evidence. Keep the PWA `Copy to Notes` path unchanged.

@@ -77,3 +77,23 @@ Phase A removal testing is complete and shows representation redundancy. Phase
 B generated Gym Logger payload and Phase C Shortcut append remain blocked until
 a minimum sufficient native representation or representation set is identified
 by the next bounded sufficiency test.
+
+## Phase A2 next gate — single-representation sufficiency
+
+The updated helper now provides one `Replay ONLY <type>` button for each unique
+readable, non-empty type from the fresh capture. Run each displayed button using
+the same temporary/test Gym note and record the result separately. Prioritize
+these identifiers when present:
+
+- `public.rtf`
+- `com.apple.flat-rtfd`
+- `public.html`
+- `com.apple.webarchive`
+- `com.apple.notes.richtext`
+- `public.utf8-plain-text` as a negative control
+
+Each single-type result must be judged on editable table structure, all five
+colours, values/order/notes, and Unicode. The helper must not be treated as
+successful merely because it placed bytes on the clipboard. Do not begin a
+generated Gym Logger payload or Shortcut append until at least one single type
+or minimal sufficient set passes this complete-fidelity check.

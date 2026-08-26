@@ -18,6 +18,14 @@ const sampleRepresentations = [
 const retainedAfterRemoval = sampleRepresentations.filter(
   ({ typeIdentifier }) => typeIdentifier !== "public.html",
 );
+const sampleItems = [
+  [sampleRepresentations[0], sampleRepresentations[1], sampleRepresentations[2]],
+  [sampleRepresentations[2], sampleRepresentations[0]],
+];
+const requestedType = "public.rtf";
+const onlyRequestedType = sampleItems.map((representations) =>
+  representations.filter(({ typeIdentifier }) => typeIdentifier === requestedType),
+);
 
 const checks = [
   ["bundled fixture matches canonical fixture", JSON.stringify(fixture) === JSON.stringify(bundled)],
@@ -38,7 +46,10 @@ const checks = [
   ["clipboard replay writes captured representations", inspector.includes("replayLatestCapture") && inspector.includes("UIPasteboard.general.setItems")],
   ["removal harness reads non-empty captured type identifiers", inspector.includes("latestCaptureTypeIdentifiers") && inspector.includes("byteLength")],
   ["removal harness excludes only the requested type", inspector.includes("excludingTypeIdentifier") && inspector.includes("representation.typeIdentifier == excludingTypeIdentifier") && retainedAfterRemoval.length === 2 && retainedAfterRemoval.every(({ typeIdentifier }) => typeIdentifier !== "public.html")],
-  ["UI exposes inspection, replay, share, and removal actions", ["Inspect Notes Clipboard", "Replay Captured Clipboard", "Share Capture Report and Raw Payloads", "Replay without "].every((label) => app.includes(label)) && app.includes("Button(\"Replay without \\(typeIdentifier)\")")],
+  ["single replay selects only the requested type", inspector.includes("onlyTypeIdentifier") && inspector.includes("representation.typeIdentifier == requestedType") && onlyRequestedType.every((item) => item.length === 1 && item[0].typeIdentifier === requestedType)],
+  ["single replay preserves captured item order", inspector.includes("for capturedItem in manifest.items") && inspector.includes("items.append(item)")],
+  ["single replay rejects missing or empty types", inspector.includes("trimmingCharacters") && inspector.includes("guard !requestedType.isEmpty") && inspector.includes("missingRepresentation")],
+  ["UI exposes inspection, replay, share, removal, and single actions", ["Inspect Notes Clipboard", "Replay Captured Clipboard", "Share Capture Report and Raw Payloads", "Replay without ", "Replay ONLY "].every((label) => app.includes(label)) && app.includes("Button(\"Replay ONLY \\(typeIdentifier)\")")],
   ["Xcode project references all Swift files and fixture", ["GymLoggerPasteboardHelperApp.swift", "ContentView.swift", "PasteboardPayload.swift", "ClipboardInspector.swift", "latest-session.example.json"].every((name) => project.includes(name))],
 ];
 
