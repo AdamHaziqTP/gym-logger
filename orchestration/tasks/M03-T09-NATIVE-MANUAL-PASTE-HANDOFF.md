@@ -1,6 +1,6 @@
 # M03-T09 — Product native manual-paste handoff
 
-Status: `IMPLEMENTED — CODEX FALLBACK; READY_FOR_HOSTED_BUILD_AND_HUMAN_GATE`
+Status: `IMPLEMENTED — REPLACEMENT IPA READY_FOR_HUMAN_GATE`
 
 ## Context
 
@@ -46,6 +46,20 @@ allows → one manual Paste. Do not iterate Shortcut append or HTML conversion.
   action contract.
 - Run focused/native checks, full PWA tests, production build, diff hygiene,
   and the hosted macOS/Xcode helper build.
+- The hosted build must inspect the resulting IPA, not just the source app:
+  assert the complete bundle identity (`CFBundleExecutable`, identifier, name,
+  display name, package type, and versions), preserve
+  `gymloggerpasteboardproof`, and verify the named executable exists in the
+  packaged app bundle.
 - Do not claim direct manual-paste success until the target iPhone retests the
   new helper using a real production session.
 - Report changed files and any iOS URL/installation limitation honestly.
+
+## Packaging correction checkpoint
+
+The first M03-T09 artifact from hosted run `32972780014` was blocked by a
+malformed packaged `Info.plist` and must not be retried. Commit `040fbb2`
+restored the complete custom plist and added packaged-IPA assertions. Hosted
+run `32974624451` passed those assertions. The task is now ready for the same
+single target-iPhone installation and production-session manual-paste proof;
+the physical result remains pending.

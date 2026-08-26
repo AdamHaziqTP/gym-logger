@@ -8,10 +8,10 @@ Updated: 2026-08-26
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
 - Current task: M03-T09 real production-session native manual-paste handoff
-- Status: HUMAN_REVIEW_REQUIRED — M03-T09 NATIVE HELPER DEVICE PROOF READY
+- Status: HUMAN_REVIEW_REQUIRED — M03-T09 REPLACEMENT HELPER DEVICE PROOF READY
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: install the newest hosted helper, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`.
+- Human review gate: install the replacement helper from hosted run `32974624451`, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact.
 - Latest bounded task: M03-T09 real-session native manual-paste handoff; production PWA ordinary Copy to Notes remains unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
@@ -27,6 +27,7 @@ Updated: 2026-08-26
 - M03-T01/E-003 engineering checkpoint: `75c7ba4` — isolated feasibility harness accepted by Codex at 33/33 focused tests, 186/186 full suite, build, diff audit, and HTTPS runtime smoke; no auxiliary route is adopted into v1
 - B2 helper checkpoint: `249e216` — Apple Notes-shaped generated flat-RTFD source and gate; hosted macOS/Xcode run `32959270742` passed packaging
 - B2 device checkpoint: `d0544c5` — generated Gym Logger flat-RTFD pasted as an editable table with all five row colours; legend-label polish remained open
+- M03-T09 packaging correction: `040fbb2` — complete native helper bundle metadata and packaged-IPA assertions; hosted macOS/Xcode run `32974624451` passed
 
 ## Completed
 
@@ -82,7 +83,8 @@ Updated: 2026-08-26
 - Codex independently verified the Phase C source contract, 410/410 PWA tests, production build, and diff hygiene. Hosted macOS/Xcode run `32961489740` independently compiled and packaged the updated helper from `6d28fec`; the Phase C device gate is now open.
 - Phase C was physically closed at `cda3a58`: Shortcut append reached the correct `Gym` note and preserved a table, but stripped colours and concatenated the legend. No further Shortcut or HTML conversion variants are authorized.
 - M03-T09 OX Alpha dispatch timed out without output or a usable delta in the bounded approximately 150-second DSH Desktop window. Codex fallback implemented the narrow manual-paste handoff and recorded the worker classification in `orchestration/reports/M03-T09-NATIVE-MANUAL-PASTE-HANDOFF-OX-ALPHA-REPORT.md`.
-- M03-T09 is independently green for the PWA/native contract: 412/412 PWA tests, production build, native static contract, and handoff-specific review. Hosted macOS/Xcode run `32972780014` also compiled and packaged the final changed helper; the target iPhone result remains open.
+- M03-T09 is independently green for the PWA/native contract: 412/412 PWA tests, production build, native static contract, and handoff-specific review. Hosted macOS/Xcode run `32974624451` compiled, packaged, and verified the replacement helper IPA; the target iPhone result remains open.
+- The target iPhone blocked M03-T09 before launch because the `32972780014` IPA had a malformed packaged `Info.plist`. Packaging correction `040fbb2` restored the complete bundle identity and added IPA-level CI assertions; the replacement artifact is ready for the same single physical proof.
 
 ## Final disposition
 
@@ -98,7 +100,7 @@ Updated: 2026-08-26
 - M05-T01 backup/restore, M06 release-readiness, and M06-T04 settings restore are accepted for automated scope. Stop only at the consolidated final iPhone 14 Pro Max gate in `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
 - The consolidated iPhone 14 Pro Max pass found real failures in both image-export previews, mobile export-sheet dismissal, local HTTPS trust, and the Home Screen icon. Route the bounded code/icon corrections through M06-T05 before requesting one consolidated retest; do not mark any physical behavior passed from desktop evidence.
 - M06-T05 is accepted for automated scope. The same consolidated checklist now awaits one physical retest at `https://192.168.1.49:4173/`; do not mark device behavior passed from desktop evidence.
-- M03-T03 target-iPhone proof is closed as failed; do not claim Apple Notes colours from the Shortcuts route or desktop evidence. E-004 Phase A/A2 is complete; B2 generated-payload proof is now the active bounded route.
+- M03-T03 target-iPhone proof is closed as failed; do not claim Apple Notes colours from the Shortcuts route or desktop evidence. E-004 Phase A/A2 and B2 generated-payload proof are complete; M03-T09 production manual-paste proof is the active bounded route.
 - M06-T06 OX invocation produced no output or delta during the bounded ~95-second task window; classify this as a task-level worker hang/timeout, not OX unavailability. Codex fallback was used only after that concrete failure and independently verified the implementation.
 
 ## Deferred
@@ -121,7 +123,7 @@ Updated: 2026-08-26
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: trusted HTTPS verification completed.
 - E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.
-- E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is the active bounded proof; no paid Developer dependency is authorized.
+- E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss; M03-T09 native manual-paste proof is the active gate and no paid Developer dependency is authorized.
 
 ## Active task checkpoint
 

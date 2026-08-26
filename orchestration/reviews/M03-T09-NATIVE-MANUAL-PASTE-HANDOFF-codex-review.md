@@ -27,17 +27,25 @@ Updated: 2026-08-26
 - Native static contract: **PASS** (`node orchestration/feasibility/E-004-native/verify.mjs`).
 - PWA full suite: **PASS — 412/412 tests, 36 files**.
 - `npm run build`: **PASS**.
-- `git diff --check`: pending final checkpoint after orchestration docs are
-  updated.
-- Swift/Xcode compile and packaging: **PASS** via hosted macOS/Xcode workflow
-  `32972780014` on commit `08f894b`; the artifact contains the helper app,
-  bundled fixture, and registered `gymloggerpasteboardproof` URL scheme. This
-  proves packaging only, not the Apple Notes or target-device result.
+- `git diff --check`: **PASS** for the packaging correction.
+- The previous hosted artifact `32972780014` was rejected by LiveContainer
+  before launch because its packaged plist omitted required bundle identity
+  fields. It must not be retried.
+- Swift/Xcode compile and packaging correction: **PASS** via hosted
+  macOS/Xcode workflow
+  [`32974624451`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32974624451)
+  on commit `040fbb2`.
+- Packaged-IPA assertions: **PASS** — `CFBundleExecutable` is
+  `GymLoggerPasteboardHelper`, the bundle identifier/name/display/version
+  fields are present, `CFBundlePackageType` is `APPL`, the
+  `gymloggerpasteboardproof` scheme remains present, and the named executable
+  exists in the app bundle. This proves packaging only, not Apple Notes or the
+  target-device result.
 
 ## Acceptance boundary
 
-This review accepts the code and transport contract for the next device gate.
-It does not mark the target iPhone result passed. The helper must be built and
-installed, then the product owner must paste one real production session into
-the existing `Gym` note and verify the checklist in the accompanying evidence
-file.
+This review accepts the code, transport contract, and replacement IPA
+packaging for the next device gate. It does not mark the target iPhone result
+passed. The replacement helper must be installed, then the product owner must
+paste one real production session into the existing `Gym` note and verify the
+checklist in the accompanying evidence file.

@@ -1,12 +1,16 @@
 # M03-T09 — real production-session native manual-paste handoff
 
-Status: `BLOCKED — FINAL HELPER IPA CANNOT BE IMPORTED BY LIVECONTAINER`
+Status: `READY FOR RETEST — REPLACEMENT HELPER IPA PACKAGING VERIFIED`
 
 Target: iPhone 14 Pro Max
 
-Build: hosted macOS/Xcode workflow
+Replacement build: hosted macOS/Xcode workflow
+[`32974624451`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32974624451)
+(`GymLoggerPasteboardHelper-unsigned` artifact, commit `040fbb2`).
+
+The earlier artifact from
 [`32972780014`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32972780014)
-(`GymLoggerPasteboardHelper-unsigned` artifact, commit `08f894b`).
+is invalid for this gate and must not be retried.
 
 This is the single physical proof for the productized fallback. It is not a
 Shortcut append test. The expected flow is Gym Logger → native helper → native
@@ -47,6 +51,29 @@ minimum OS version, device family, and required arm64 capability, but no
 Therefore this is an artifact-packaging defect, not a failed Apple Notes colour
 handoff and not evidence that LiveContainer itself is incompatible with the helper.
 Do not ask the product owner to retry the same IPA.
+
+## Packaging correction completed — 2026-08-26
+
+The custom native app plist was restored with the complete application identity,
+including executable, identifier, name/display name, package type, and version
+fields. The hosted workflow now extracts `Info.plist` from the resulting IPA
+and asserts those fields, the `gymloggerpasteboardproof` URL scheme, and the
+presence of the executable named by `CFBundleExecutable`.
+
+Hosted run
+[`32974624451`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32974624451)
+passed the build, packaging, and all IPA metadata assertions:
+
+- `CFBundleExecutable = GymLoggerPasteboardHelper`;
+- bundle identifier, name, display name, short version, and bundle version are
+  present;
+- `CFBundlePackageType = APPL`;
+- `gymloggerpasteboardproof` remains registered;
+- `Payload/GymLoggerPasteboardHelper.app/GymLoggerPasteboardHelper` exists.
+
+This resolves the recorded LiveContainer import blocker. The replacement IPA
+is ready for the same physical M03-T09 proof; no Notes result has been inferred
+from the hosted build.
 
 ## Required correction before retest
 
@@ -94,9 +121,11 @@ this packaging regression cannot recur.
 
 Current device result:
 
-- helper import/install: **BLOCKED** — malformed packaged `Info.plist` causes
-  LiveContainer `Unknown.app/(null): Bad file descriptor` before launch;
-- Notes handoff checks: **NOT RUN** because the helper could not be imported.
+- previous helper import/install: **BLOCKED** — malformed packaged `Info.plist`
+  caused LiveContainer `Unknown.app/(null): Bad file descriptor` before launch;
+- replacement helper import/install: **PENDING HUMAN RETEST**;
+- Notes handoff checks: **NOT RUN** for the replacement because this is a new
+  artifact and physical installation is still required.
 
 Do not infer the Notes result from source, desktop tests, or the earlier B2
 fixture proof. Once a corrected IPA installs successfully, repeat the physical
