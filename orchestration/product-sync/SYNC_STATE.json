@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "checkpoint-pushed",
+      "summary": "Pushed 3c08b33. E-004 exact native Notes capture/replay is reported PASS; generated Gym Logger coloured Notes export remains unproven and is not productized; v1 PWA production path is unchanged.",
+      "at": "2026-08-26T07:09:56.939Z"
+    },
+    {
       "name": "m03-t07-closed",
       "summary": "M03-T07 closed after Codex review: exact native Notes capture/replay is proven, but generated Gym Logger coloured export is not safely productizable from the available evidence; keep v1 production unchanged.",
       "at": "2026-08-26T07:09:39.853Z"
@@ -56,21 +61,16 @@
       "name": "worker-timeout-and-proof-ready",
       "summary": "M03-T04 WebKit native-selection-copy proof is ready for one target-iPhone paste; M06-T07 polish remains automated-green and colour recovery is reopened.",
       "at": "2026-08-25T17:49:29.197Z"
-    },
-    {
-      "name": "checkpoint-published",
-      "summary": "M06-T05 framing checkpoint and M06-T06 migration verification counts are current; 374/374 tests, build, LAN runtime and certificate pass; target iPhone framing retest remains open.",
-      "at": "2026-08-25T17:07:00.914Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T07:09:39.854Z",
+  "lastPublishedAt": "2026-08-26T07:09:56.939Z",
   "lastEvent": {
-    "name": "m03-t07-closed",
-    "summary": "M03-T07 closed after Codex review: exact native Notes capture/replay is proven, but generated Gym Logger coloured export is not safely productizable from the available evidence; keep v1 production unchanged.",
-    "at": "2026-08-26T07:09:39.853Z"
+    "name": "checkpoint-pushed",
+    "summary": "Pushed 3c08b33. E-004 exact native Notes capture/replay is reported PASS; generated Gym Logger coloured Notes export remains unproven and is not productized; v1 PWA production path is unchanged.",
+    "at": "2026-08-26T07:09:56.939Z"
   },
-  "syncRevision": 88,
+  "syncRevision": 89,
   "openEscalations": [],
   "chatNotifications": [
     {
