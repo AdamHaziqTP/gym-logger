@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "e004-native-helper-ready",
+      "summary": "M03-T06 closed after exact Notes HTML replay stripped colours; E-004 native pasteboard inspection/replay helper and hosted macOS build are ready for one iPhone 14 Pro Max proof. Hosted run 32925095555 succeeded; no device colour result claimed.",
+      "at": "2026-08-26T03:09:27.085Z"
+    },
+    {
       "name": "m03-t06-exact-html-replay-ready",
       "summary": "M03-T05 fingerprint showed Apple Notes colour-bearing HTML; M03-T06 exact replay is independently verified and ready for one target-iPhone paste. E-004 native inspection remains staged behind the physical replay result.",
       "at": "2026-08-26T02:34:39.964Z"
@@ -56,21 +61,16 @@
       "name": "worker-diagnostic",
       "summary": "DSH/OX recovery verified: unpatched smoke 16.65s PASS, patched smoke 25.33s PASS, larger worker task timeout 90.08s; classify task hang, not OX unavailable",
       "at": "2026-08-25T16:19:55.786Z"
-    },
-    {
-      "name": "accepted-checkpoint",
-      "summary": "M06-T05 alternate pure-JS rasterizer checkpoint d8f19e9; one saved-image-only iPhone retest remains",
-      "at": "2026-08-25T15:59:58.014Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T02:34:39.964Z",
+  "lastPublishedAt": "2026-08-26T03:09:27.085Z",
   "lastEvent": {
-    "name": "m03-t06-exact-html-replay-ready",
-    "summary": "M03-T05 fingerprint showed Apple Notes colour-bearing HTML; M03-T06 exact replay is independently verified and ready for one target-iPhone paste. E-004 native inspection remains staged behind the physical replay result.",
-    "at": "2026-08-26T02:34:39.964Z"
+    "name": "e004-native-helper-ready",
+    "summary": "M03-T06 closed after exact Notes HTML replay stripped colours; E-004 native pasteboard inspection/replay helper and hosted macOS build are ready for one iPhone 14 Pro Max proof. Hosted run 32925095555 succeeded; no device colour result claimed.",
+    "at": "2026-08-26T03:09:27.085Z"
   },
-  "syncRevision": 83,
+  "syncRevision": 84,
   "openEscalations": [],
   "chatNotifications": [
     {
