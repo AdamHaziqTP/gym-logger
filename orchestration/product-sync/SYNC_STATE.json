@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "e004-native-helper-device-gate",
+      "summary": "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed.",
+      "at": "2026-08-26T03:10:32.076Z"
+    },
+    {
       "name": "e004-native-helper-ready",
       "summary": "M03-T06 closed after exact Notes HTML replay stripped colours; E-004 native pasteboard inspection/replay helper and hosted macOS build are ready for one iPhone 14 Pro Max proof. Hosted run 32925095555 succeeded; no device colour result claimed.",
       "at": "2026-08-26T03:09:27.085Z"
@@ -56,21 +61,16 @@
       "name": "worker-diagnostic-checkpoint",
       "summary": "Worker diagnostic report committed at 5b6122e; wrapper and patched smoke pass, larger worker task timeout classified",
       "at": "2026-08-25T16:20:15.161Z"
-    },
-    {
-      "name": "worker-diagnostic",
-      "summary": "DSH/OX recovery verified: unpatched smoke 16.65s PASS, patched smoke 25.33s PASS, larger worker task timeout 90.08s; classify task hang, not OX unavailable",
-      "at": "2026-08-25T16:19:55.786Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T03:09:27.085Z",
+  "lastPublishedAt": "2026-08-26T03:10:32.076Z",
   "lastEvent": {
-    "name": "e004-native-helper-ready",
-    "summary": "M03-T06 closed after exact Notes HTML replay stripped colours; E-004 native pasteboard inspection/replay helper and hosted macOS build are ready for one iPhone 14 Pro Max proof. Hosted run 32925095555 succeeded; no device colour result claimed.",
-    "at": "2026-08-26T03:09:27.085Z"
+    "name": "e004-native-helper-device-gate",
+    "summary": "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed.",
+    "at": "2026-08-26T03:10:32.076Z"
   },
-  "syncRevision": 84,
+  "syncRevision": 85,
   "openEscalations": [],
   "chatNotifications": [
     {

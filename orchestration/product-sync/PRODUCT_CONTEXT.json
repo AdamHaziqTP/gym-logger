@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T03:09:27.144Z",
+  "generatedAt": "2026-08-26T03:10:32.135Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "9f4665e chore: sync E-004 native helper context",
     "8713188 docs: record native helper build gate",
     "38fea43 fix: package hosted native helper build output",
     "008453c fix: isolate native helper pasteboard UI on main actor",
-    "e519c05 fix: correct native helper project paths",
-    "778045e fix: correct hosted native helper build workflow"
+    "e519c05 fix: correct native helper project paths"
   ],
   "codexVerification": [
     {
@@ -179,7 +179,7 @@
     "obtain the unsigned helper artifact from the successful hosted build, sign/install it through a legitimate iOS test route, then copy a small five-colour table in Apple Notes, inspect/replay the native pasteboard, and report editable table structure, colours, Unicode, and data fidelity. Do not claim success from desktop or hosted build evidence."
   ],
   "decisionsMadeSinceLastSync": [
-    "M03-T06 closed after exact Notes HTML replay stripped colours; E-004 native pasteboard inspection/replay helper and hosted macOS build are ready for one iPhone 14 Pro Max proof. Hosted run 32925095555 succeeded; no device colour result claimed."
+    "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed."
   ],
   "recordedDecisions": [
     {
@@ -231,7 +231,7 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "8713188666f732dbbeab5b34b494a8a461293c2d",
+    "commit": "9f4665e923c0704dd74e60db13c3a96b8674585c",
     "branch": "main",
     "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
@@ -256,11 +256,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "e004-native-helper-ready",
-      "summary": "M03-T06 closed after exact Notes HTML replay stripped colours; E-004 native pasteboard inspection/replay helper and hosted macOS build are ready for one iPhone 14 Pro Max proof. Hosted run 32925095555 succeeded; no device colour result claimed.",
-      "at": "2026-08-26T03:09:27.085Z"
+      "name": "e004-native-helper-device-gate",
+      "summary": "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed.",
+      "at": "2026-08-26T03:10:32.076Z"
     },
-    "contextRevision": 84,
+    "contextRevision": 85,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
