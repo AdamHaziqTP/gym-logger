@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T15:51:12.011Z",
+  "generatedAt": "2026-08-26T15:51:35.177Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "ab1342e docs: open corrected one-app IPA device gate",
     "96579d0 fix: report one-app native handoff completion",
     "70da01a docs: open one-app IPA device gate",
     "dc228e6 fix: correct one-app iOS source paths",
-    "cbbbf1f fix: stage bundled web app at iOS project root",
-    "da21c90 feat: add all-in-one Gym Logger iOS shell"
+    "cbbbf1f fix: stage bundled web app at iOS project root"
   ],
   "codexVerification": [
     {
@@ -177,7 +177,7 @@
     "install the single `GymLogger-unsigned.ipa` artifact from hosted run `32986140862` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate."
   ],
   "decisionsMadeSinceLastSync": [
-    "Corrected all-in-one IPA from hosted run 32986140862 passed independent package inspection; consolidated iPhone 14 Pro Max gate is open."
+    "All automatable one-app IPA checks are green; corrected hosted artifact 32986140862 is ready for the single consolidated iPhone 14 Pro Max acceptance pass."
   ],
   "recordedDecisions": [
     {
@@ -229,16 +229,12 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "96579d043418ed3d97161b7b7670a12ca9f380cd",
+    "commit": "ab1342e606acc7bab442bc145b13beac1a791ed7",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/reviews/M03-T10-ONE-APP-IPA-CODEX-REVIEW.md\n M orchestration/state/STATE.md\n M orchestration/tasks/M03-T10-ONE-APP-IPA-PRODUCTIZATION.md",
+    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
-      "orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/reviews/M03-T10-ONE-APP-IPA-CODEX-REVIEW.md",
-      "orchestration/state/STATE.md",
-      "orchestration/tasks/M03-T10-ONE-APP-IPA-PRODUCTIZATION.md"
+      "orchestration/product-orchestrator/bootstrap.mjs"
     ]
   },
   "builder": {
@@ -258,11 +254,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t10-corrected-hosted-ipa-ready",
-      "summary": "Corrected all-in-one IPA from hosted run 32986140862 passed independent package inspection; consolidated iPhone 14 Pro Max gate is open.",
-      "at": "2026-08-26T15:51:11.950Z"
+      "name": "m03-t10-corrected-hosted-ipa-device-gate",
+      "summary": "All automatable one-app IPA checks are green; corrected hosted artifact 32986140862 is ready for the single consolidated iPhone 14 Pro Max acceptance pass.",
+      "at": "2026-08-26T15:51:35.123Z"
     },
-    "contextRevision": 114,
+    "contextRevision": 115,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

@@ -3,6 +3,11 @@
   "activeBuilder": "openrouter-free",
   "events": [
     {
+      "name": "m03-t10-corrected-hosted-ipa-device-gate",
+      "summary": "All automatable one-app IPA checks are green; corrected hosted artifact 32986140862 is ready for the single consolidated iPhone 14 Pro Max acceptance pass.",
+      "at": "2026-08-26T15:51:35.123Z"
+    },
+    {
       "name": "m03-t10-corrected-hosted-ipa-ready",
       "summary": "Corrected all-in-one IPA from hosted run 32986140862 passed independent package inspection; consolidated iPhone 14 Pro Max gate is open.",
       "at": "2026-08-26T15:51:11.950Z"
@@ -56,11 +61,6 @@
       "name": "m03-t09-device-proof-ready",
       "summary": "Hosted macOS/Xcode run 32972463589 compiled and packaged the real-session helper from 53d322c. M03-T09 now waits only for one target-iPhone production-session manual-paste proof.",
       "at": "2026-08-26T13:10:27.376Z"
-    },
-    {
-      "name": "m03-t09-manual-paste-gate-ready",
-      "summary": "Phase C Shortcut append closed after cda3a58; M03-T09 real-session native manual-paste handoff is implemented and independently verified. Hosted helper run 32972463589 is ready for one target-iPhone production-session paste.",
-      "at": "2026-08-26T13:09:56.649Z"
     }
   ],
   "builderChanges": [
@@ -71,13 +71,13 @@
       "reason": "Product owner disabled OX Alpha for remaining Gym Logger work; use Codex subagents/fallback for any follow-up instead."
     }
   ],
-  "lastPublishedAt": "2026-08-26T15:51:11.951Z",
+  "lastPublishedAt": "2026-08-26T15:51:35.123Z",
   "lastEvent": {
-    "name": "m03-t10-corrected-hosted-ipa-ready",
-    "summary": "Corrected all-in-one IPA from hosted run 32986140862 passed independent package inspection; consolidated iPhone 14 Pro Max gate is open.",
-    "at": "2026-08-26T15:51:11.950Z"
+    "name": "m03-t10-corrected-hosted-ipa-device-gate",
+    "summary": "All automatable one-app IPA checks are green; corrected hosted artifact 32986140862 is ready for the single consolidated iPhone 14 Pro Max acceptance pass.",
+    "at": "2026-08-26T15:51:35.123Z"
   },
-  "syncRevision": 114,
+  "syncRevision": 115,
   "openEscalations": [],
   "chatNotifications": [
     {
