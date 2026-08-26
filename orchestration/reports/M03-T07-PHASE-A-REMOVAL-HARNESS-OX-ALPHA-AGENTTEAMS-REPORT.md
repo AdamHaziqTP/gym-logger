@@ -41,5 +41,9 @@ Codex completed the narrow fallback implementation after the concrete timeout:
 - `git diff --check`: PASS;
 - production `src/` and `public/` diff: none.
 
-The Swift helper still requires the hosted macOS/Xcode workflow for a fresh
-device-installable build. No physical result is claimed by this report.
+The source was subsequently rebuilt successfully by hosted workflow run
+`32946246114` ([run details](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32946246114)).
+Codex downloaded and inspected the `GymLoggerPasteboardHelper-unsigned` IPA;
+it contains the helper app, `Info.plist`, and the bundled fixture. This is a
+compile/package result only; no physical installation or Apple Notes result is
+claimed by this report.

@@ -30,6 +30,9 @@ without guesswork or a new target-device proof.
       path or guessing private Apple Notes types.
 - [x] The helper variant label renders the actual type identifier, and the
       platform-neutral contract checks cover the exclusion behavior.
+- [x] Hosted macOS/Xcode workflow `32946246114` compiled and packaged the
+      updated helper; Codex verified the IPA contains the helper app and
+      bundled fixture.
 
 ## Remaining gate
 

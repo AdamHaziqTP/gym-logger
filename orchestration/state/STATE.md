@@ -327,6 +327,9 @@ Updated: 2026-08-26
   paste it back into Notes. Record table editability, five colours, values/order,
   and Unicode in
   `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md`.
+- The fresh helper build is ready from hosted macOS/Xcode workflow
+  `32946246114`; Codex verified the unsigned IPA contents. This does not claim
+  installation or Apple Notes behavior.
 - Do not start generated Gym payload synthesis or Shortcut append until this
   Phase A result identifies a viable minimum representation. Keep the PWA
   `Copy to Notes` path unchanged.

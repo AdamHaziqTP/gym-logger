@@ -1,9 +1,22 @@
 # E-004 Phase A — native representation-removal variants
 
-Status: `HUMAN_REVIEW_REQUIRED — UPDATED HELPER BUILD REQUIRED`
+Status: `HUMAN_REVIEW_REQUIRED — UPDATED HELPER BUILD READY`
 Device: iPhone 14 Pro Max
 Purpose: identify whether one captured native pasteboard representation is
 necessary for Apple Notes to preserve an editable coloured table.
+
+## Updated helper build
+
+The Phase A helper source was rebuilt successfully by the hosted macOS/Xcode
+workflow on `main`:
+
+- Run: [32946246114](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32946246114)
+- Artifact: `GymLoggerPasteboardHelper-unsigned`
+- Verification: the IPA contains `Payload/GymLoggerPasteboardHelper.app`,
+  `Info.plist`, and the bundled `latest-session.example.json` fixture.
+
+The hosted build proves compilation and packaging only. It does not prove
+iPhone installation or Apple Notes behavior.
 
 ## Important boundary
 

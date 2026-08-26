@@ -72,6 +72,8 @@ iPhone.
 The next gate is one fresh helper build on the target iPhone, followed by the
 one-at-a-time removal variants described in
 `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md`.
+The updated helper was rebuilt successfully in hosted workflow run
+`32946246114`; the artifact contains the Phase A controls and bundled fixture.
 Only after that result should the project attempt a generated Gym Logger
 payload. It must not alter the normal PWA Notes path while the proof is
 inconclusive.
