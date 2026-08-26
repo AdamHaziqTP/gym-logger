@@ -39,6 +39,45 @@ jobs:
           (cd artifacts && zip -qry ../GymLoggerPasteboardHelper-unsigned.ipa Payload)
           cp "$app_path/Info.plist" artifacts/GymLoggerPasteboardHelper-Info.plist
 
+      - name: Verify packaged IPA metadata
+        shell: bash
+        working-directory: orchestration/feasibility/E-004-native
+        run: |
+          set -euo pipefail
+          ipa_path="GymLoggerPasteboardHelper-unsigned.ipa"
+          plist_path="$(mktemp)"
+          cleanup() { rm -f "$plist_path"; }
+          trap cleanup EXIT
+
+          unzip -p "$ipa_path" Payload/GymLoggerPasteboardHelper.app/Info.plist > "$plist_path"
+          /usr/bin/plutil -lint "$plist_path"
+
+          plist_value() {
+            /usr/bin/plutil -extract "$1" raw -o - "$plist_path"
+          }
+
+          executable="$(plist_value CFBundleExecutable)"
+          bundle_identifier="$(plist_value CFBundleIdentifier)"
+          package_type="$(plist_value CFBundlePackageType)"
+          bundle_name="$(plist_value CFBundleName)"
+          display_name="$(plist_value CFBundleDisplayName)"
+          short_version="$(plist_value CFBundleShortVersionString)"
+          bundle_version="$(plist_value CFBundleVersion)"
+
+          test "$executable" = "GymLoggerPasteboardHelper"
+          test -n "$bundle_identifier"
+          test "$package_type" = "APPL"
+          test -n "$bundle_name"
+          test -n "$display_name"
+          test -n "$short_version"
+          test -n "$bundle_version"
+          /usr/bin/plutil -convert xml1 -o - "$plist_path" | grep -Fq 'gymloggerpasteboardproof'
+          unzip -Z1 "$ipa_path" | grep -Fxq "Payload/GymLoggerPasteboardHelper.app/$executable"
+
+          echo "IPA metadata PASS: executable=$executable bundle_id=$bundle_identifier package_type=$package_type name=$bundle_name display_name=$display_name version=$short_version ($bundle_version)"
+          echo "IPA URL scheme PASS: gymloggerpasteboardproof"
+          echo "IPA executable path PASS: Payload/GymLoggerPasteboardHelper.app/$executable"
+
       - name: Upload unsigned build artifact
         uses: actions/upload-artifact@v4
         with:
