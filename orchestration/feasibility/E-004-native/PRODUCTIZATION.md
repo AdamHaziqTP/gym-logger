@@ -2,7 +2,7 @@
 
 Updated: 2026-08-26
 
-Status: `PHASE B2 READY — APPLE NOTES-SHAPED GENERATED FLAT-RTFD DEVICE PROOF REQUIRED`
+Status: `PHASE C READY — NATIVE FLAT-RTFD SHORTCUT APPEND DEVICE PROOF REQUIRED`
 
 ## Verified capability
 
@@ -138,10 +138,11 @@ iPhone.
 
 ## Current next gate and re-open criteria
 
-The next gate is the B2 generated Apple Notes-shaped flat-RTFD paste described
-in
-`orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B2-APPLE-NOTES-SHAPED-FLAT-RTFD.md`.
-The B2 helper is ready from hosted macOS/Xcode workflow `32959270742`; the
-artifact contains the new Apple-shaped generator and bundled fixture. Only
-after the target-iPhone B2 result should the project attempt Shortcut append.
-It must not alter the normal PWA Notes path while the proof is inconclusive.
+The next gate is the Phase C Shortcut append proof described in
+`orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-C-SHORTCUT-APPEND.md`.
+Install the latest hosted macOS/Xcode helper artifact, create the one-time
+`Gym Logger to Gym` Shortcut with only `Append Shortcut Input to Gym`, then use
+the helper's Phase C action. Do not interpret direct B2 paste success as proof
+that Shortcut append preserves the native representation. If append strips
+fidelity, retain the helper's perfect-clipboard/manual-paste fallback and do
+not alter the PWA path.

@@ -70,6 +70,13 @@ enum NativePayloadBuilder {
         "orange": "#261802", "purple": "#1f0e27", "mint": "#0f201f",
         "blue": "#021529", "pink": "#260809",
     ]
+    private static let notesLegend: [(label: String, highlight: String)] = [
+        ("Arms", "orange"),
+        ("Back", "purple"),
+        ("Chest", "mint"),
+        ("Delts", "blue"),
+        ("Legs", "pink"),
+    ]
 
     static func loadFixture() throws -> FixtureSession {
         guard let url = Bundle.main.url(forResource: "latest-session.example", withExtension: "json") else {
@@ -165,6 +172,12 @@ enum NativePayloadBuilder {
 
     private static let notesHighlightReset = "\\AppleHighlight0 \\AppleHilightClrSch0"
 
+    private static func makeNotesLegend() -> String {
+        notesLegend.map { entry in
+            "\(notesHighlightPrefix(for: entry.highlight))\(rtfEscape(entry.label))\(notesHighlightReset)"
+        }.joined(separator: " ")
+    }
+
     private static func makeRTF(session: FixtureSession, rows: [FixtureRow], summary: String) -> String {
         // These indices and Apple-specific controls mirror the RTF semantics
         // observed in a Notes-origin flat-RTFD capture. The session values
@@ -186,7 +199,7 @@ enum NativePayloadBuilder {
                 .joined()
             return "\(bounds)\(cells)\\row"
         }.joined(separator: "\n")
-        return "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2865\\cocoatextscaling0\\cocoaplatform0\\deff0\(fontTable)\(colourTable)\(expandedColourTable)\\margl720\\margr720\\vieww12000\\viewh16000\\pard\\itap0\\f1\\fs28\\cf2 \\AppleHighlight0 \\AppleHilightClrSch0\\b \(rtfEscape(session.displayDate))\\b0\\par\\pard \(rtfEscape(categories.joined(separator: " ")))\\par\\pard \(rtfEscape(summary))\\par\(bounds)\(header)\\row\n\(body)\\pard\\itap0\\f1\\fs28\\cf2 \\AppleHighlight0 \\AppleHilightClrSch0\\b Notes\\b0\\par\(rtfEscape(session.notes))}"
+        return "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2865\\cocoatextscaling0\\cocoaplatform0\\deff0\(fontTable)\(colourTable)\(expandedColourTable)\\margl720\\margr720\\vieww12000\\viewh16000\\pard\\itap0\\f1\\fs28\\cf2 \\AppleHighlight0 \\AppleHilightClrSch0\\b \(rtfEscape(session.displayDate))\\b0\\par\\pard \(makeNotesLegend())\\par\\pard \(rtfEscape(summary))\\par\(bounds)\(header)\\row\n\(body)\\pard\\itap0\\f1\\fs28\\cf2 \\AppleHighlight0 \\AppleHilightClrSch0\\b Notes\\b0\\par\(rtfEscape(session.notes))}"
     }
 
     private static func makeFlatRTFD(rtf: String) throws -> Data {

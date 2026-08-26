@@ -364,3 +364,21 @@ highlight controls and Cocoa/table metadata, package it as only
 PWA, ordinary uncoloured `Copy to Notes`, and all captured-payload diagnostics
 unchanged. If B2 fails, close generated colour recovery unless a new product
 decision reopens it.
+
+## M03-T07-B2 accepted; M03-T08 Phase C authorized — 2026-08-26
+
+The product owner supplied target-iPhone evidence at `d0544c5` that the B2
+generated Gym Logger payload pastes into Apple Notes as an editable table with
+correct content and all five row/category colours. The separate legend labels
+were not individually coloured; treat that as a narrow polish correction and
+do not reopen the completed B2 feasibility work.
+
+Authorize one bounded Phase C proof. The isolated native helper may colour the
+five legend labels and may add a separate action that writes only the proven
+`com.apple.flat-rtfd` payload, then opens the documented
+`shortcuts://run-shortcut?name=Gym%20Logger%20to%20Gym&input=clipboard` URL.
+The intended user-created Shortcut is named `Gym Logger to Gym` and contains
+only `Append Shortcut Input to Gym`. Do not use Get Text, HTML conversion, or
+any flattening action. Keep the existing PWA and ordinary Copy to Notes path
+unchanged. Do not claim Shortcut append success until the target iPhone proves
+editable table, all five colours, content/order, summary, notes, and Unicode.

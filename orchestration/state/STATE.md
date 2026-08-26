@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
-- Current task: M03-T07-B2 generated Apple Notes-shaped flat-RTFD proof
-- Status: HUMAN_REVIEW_REQUIRED — B2 HELPER BUILD READY
+- Current task: M03-T08 Phase C native flat-RTFD Shortcut append proof
+- Status: HUMAN_REVIEW_REQUIRED — PHASE C HELPER BUILD PENDING
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: E-004 Phase B2 generated Apple Notes-shaped flat-RTFD proof on the iPhone 14 Pro Max. Phase B passed table/content but failed all colours; now paste the newly generated B2 fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C.
-- Latest bounded task: M03-T07-B2 generated Apple Notes-shaped native handoff; production PWA and normal Copy to Notes remain unchanged.
+- Human review gate: B2 core passed on the iPhone 14 Pro Max at `d0544c5` (editable generated table, all five row colours, content, and Unicode). Install the fresh Phase C helper, verify the five coloured legend labels, configure the one-action `Gym Logger to Gym` Shortcut with only `Append Shortcut Input to Gym`, and verify direct append preserves the editable coloured table, content/order, summary, notes, and Unicode.
+- Latest bounded task: M03-T08 Phase C native handoff; production PWA and normal Copy to Notes remain unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -26,6 +26,7 @@ Updated: 2026-08-26
 - M03-T01/FIX-03 engineering checkpoint: 153/153 tests, build, diff audit, and HTTPS runtime smoke accepted; Apple Notes color interoperability was escalated and is now resolved as a documented v1 limitation
 - M03-T01/E-003 engineering checkpoint: `75c7ba4` — isolated feasibility harness accepted by Codex at 33/33 focused tests, 186/186 full suite, build, diff audit, and HTTPS runtime smoke; no auxiliary route is adopted into v1
 - B2 helper checkpoint: `249e216` — Apple Notes-shaped generated flat-RTFD source and gate; hosted macOS/Xcode run `32959270742` passed packaging
+- B2 device checkpoint: `d0544c5` — generated Gym Logger flat-RTFD pasted as an editable table with all five row colours; legend-label polish remained open
 
 ## Completed
 
@@ -76,6 +77,9 @@ Updated: 2026-08-26
 - Phase B physical evidence at `934ddd7` passed the newly generated flat-RTFD table/content structure but failed all five category colours. Phase C remains blocked; B2 is the bounded Apple Notes-shaped RTF correction.
 - B2 Apple Notes-shaped helper correction is independently green for automated scope: native contract checks pass, the full PWA suite is 410/410, build and diff hygiene pass, and production `src/`/`public/` remain unchanged. Target-iPhone colour fidelity is unproven.
 - Hosted macOS/Xcode run `32959270742` passed from `249e216`; Codex verified the unsigned IPA contains the helper app and bundled fixture. This proves packaging only, not the Apple Notes result.
+- B2 target-iPhone result is accepted for core feasibility at `d0544c5`: generated data pasted as an editable table with all five row/category colours, correct content/order/summary/notes/Unicode; only the separate legend labels were uncoloured.
+- The bounded M03-T08 Phase C task was attempted through a fresh DSH Desktop headless `/agent-teams` dispatch with the configured OpenRouter/stealth/ox-alpha patch. It produced no stdout or delta for 150 seconds and was terminated as a task-level worker timeout; Codex fallback added the legend polish and Shortcut proof action.
+- Codex independently verified the Phase C source contract, 410/410 PWA tests, production build, and diff hygiene. Hosted macOS/Xcode packaging is the remaining automated checkpoint before opening the device gate.
 
 ## Final disposition
 
@@ -106,7 +110,7 @@ Updated: 2026-08-26
 - M06-T05 framing is the current physical export gate: retest one Faithful and one Compact saved PNG for visible content and correct full-frame geometry. Preview and mobile dismissal remain accepted from the latest physical evidence unless they regress.
 - The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending.
 - M03-T03 Shortcuts share, one-time setup, and colour-recovery proof are closed as a physical failure; the ordinary uncoloured Copy to Notes baseline remains accepted.
-- E-004 B2 generated Gym Logger payload is the current gate; Phase C Shortcut append remains deferred. Preserve the helper and do not infer generated Apple Notes fidelity from captured-payload replay.
+- E-004 B2 generated Gym Logger payload passed at `d0544c5`; the current gate is Phase C Shortcut append. Preserve the helper and do not infer Shortcut append fidelity from captured-payload replay.
 - The post-`0cb9b46` saved-image retest found fully transparent Faithful and Compact PNGs. The active correction is `orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md`; do not mark PNG delivery passed from desktop evidence.
 
 ## Escalations
@@ -114,7 +118,7 @@ Updated: 2026-08-26
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: trusted HTTPS verification completed.
 - E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.
-- E-004 Phase A/A2 is complete. B2 generated Apple Notes-shaped flat-RTFD proof is active and requires one hosted-helper target-iPhone paste; no paid Developer dependency is authorized.
+- E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is the active bounded proof; no paid Developer dependency is authorized.
 
 ## Active task checkpoint
 
@@ -419,3 +423,24 @@ Updated: 2026-08-26
   editable table, all five colours, content/order/summary/notes, and Unicode.
   No device PASS is inferred from desktop/source evidence.
 - Phase C remains blocked until the B2 generated-workout result passes.
+
+## M03-T08 Phase C native flat-RTFD Shortcut append proof — 2026-08-26
+
+- B2 core feasibility passed on the target iPhone at `d0544c5`: a freshly
+  generated Gym Logger workout pasted as an editable Apple Notes table with
+  all five row/category colours and correct content. The uncoloured legend
+  labels are a narrow polish item, not a reason to reopen B2.
+- The bounded implementation adds Apple-highlight colouring to the five
+  legend labels and adds a separate helper action that writes only the proven
+  `com.apple.flat-rtfd` representation before opening
+  `shortcuts://run-shortcut?name=Gym%20Logger%20to%20Gym&input=clipboard`.
+  Existing capture/replay/sufficiency controls and the PWA path remain intact.
+- The configured DSH Desktop `/agent-teams` task produced no output or delta in
+  the bounded 150-second window. This is recorded as a task-level timeout; the
+  Codex fallback is independently verified and does not claim OX-authored code.
+- Current human gate: install the new hosted helper, ensure a one-time Shortcut
+  named `Gym Logger to Gym` contains only `Append Shortcut Input to Gym`, tap
+  `Generate & Run Gym Logger to Gym Shortcut`, and inspect the existing `Gym`
+  note for an editable table, five legend/row colours, correct content/order,
+  summary, notes, and Unicode. No Shortcut append success is inferred until
+  this physical result is recorded.

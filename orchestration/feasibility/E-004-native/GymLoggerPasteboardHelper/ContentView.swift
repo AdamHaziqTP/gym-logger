@@ -59,6 +59,13 @@ struct ContentView: View {
                 Button("Copy Generated Gym Session (flat-RTFD only)") { copySession() }
                     .buttonStyle(.bordered)
 
+                Text("Phase C Shortcut proof").font(.headline)
+                Text("One-time setup: create a Shortcut named Gym Logger to Gym with only ‘Append Shortcut Input to Gym’. This proof keeps the native flat-RTFD clipboard item intact; it does not convert it to text or HTML.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                Button("Generate & Run Gym Logger to Gym Shortcut") { copySessionAndRunShortcut() }
+                    .buttonStyle(.borderedProminent)
+
                 Text(status).font(.footnote).foregroundStyle(.secondary)
             }
             .padding(24)
@@ -134,6 +141,30 @@ struct ContentView: View {
             status = "Generated a new Gym Logger flat-RTFD payload. Open a temporary Gym note and paste once."
         } catch {
             status = "Could not load the bundled proof fixture."
+        }
+    }
+
+    private func copySessionAndRunShortcut() {
+        do {
+            let session = try NativePayloadBuilder.loadFixture()
+            let payload = try NativePayloadBuilder.makePayload(session: session)
+            UIPasteboard.general.setItems(
+                [payload.flatRTFDPasteboardItem],
+                options: [.expirationDate: Date().addingTimeInterval(600)]
+            )
+            guard let url = URL(string: "shortcuts://run-shortcut?name=Gym%20Logger%20to%20Gym&input=clipboard") else {
+                status = "Clipboard prepared, but the Gym Logger to Gym Shortcut URL is invalid."
+                return
+            }
+            status = "Native flat-RTFD clipboard prepared. Opening Gym Logger to Gym; verify the existing Gym note after the Shortcut runs."
+            UIApplication.shared.open(url, options: [:]) { didOpen in
+                guard !didOpen else { return }
+                Task { @MainActor in
+                    status = "Clipboard prepared, but iOS could not open Gym Logger to Gym. Check that the Shortcut exists with only Append Shortcut Input to Gym."
+                }
+            }
+        } catch {
+            status = "Could not prepare the generated native Notes payload."
         }
     }
 }

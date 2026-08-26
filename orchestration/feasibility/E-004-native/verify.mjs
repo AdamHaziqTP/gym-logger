@@ -53,6 +53,13 @@ const checks = [
   ["generated RTF uses expanded Apple colour table", source.includes("\\expandedcolortbl") && source.includes("\\cssrgb")],
   ["generated RTF uses all five Apple highlight schemes", appleHighlightSchemes.every((value) => source.includes(value))],
   ["generated RTF resets Apple highlight state", source.includes(`${sourceSlash}AppleHighlight0 ${sourceSlash}AppleHilightClrSch0`)],
+  ["generated RTF colors each legend label", source.includes("makeNotesLegend") && [
+    '("Arms", "orange")',
+    '("Back", "purple")',
+    '("Chest", "mint")',
+    '("Delts", "blue")',
+    '("Legs", "pink")',
+  ].every((value) => source.includes(value))],
   ["generated RTF has Apple table nesting metadata", source.includes("\\itap1") && source.includes("\\trowd")],
   ["generated RTF removes generic highlight controls", !source.includes("\\highlight") && !source.includes("\\chcbpat")],
   ["generated payload keeps Unicode", source.includes("·") && source.includes("rtfEscape")],
@@ -70,6 +77,7 @@ const checks = [
   ["single replay preserves captured item order", inspector.includes("for capturedItem in manifest.items") && inspector.includes("items.append(item)")],
   ["single replay rejects missing or empty types", inspector.includes("trimmingCharacters") && inspector.includes("guard !requestedType.isEmpty") && inspector.includes("missingRepresentation")],
   ["UI exposes inspection, replay, share, removal, and single actions", ["Inspect Notes Clipboard", "Replay Captured Clipboard", "Share Capture Report and Raw Payloads", "Replay without ", "Replay ONLY "].every((label) => app.includes(label)) && app.includes("Button(\"Replay ONLY \\(typeIdentifier)\")")],
+  ["Phase C preserves flat-RTFD and opens the clipboard Shortcut URL", app.includes("shortcuts://run-shortcut?name=Gym%20Logger%20to%20Gym&input=clipboard") && app.includes("UIPasteboard.general.setItems") && app.includes("payload.flatRTFDPasteboardItem") && app.includes("UIApplication.shared.open") && app.includes("Append Shortcut Input to Gym")],
   ["Xcode project references all Swift files and fixture", ["GymLoggerPasteboardHelperApp.swift", "ContentView.swift", "PasteboardPayload.swift", "ClipboardInspector.swift", "latest-session.example.json"].every((name) => project.includes(name))],
 ];
 
