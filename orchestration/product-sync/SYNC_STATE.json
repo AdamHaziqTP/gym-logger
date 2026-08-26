@@ -3,6 +3,11 @@
   "activeBuilder": "openrouter-free",
   "events": [
     {
+      "name": "m03-t11-ux-cleanup-implemented",
+      "summary": "M03-T11 implemented and independently verified locally; fresh hosted all-in-one IPA build is required before the consolidated iPhone 14 Pro Max gate.",
+      "at": "2026-08-26T16:47:05.146Z"
+    },
+    {
       "name": "m03-t10-corrected-hosted-ipa-device-gate",
       "summary": "All automatable one-app IPA checks are green; corrected hosted artifact 32986140862 is ready for the single consolidated iPhone 14 Pro Max acceptance pass.",
       "at": "2026-08-26T15:51:35.123Z"
@@ -56,11 +61,6 @@
       "name": "m03-t09-final-device-gate",
       "summary": "M03-T09 native helper is built and independently verified; only one real Tuesday production-session iPhone paste remains before accepting the optional colour-preserving manual workflow.",
       "at": "2026-08-26T13:10:55.648Z"
-    },
-    {
-      "name": "m03-t09-device-proof-ready",
-      "summary": "Hosted macOS/Xcode run 32972463589 compiled and packaged the real-session helper from 53d322c. M03-T09 now waits only for one target-iPhone production-session manual-paste proof.",
-      "at": "2026-08-26T13:10:27.376Z"
     }
   ],
   "builderChanges": [
@@ -71,13 +71,13 @@
       "reason": "Product owner disabled OX Alpha for remaining Gym Logger work; use Codex subagents/fallback for any follow-up instead."
     }
   ],
-  "lastPublishedAt": "2026-08-26T15:51:35.123Z",
+  "lastPublishedAt": "2026-08-26T16:47:05.147Z",
   "lastEvent": {
-    "name": "m03-t10-corrected-hosted-ipa-device-gate",
-    "summary": "All automatable one-app IPA checks are green; corrected hosted artifact 32986140862 is ready for the single consolidated iPhone 14 Pro Max acceptance pass.",
-    "at": "2026-08-26T15:51:35.123Z"
+    "name": "m03-t11-ux-cleanup-implemented",
+    "summary": "M03-T11 implemented and independently verified locally; fresh hosted all-in-one IPA build is required before the consolidated iPhone 14 Pro Max gate.",
+    "at": "2026-08-26T16:47:05.146Z"
   },
-  "syncRevision": 115,
+  "syncRevision": 116,
   "openEscalations": [],
   "chatNotifications": [
     {
