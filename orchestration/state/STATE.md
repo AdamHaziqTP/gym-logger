@@ -249,6 +249,10 @@ Updated: 2026-08-26
   scheme. The workflow was corrected to use the target build's normal runner
   DerivedData location; rerun is required before the helper is ready for
   installation.
+- Hosted workflow run `32924817788` reached the Xcode build graph but failed
+  because the project referenced its nested Swift/resource files from the
+  wrong directory. The project references now use the actual nested paths;
+  rerun is required for a real compile result.
 - Current E-004 gate:
   `orchestration/evidence/HUMAN-VERIFICATION-E-004-NATIVE-CLIPBOARD-INSPECTION.md`.
   It remains `BLOCKED/DEFERRED — HOSTED IOS BUILD PENDING`; after a truthful

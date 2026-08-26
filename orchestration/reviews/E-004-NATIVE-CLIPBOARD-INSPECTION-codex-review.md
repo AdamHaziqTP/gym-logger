@@ -26,6 +26,9 @@ the PWA production path.
       only after a real build succeeds.
 - [x] First hosted workflow invocation reached Xcode; its target-plus-derived-
       data-path argument error was diagnosed and corrected in the workflow.
+- [x] Second hosted workflow invocation reached the Xcode build graph; its
+      nested-source/resource path error was diagnosed and corrected in the
+      project file.
 - [x] PWA regression suite: 410/410 tests pass.
 - [x] PWA production build passes.
 - [x] Native platform-neutral harness: 18/18 checks pass.
@@ -33,7 +36,8 @@ the PWA production path.
 - [x] No `src/` or `public/` production files changed.
 - [ ] Swift/Xcode compilation: not run on this Windows workstation.
 - [ ] Hosted macOS/Xcode compilation: first run failed at workflow argument
-      validation; corrected workflow requires a second run.
+      validation and second run failed at nested project paths; corrected
+      project requires a third run.
 - [ ] iOS installation: not run.
 - [ ] Apple Notes editable-table, Unicode, or five-colour result: not run.
 

@@ -15,12 +15,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A00200010000000000000001 /* GymLoggerPasteboardHelperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLoggerPasteboardHelperApp.swift; sourceTree = "<group>"; };
-		A00200020000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A00200030000000000000003 /* PasteboardPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardPayload.swift; sourceTree = "<group>"; };
-		A00200040000000000000004 /* latest-session.example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = latest-session.example.json; sourceTree = "<group>"; };
+		A00200010000000000000001 /* GymLoggerPasteboardHelperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLoggerPasteboardHelper/GymLoggerPasteboardHelperApp.swift; sourceTree = "<group>"; };
+		A00200020000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLoggerPasteboardHelper/ContentView.swift; sourceTree = "<group>"; };
+		A00200030000000000000003 /* PasteboardPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLoggerPasteboardHelper/PasteboardPayload.swift; sourceTree = "<group>"; };
+		A00200040000000000000004 /* latest-session.example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GymLoggerPasteboardHelper/latest-session.example.json; sourceTree = "<group>"; };
 		A00200050000000000000005 /* GymLoggerPasteboardHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymLoggerPasteboardHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A00200060000000000000006 /* ClipboardInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardInspector.swift; sourceTree = "<group>"; };
+		A00200060000000000000006 /* ClipboardInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLoggerPasteboardHelper/ClipboardInspector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

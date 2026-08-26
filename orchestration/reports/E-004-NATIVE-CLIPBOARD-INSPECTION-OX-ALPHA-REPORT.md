@@ -38,3 +38,9 @@ workflow defect, not evidence against the helper source. The workflow was
 corrected to keep the target build and locate the resulting app in the clean
 runner's normal DerivedData tree. A second run is required before the native
 proof can be considered ready for installation.
+
+The corrected second hosted run (`32924817788`) reached the build graph but
+failed because the Xcode project file referenced the nested Swift/resource
+files as project-root files. The project references are now corrected to the
+actual `GymLoggerPasteboardHelper/` paths; a third run is required to obtain a
+real compile result.
