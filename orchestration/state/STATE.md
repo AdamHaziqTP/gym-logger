@@ -253,6 +253,10 @@ Updated: 2026-08-26
   because the project referenced its nested Swift/resource files from the
   wrong directory. The project references now use the actual nested paths;
   rerun is required for a real compile result.
+- Hosted workflow run `32924910818` compiled the helper sources far enough to
+  expose a Swift actor-isolation error in the replay action. The helper view is
+  now explicitly main-actor isolated; rerun is required to verify compile and
+  packaging.
 - Current E-004 gate:
   `orchestration/evidence/HUMAN-VERIFICATION-E-004-NATIVE-CLIPBOARD-INSPECTION.md`.
   It remains `BLOCKED/DEFERRED — HOSTED IOS BUILD PENDING`; after a truthful

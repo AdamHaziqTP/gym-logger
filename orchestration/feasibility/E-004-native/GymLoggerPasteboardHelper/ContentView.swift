@@ -1,6 +1,7 @@
 import SwiftUI
 import UIKit
 
+@MainActor
 struct ContentView: View {
     @State private var status = "Copy a small coloured table in Apple Notes, then inspect it here."
     @State private var shareURLs: [URL] = []

@@ -44,3 +44,8 @@ failed because the Xcode project file referenced the nested Swift/resource
 files as project-root files. The project references are now corrected to the
 actual `GymLoggerPasteboardHelper/` paths; a third run is required to obtain a
 real compile result.
+
+The third hosted run (`32924910818`) compiled the project sources and exposed
+one Swift actor-isolation error in the replay button path. The helper view now
+explicitly runs on the main actor, matching `UIPasteboard` access; a fourth run
+is required to verify the corrected compile and packaging steps.

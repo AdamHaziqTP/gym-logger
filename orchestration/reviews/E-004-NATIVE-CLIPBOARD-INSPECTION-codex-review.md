@@ -29,6 +29,9 @@ the PWA production path.
 - [x] Second hosted workflow invocation reached the Xcode build graph; its
       nested-source/resource path error was diagnosed and corrected in the
       project file.
+- [x] Third hosted workflow invocation compiled the project sources far enough
+      to expose an actor-isolation error in the replay action; the view is now
+      explicitly main-actor isolated.
 - [x] PWA regression suite: 410/410 tests pass.
 - [x] PWA production build passes.
 - [x] Native platform-neutral harness: 18/18 checks pass.
@@ -36,8 +39,8 @@ the PWA production path.
 - [x] No `src/` or `public/` production files changed.
 - [ ] Swift/Xcode compilation: not run on this Windows workstation.
 - [ ] Hosted macOS/Xcode compilation: first run failed at workflow argument
-      validation and second run failed at nested project paths; corrected
-      project requires a third run.
+      validation, second run failed at nested project paths, and third run
+      exposed Swift actor isolation; corrected source requires a fourth run.
 - [ ] iOS installation: not run.
 - [ ] Apple Notes editable-table, Unicode, or five-colour result: not run.
 
