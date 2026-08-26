@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "checkpoint-accepted",
+      "summary": "Phase B generated flat-RTFD helper and device gate are current at the latest main checkpoint.",
+      "at": "2026-08-26T10:10:43.995Z"
+    },
+    {
       "name": "worker-ready",
       "summary": "Phase B generated flat-RTFD helper build 32956758287 is ready; target-iPhone generated workout paste is the next gate.",
       "at": "2026-08-26T10:10:30.810Z"
@@ -56,21 +61,16 @@
       "name": "human-gate-recorded",
       "summary": "E-004 exact native Notes capture/replay reported PASS on iPhone 14 Pro Max; queue bounded Gym Logger handoff productization without changing normal Copy to Notes.",
       "at": "2026-08-26T06:59:12.401Z"
-    },
-    {
-      "name": "e004-native-helper-device-gate",
-      "summary": "E-004 hosted macOS/Xcode run 32925095555 succeeded and the unsigned IPA was independently verified. The only remaining gate is legitimate iPhone 14 Pro Max installation/signing and the native Notes inspection/replay/paste result; no colour success is claimed.",
-      "at": "2026-08-26T03:10:32.076Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T10:10:30.811Z",
+  "lastPublishedAt": "2026-08-26T10:10:43.996Z",
   "lastEvent": {
-    "name": "worker-ready",
-    "summary": "Phase B generated flat-RTFD helper build 32956758287 is ready; target-iPhone generated workout paste is the next gate.",
-    "at": "2026-08-26T10:10:30.810Z"
+    "name": "checkpoint-accepted",
+    "summary": "Phase B generated flat-RTFD helper and device gate are current at the latest main checkpoint.",
+    "at": "2026-08-26T10:10:43.995Z"
   },
-  "syncRevision": 96,
+  "syncRevision": 97,
   "openEscalations": [],
   "chatNotifications": [
     {

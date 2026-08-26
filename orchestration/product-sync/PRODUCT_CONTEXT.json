@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T10:10:30.869Z",
+  "generatedAt": "2026-08-26T10:10:44.052Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "625a43d chore: sync generated flat-RTFD gate",
     "af89425 docs: publish generated flat-RTFD device gate",
     "10e187a feat: generate flat-RTFD Notes proof payload",
     "1833770 docs: record Phase A2 native sufficiency results",
-    "80aaf50 docs: record partial Phase A2 device results",
-    "4355223 chore: align product sync with A2 checkpoint"
+    "80aaf50 docs: record partial Phase A2 device results"
   ],
   "codexVerification": [
     {
@@ -179,7 +179,7 @@
     "E-004 Phase B generated Gym Logger flat-RTFD proof on the iPhone 14 Pro Max. A2 proved captured `com.apple.flat-rtfd` alone is sufficient; now paste the newly generated fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C."
   ],
   "decisionsMadeSinceLastSync": [
-    "Phase B generated flat-RTFD helper build 32956758287 is ready; target-iPhone generated workout paste is the next gate."
+    "Phase B generated flat-RTFD helper and device gate are current at the latest main checkpoint."
   ],
   "recordedDecisions": [
     {
@@ -231,7 +231,7 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "af89425c7143020bcefeff63021093b895844398",
+    "commit": "625a43dc4e86c235f7131640cf94d67b1dc1c857",
     "branch": "main",
     "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
@@ -256,11 +256,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "worker-ready",
-      "summary": "Phase B generated flat-RTFD helper build 32956758287 is ready; target-iPhone generated workout paste is the next gate.",
-      "at": "2026-08-26T10:10:30.810Z"
+      "name": "checkpoint-accepted",
+      "summary": "Phase B generated flat-RTFD helper and device gate are current at the latest main checkpoint.",
+      "at": "2026-08-26T10:10:43.995Z"
     },
-    "contextRevision": 96,
+    "contextRevision": 97,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
