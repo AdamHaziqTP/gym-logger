@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t09-final-device-gate",
+      "summary": "M03-T09 native helper is built and independently verified; only one real Tuesday production-session iPhone paste remains before accepting the optional colour-preserving manual workflow.",
+      "at": "2026-08-26T13:10:55.648Z"
+    },
+    {
       "name": "m03-t09-device-proof-ready",
       "summary": "Hosted macOS/Xcode run 32972463589 compiled and packaged the real-session helper from 53d322c. M03-T09 now waits only for one target-iPhone production-session manual-paste proof.",
       "at": "2026-08-26T13:10:27.376Z"
@@ -56,21 +61,16 @@
       "name": "worker-ready",
       "summary": "A2 single-representation helper is built and ready for one target-iPhone sufficiency gate.",
       "at": "2026-08-26T09:24:05.067Z"
-    },
-    {
-      "name": "checkpoint-accepted",
-      "summary": "Phase A helper build and removal-variant gate are current at the latest main checkpoint.",
-      "at": "2026-08-26T08:10:43.521Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T13:10:27.377Z",
+  "lastPublishedAt": "2026-08-26T13:10:55.648Z",
   "lastEvent": {
-    "name": "m03-t09-device-proof-ready",
-    "summary": "Hosted macOS/Xcode run 32972463589 compiled and packaged the real-session helper from 53d322c. M03-T09 now waits only for one target-iPhone production-session manual-paste proof.",
-    "at": "2026-08-26T13:10:27.376Z"
+    "name": "m03-t09-final-device-gate",
+    "summary": "M03-T09 native helper is built and independently verified; only one real Tuesday production-session iPhone paste remains before accepting the optional colour-preserving manual workflow.",
+    "at": "2026-08-26T13:10:55.648Z"
   },
-  "syncRevision": 104,
+  "syncRevision": 105,
   "openEscalations": [],
   "chatNotifications": [
     {
