@@ -1,6 +1,6 @@
 # Human verification — E-004 Phase C Shortcut append
 
-Status: `HUMAN_REVIEW_REQUIRED — HOSTED HELPER BUILD PENDING`
+Status: `HUMAN_REVIEW_REQUIRED — HOSTED HELPER BUILD READY`
 Device: iPhone 14 Pro Max
 Date opened: 2026-08-26
 
@@ -23,8 +23,8 @@ transformation. The existing `Gym` note is the target.
 
 ## Test procedure
 
-1. Install and open the newest `GymLoggerPasteboardHelper-unsigned` artifact
-   linked by the final Codex review.
+1. Install and open the `GymLoggerPasteboardHelper-unsigned` artifact from
+   [hosted macOS/Xcode run 32961489740](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32961489740).
 2. Tap **Generate & Run Gym Logger to Gym Shortcut**.
 3. Allow the Shortcut to run if iOS asks, then open the existing `Gym` note.
 4. Confirm the appended result is a real editable Apple Notes table, not plain

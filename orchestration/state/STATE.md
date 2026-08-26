@@ -8,7 +8,7 @@ Updated: 2026-08-26
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
 - Current task: M03-T08 Phase C native flat-RTFD Shortcut append proof
-- Status: HUMAN_REVIEW_REQUIRED — PHASE C HELPER BUILD PENDING
+- Status: HUMAN_REVIEW_REQUIRED — PHASE C HELPER BUILD READY
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
 - Human review gate: B2 core passed on the iPhone 14 Pro Max at `d0544c5` (editable generated table, all five row colours, content, and Unicode). Install the fresh Phase C helper, verify the five coloured legend labels, configure the one-action `Gym Logger to Gym` Shortcut with only `Append Shortcut Input to Gym`, and verify direct append preserves the editable coloured table, content/order, summary, notes, and Unicode.
@@ -79,7 +79,7 @@ Updated: 2026-08-26
 - Hosted macOS/Xcode run `32959270742` passed from `249e216`; Codex verified the unsigned IPA contains the helper app and bundled fixture. This proves packaging only, not the Apple Notes result.
 - B2 target-iPhone result is accepted for core feasibility at `d0544c5`: generated data pasted as an editable table with all five row/category colours, correct content/order/summary/notes/Unicode; only the separate legend labels were uncoloured.
 - The bounded M03-T08 Phase C task was attempted through a fresh DSH Desktop headless `/agent-teams` dispatch with the configured OpenRouter/stealth/ox-alpha patch. It produced no stdout or delta for 150 seconds and was terminated as a task-level worker timeout; Codex fallback added the legend polish and Shortcut proof action.
-- Codex independently verified the Phase C source contract, 410/410 PWA tests, production build, and diff hygiene. Hosted macOS/Xcode packaging is the remaining automated checkpoint before opening the device gate.
+- Codex independently verified the Phase C source contract, 410/410 PWA tests, production build, and diff hygiene. Hosted macOS/Xcode run `32961489740` independently compiled and packaged the updated helper from `6d28fec`; the Phase C device gate is now open.
 
 ## Final disposition
 

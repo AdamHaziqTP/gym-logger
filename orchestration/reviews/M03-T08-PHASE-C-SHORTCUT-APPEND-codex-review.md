@@ -25,6 +25,9 @@ fidelity until the target iPhone records that result.
 - [x] PWA regression suite: **PASS — 410/410 tests**.
 - [x] `npm run build`: **PASS**.
 - [x] `git diff --check`: **PASS**.
+- [x] Hosted macOS/Xcode workflow `32961489740` compiled and packaged the
+      updated helper from `6d28fec`; the unsigned artifact is ready for the
+      target-device proof.
 
 ## Worker protocol
 

@@ -1,6 +1,6 @@
 # M03-T08 — Phase C native flat-RTFD Shortcut append proof
 
-Status: `IMPLEMENTED — CODEX FALLBACK; HOSTED BUILD PENDING`
+Status: `READY_FOR_HUMAN — HOSTED BUILD VERIFIED`
 
 ## Context
 
