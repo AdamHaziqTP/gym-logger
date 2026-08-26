@@ -1,6 +1,6 @@
 # M03-T06 — Exact Apple Notes HTML replay human verification
 
-Status: `RETEST READY — TARGET IPHONE REQUIRED`
+Status: `FAIL — EXACT NOTES HTML REPLAY PRESERVES TABLE BUT STRIPS COLOURS`
 Device target: iPhone 14 Pro Max
 Replay URL:
 `https://192.168.1.49:4173/feasibility/notes-html-replay.html`
@@ -12,17 +12,34 @@ category colours. This proof writes that exact captured HTML and matching
 plain text to the clipboard without sanitizing, simplifying, regenerating, or
 substituting anything. It is not the normal Gym Logger copy action.
 
-## Exact device steps
+## Physical result — 2026-08-26
 
-1. Open the replay URL in Safari on the iPhone.
-2. Wait until it says the captured payload is loaded and ready.
-3. Tap **Replay captured Notes HTML** once.
-4. Return to the existing Apple Notes `Gym` note and paste once.
-5. Report these results together:
-   - editable table structure: PASS/FAIL;
-   - Arms orange, Back purple, Chest mint, Delts blue, Legs pink: PASS/FAIL;
-   - date, legend, row order, values, summary, notes, and Unicode: PASS/FAIL;
-   - any Safari permission/error message.
+The product owner completed the target-iPhone replay and pasted once into the
+existing Apple Notes `Gym` note.
 
-Do not use the normal Gym Logger Copy to Notes action for this test. Do not
-retest the prior fingerprint page.
+- **PASS — table/content structure survives.** The product owner reported that
+  the table "looks good", and the supplied screenshot shows the expected
+  Notes table, date, legend, summary, headers, row order, and workout values.
+- **FAIL — all category colours are stripped.** The pasted result is uniformly
+  uncoloured despite replaying the exact `text/html` captured from Apple Notes,
+  whose browser-visible source contained all five foreground/background colour
+  styles.
+- No Safari clipboard permission/error was reported for this run.
+- No separate data/Unicode defect was reported in this run. The decisive
+  failure is colour fidelity.
+
+## Interpretation
+
+M03-T06 closes the remaining browser-HTML hypothesis. Apple Notes exposes
+colour-bearing `text/html` to Safari on read, but Safari writing that exact
+captured HTML back through the web Clipboard API does not reproduce the colour
+fidelity when pasted into Notes. Therefore further HTML/CSS/token/markup
+iteration is not justified under the current evidence.
+
+Production Gym Logger `Copy to Notes` remains unchanged.
+
+The next bounded colour-recovery branch is the staged E-004 native pasteboard
+inspection/replay proof: inspect the actual native Notes pasteboard
+representations, replay them unchanged, and identify the minimum
+representation responsible for editable-table colour fidelity before
+attempting a Gym Logger native payload generator.
