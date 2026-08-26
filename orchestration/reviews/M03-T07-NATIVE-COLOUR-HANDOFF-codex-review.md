@@ -2,7 +2,7 @@
 
 ## Review disposition
 
-`ACCEPTED — BOUNDED FEASIBILITY CLOSED WITHOUT PRODUCTION CHANGE`
+`ACCEPTED — PHASE A HARNESS READY; PHYSICAL REMOVAL PROOF REQUIRED`
 
 The supplied iPhone result proves exact native capture/replay. The repository
 does not contain the raw captured native payloads, and the current helper's
@@ -25,12 +25,17 @@ without guesswork or a new target-device proof.
       self-contained `/agent-teams` attempts were made; both remained silent
       within the bounded windows. This is recorded as infrastructure timeout,
       not as OX Alpha unavailability.
+- [x] The reopened Phase A harness exposes one-at-a-time removal of each
+      non-empty captured representation without changing the PWA clipboard
+      path or guessing private Apple Notes types.
+- [x] The helper variant label renders the actual type identifier, and the
+      platform-neutral contract checks cover the exclusion behavior.
 
 ## Remaining gate
 
-There is no new production-code gate created by this task. If the product
-owner later wants generated Gym Logger workouts to retain Notes colours, the
-raw native capture must first be made available and a separate bounded
-generated-workout paste test must pass on the iPhone 14 Pro Max. Until then,
-the shipped v1 behavior is the editable uncoloured Notes table plus the
-coloured Compact image snapshot.
+The current gate is the target-iPhone Phase A removal-variant pass documented
+in `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md`.
+If no useful minimum representation is identified, close colour recovery with
+the existing v1 behavior: editable uncoloured Notes table plus coloured Compact
+image snapshot. A generated Gym Logger payload and Shortcut append must not be
+claimed before a separate target-iPhone proof.

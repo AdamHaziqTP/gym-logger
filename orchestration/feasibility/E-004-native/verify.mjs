@@ -10,6 +10,14 @@ const inspector = readFileSync(resolve(import.meta.dirname, "GymLoggerPasteboard
 const project = readFileSync(resolve(import.meta.dirname, "GymLoggerPasteboardHelper.xcodeproj/project.pbxproj"), "utf8");
 const fixture = JSON.parse(readFileSync(fixturePath, "utf8"));
 const bundled = JSON.parse(readFileSync(bundledPath, "utf8"));
+const sampleRepresentations = [
+  { typeIdentifier: "com.apple.notes.richtext-pasteboard-item", relativePath: "notes.bin" },
+  { typeIdentifier: "public.html", relativePath: "html.bin" },
+  { typeIdentifier: "public.rtf", relativePath: "rtf.bin" },
+];
+const retainedAfterRemoval = sampleRepresentations.filter(
+  ({ typeIdentifier }) => typeIdentifier !== "public.html",
+);
 
 const checks = [
   ["bundled fixture matches canonical fixture", JSON.stringify(fixture) === JSON.stringify(bundled)],
@@ -28,7 +36,9 @@ const checks = [
   ["clipboard inspector enumerates item providers", inspector.includes("pasteboard.itemProviders") && inspector.includes("registeredTypeIdentifiers")],
   ["clipboard inspector records hashes and raw payloads", inspector.includes("SHA256.hash") && inspector.includes("manifest.json")],
   ["clipboard replay writes captured representations", inspector.includes("replayLatestCapture") && inspector.includes("UIPasteboard.general.setItems")],
-  ["UI exposes inspection, replay, and share actions", ["Inspect Notes Clipboard", "Replay Captured Clipboard", "Share Capture Report and Raw Payloads"].every((label) => app.includes(label))],
+  ["removal harness reads non-empty captured type identifiers", inspector.includes("latestCaptureTypeIdentifiers") && inspector.includes("byteLength")],
+  ["removal harness excludes only the requested type", inspector.includes("excludingTypeIdentifier") && inspector.includes("representation.typeIdentifier == excludingTypeIdentifier") && retainedAfterRemoval.length === 2 && retainedAfterRemoval.every(({ typeIdentifier }) => typeIdentifier !== "public.html")],
+  ["UI exposes inspection, replay, share, and removal actions", ["Inspect Notes Clipboard", "Replay Captured Clipboard", "Share Capture Report and Raw Payloads", "Replay without "].every((label) => app.includes(label)) && app.includes("Button(\"Replay without \\(typeIdentifier)\")")],
   ["Xcode project references all Swift files and fixture", ["GymLoggerPasteboardHelperApp.swift", "ContentView.swift", "PasteboardPayload.swift", "ClipboardInspector.swift", "latest-session.example.json"].every((name) => project.includes(name))],
 ];
 

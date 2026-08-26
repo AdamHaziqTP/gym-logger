@@ -8,10 +8,10 @@ Updated: 2026-08-26
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
 - Current task: M03-T07 native coloured Notes handoff productization
-- Status: ACCEPTED FOR NATIVE CAPTURE/REPLAY; GENERATED GYM PAYLOAD PRODUCTIZATION PENDING
+- Status: HUMAN_REVIEW_REQUIRED — PHASE A REMOVAL VARIANTS READY
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: none for the accepted v1 PWA path. The product owner reported exact native Notes capture/replay PASS on the iPhone 14 Pro Max; do not infer generated Gym Logger export success from that captured-payload replay.
+- Human review gate: E-004 Phase A removal-variant proof on the iPhone 14 Pro Max. The product owner reported exact native Notes capture/replay PASS; do not infer generated Gym Logger export success from that captured-payload replay. Use the fresh helper build and record each non-empty captured representation variant before Phase B/C.
 - Latest bounded task: M03-T07 native handoff productization; production PWA and normal Copy to Notes remain unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
@@ -87,7 +87,7 @@ Updated: 2026-08-26
 - M05-T01 backup/restore, M06 release-readiness, and M06-T04 settings restore are accepted for automated scope. Stop only at the consolidated final iPhone 14 Pro Max gate in `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
 - The consolidated iPhone 14 Pro Max pass found real failures in both image-export previews, mobile export-sheet dismissal, local HTTPS trust, and the Home Screen icon. Route the bounded code/icon corrections through M06-T05 before requesting one consolidated retest; do not mark any physical behavior passed from desktop evidence.
 - M06-T05 is accepted for automated scope. The same consolidated checklist now awaits one physical retest at `https://192.168.1.49:4173/`; do not mark device behavior passed from desktop evidence.
-- M03-T03 target-iPhone proof is closed as failed; do not claim Apple Notes colours from the Shortcuts route or desktop evidence. E-004 is parked as BLOCKED/DEFERRED — NEEDS MAC/XCODE and remains preserved for a later legitimate toolchain.
+- M03-T03 target-iPhone proof is closed as failed; do not claim Apple Notes colours from the Shortcuts route or desktop evidence. E-004 generated-payload productization remains deferred while its reopened Phase A removal proof is prepared.
 - M06-T06 OX invocation produced no output or delta during the bounded ~95-second task window; classify this as a task-level worker hang/timeout, not OX unavailability. Codex fallback was used only after that concrete failure and independently verified the implementation.
 
 ## Deferred
@@ -102,7 +102,7 @@ Updated: 2026-08-26
 - M06-T05 framing is the current physical export gate: retest one Faithful and one Compact saved PNG for visible content and correct full-frame geometry. Preview and mobile dismissal remain accepted from the latest physical evidence unless they regress.
 - The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending.
 - M03-T03 Shortcuts share, one-time setup, and colour-recovery proof are closed as a physical failure; the ordinary uncoloured Copy to Notes baseline remains accepted.
-- E-004 native-helper build/install/paste proof is BLOCKED/DEFERRED — NEEDS MAC/XCODE; preserve the helper and do not infer an Apple Notes result.
+- E-004 generated Gym Logger payload and Shortcut append remain deferred; preserve the helper and do not infer a generated Apple Notes result from captured-payload replay.
 - The post-`0cb9b46` saved-image retest found fully transparent Faithful and Compact PNGs. The active correction is `orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md`; do not mark PNG delivery passed from desktop evidence.
 
 ## Escalations
@@ -110,7 +110,7 @@ Updated: 2026-08-26
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: trusted HTTPS verification completed.
 - E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.
-- E-004 is BLOCKED/DEFERRED — NEEDS MAC/XCODE: preserve the one authorized isolated native proof; it does not block the remaining PWA v1 gate and requires no paid Developer dependency.
+- E-004 Phase A is active and requires a fresh hosted-helper build plus one target-iPhone removal-variant pass; generated payload synthesis remains deferred and no paid Developer dependency is authorized.
 
 ## Active task checkpoint
 
@@ -297,8 +297,36 @@ Updated: 2026-08-26
 - A PWA JSON/share handoff would move data but would not prove a colour-bearing
   native Notes payload. Transforming Apple-private payloads without the raw
   capture and a generated-workout target-iPhone proof would be guesswork.
-- M03-T07 is closed with the limitation documented in
-  `orchestration/feasibility/E-004-native/PRODUCTIZATION.md`.
+- The earlier M03-T07 no-production-change disposition remains documented in
+  `orchestration/feasibility/E-004-native/PRODUCTIZATION.md`; its isolated
+  native branch is now reopened for Phase A only.
 - Keep normal editable uncoloured `Copy to Notes`, Compact colour snapshot, and
   the isolated native helper. Do not add a misleading coloured Notes export
   button.
+
+## M03-T07 Phase A reopening — 2026-08-26
+
+- The exact native capture/replay result remains accepted: editable table,
+  five colours, data/order, and Unicode were reported PASS on the iPhone 14 Pro
+  Max. This is still only captured-payload replay, not generated Gym Logger
+  export.
+- The product owner explicitly reopened one bounded Phase A investigation:
+  identify the minimum colour-bearing native representation by replaying the
+  fresh captured item once per non-empty type with that type removed.
+- `ClipboardInspector` now discovers readable non-empty captured type
+  identifiers and supports `Replay without <type>` while preserving all other
+  captured representations and item order. The helper variant label was
+  independently corrected and verified.
+- Codex independently verified the isolated native harness at 20/20 checks,
+  the PWA suite at 410/410 tests, `npm run build`, `git diff --check`, and no
+  `src/` or `public/` production changes. The DSH `/agent-teams` implementation
+  attempt timed out with no delta; the configured wrapper/plugin remain
+  available and the narrow fallback is recorded.
+- Current human gate: install the freshly rebuilt helper, capture a small
+  coloured Notes table, inspect it, then run each displayed removal variant and
+  paste it back into Notes. Record table editability, five colours, values/order,
+  and Unicode in
+  `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md`.
+- Do not start generated Gym payload synthesis or Shortcut append until this
+  Phase A result identifies a viable minimum representation. Keep the PWA
+  `Copy to Notes` path unchanged.

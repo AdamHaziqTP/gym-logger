@@ -2,6 +2,8 @@
 
 Updated: 2026-08-26
 
+Status: `PHASE A READY — REPRESENTATION-REMOVAL DEVICE PROOF REQUIRED`
+
 ## Verified capability
 
 On the product owner's iPhone 14 Pro Max, the isolated helper captured an
@@ -10,6 +12,22 @@ back into Notes. The reported result preserved an editable table, all five
 category colours, values/order, and Unicode.
 
 That is a successful **exact captured-payload replay** proof.
+
+## Reopened Phase A — representation-removal harness
+
+The product decision now reopens this branch for one controlled experiment. The
+repository does not contain the raw payload files from the earlier device
+capture, so the helper performs the safe part of the experiment on-device after
+a fresh capture: it discovers each non-empty captured type identifier and
+offers one `Replay without ...` action per identifier. Each variant preserves
+the other captured representations and the original item order.
+
+This is an isolated diagnostic capability, not a production PWA change. The
+variant buttons are only evidence-generating; no representation is declared
+colour-bearing until the owner pastes that variant back into Apple Notes on the
+iPhone 14 Pro Max and records the result. Phase B generated-workout synthesis
+and Phase C Shortcut append remain blocked until Phase A identifies a useful
+minimum representation, or the branch is closed with evidence.
 
 ## Boundary that remains unproven
 
@@ -49,11 +67,11 @@ later, explicitly bounded investigation. Do not add a misleading
 has passed the same editable-table/five-colour/Unicode test on the target
 iPhone.
 
-## Re-open criteria
+## Current next gate and re-open criteria
 
-Re-open only with the raw native capture available and a concrete bounded plan
-to transform one canonical Gym Logger session. The first re-open task must
-identify the minimum representation by removal tests, then build one generated
-workout payload, run the platform-neutral checks, and request one physical
-paste proof. It must not alter the normal PWA Notes path while the proof is
+The next gate is one fresh helper build on the target iPhone, followed by the
+one-at-a-time removal variants described in
+`orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md`.
+Only after that result should the project attempt a generated Gym Logger
+payload. It must not alter the normal PWA Notes path while the proof is
 inconclusive.

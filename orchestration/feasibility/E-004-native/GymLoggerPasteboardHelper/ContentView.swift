@@ -5,6 +5,7 @@ import UIKit
 struct ContentView: View {
     @State private var status = "Copy a small coloured table in Apple Notes, then inspect it here."
     @State private var shareURLs: [URL] = []
+    @State private var removalCandidates: [String] = []
 
     var body: some View {
         ScrollView {
@@ -20,6 +21,20 @@ struct ContentView: View {
                     .buttonStyle(.bordered)
                 Button("Share Capture Report and Raw Payloads") { shareCapture() }
                     .buttonStyle(.bordered)
+
+                if !removalCandidates.isEmpty {
+                    Divider()
+                    Text("Representation-removal variants").font(.headline)
+                    Text("Replay one variant at a time, then paste into Notes. Each button removes only the named non-empty captured representation.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                    ForEach(removalCandidates, id: \.self) { typeIdentifier in
+                        Button("Replay without \(typeIdentifier)") {
+                            replayWithout(typeIdentifier)
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                }
 
                 Divider()
                 Text("Synthetic fixture (historical comparison only)").font(.headline)
@@ -44,6 +59,7 @@ struct ContentView: View {
             do {
                 let package = try await NativeClipboardInspector.inspect()
                 let readableCount = package.manifest.items.flatMap(\.representations).filter { $0.relativePath != nil }.count
+                removalCandidates = try NativeClipboardInspector.latestCaptureTypeIdentifiers()
                 status = "Captured \(package.manifest.itemCount) item(s), \(readableCount) readable representation(s). Share the report or replay it into Notes."
             } catch {
                 status = "Inspection failed: \(error.localizedDescription)"
@@ -57,6 +73,15 @@ struct ContentView: View {
             status = "Replayed the captured pasteboard representations. Open the Gym note and paste once."
         } catch {
             status = "Replay failed: \(error.localizedDescription)"
+        }
+    }
+
+    private func replayWithout(_ typeIdentifier: String) {
+        do {
+            try NativeClipboardInspector.replayLatestCapture(excludingTypeIdentifier: typeIdentifier)
+            status = "Replayed without \(typeIdentifier). Open the Gym note and paste once, then record whether the table, colours, and Unicode survived."
+        } catch {
+            status = "Variant replay failed: \(error.localizedDescription)"
         }
     }
 

@@ -1,6 +1,6 @@
 # M03-T07 — Native coloured Notes handoff productization
 
-Status: `CLOSED — NO SAFE PRODUCTION CHANGE; LIMITATION DOCUMENTED`
+Status: `HUMAN_REVIEW_REQUIRED — PHASE A REMOVAL VARIANTS READY`
 Owner: OX Alpha builder, Codex acceptance
 Scope: bounded productization feasibility; no native rewrite
 
@@ -11,6 +11,19 @@ Max: a coloured Apple Notes table was captured by the isolated helper and
 replayed with editable structure, all five colours, correct data/order, and
 Unicode. This proves replay of an existing Notes payload, not generation of a
 new Gym Logger payload.
+
+## Reopened bounded plan
+
+The product owner has explicitly reopened the branch after the exact captured
+replay proved that native pasteboard fidelity can preserve an editable table and
+all five colours. The next task is Phase A only: use a fresh on-device capture
+and replay the captured item once per non-empty representation excluded. The
+helper now generates these variants from the real capture instead of guessing
+private identifiers or relying on missing repository payload files.
+
+Phase B (a newly generated Gym Logger workout) and Phase C (direct Shortcut
+append) remain blocked until Phase A identifies a plausible minimum native
+representation. The normal PWA `Copy to Notes` path remains unchanged.
 
 ## Goal
 
@@ -32,6 +45,9 @@ single manual paste over any claim of unsupported direct Notes automation.
    add platform-neutral tests. Otherwise produce a concrete implementation
    plan and honest limitation report.
 5. Keep the supplied app icon work and PWA production behavior out of scope.
+6. For the reopened Phase A, expose controlled one-representation-removal
+   replays from the helper and record target-iPhone results before attempting
+   any generated workout payload.
 
 ## Acceptance
 
@@ -52,6 +68,12 @@ read-only task, but the captain returned no final productization report. See
 `orchestration/reports/M03-T07-NATIVE-COLOUR-HANDOFF-OX-ALPHA-AGENTTEAMS-REPORT.md`.
 This is an infrastructure timeout, not an implementation result.
 
+The reopened Phase A implementation task was also dispatched as a fresh,
+self-contained `/agent-teams` task through the same verified wrapper. It
+remained silent for the bounded window and produced no delta. Codex completed
+the narrow fallback implementation and independently verified it; this is
+recorded in `orchestration/reports/M03-T07-PHASE-A-REMOVAL-HARNESS-OX-ALPHA-AGENTTEAMS-REPORT.md`.
+
 ## Codex disposition
 
 The bounded review found no safe production change that would turn the proven
@@ -61,7 +83,7 @@ fixture builder still emits ordinary plain/HTML/RTF representations whose
 colour fidelity in Notes is unproven. Transforming a captured private payload
 without the raw capture and a target-iPhone proof would be guesswork.
 
-The task is therefore closed with the limitation documented in
-`orchestration/feasibility/E-004-native/PRODUCTIZATION.md`. The PWA's normal
+The earlier no-production-change disposition remains valid for the PWA, but
+the isolated native branch is now reopened for Phase A. The PWA's normal
 editable uncoloured `Copy to Notes` path, Compact colour snapshot, and the
 isolated native helper remain preserved.

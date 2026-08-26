@@ -172,8 +172,21 @@ enum NativeClipboardInspector {
         return ClipboardCapturePackage(manifest: manifest, directoryURL: directoryURL)
     }
 
+    static func latestCaptureTypeIdentifiers() throws -> [String] {
+        guard let directoryURL = latestCaptureDirectory() else { throw ClipboardInspectorError.noCapture }
+        let manifest = try loadManifest(from: directoryURL)
+        var identifiers: [String] = []
+        for representation in manifest.items.flatMap(\.representations) {
+            guard representation.relativePath != nil,
+                  (representation.byteLength ?? 0) > 0,
+                  !identifiers.contains(representation.typeIdentifier) else { continue }
+            identifiers.append(representation.typeIdentifier)
+        }
+        return identifiers
+    }
+
     @MainActor
-    static func replayLatestCapture() throws {
+    static func replayLatestCapture(excludingTypeIdentifier: String? = nil) throws {
         guard let directoryURL = latestCaptureDirectory() else { throw ClipboardInspectorError.noCapture }
         let manifest = try loadManifest(from: directoryURL)
         var items: [[String: Any]] = []
@@ -181,6 +194,8 @@ enum NativeClipboardInspector {
         for capturedItem in manifest.items {
             var item: [String: Any] = [:]
             for representation in capturedItem.representations {
+                if let excludingTypeIdentifier,
+                   representation.typeIdentifier == excludingTypeIdentifier { continue }
                 guard item[representation.typeIdentifier] == nil,
                       let relativePath = representation.relativePath else { continue }
                 let data = try Data(contentsOf: directoryURL.appendingPathComponent(relativePath))
