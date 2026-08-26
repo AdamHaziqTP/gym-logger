@@ -29,7 +29,12 @@ and waits for its asynchronous completion event before claiming success.
 The first hosted attempt (`32990405957`) reached Swift compilation but exposed
 an Xcode 15.4 API rename for `PHAssetCreationRequest`. Codex corrected the
 call to `PHAssetCreationRequest.forAsset()` and reran the local checks above;
-a replacement hosted build is required before claiming the IPA is ready.
+a replacement hosted build (`32990579200`) then passed compilation,
+packaging, artifact upload, and all workflow IPA assertions. Codex downloaded
+and independently inspected the artifact: bundle identity/executable,
+Photos usage description, bundled web app, and 192/512 icon resources all
+passed. Artifact SHA-256 was recorded locally as
+`c97b2b3880c278fb2ea4b87a3c2f3463489fbe50b52fd0bd01cc58543259eff8`.
 
 No physical iPhone behavior is inferred from these checks. Hosted
 macOS/Xcode compilation, IPA inspection, installation, Photos delivery, and

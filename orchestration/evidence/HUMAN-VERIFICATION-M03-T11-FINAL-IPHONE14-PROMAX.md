@@ -1,6 +1,6 @@
 # M03-T11 — final one-app IPA iPhone 14 Pro Max gate
 
-Status: `HUMAN_REVIEW_REQUIRED — HOSTED IPA PENDING`
+Status: `HUMAN_REVIEW_REQUIRED — HOSTED IPA READY`
 
 This checklist must be completed on the physical iPhone 14 Pro Max. Desktop
 tests, source inspection, and hosted packaging do not close these items.
@@ -41,7 +41,7 @@ tests, source inspection, and hosted packaging do not close these items.
 
 - Device: iPhone 14 Pro Max
 - iOS/Safari or LiveContainer version: ____________________
-- IPA/workflow run: ____________________
+- IPA/workflow run: `32990579200`
 - Result: `PENDING`
 - Failures/screenshots/notes: _____________________________________________
 

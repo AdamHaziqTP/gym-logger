@@ -1,6 +1,6 @@
 # M03-T11 — Final one-app IPA UX cleanup
 
-Status: `IMPLEMENTED — HOSTED CORRECTION PENDING`
+Status: `AUTOMATED SCOPE ACCEPTED — HUMAN GATE OPEN`
 
 ## Authority
 
@@ -30,7 +30,7 @@ operations.
 The first hosted attempt (`32990405957`) exposed one Xcode 15.4 Swift API
 compatibility issue in the new Photos write call. Codex corrected it to the
 Swift-imported `PHAssetCreationRequest.forAsset()` API; the replacement
-hosted build is required.
+hosted build was then completed successfully by run `32990579200`.
 
 ## Acceptance
 
