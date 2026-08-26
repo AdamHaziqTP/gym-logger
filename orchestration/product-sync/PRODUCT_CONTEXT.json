@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T10:10:44.052Z",
+  "generatedAt": "2026-08-26T10:42:22.103Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -36,10 +36,10 @@
   },
   "current": {
     "milestone": "M03 — Apple Notes colour-recovery feasibility",
-    "task": "M03-T07-B generated Gym Logger flat-RTFD payload proof",
-    "status": "HUMAN_REVIEW_REQUIRED — GENERATED FLAT-RTFD DEVICE PROOF READY",
-    "humanReviewGate": "E-004 Phase B generated Gym Logger flat-RTFD proof on the iPhone 14 Pro Max. A2 proved captured `com.apple.flat-rtfd` alone is sufficient; now paste the newly generated fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C.",
-    "nextAction": "E-004 Phase B generated Gym Logger flat-RTFD proof on the iPhone 14 Pro Max. A2 proved captured `com.apple.flat-rtfd` alone is sufficient; now paste the newly generated fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C."
+    "task": "M03-T07-B2 generated Apple Notes-shaped flat-RTFD proof",
+    "status": "HUMAN_REVIEW_REQUIRED — B2 HELPER BUILD READY",
+    "humanReviewGate": "E-004 Phase B2 generated Apple Notes-shaped flat-RTFD proof on the iPhone 14 Pro Max. Phase B passed table/content but failed all colours; now paste the newly generated B2 fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C.",
+    "nextAction": "E-004 Phase B2 generated Apple Notes-shaped flat-RTFD proof on the iPhone 14 Pro Max. Phase B passed table/content but failed all colours; now paste the newly generated B2 fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,13 +56,22 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "249e216 feat: shape generated Notes payload like Apple RTF",
+    "934ddd7 docs: record Phase B generated flat-RTFD colour failure",
+    "dbd1318 chore: align product sync with Phase B",
     "625a43d chore: sync generated flat-RTFD gate",
-    "af89425 docs: publish generated flat-RTFD device gate",
-    "10e187a feat: generate flat-RTFD Notes proof payload",
-    "1833770 docs: record Phase A2 native sufficiency results",
-    "80aaf50 docs: record partial Phase A2 device results"
+    "af89425 docs: publish generated flat-RTFD device gate"
   ],
   "codexVerification": [
+    {
+      "path": "orchestration/reviews/M03-T07-B2-APPLE-NOTES-SHAPED-FLAT-RTFD-codex-review.md",
+      "result": [
+        "closed with a real target-iPhone colour failure at `934ddd7`. B2 remains an",
+        "[x] Native contract harness: **PASS**.",
+        "[x] PWA regression suite: **PASS — 410/410 tests**.",
+        "[x] `npm run build`: **PASS**."
+      ]
+    },
     {
       "path": "orchestration/reviews/M03-T07-B-GENERATED-FLAT-RTFD-codex-review.md",
       "result": [
@@ -80,23 +89,25 @@
         "[x] Native contract checks: 23/23 PASS.",
         "[x] PWA regression suite: 410/410 PASS; `npm run build`: PASS;"
       ]
-    },
-    {
-      "path": "orchestration/reviews/M03-T07-NATIVE-COLOUR-HANDOFF-codex-review.md",
-      "result": [
-        "updated helper; Codex verified the IPA contains the helper app and",
-        "The current gate is the target-iPhone Phase A removal-variant pass documented"
-      ]
     }
   ],
   "humanVerification": [
     {
+      "path": "orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B2-APPLE-NOTES-SHAPED-FLAT-RTFD.md",
+      "result": [
+        "Base result: Phase B colour failure recorded at `934ddd7`",
+        "built from commit `249e216`. Codex independently verified the IPA contains the",
+        "Report `PASS` only if the generated workout satisfies every item: editable",
+        "Report `FAIL` with the first mismatch and a screenshot if possible. Do not"
+      ]
+    },
+    {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B-GENERATED-FLAT-RTFD.md",
       "result": [
+        "Status: `FAIL — GENERATED FLAT-RTFD PASTES WITHOUT CATEGORY COLOURS`",
         "Phase C Shortcut append is blocked until this generated payload passes.",
-        "Report `PASS` only if the generated workout satisfies every item above:",
-        "Unicode. Report `FAIL` with the first visible mismatch and a screenshot if",
-        "If Phase B passes, the next bounded task is Phase C: test whether passing this"
+        "Category colours: **FAIL — no colour**.",
+        "This is the first visible acceptance mismatch and is sufficient to fail Phase"
       ]
     },
     {
@@ -150,15 +161,6 @@
         "**PASS — Faithful PNG export:** saved image is visible and correctly framed after the Canvg/framing corrections. Product owner does not expect to use this mode often, but it no longer blocks acceptance.",
         "**PASS — actual Tuesday migration:** the Tuesday 25 Aug real 40-row session is present and looks correct on device."
       ]
-    },
-    {
-      "path": "orchestration/evidence/M06-T07-FINAL-HUMAN-CHECKLIST.md",
-      "result": [
-        "These are the only new checks after the Codex-verified M06-T07 polish batch.",
-        "Result: `PASS` / `FAIL`",
-        "Result: `PASS` / `FAIL`",
-        "E-004 remains blocked pending legitimate Mac/Xcode access."
-      ]
     }
   ],
   "unresolvedDefects": [
@@ -175,17 +177,13 @@
     "E-001 historical DSH rate-limit condition is no longer the current blocker.",
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
-    "E-004 Phase A is active and requires a fresh hosted-helper build plus one target-iPhone removal-variant pass; generated payload synthesis remains deferred and no paid Developer dependency is authorized.",
-    "E-004 Phase B generated Gym Logger flat-RTFD proof on the iPhone 14 Pro Max. A2 proved captured `com.apple.flat-rtfd` alone is sufficient; now paste the newly generated fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C."
+    "E-004 Phase A/A2 is complete. B2 generated Apple Notes-shaped flat-RTFD proof is active and requires one hosted-helper target-iPhone paste; no paid Developer dependency is authorized.",
+    "E-004 Phase B2 generated Apple Notes-shaped flat-RTFD proof on the iPhone 14 Pro Max. Phase B passed table/content but failed all colours; now paste the newly generated B2 fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C."
   ],
   "decisionsMadeSinceLastSync": [
-    "Phase B generated flat-RTFD helper and device gate are current at the latest main checkpoint."
+    "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742; target-iPhone generated-workout paste is the only open gate."
   ],
   "recordedDecisions": [
-    {
-      "title": "E-004 parked pending legitimate iOS toolchain — 2026-08-25",
-      "detail": ""
-    },
     {
       "title": "M06-T07 final polish — 2026-08-26",
       "detail": "Compact is the preferred initial export style; Faithful remains available as Add a direct **Share Colour Snapshot** action near Copy to Notes. It shares"
@@ -213,9 +211,14 @@
     {
       "title": "M03-T07 native route productization disposition — 2026-08-26",
       "detail": ""
+    },
+    {
+      "title": "M03-T07-B2 Apple Notes-shaped generated flat-RTFD proof — 2026-08-26",
+      "detail": ""
     }
   ],
   "relevantEvidence": [
+    "orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B2-APPLE-NOTES-SHAPED-FLAT-RTFD.md",
     "orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B-GENERATED-FLAT-RTFD.md",
     "orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md",
     "orchestration/evidence/HUMAN-VERIFICATION-E-004-NATIVE-CLIPBOARD-INSPECTION.md",
@@ -223,7 +226,6 @@
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T05-NOTES-CLIPBOARD-FINGERPRINT.md",
     "orchestration/evidence/HUMAN-VERIFICATION-M03-T04-WEBKIT-SELECTION-COPY.md",
     "orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX-2026-08-26.md",
-    "orchestration/evidence/M06-T07-FINAL-HUMAN-CHECKLIST.md",
     "references/gym_logger_app_icon_1024.png",
     "references/IMG_5554.jpeg",
     "references/IMG_5553.png",
@@ -231,12 +233,20 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "625a43dc4e86c235f7131640cf94d67b1dc1c857",
+    "commit": "249e21634e967bd7769ed4b076139c66ce04ea65",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B2-APPLE-NOTES-SHAPED-FLAT-RTFD.md\n M orchestration/feasibility/E-004-native/PRODUCTIZATION.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/state/DECISIONS.md\n M orchestration/state/STATE.md\n?? orchestration/reviews/M03-T07-B2-APPLE-NOTES-SHAPED-FLAT-RTFD-codex-review.md",
     "changedFiles": [
+      "orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B2-APPLE-NOTES-SHAPED-FLAT-RTFD.md",
+      "orchestration/feasibility/E-004-native/PRODUCTIZATION.md",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs"
+      "orchestration/product-orchestrator/bootstrap.mjs",
+      "orchestration/product-sync/PRODUCT_CONTEXT.json",
+      "orchestration/product-sync/PRODUCT_CONTEXT.md",
+      "orchestration/product-sync/SYNC_STATE.json",
+      "orchestration/state/DECISIONS.md",
+      "orchestration/state/STATE.md",
+      "orchestration/reviews/M03-T07-B2-APPLE-NOTES-SHAPED-FLAT-RTFD-codex-review.md"
     ]
   },
   "builder": {
@@ -256,11 +266,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "checkpoint-accepted",
-      "summary": "Phase B generated flat-RTFD helper and device gate are current at the latest main checkpoint.",
-      "at": "2026-08-26T10:10:43.995Z"
+      "name": "m03-t07-b2-device-gate-ready",
+      "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742; target-iPhone generated-workout paste is the only open gate.",
+      "at": "2026-08-26T10:42:22.041Z"
     },
-    "contextRevision": 97,
+    "contextRevision": 99,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

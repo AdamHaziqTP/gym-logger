@@ -8,7 +8,7 @@ Updated: 2026-08-26
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
 - Current task: M03-T07-B2 generated Apple Notes-shaped flat-RTFD proof
-- Status: HUMAN_REVIEW_REQUIRED — B2 HELPER BUILD REQUIRED
+- Status: HUMAN_REVIEW_REQUIRED — B2 HELPER BUILD READY
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
 - Human review gate: E-004 Phase B2 generated Apple Notes-shaped flat-RTFD proof on the iPhone 14 Pro Max. Phase B passed table/content but failed all colours; now paste the newly generated B2 fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C.
@@ -25,6 +25,7 @@ Updated: 2026-08-26
 - M02-T02/T03/T04: accepted automatically through Codex verification
 - M03-T01/FIX-03 engineering checkpoint: 153/153 tests, build, diff audit, and HTTPS runtime smoke accepted; Apple Notes color interoperability was escalated and is now resolved as a documented v1 limitation
 - M03-T01/E-003 engineering checkpoint: `75c7ba4` — isolated feasibility harness accepted by Codex at 33/33 focused tests, 186/186 full suite, build, diff audit, and HTTPS runtime smoke; no auxiliary route is adopted into v1
+- B2 helper checkpoint: `249e216` — Apple Notes-shaped generated flat-RTFD source and gate; hosted macOS/Xcode run `32959270742` passed packaging
 
 ## Completed
 
@@ -74,6 +75,7 @@ Updated: 2026-08-26
 - M06-T05 framing correction is independently accepted for automated scope: the delivery canvas now applies the selected raster scale before Canvg renders; focused PNG/migration coverage is 27/27, full suite is 374/374, build/runtime/certificate/diff checks pass, and the target-iPhone saved-image framing result remains open.
 - Phase B physical evidence at `934ddd7` passed the newly generated flat-RTFD table/content structure but failed all five category colours. Phase C remains blocked; B2 is the bounded Apple Notes-shaped RTF correction.
 - B2 Apple Notes-shaped helper correction is independently green for automated scope: native contract checks pass, the full PWA suite is 410/410, build and diff hygiene pass, and production `src/`/`public/` remain unchanged. Target-iPhone colour fidelity is unproven.
+- Hosted macOS/Xcode run `32959270742` passed from `249e216`; Codex verified the unsigned IPA contains the helper app and bundled fixture. This proves packaging only, not the Apple Notes result.
 
 ## Final disposition
 
@@ -89,7 +91,7 @@ Updated: 2026-08-26
 - M05-T01 backup/restore, M06 release-readiness, and M06-T04 settings restore are accepted for automated scope. Stop only at the consolidated final iPhone 14 Pro Max gate in `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
 - The consolidated iPhone 14 Pro Max pass found real failures in both image-export previews, mobile export-sheet dismissal, local HTTPS trust, and the Home Screen icon. Route the bounded code/icon corrections through M06-T05 before requesting one consolidated retest; do not mark any physical behavior passed from desktop evidence.
 - M06-T05 is accepted for automated scope. The same consolidated checklist now awaits one physical retest at `https://192.168.1.49:4173/`; do not mark device behavior passed from desktop evidence.
-- M03-T03 target-iPhone proof is closed as failed; do not claim Apple Notes colours from the Shortcuts route or desktop evidence. E-004 generated-payload productization remains deferred while its reopened Phase A removal proof is prepared.
+- M03-T03 target-iPhone proof is closed as failed; do not claim Apple Notes colours from the Shortcuts route or desktop evidence. E-004 Phase A/A2 is complete; B2 generated-payload proof is now the active bounded route.
 - M06-T06 OX invocation produced no output or delta during the bounded ~95-second task window; classify this as a task-level worker hang/timeout, not OX unavailability. Codex fallback was used only after that concrete failure and independently verified the implementation.
 
 ## Deferred
@@ -104,7 +106,7 @@ Updated: 2026-08-26
 - M06-T05 framing is the current physical export gate: retest one Faithful and one Compact saved PNG for visible content and correct full-frame geometry. Preview and mobile dismissal remain accepted from the latest physical evidence unless they regress.
 - The final retest's port-5174 certificate-serving interruption was infrastructure-only and is resolved: both the certificate endpoint and HTTPS app endpoint are now bound on `0.0.0.0` and verified over the workstation LAN address. The iPhone trust result remains pending.
 - M03-T03 Shortcuts share, one-time setup, and colour-recovery proof are closed as a physical failure; the ordinary uncoloured Copy to Notes baseline remains accepted.
-- E-004 generated Gym Logger payload and Shortcut append remain deferred; preserve the helper and do not infer a generated Apple Notes result from captured-payload replay.
+- E-004 B2 generated Gym Logger payload is the current gate; Phase C Shortcut append remains deferred. Preserve the helper and do not infer generated Apple Notes fidelity from captured-payload replay.
 - The post-`0cb9b46` saved-image retest found fully transparent Faithful and Compact PNGs. The active correction is `orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md`; do not mark PNG delivery passed from desktop evidence.
 
 ## Escalations
@@ -112,7 +114,7 @@ Updated: 2026-08-26
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: trusted HTTPS verification completed.
 - E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.
-- E-004 Phase A is active and requires a fresh hosted-helper build plus one target-iPhone removal-variant pass; generated payload synthesis remains deferred and no paid Developer dependency is authorized.
+- E-004 Phase A/A2 is complete. B2 generated Apple Notes-shaped flat-RTFD proof is active and requires one hosted-helper target-iPhone paste; no paid Developer dependency is authorized.
 
 ## Active task checkpoint
 
@@ -411,8 +413,8 @@ Updated: 2026-08-26
 - Independent Codex verification is green: native harness PASS, full PWA
   suite 410/410, production build PASS, `git diff --check` PASS, and no
   production `src/` or `public/` changes.
-- Current human gate: after the new hosted macOS/Xcode helper build is ready,
-  install it on the iPhone 14 Pro Max, tap `Copy Generated Gym Session
+- Current human gate: the hosted macOS/Xcode helper build is ready from run
+  `32959270742`; install it on the iPhone 14 Pro Max, tap `Copy Generated Gym Session
   (flat-RTFD only)`, paste into a temporary Apple Notes note, and verify an
   editable table, all five colours, content/order/summary/notes, and Unicode.
   No device PASS is inferred from desktop/source evidence.

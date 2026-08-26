@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t07-b2-device-gate-ready",
+      "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742; target-iPhone generated-workout paste is the only open gate.",
+      "at": "2026-08-26T10:42:22.041Z"
+    },
+    {
+      "name": "m03-t07-b2-device-gate-ready",
+      "summary": "B2 generated Apple Notes-shaped flat-RTFD helper is independently verified and packaged; target-iPhone generated-workout paste is the only open gate.",
+      "at": "2026-08-26T10:40:00.534Z"
+    },
+    {
       "name": "checkpoint-accepted",
       "summary": "Phase B generated flat-RTFD helper and device gate are current at the latest main checkpoint.",
       "at": "2026-08-26T10:10:43.995Z"
@@ -51,26 +61,16 @@
       "name": "m03-t07-closed",
       "summary": "M03-T07 closed after Codex review: exact native Notes capture/replay is proven, but generated Gym Logger coloured export is not safely productizable from the available evidence; keep v1 production unchanged.",
       "at": "2026-08-26T07:09:39.853Z"
-    },
-    {
-      "name": "worker-timeout-and-disposition-recorded",
-      "summary": "E-004 native capture/replay is physically reported PASS; M03-T07 productization found no safe generated-colour route, so production remains unchanged and the native helper proof is preserved.",
-      "at": "2026-08-26T07:08:41.214Z"
-    },
-    {
-      "name": "human-gate-recorded",
-      "summary": "E-004 exact native Notes capture/replay reported PASS on iPhone 14 Pro Max; queue bounded Gym Logger handoff productization without changing normal Copy to Notes.",
-      "at": "2026-08-26T06:59:12.401Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T10:10:43.996Z",
+  "lastPublishedAt": "2026-08-26T10:42:22.042Z",
   "lastEvent": {
-    "name": "checkpoint-accepted",
-    "summary": "Phase B generated flat-RTFD helper and device gate are current at the latest main checkpoint.",
-    "at": "2026-08-26T10:10:43.995Z"
+    "name": "m03-t07-b2-device-gate-ready",
+    "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742; target-iPhone generated-workout paste is the only open gate.",
+    "at": "2026-08-26T10:42:22.041Z"
   },
-  "syncRevision": 97,
+  "syncRevision": 99,
   "openEscalations": [],
   "chatNotifications": [
     {

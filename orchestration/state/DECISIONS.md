@@ -349,3 +349,18 @@ uncoloured PWA Notes path and Compact colour snapshot. Preserve E-004 as an
 isolated proof. Do not add a coloured Notes export action or claim direct Notes
 append. Re-open only if the raw capture is available and a new bounded
 generated-workout target-iPhone proof is authorized.
+
+## M03-T07-B2 Apple Notes-shaped generated flat-RTFD proof — 2026-08-26
+
+The product owner supplied a genuine Phase B target-iPhone failure at
+`934ddd7`: a newly generated Gym Logger flat-RTFD pasted with editable table
+content but lost all category colours. Do not advance to Phase C Shortcut
+append and do not repeat generic HTML/RTF colour permutations.
+
+Authorize exactly one bounded B2 correction. Generate a fresh workout from the
+canonical Gym Logger fixture, shape `TXT.rtf` with the observed Apple Notes
+highlight controls and Cocoa/table metadata, package it as only
+`com.apple.flat-rtfd`, and open one new target-iPhone gate. Keep the production
+PWA, ordinary uncoloured `Copy to Notes`, and all captured-payload diagnostics
+unchanged. If B2 fails, close generated colour recovery unless a new product
+decision reopens it.

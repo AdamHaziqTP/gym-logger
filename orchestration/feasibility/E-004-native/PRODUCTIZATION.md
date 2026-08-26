@@ -83,14 +83,15 @@ only `com.apple.flat-rtfd` on the pasteboard. The raw Notes capture is not
 present and is not replayed or patched.
 
 Codex independently verified the B2 source contract, full PWA suite/build,
-diff hygiene, and no production `src/`/`public/` changes. Physical Notes colour
-fidelity remains unproven; use the dedicated B2 checklist before any Phase C
-Shortcut investigation.
+diff hygiene, and no production `src/`/`public/` changes. Hosted macOS/Xcode
+run `32959270742` compiled and packaged the helper from `249e216`; physical
+Notes colour fidelity remains unproven. Use the dedicated B2 checklist before
+any Phase C Shortcut investigation.
 
 ## Current B2 gate
 
-Build the helper through the hosted macOS/Xcode workflow, then run one target
-iPhone 14 Pro Max test from
+Install the `GymLoggerPasteboardHelper-unsigned` artifact from hosted run
+`32959270742`, then run one target iPhone 14 Pro Max test from
 `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B2-APPLE-NOTES-SHAPED-FLAT-RTFD.md`.
 If the generated workout still loses colour, close generated colour recovery
 without further HTML/RTF permutations and preserve the working uncoloured
@@ -137,10 +138,10 @@ iPhone.
 
 ## Current next gate and re-open criteria
 
-The next gate is the generated Gym Logger flat-RTFD paste described in
-`orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B-GENERATED-FLAT-RTFD.md`.
-The Phase B helper is ready from hosted macOS/Xcode workflow `32956758287`;
-the artifact contains the generated flat-RTFD proof action and bundled
-fixture. Only after the target-iPhone result should the project attempt
-Shortcut append. It must not alter the normal PWA Notes path while the proof is
-inconclusive.
+The next gate is the B2 generated Apple Notes-shaped flat-RTFD paste described
+in
+`orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B2-APPLE-NOTES-SHAPED-FLAT-RTFD.md`.
+The B2 helper is ready from hosted macOS/Xcode workflow `32959270742`; the
+artifact contains the new Apple-shaped generator and bundled fixture. Only
+after the target-iPhone B2 result should the project attempt Shortcut append.
+It must not alter the normal PWA Notes path while the proof is inconclusive.

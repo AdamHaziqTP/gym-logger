@@ -1,6 +1,6 @@
 # E-004 Phase B2 — generated Apple Notes-shaped flat-RTFD proof
 
-Status: `HUMAN_REVIEW_REQUIRED — B2 HELPER BUILD REQUIRED`
+Status: `HUMAN_REVIEW_REQUIRED — B2 HELPER BUILD READY`
 Device: iPhone 14 Pro Max
 Base result: Phase B colour failure recorded at `934ddd7`
 
@@ -19,9 +19,11 @@ structural clues are reference evidence only.
 
 ## New helper build
 
-The build URL/artifact will be added after the B2 branch is pushed and the
-hosted macOS/Xcode workflow completes. Do not use the older Phase B artifact
-from run `32956758287`; it contains the generic RTF generator.
+Use the `GymLoggerPasteboardHelper-unsigned` artifact from [hosted macOS/Xcode
+run 32959270742](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32959270742),
+built from commit `249e216`. Codex independently verified the IPA contains the
+helper app and bundled Gym Logger fixture. Do not use the older Phase B
+artifact from run `32956758287`; it contains the generic RTF generator.
 
 ## Test procedure
 
