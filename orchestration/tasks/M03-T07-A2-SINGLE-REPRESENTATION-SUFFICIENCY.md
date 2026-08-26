@@ -1,6 +1,6 @@
 # M03-T07-A2 — Single-representation native Notes sufficiency
 
-Status: `HUMAN_REVIEW_REQUIRED — A2 HELPER BUILD READY`
+Status: `ACCEPTED — PHASE A2 COMPLETE; PHASE B QUEUED`
 Owner: OX Alpha builder, Codex acceptance
 Scope: isolated E-004 diagnostic helper; no native rewrite and no PWA change
 

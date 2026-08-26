@@ -31,21 +31,40 @@ struct NativePasteboardPayload {
     let plainText: String
     let html: String
     let rtf: String
+    let flatRTFD: Data
+
+    static let flatRTFDTypeIdentifier = "com.apple.flat-rtfd"
 
     var pasteboardItem: [String: Any] {
         [
             UTType.utf8PlainText.identifier: plainText,
             UTType.html.identifier: Data(html.utf8),
             UTType.rtf.identifier: Data(rtf.utf8),
+            Self.flatRTFDTypeIdentifier: flatRTFD,
         ]
+    }
+
+    var flatRTFDPasteboardItem: [String: Any] {
+        [Self.flatRTFDTypeIdentifier: flatRTFD]
+    }
+}
+
+enum NativePayloadError: LocalizedError {
+    case flatRTFDSerializationFailed
+
+    var errorDescription: String? {
+        switch self {
+        case .flatRTFDSerializationFailed:
+            return "The generated flat-RTFD container could not be serialized."
+        }
     }
 }
 
 enum NativePayloadBuilder {
     private static let categories = ["Arms", "Back", "Chest", "Delts", "Legs"]
     private static let foreground: [String: String] = [
-        "orange": "#ff9f0a", "purple": "#bf5af2", "mint": "#66d4cf",
-        "blue": "#0a84ff", "pink": "#ff375f",
+        "orange": "#ff9230", "purple": "#db34f2", "mint": "#00dac3",
+        "blue": "#0091ff", "pink": "#ff375f",
     ]
     private static let opaqueBackground: [String: String] = [
         "orange": "#261802", "purple": "#1f0e27", "mint": "#0f201f",
@@ -59,7 +78,7 @@ enum NativePayloadBuilder {
         return try JSONDecoder().decode(FixtureFile.self, from: Data(contentsOf: url)).session
     }
 
-    static func makePayload(session: FixtureSession) -> NativePasteboardPayload {
+    static func makePayload(session: FixtureSession) throws -> NativePasteboardPayload {
         let rows = session.rows.sorted { $0.position < $1.position }
         let sets = session.summary.setsDisplayOverride ?? ""
         let exercises = session.summary.exercisesDisplayOverride ?? ""
@@ -69,10 +88,12 @@ enum NativePayloadBuilder {
             [categoryLabel(row.highlight), row.exercise, row.sets, row.reps, row.weight, row.skip].joined(separator: "\t")
         }
         let plain = ([session.displayDate, "", categories.joined(separator: " "), "", summary, "", header] + textRows + ["", "Notes", session.notes]).joined(separator: "\n")
+        let generatedRTF = makeRTF(session: session, rows: rows, summary: summary)
         return NativePasteboardPayload(
             plainText: plain,
             html: makeHTML(session: session, rows: rows, summary: summary),
-            rtf: makeRTF(session: session, rows: rows, summary: summary)
+            rtf: generatedRTF,
+            flatRTFD: try makeFlatRTFD(rtf: generatedRTF)
         )
     }
 
@@ -132,7 +153,7 @@ enum NativePayloadBuilder {
     }
 
     private static func makeRTF(session: FixtureSession, rows: [FixtureRow], summary: String) -> String {
-        let colours = ["#ff9f0a", "#bf5af2", "#66d4cf", "#0a84ff", "#ff375f", "#261802", "#1f0e27", "#0f201f", "#021529", "#260809"]
+        let colours = [foreground["orange"]!, foreground["purple"]!, foreground["mint"]!, foreground["blue"]!, foreground["pink"]!, "#261802", "#1f0e27", "#0f201f", "#021529", "#260809"]
         let colourTable = "{\\colortbl;\(colours.map(rgb).joined(separator: ";"));}"
         let bounds = "\\trowd\\trgaph80\\trleft0\\cellx1100\\cellx2600\\cellx3900\\cellx5400\\cellx7000"
         let header = ["Exercise", "Sets", "Reps", "Weight", "Skip"].map { "\\intbl{\\b \(rtfEscape($0))}\\cell" }.joined()
@@ -152,5 +173,16 @@ enum NativePayloadBuilder {
             return "\(bounds)\(cells)\\row"
         }.joined(separator: "\n")
         return "{\\rtf1\\ansi\\ansicpg1252\\deff0\(colourTable)\\pard\\fs28\\b \(rtfEscape(session.displayDate))\\b0\\fs22\\par\\pard \(rtfEscape(categories.joined(separator: " ")))\\par\\pard \(rtfEscape(summary))\\par\(bounds)\(header)\\row\n\(body)\\pard\\b Notes\\b0\\par\(rtfEscape(session.notes))}"
+    }
+
+    private static func makeFlatRTFD(rtf: String) throws -> Data {
+        let textFile = FileWrapper(regularFileWithContents: Data(rtf.utf8))
+        textFile.preferredFilename = "TXT.rtf"
+        let rtfdPackage = FileWrapper(directoryWithFileWrappers: ["TXT.rtf": textFile])
+        rtfdPackage.preferredFilename = "Gym Logger.rtfd"
+        guard let serialized = rtfdPackage.serializedRepresentation, !serialized.isEmpty else {
+            throw NativePayloadError.flatRTFDSerializationFailed
+        }
+        return serialized
     }
 }

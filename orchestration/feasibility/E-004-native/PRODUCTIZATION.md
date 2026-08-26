@@ -2,7 +2,7 @@
 
 Updated: 2026-08-26
 
-Status: `PHASE A2 READY — SINGLE-REPRESENTATION DEVICE PROOF REQUIRED`
+Status: `PHASE B READY — GENERATED FLAT-RTFD DEVICE PROOF REQUIRED`
 
 ## Verified capability
 
@@ -44,6 +44,21 @@ The preferred target types are `public.rtf`, `com.apple.flat-rtfd`,
 `public.utf8-plain-text`, when present in the device capture. The helper remains
 dynamic so the physical test can cover the identifiers Apple actually exposes.
 
+## Phase B — generated Gym Logger flat-RTFD proof
+
+Phase A2 physically proved that captured `com.apple.flat-rtfd` alone preserves
+the required Apple Notes fidelity. The helper now generates a new payload from
+the bundled canonical `latest-session.example.json` fixture instead of reading
+or transforming captured Notes bytes. It creates the existing coloured RTF
+table, packages it as a Foundation `FileWrapper` with `TXT.rtf`, serializes the
+package, and places only `com.apple.flat-rtfd` on the pasteboard for the
+dedicated proof action.
+
+This is still an isolated feasibility helper. It does not change the PWA or
+claim that generated Gym Logger data works until the target iPhone paste proves
+an editable table, all five colours, correct content/order/notes, and Unicode.
+Phase C Shortcut append remains blocked until that generated payload passes.
+
 ## Boundary that remains unproven
 
 The proof did not generate a new Gym Logger workout. The helper's synthetic
@@ -84,10 +99,9 @@ iPhone.
 
 ## Current next gate and re-open criteria
 
-The next gate is the single-representation sufficiency pass described in
-`orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-A-REMOVAL-VARIANTS.md`.
-The updated A2 helper is ready from hosted macOS/Xcode workflow `32952585740`;
-the artifact contains the single-representation controls and bundled fixture.
-Only after that result should the project attempt a generated Gym Logger
-payload. It must not alter the normal PWA Notes path while the proof is
-inconclusive.
+The next gate is the generated Gym Logger flat-RTFD paste described in
+`orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B-GENERATED-FLAT-RTFD.md`.
+The A2 helper source has been extended for this proof and must be rebuilt on
+hosted macOS/Xcode before installation. Only after that result should the
+project attempt Shortcut append. It must not alter the normal PWA Notes path
+while the proof is inconclusive.

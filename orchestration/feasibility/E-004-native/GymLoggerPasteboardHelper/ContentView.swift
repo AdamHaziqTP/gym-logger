@@ -52,8 +52,11 @@ struct ContentView: View {
                 }
 
                 Divider()
-                Text("Synthetic fixture (historical comparison only)").font(.headline)
-                Button("Copy Gym Session to Pasteboard") { copySession() }
+                Text("Generated Gym Logger payload proof").font(.headline)
+                Text("Builds a new 40-row workout payload from the bundled Gym Logger fixture and places only flat-RTFD on the clipboard for Apple Notes testing.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                Button("Copy Generated Gym Session (flat-RTFD only)") { copySession() }
                     .buttonStyle(.bordered)
 
                 Text(status).font(.footnote).foregroundStyle(.secondary)
@@ -123,12 +126,12 @@ struct ContentView: View {
     private func copySession() {
         do {
             let session = try NativePayloadBuilder.loadFixture()
-            let payload = NativePayloadBuilder.makePayload(session: session)
+            let payload = try NativePayloadBuilder.makePayload(session: session)
             UIPasteboard.general.setItems(
-                [payload.pasteboardItem],
+                [payload.flatRTFDPasteboardItem],
                 options: [.expirationDate: Date().addingTimeInterval(600)]
             )
-            status = "Copied. Open the existing Gym note and paste once."
+            status = "Generated a new Gym Logger flat-RTFD payload. Open a temporary Gym note and paste once."
         } catch {
             status = "Could not load the bundled proof fixture."
         }

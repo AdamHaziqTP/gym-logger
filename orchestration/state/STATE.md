@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
-- Current task: M03-T07-A2 single-representation native Notes sufficiency
-- Status: HUMAN_REVIEW_REQUIRED — SINGLE-REPRESENTATION VARIANTS READY
+- Current task: M03-T07-B generated Gym Logger flat-RTFD payload proof
+- Status: HUMAN_REVIEW_REQUIRED — GENERATED FLAT-RTFD DEVICE PROOF READY
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: E-004 Phase A2 single-representation sufficiency proof on the iPhone 14 Pro Max. Phase A removal variants all passed, but that only proves redundancy. Use the fresh helper build and record each displayed `Replay ONLY <type>` variant before Phase B/C.
-- Latest bounded task: M03-T07-A2 native handoff sufficiency; production PWA and normal Copy to Notes remain unchanged.
+- Human review gate: E-004 Phase B generated Gym Logger flat-RTFD proof on the iPhone 14 Pro Max. A2 proved captured `com.apple.flat-rtfd` alone is sufficient; now paste the newly generated fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C.
+- Latest bounded task: M03-T07-B generated native handoff; production PWA and normal Copy to Notes remain unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -360,3 +360,24 @@ Updated: 2026-08-26
 - Do not start generated Gym payload synthesis or Shortcut append until A2
   identifies at least one sufficient representation or closes the branch with
   evidence. Keep the PWA `Copy to Notes` path unchanged.
+
+## M03-T07-B generated Gym Logger flat-RTFD proof — 2026-08-26
+
+- Phase A/A2 is complete. The target iPhone reported `com.apple.flat-rtfd`
+  alone preserved an editable table, all five category colours, correct
+  content/order, and Unicode; public HTML/WebArchive/RTF only preserved the
+  table, and plain text preserved neither table nor colours.
+- Phase B is now authorized. `NativePayloadBuilder` generates a new payload
+  from the bundled canonical `latest-session.example.json` fixture, packages
+  the generated coloured `TXT.rtf` using Foundation `FileWrapper`, and exposes
+  a proof action that places only `com.apple.flat-rtfd` on the pasteboard.
+- Codex independently verified the native contract at 27/27 checks, the PWA
+  suite at 410/410 tests, `npm run build`, `git diff --check`, and no `src/` or
+  `public/` production changes. The fresh DSH `/agent-teams` implementation
+  attempt timed out with no delta; the narrow fallback is recorded.
+- Current human gate: install the fresh Phase B helper build, tap
+  `Copy Generated Gym Session (flat-RTFD only)`, paste into a temporary Apple
+  Notes Gym note, and record the generated-workout fidelity checklist in
+  `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B-GENERATED-FLAT-RTFD.md`.
+- Do not start Phase C Shortcut append or alter production `Copy to Notes`
+  until the generated flat-RTFD paste passes on the target iPhone.
