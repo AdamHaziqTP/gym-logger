@@ -8,7 +8,7 @@ Updated: 2026-08-26
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
 - Current task: M03-T09 real production-session native manual-paste handoff
-- Status: READY_FOR_HOSTED_BUILD_AND_HUMAN_GATE
+- Status: HUMAN_REVIEW_REQUIRED — M03-T09 NATIVE HELPER DEVICE PROOF READY
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
 - Human review gate: install the newest hosted helper, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`.
@@ -82,7 +82,7 @@ Updated: 2026-08-26
 - Codex independently verified the Phase C source contract, 410/410 PWA tests, production build, and diff hygiene. Hosted macOS/Xcode run `32961489740` independently compiled and packaged the updated helper from `6d28fec`; the Phase C device gate is now open.
 - Phase C was physically closed at `cda3a58`: Shortcut append reached the correct `Gym` note and preserved a table, but stripped colours and concatenated the legend. No further Shortcut or HTML conversion variants are authorized.
 - M03-T09 OX Alpha dispatch timed out without output or a usable delta in the bounded approximately 150-second DSH Desktop window. Codex fallback implemented the narrow manual-paste handoff and recorded the worker classification in `orchestration/reports/M03-T09-NATIVE-MANUAL-PASTE-HANDOFF-OX-ALPHA-REPORT.md`.
-- M03-T09 is independently green for the PWA/native contract: 412/412 PWA tests, production build, native static contract, and handoff-specific review. The native Swift compile requires the hosted macOS/Xcode workflow and the target iPhone result remains open.
+- M03-T09 is independently green for the PWA/native contract: 412/412 PWA tests, production build, native static contract, and handoff-specific review. Hosted macOS/Xcode run `32972463589` also compiled and packaged the changed helper; the target iPhone result remains open.
 
 ## Final disposition
 

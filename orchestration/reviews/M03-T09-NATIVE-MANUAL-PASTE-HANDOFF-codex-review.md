@@ -29,9 +29,10 @@ Updated: 2026-08-26
 - `npm run build`: **PASS**.
 - `git diff --check`: pending final checkpoint after orchestration docs are
   updated.
-- Swift/Xcode compile: **not available on this Windows workstation**. A fresh
-  hosted macOS/Xcode workflow must package the changed helper before physical
-  testing; no iOS compile or device result is claimed here.
+- Swift/Xcode compile and packaging: **PASS** via hosted macOS/Xcode workflow
+  `32972463589` on commit `53d322c`; the artifact contains the helper app,
+  bundled fixture, and registered `gymloggerpasteboardproof` URL scheme. This
+  proves packaging only, not the Apple Notes or target-device result.
 
 ## Acceptance boundary
 

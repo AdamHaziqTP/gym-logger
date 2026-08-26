@@ -4,6 +4,10 @@ Status: `READY FOR TARGET-IPHONE VERIFICATION`
 
 Target: iPhone 14 Pro Max
 
+Build: hosted macOS/Xcode workflow
+[`32972463589`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32972463589)
+(`GymLoggerPasteboardHelper-unsigned` artifact, commit `53d322c`).
+
 This is the single physical proof for the productized fallback. It is not a
 Shortcut append test. The expected flow is Gym Logger → native helper → native
 coloured clipboard → one manual Paste in the existing `Gym` note.
