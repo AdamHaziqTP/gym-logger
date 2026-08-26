@@ -6,13 +6,13 @@ Updated: 2026-08-26
 
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
-- Current milestone: M06 — PWA polish and regression
-- Current task: M03-T06 exact Apple Notes HTML replay proof — M03-T05 exposed colour-bearing Notes HTML in the browser-visible clipboard
-- Status: HUMAN_REVIEW_REQUIRED (M03-T06 exact replay ready; normal Copy to Notes unchanged; E-004 native inspection remains behind replay evidence)
+- Current milestone: M03 — Apple Notes colour-recovery feasibility
+- Current task: E-004 native Apple Notes pasteboard inspection and exact replay
+- Status: READY_FOR_OX (M03-T06 closed after target-iPhone colour failure; normal Copy to Notes unchanged)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: after M03-T06 is independently verified and served over HTTPS, tap Replay captured Notes HTML, paste into Apple Notes, and report editable table structure plus all five category colours. Do not claim replay success from desktop evidence. M06-T07 icon/share checks remain deferred and batched.
-- Latest bounded task: M03-T06 isolated exact replay of the supplied Apple Notes HTML/text clipboard representations; normal Copy to Notes remains unchanged.
+- Human review gate: after the isolated native helper is independently verified and an iOS build/install route is available, copy a small five-colour table in Apple Notes, inspect/replay the native pasteboard, then report editable table structure, colours, Unicode, and data fidelity. Do not claim success from desktop or hosted build evidence.
+- Latest bounded task: E-004 native clipboard inspection/replay plus GitHub-hosted macOS/Xcode build preparation; production PWA and normal Copy to Notes remain unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -218,3 +218,35 @@ Updated: 2026-08-26
 - M06-T06 accepted automated checkpoint: `orchestration/reviews/M06-T06-ACTUAL-SESSION-MIGRATION-codex-review.md`; current human gate remains `orchestration/evidence/HUMAN-VERIFICATION-FINAL-IPHONE14-PROMAX.md`.
 - New product evidence: `orchestration/evidence/HUMAN-VERIFICATION-M06-T05-EXPORT-DELIVERY-RETEST.md` now records PNG visibility PASS but framing/crop FAIL after `9cf5286`; do not treat the export branch as physically accepted.
 - New automated evidence: `orchestration/evidence/M06-T05-FIX-EXPORT-FRAMING-AUTOMATED.md` records the independently verified geometry correction; physical acceptance remains intentionally unclaimed.
+
+## M03-T06 disposition and E-004 native inspection checkpoint
+
+- M03-T06 is closed as a genuine target-iPhone colour-fidelity failure. The
+  exact Apple Notes-origin HTML replay preserved the editable table, order,
+  values, summary, notes, and Unicode but stripped all five category colours.
+  No further HTML/CSS/WebKit colour experiments are authorized.
+- E-004 is now the active bounded colour-recovery proof. The existing isolated
+  SwiftUI helper was extended with `Inspect Notes Clipboard`,
+  `Replay Captured Clipboard`, report/raw-payload sharing, first-item
+  pasteboard type order, item-provider identifiers, byte sizes, SHA-256 hashes,
+  and a 10 MB raw-payload safety cap. Production PWA and normal `Copy to
+  Notes` remain untouched.
+- Codex independently ran the native harness: 18/18 checks pass after adding
+  the explicit pasteboard type-order contract. The PWA regression suite remains
+  410/410, `npm run build` passes, `git diff --check` passes, and no `src/` or
+  `public/` files changed in this checkpoint.
+- The fresh E-004 OX Alpha task was dispatched through the verified DSH Desktop
+  wrapper with the configured `openrouter` / `stealth/ox-alpha` routing. It
+  produced no stdout, stderr, report, or delta during the bounded window and
+  was classified as a worker-task timeout. This does not classify OX or the
+  wrapper as unavailable; the Codex fallback is recorded separately.
+- `.github/workflows/e004-native-helper.yml` is prepared for a manual hosted
+  macOS/Xcode build. No IPA, compile result, install result, or Apple Notes
+  colour result is claimed until that workflow actually produces an artifact
+  and the target iPhone is tested.
+- Current E-004 gate:
+  `orchestration/evidence/HUMAN-VERIFICATION-E-004-NATIVE-CLIPBOARD-INSPECTION.md`.
+  It remains `BLOCKED/DEFERRED — HOSTED IOS BUILD PENDING`; after a truthful
+  build/install route exists, the single physical test is Notes copy → native
+  inspection → exact replay → paste into `Gym` and report table, colours,
+  Unicode, and data fidelity.

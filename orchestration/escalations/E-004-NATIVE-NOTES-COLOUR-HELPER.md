@@ -46,3 +46,22 @@ The M03-T05 fingerprint did expose colour-bearing HTML, so E-004 is held
 behind the single M03-T06 exact replay proof. If the byte-equivalent replay
 fails on the target iPhone, E-004 becomes the next authorized branch; until
 then, do not build or package the native helper.
+
+## M03-T06 result; native inspection now authorized — 2026-08-26
+
+M03-T06 physically failed only for colour: exact Notes-origin HTML replay
+preserved an editable table and the fixture content but stripped all five
+colours. The browser-HTML branch is closed. Advance E-004 to native pasteboard
+inspection and exact replay; do not perform more HTML experiments.
+
+The next helper must inspect the pasteboard Apple Notes actually produces,
+including `public.rtf`, RTFD/flat-RTFD, HTML, webarchive, attributed-string
+compatible data, and Apple-private identifiers where exposed. It must retain
+type order, sizes, hashes, and permitted raw payloads, then replay the captured
+item unchanged. Representation-removal tests and synthetic Gym Logger output
+are allowed only after a successful exact replay proves the colour-bearing
+representation.
+
+The GitHub-hosted macOS/Xcode workflow is reopened to produce a truthful build
+artifact or an explicit build blocker. No paid Developer dependency, native
+rewrite, or production `Copy to Notes` change is authorized.

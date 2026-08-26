@@ -6,6 +6,7 @@ const fixturePath = resolve(root, "seed/latest-session.example.json");
 const bundledPath = resolve(import.meta.dirname, "GymLoggerPasteboardHelper/latest-session.example.json");
 const source = readFileSync(resolve(import.meta.dirname, "GymLoggerPasteboardHelper/PasteboardPayload.swift"), "utf8");
 const app = readFileSync(resolve(import.meta.dirname, "GymLoggerPasteboardHelper/ContentView.swift"), "utf8");
+const inspector = readFileSync(resolve(import.meta.dirname, "GymLoggerPasteboardHelper/ClipboardInspector.swift"), "utf8");
 const project = readFileSync(resolve(import.meta.dirname, "GymLoggerPasteboardHelper.xcodeproj/project.pbxproj"), "utf8");
 const fixture = JSON.parse(readFileSync(fixturePath, "utf8"));
 const bundled = JSON.parse(readFileSync(bundledPath, "utf8"));
@@ -22,7 +23,13 @@ const checks = [
   ["one pasteboard item", app.includes("UIPasteboard.general.setItems") && app.includes("payload.pasteboardItem")],
   ["copy action is user initiated", app.includes("Button(\"Copy Gym Session to Pasteboard\")")],
   ["no PWA source dependency", !source.includes("src/") && !app.includes("navigator.clipboard")],
-  ["Xcode project references the three Swift files and fixture", ["GymLoggerPasteboardHelperApp.swift", "ContentView.swift", "PasteboardPayload.swift", "latest-session.example.json"].every((name) => project.includes(name))],
+  ["clipboard inspector enumerates direct items", inspector.includes("pasteboard.items")],
+  ["clipboard inspector records pasteboard type order", inspector.includes("pasteboard.types") && inspector.includes("firstItemTypeOrder")],
+  ["clipboard inspector enumerates item providers", inspector.includes("pasteboard.itemProviders") && inspector.includes("registeredTypeIdentifiers")],
+  ["clipboard inspector records hashes and raw payloads", inspector.includes("SHA256.hash") && inspector.includes("manifest.json")],
+  ["clipboard replay writes captured representations", inspector.includes("replayLatestCapture") && inspector.includes("UIPasteboard.general.setItems")],
+  ["UI exposes inspection, replay, and share actions", ["Inspect Notes Clipboard", "Replay Captured Clipboard", "Share Capture Report and Raw Payloads"].every((label) => app.includes(label))],
+  ["Xcode project references all Swift files and fixture", ["GymLoggerPasteboardHelperApp.swift", "ContentView.swift", "PasteboardPayload.swift", "ClipboardInspector.swift", "latest-session.example.json"].every((name) => project.includes(name))],
 ];
 
 for (const [label, passed] of checks) console.log(`${passed ? "PASS" : "FAIL"} ${label}`);

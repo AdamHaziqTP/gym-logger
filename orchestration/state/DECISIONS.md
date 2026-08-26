@@ -291,3 +291,25 @@ captured HTML with the existing generator and then implement only a bounded
 Notes-compatible generator. If exact replay fails, record that browser-read
 HTML is not equivalent to a writable Notes pasteboard representation and only
 then advance E-004 native inspection.
+
+## M03-T06 closed; advance E-004 native pasteboard inspection — 2026-08-26
+
+The target-iPhone exact replay of the complete Apple Notes-generated HTML
+preserved the editable table, data/order, summary, notes, and Unicode, but
+stripped all five category colours. This closes the browser-HTML recovery
+branch. Do not iterate HTML/CSS markup, colour tokens, Apple-specific classes,
+or additional WebKit clipboard variants.
+
+Advance the already-authorized E-004 native feasibility proof. The helper must
+first inspect the actual pasteboard produced by Apple Notes after copying a
+small coloured table, enumerate type identifiers in fidelity order, record
+byte sizes and hashes, export raw payloads where permitted, and replay the
+captured representations unchanged. Run representation-removal tests only if
+exact replay preserves both an editable table and all five colours. Do not
+synthesize Gym Logger payloads until the colour-bearing representation is
+identified.
+
+Reopen the GitHub-hosted macOS/Xcode build route for this isolated helper. A
+free-account/device-test route is allowed for this one-time feasibility proof;
+no paid Apple Developer membership, native PWA rewrite, or change to the
+production Copy to Notes path is authorized.

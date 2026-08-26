@@ -11,6 +11,7 @@
 		A00100020000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200020000000000000002 /* ContentView.swift */; };
 		A00100030000000000000003 /* PasteboardPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200030000000000000003 /* PasteboardPayload.swift */; };
 		A00100040000000000000004 /* latest-session.example.json in Resources */ = {isa = PBXBuildFile; fileRef = A00200040000000000000004 /* latest-session.example.json */; };
+		A00100050000000000000005 /* ClipboardInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200060000000000000006 /* ClipboardInspector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		A00200030000000000000003 /* PasteboardPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardPayload.swift; sourceTree = "<group>"; };
 		A00200040000000000000004 /* latest-session.example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = latest-session.example.json; sourceTree = "<group>"; };
 		A00200050000000000000005 /* GymLoggerPasteboardHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymLoggerPasteboardHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00200060000000000000006 /* ClipboardInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardInspector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,7 +28,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A00400010000000000000001 = {isa = PBXGroup; children = ( A00200010000000000000001, A00200020000000000000002, A00200030000000000000003, A00200040000000000000004, ); sourceTree = "<group>"; };
+		A00400010000000000000001 = {isa = PBXGroup; children = ( A00200010000000000000001, A00200020000000000000002, A00200030000000000000003, A00200040000000000000004, A00200060000000000000006, ); sourceTree = "<group>"; };
 		A00400020000000000000002 /* Products */ = {isa = PBXGroup; children = ( A00200050000000000000005, ); name = Products; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
@@ -43,7 +45,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A00300020000000000000002 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = ( A00100010000000000000001 /* GymLoggerPasteboardHelperApp.swift in Sources */, A00100020000000000000002 /* ContentView.swift in Sources */, A00100030000000000000003 /* PasteboardPayload.swift in Sources */, ); runOnlyForDeploymentPostprocessing = 0; };
+		A00300020000000000000002 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = ( A00100010000000000000001 /* GymLoggerPasteboardHelperApp.swift in Sources */, A00100020000000000000002 /* ContentView.swift in Sources */, A00100030000000000000003 /* PasteboardPayload.swift in Sources */, A00100050000000000000005 /* ClipboardInspector.swift in Sources */, ); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
