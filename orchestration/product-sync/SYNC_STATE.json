@@ -4,6 +4,11 @@
   "events": [
     {
       "name": "m03-t07-b2-device-gate-ready",
+      "summary": "B2 helper source from 249e216 was packaged by hosted run 32959270742; gate documentation is current at d03678b and target-iPhone generated-workout paste is the only open gate.",
+      "at": "2026-08-26T10:43:14.198Z"
+    },
+    {
+      "name": "m03-t07-b2-device-gate-ready",
       "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742 at checkpoint 6ef703c; target-iPhone generated-workout paste is the only open gate.",
       "at": "2026-08-26T10:42:50.996Z"
     },
@@ -56,21 +61,16 @@
       "name": "state-changed",
       "summary": "M03-T07 Phase A native removal harness ready; target iPhone proof required.",
       "at": "2026-08-26T08:07:23.182Z"
-    },
-    {
-      "name": "checkpoint-pushed",
-      "summary": "Pushed 3c08b33. E-004 exact native Notes capture/replay is reported PASS; generated Gym Logger coloured Notes export remains unproven and is not productized; v1 PWA production path is unchanged.",
-      "at": "2026-08-26T07:09:56.939Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T10:42:50.997Z",
+  "lastPublishedAt": "2026-08-26T10:43:14.198Z",
   "lastEvent": {
     "name": "m03-t07-b2-device-gate-ready",
-    "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742 at checkpoint 6ef703c; target-iPhone generated-workout paste is the only open gate.",
-    "at": "2026-08-26T10:42:50.996Z"
+    "summary": "B2 helper source from 249e216 was packaged by hosted run 32959270742; gate documentation is current at d03678b and target-iPhone generated-workout paste is the only open gate.",
+    "at": "2026-08-26T10:43:14.198Z"
   },
-  "syncRevision": 100,
+  "syncRevision": 101,
   "openEscalations": [],
   "chatNotifications": [
     {

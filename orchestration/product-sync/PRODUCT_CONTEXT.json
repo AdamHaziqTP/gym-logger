@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T10:42:51.056Z",
+  "generatedAt": "2026-08-26T10:43:14.258Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "d03678b chore: sync B2 product context",
     "6ef703c docs: open Apple Notes-shaped B2 device gate",
     "249e216 feat: shape generated Notes payload like Apple RTF",
     "934ddd7 docs: record Phase B generated flat-RTFD colour failure",
-    "dbd1318 chore: align product sync with Phase B",
-    "625a43d chore: sync generated flat-RTFD gate"
+    "dbd1318 chore: align product sync with Phase B"
   ],
   "codexVerification": [
     {
@@ -181,7 +181,7 @@
     "E-004 Phase B2 generated Apple Notes-shaped flat-RTFD proof on the iPhone 14 Pro Max. Phase B passed table/content but failed all colours; now paste the newly generated B2 fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C."
   ],
   "decisionsMadeSinceLastSync": [
-    "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742 at checkpoint 6ef703c; target-iPhone generated-workout paste is the only open gate."
+    "B2 helper source from 249e216 was packaged by hosted run 32959270742; gate documentation is current at d03678b and target-iPhone generated-workout paste is the only open gate."
   ],
   "recordedDecisions": [
     {
@@ -233,7 +233,7 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "6ef703c64c3eabae46cfdddb472a0acf86616a05",
+    "commit": "d03678bfc853f1720792553fd8e72228079c4fc7",
     "branch": "main",
     "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
@@ -259,10 +259,10 @@
   "synchronization": {
     "lastEvent": {
       "name": "m03-t07-b2-device-gate-ready",
-      "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742 at checkpoint 6ef703c; target-iPhone generated-workout paste is the only open gate.",
-      "at": "2026-08-26T10:42:50.996Z"
+      "summary": "B2 helper source from 249e216 was packaged by hosted run 32959270742; gate documentation is current at d03678b and target-iPhone generated-workout paste is the only open gate.",
+      "at": "2026-08-26T10:43:14.198Z"
     },
-    "contextRevision": 100,
+    "contextRevision": 101,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
