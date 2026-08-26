@@ -1,6 +1,6 @@
 # Human verification — E-004 Phase C Shortcut append
 
-Status: `HUMAN_REVIEW_REQUIRED — HOSTED HELPER BUILD READY`
+Status: `FAIL — SHORTCUT APPENDS TO CORRECT NOTE BUT STRIPS COLOUR; LEGEND SPACING ALSO REGRESSES`
 Device: iPhone 14 Pro Max
 Date opened: 2026-08-26
 
@@ -35,13 +35,54 @@ transformation. The existing `Gym` note is the target.
    values, the `40 sets · 39 exercises` summary, notes, and Unicode such as
    `30°` and `·` without mojibake.
 
-## Result to record
+## Human device result — 2026-08-26
 
-- Shortcut append: `PASS` / `FAIL` / `BLOCKED`
-- Editable table: `PASS` / `FAIL`
-- Legend colours: `PASS` / `FAIL`
-- Row colours: `PASS` / `FAIL`
-- Content/order/summary/notes/Unicode: `PASS` / `FAIL`
-- Screenshot/observation for any failure:
+The product owner configured the intended one-action Shortcut and ran the Phase
+C helper handoff. The Shortcut appended the generated workout to the correct
+existing `Gym` note.
 
-Do not mark Phase C accepted until this target-device result is recorded.
+Physical observations reported and shown in the supplied screenshot:
+
+- Shortcut routing/append to the existing `Gym` note: **PASS**.
+- Apple Notes table structure: **PRESENT**; the appended workout visibly appears
+  as a table. The product owner did not separately report an editability test,
+  so editability is not independently claimed here.
+- Legend spacing: **FAIL** — the legend renders as
+  `ArmsBackChestDeltsLegs` with no spaces between labels.
+- Legend colours: **FAIL** — the labels are not coloured.
+- Workout row/category colours: **FAIL** — the Shortcut-appended table is
+  uncoloured.
+- Content/order/summary/notes/Unicode: not fully re-verified in this report; no
+  claim beyond the visible appended structure and the product owner's stated
+  colour/legend defects.
+
+The screenshot demonstrates that the Shortcut did reach the intended note and
+preserved a table-shaped result, but it did not preserve the colour fidelity of
+the already-proven B2 direct native paste.
+
+## Disposition
+
+Phase C automatic Shortcut append is **FAIL** for the required coloured Notes
+handoff. Do not productize `Append Shortcut Input to Gym` as the coloured export
+path.
+
+The relevant contrast is now physically established:
+
+- generated Apple Notes-shaped native flat-RTFD → manual Apple Notes paste:
+  **PASS for editable coloured workout table** (B2);
+- the same generated handoff routed through Shortcut `Append Shortcut Input to
+  Gym`: **FAIL for colours**.
+
+Close the automatic Shortcut-append branch unless a materially different,
+low-friction native Notes mechanism is identified. Do not reopen the already
+failed Get Text / HTML-conversion Shortcut routes.
+
+The practical product fallback is to preserve the generated native flat-RTFD
+clipboard and require one manual Paste into the existing `Gym` note. The helper
+may automate navigation/opening as far as iOS reliably allows, but the actual
+paste should remain manual unless another physically verified route preserves
+full fidelity.
+
+Before productizing that fallback, fix the new legend-spacing regression and
+verify the latest helper's direct manual paste still preserves the five row
+colours and individually coloured, spaced legend labels.
