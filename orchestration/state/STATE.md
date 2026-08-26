@@ -244,6 +244,11 @@ Updated: 2026-08-26
   macOS/Xcode build. No IPA, compile result, install result, or Apple Notes
   colour result is claimed until that workflow actually produces an artifact
   and the target iPhone is tested.
+- Hosted workflow run `32924739747` reached Xcode but failed before compilation
+  because the target build incorrectly supplied `-derivedDataPath` without a
+  scheme. The workflow was corrected to use the target build's normal runner
+  DerivedData location; rerun is required before the helper is ready for
+  installation.
 - Current E-004 gate:
   `orchestration/evidence/HUMAN-VERIFICATION-E-004-NATIVE-CLIPBOARD-INSPECTION.md`.
   It remains `BLOCKED/DEFERRED — HOSTED IOS BUILD PENDING`; after a truthful

@@ -24,12 +24,16 @@ the PWA production path.
 - [x] Xcode project references the new Swift source.
 - [x] Hosted macOS/Xcode workflow is present and packages an unsigned artifact
       only after a real build succeeds.
+- [x] First hosted workflow invocation reached Xcode; its target-plus-derived-
+      data-path argument error was diagnosed and corrected in the workflow.
 - [x] PWA regression suite: 410/410 tests pass.
 - [x] PWA production build passes.
 - [x] Native platform-neutral harness: 18/18 checks pass.
 - [x] `git diff --check` passes.
 - [x] No `src/` or `public/` production files changed.
 - [ ] Swift/Xcode compilation: not run on this Windows workstation.
+- [ ] Hosted macOS/Xcode compilation: first run failed at workflow argument
+      validation; corrected workflow requires a second run.
 - [ ] iOS installation: not run.
 - [ ] Apple Notes editable-table, Unicode, or five-colour result: not run.
 

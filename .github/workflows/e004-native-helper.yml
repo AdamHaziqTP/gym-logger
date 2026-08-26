@@ -23,7 +23,6 @@ jobs:
           -configuration Release
           -sdk iphoneos
           -destination 'generic/platform=iOS'
-          -derivedDataPath build
           CODE_SIGNING_ALLOWED=NO
           CODE_SIGNING_REQUIRED=NO
           DEVELOPMENT_TEAM=
@@ -33,7 +32,7 @@ jobs:
         working-directory: orchestration/feasibility/E-004-native
         run: |
           set -euo pipefail
-          app_path="$(find build/Build/Products -type d -name 'GymLoggerPasteboardHelper.app' -print -quit)"
+          app_path="$(find "$HOME/Library/Developer/Xcode/DerivedData" -type d -path '*/Build/Products/*/GymLoggerPasteboardHelper.app' -print -quit)"
           test -n "$app_path"
           mkdir -p artifacts/Payload
           cp -R "$app_path" artifacts/Payload/

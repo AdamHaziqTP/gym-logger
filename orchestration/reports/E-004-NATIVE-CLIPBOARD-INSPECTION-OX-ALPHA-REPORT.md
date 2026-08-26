@@ -28,3 +28,13 @@ permitted emergency fallback to complete only the bounded task described in
 
 No device behavior, IPA, signing result, Apple Notes editability, Unicode
 fidelity, or colour fidelity is claimed from this worker attempt.
+
+## Hosted-build follow-up
+
+The first hosted macOS workflow run (`32924739747`) reached Xcode but failed
+before compilation because the workflow combined a target build with
+`-derivedDataPath`, which Xcode requires to be paired with a scheme. This was a
+workflow defect, not evidence against the helper source. The workflow was
+corrected to keep the target build and locate the resulting app in the clean
+runner's normal DerivedData tree. A second run is required before the native
+proof can be considered ready for installation.
