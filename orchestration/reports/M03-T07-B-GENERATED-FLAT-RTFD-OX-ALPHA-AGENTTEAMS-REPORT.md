@@ -33,5 +33,7 @@ and deterministic contract checks. The production PWA was not changed.
 - `git diff --check`: PASS;
 - production `src/` and `public/` diff: none.
 
-The hosted macOS/Xcode workflow must compile this new Swift change before the
-target-iPhone generated-paste gate. No physical Phase B result is claimed.
+Hosted macOS/Xcode workflow `32956758287` subsequently compiled and packaged
+the helper ([run details](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32956758287)).
+Codex verified the IPA contains the helper app and bundled fixture. No physical
+Phase B result is claimed.

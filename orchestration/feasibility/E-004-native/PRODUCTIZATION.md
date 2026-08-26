@@ -101,7 +101,8 @@ iPhone.
 
 The next gate is the generated Gym Logger flat-RTFD paste described in
 `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B-GENERATED-FLAT-RTFD.md`.
-The A2 helper source has been extended for this proof and must be rebuilt on
-hosted macOS/Xcode before installation. Only after that result should the
-project attempt Shortcut append. It must not alter the normal PWA Notes path
-while the proof is inconclusive.
+The Phase B helper is ready from hosted macOS/Xcode workflow `32956758287`;
+the artifact contains the generated flat-RTFD proof action and bundled
+fixture. Only after the target-iPhone result should the project attempt
+Shortcut append. It must not alter the normal PWA Notes path while the proof is
+inconclusive.

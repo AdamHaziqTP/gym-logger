@@ -381,3 +381,6 @@ Updated: 2026-08-26
   `orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B-GENERATED-FLAT-RTFD.md`.
 - Do not start Phase C Shortcut append or alter production `Copy to Notes`
   until the generated flat-RTFD paste passes on the target iPhone.
+- The generated Phase B helper build is ready from hosted macOS/Xcode workflow
+  `32956758287`; Codex verified the unsigned IPA contents. This does not claim
+  installation or Apple Notes behavior.

@@ -24,6 +24,9 @@ target iPhone paste passes.
 - [x] Native contract checks: 27/27 PASS.
 - [x] PWA regression suite: 410/410 PASS; `npm run build`: PASS;
       `git diff --check`: PASS.
+- [x] Hosted macOS/Xcode workflow `32956758287` compiled and packaged the
+      generated-payload helper; Codex verified the IPA contains the helper app,
+      `Info.plist`, and the bundled fixture.
 
 ## Remaining gate
 

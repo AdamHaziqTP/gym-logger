@@ -1,6 +1,6 @@
 # E-004 Phase B — generated Gym Logger flat-RTFD proof
 
-Status: `HUMAN_REVIEW_REQUIRED — UPDATED HELPER BUILD REQUIRED`
+Status: `HUMAN_REVIEW_REQUIRED — GENERATED HELPER BUILD READY`
 Device: iPhone 14 Pro Max
 Purpose: determine whether a newly generated Gym Logger workout can paste into
 Apple Notes as an editable, fully coloured table using only `com.apple.flat-rtfd`.
@@ -14,6 +14,15 @@ new payload from the bundled canonical Gym Logger
 
 The production PWA and its ordinary `Copy to Notes` action remain unchanged.
 Phase C Shortcut append is blocked until this generated payload passes.
+
+## Generated helper build
+
+The Phase B helper was compiled and packaged by hosted macOS/Xcode workflow
+run [32956758287](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32956758287).
+The `GymLoggerPasteboardHelper-unsigned` IPA contains the helper app,
+`Info.plist`, and the bundled `latest-session.example.json` fixture. This proves
+compilation and packaging only; the generated Apple Notes result remains a
+device gate.
 
 ## Test procedure
 
