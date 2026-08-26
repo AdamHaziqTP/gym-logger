@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "phase-c-ready",
+      "summary": "B2 generated coloured-table proof accepted at d0544c5; Phase C native flat-RTFD Shortcut append gate is ready from hosted helper run 32961489740.",
+      "at": "2026-08-26T11:06:30.964Z"
+    },
+    {
       "name": "m03-t07-b2-device-gate-ready",
       "summary": "B2 helper source from 249e216 was packaged by hosted run 32959270742; gate documentation is current at d03678b and target-iPhone generated-workout paste is the only open gate.",
       "at": "2026-08-26T10:43:14.198Z"
@@ -56,21 +61,16 @@
       "name": "checkpoint-accepted",
       "summary": "Phase A native pasteboard removal harness independently verified; target iPhone removal-variant proof is the next gate.",
       "at": "2026-08-26T08:08:14.740Z"
-    },
-    {
-      "name": "state-changed",
-      "summary": "M03-T07 Phase A native removal harness ready; target iPhone proof required.",
-      "at": "2026-08-26T08:07:23.182Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T10:43:14.198Z",
+  "lastPublishedAt": "2026-08-26T11:06:30.965Z",
   "lastEvent": {
-    "name": "m03-t07-b2-device-gate-ready",
-    "summary": "B2 helper source from 249e216 was packaged by hosted run 32959270742; gate documentation is current at d03678b and target-iPhone generated-workout paste is the only open gate.",
-    "at": "2026-08-26T10:43:14.198Z"
+    "name": "phase-c-ready",
+    "summary": "B2 generated coloured-table proof accepted at d0544c5; Phase C native flat-RTFD Shortcut append gate is ready from hosted helper run 32961489740.",
+    "at": "2026-08-26T11:06:30.964Z"
   },
-  "syncRevision": 101,
+  "syncRevision": 102,
   "openEscalations": [],
   "chatNotifications": [
     {
