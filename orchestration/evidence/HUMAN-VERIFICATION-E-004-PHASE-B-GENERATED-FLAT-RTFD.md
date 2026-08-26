@@ -1,6 +1,6 @@
 # E-004 Phase B — generated Gym Logger flat-RTFD proof
 
-Status: `HUMAN_REVIEW_REQUIRED — GENERATED HELPER BUILD READY`
+Status: `FAIL — GENERATED FLAT-RTFD PASTES WITHOUT CATEGORY COLOURS`
 Device: iPhone 14 Pro Max
 Purpose: determine whether a newly generated Gym Logger workout can paste into
 Apple Notes as an editable, fully coloured table using only `com.apple.flat-rtfd`.
@@ -42,14 +42,33 @@ device gate.
 7. Confirm free-form values and Unicode remain exact, including `30°`, `8,6`,
    curly punctuation, and multiline notes, with no mojibake.
 
-## Result to report
+## Human device result — 2026-08-26
 
-Report `PASS` only if the generated workout satisfies every item above:
-editable table, all five colours, correct date/order/values/summary/notes, and
-Unicode. Report `FAIL` with the first visible mismatch and a screenshot if
-possible. Do not infer success from the helper status, clipboard type, desktop
-build, or the earlier captured-payload result.
+The product owner installed the Phase B helper, used **Copy Generated Gym
+Session (flat-RTFD only)**, and pasted the generated workout into Apple Notes.
 
-If Phase B passes, the next bounded task is Phase C: test whether passing this
-generated flat-RTFD clipboard through the documented Shortcut append flow keeps
-the same editable table and colours in the existing `Gym` note.
+- Category colours: **FAIL — no colour**.
+
+This is the first visible acceptance mismatch and is sufficient to fail Phase
+B. No additional claims are made here about table editability, 40-row order,
+values, summary, notes, or Unicode because the product owner did not report
+those details in this result.
+
+The result is materially different from Phase A2: an exact Apple Notes-captured
+`com.apple.flat-rtfd` representation pasted alone with full table and colour
+fidelity, while the newly generated Foundation/FileWrapper flat-RTFD payload
+does not preserve category colours. Therefore the type identifier and an RTFD
+package containing `TXT.rtf` are not, by themselves, sufficient to reproduce
+Apple Notes colour fidelity.
+
+## Disposition
+
+Phase B is **FAIL** and Phase C Shortcut append remains blocked. Do not change
+the production PWA `Copy to Notes` path based on this result.
+
+The next bounded investigation should compare the successful captured
+`com.apple.flat-rtfd` payload with the generated flat-RTFD payload at the
+container and `TXT.rtf` levels, focusing on structural/attributed-text metadata
+rather than merely matching colour values or the pasteboard type identifier.
+Any follow-up generated-payload attempt must remain isolated until another
+target-iPhone paste proves editable table structure and all five colours.
