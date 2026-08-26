@@ -11,7 +11,7 @@ Updated: 2026-08-26
 - Status: HUMAN_REVIEW_REQUIRED — M03-T09 REPLACEMENT HELPER DEVICE PROOF READY
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: install the replacement helper from hosted run `32974624451`, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact.
+- Human review gate: with the replacement helper from hosted run `32974624451` installed, open the current PWA at `https://192.168.1.49:4173/`, open the real Tuesday `actual-2026-08-25` session, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact.
 - Latest bounded task: M03-T09 real-session native manual-paste handoff; production PWA ordinary Copy to Notes remains unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
@@ -28,6 +28,7 @@ Updated: 2026-08-26
 - B2 helper checkpoint: `249e216` — Apple Notes-shaped generated flat-RTFD source and gate; hosted macOS/Xcode run `32959270742` passed packaging
 - B2 device checkpoint: `d0544c5` — generated Gym Logger flat-RTFD pasted as an editable table with all five row colours; legend-label polish remained open
 - M03-T09 packaging correction: `040fbb2` — complete native helper bundle metadata and packaged-IPA assertions; hosted macOS/Xcode run `32974624451` passed
+- M03-T09 PWA access checkpoint: current production build is served at `https://192.168.1.49:4173/` over LAN HTTPS with the Tuesday migration and production handoff action present
 
 ## Completed
 
@@ -85,6 +86,7 @@ Updated: 2026-08-26
 - M03-T09 OX Alpha dispatch timed out without output or a usable delta in the bounded approximately 150-second DSH Desktop window. Codex fallback implemented the narrow manual-paste handoff and recorded the worker classification in `orchestration/reports/M03-T09-NATIVE-MANUAL-PASTE-HANDOFF-OX-ALPHA-REPORT.md`.
 - M03-T09 is independently green for the PWA/native contract: 412/412 PWA tests, production build, native static contract, and handoff-specific review. Hosted macOS/Xcode run `32974624451` compiled, packaged, and verified the replacement helper IPA; the target iPhone result remains open.
 - The target iPhone blocked M03-T09 before launch because the `32972780014` IPA had a malformed packaged `Info.plist`. Packaging correction `040fbb2` restored the complete bundle identity and added IPA-level CI assertions; the replacement artifact is ready for the same single physical proof.
+- The temporary PWA-access blocker is resolved for this workstation session: `https://192.168.1.49:4173/` returns the current production app shell, manifest, and M03-T09 handoff action over LAN HTTPS. The server must remain running while the iPhone test is performed; this is a reachable LAN test deployment, not a public hosting claim.
 
 ## Final disposition
 
@@ -123,7 +125,7 @@ Updated: 2026-08-26
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: trusted HTTPS verification completed.
 - E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.
-- E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss; M03-T09 native manual-paste proof is the active gate and no paid Developer dependency is authorized.
+- E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss; M03-T09 native manual-paste proof is the active gate and no paid Developer dependency is authorized. The production Gym Logger remains a PWA; the native IPA is only the pasteboard helper.
 
 ## Active task checkpoint
 

@@ -1,6 +1,6 @@
 # M03-T09 — real production-session native manual-paste handoff
 
-Status: `BLOCKED — REPLACEMENT HELPER INSTALLS, BUT CURRENT PWA BUILD/URL IS NOT AVAILABLE TO PRODUCT OWNER`
+Status: `READY FOR RETEST — CURRENT PWA AVAILABLE OVER LAN HTTPS`
 
 Target: iPhone 14 Pro Max
 
@@ -48,12 +48,27 @@ This is not a native helper failure and not an Apple Notes handoff result. The
 human instructions assumed an accessible current PWA build without providing a
 usable production/reachable URL or install path.
 
+## Current PWA access — resolved for retest
+
+The current production PWA is now served from the workstation over LAN HTTPS:
+
+`https://192.168.1.49:4173/`
+
+Workstation verification passed:
+
+- app shell: HTTP 200;
+- manifest: HTTP 200, `Gym Log`, three icon entries;
+- built app contains **Prepare Coloured Notes Copy**;
+- current build includes the Tuesday migration and production handoff code.
+
+This is a temporary LAN test deployment, not a public-hosting claim. The
+workstation preview process must remain running while the iPhone uses the URL.
+
 ## Required correction before retest
 
-Provide the product owner with a reachable current HTTPS build of the Gym Logger
-PWA containing M03-T09, suitable for Safari/Add to Home Screen on the target
-iPhone. The provided build must include the real Tuesday session migration and
-the **Prepare Coloured Notes Copy** action on the session screen.
+The required current HTTPS PWA is now available at
+`https://192.168.1.49:4173/`, containing M03-T09, the real Tuesday session
+migration, and the **Prepare Coloured Notes Copy** action.
 
 Do not ask the product owner to package the PWA as an IPA. The production Gym
 Logger remains a PWA; the native IPA is only the colour-preserving pasteboard
@@ -66,8 +81,8 @@ not merely the phrase “open the trusted Gym Logger HTTPS build.”
 
 1. Keep/import the corrected `GymLoggerPasteboardHelper-unsigned` from run
    `32974624451` in LiveContainer.
-2. Open the supplied current Gym Logger HTTPS PWA in Safari / Home Screen and
-   open the real Tuesday session shown as **Tuesday 25 Aug** /
+2. Open `https://192.168.1.49:4173/` in Safari (or add that exact URL to the
+   Home Screen) and open the real Tuesday session shown as **Tuesday 25 Aug** /
    `actual-2026-08-25`.
 3. Confirm it is the real Tuesday workout, then tap **Prepare Coloured Notes
    Copy**.
@@ -91,10 +106,10 @@ not merely the phrase “open the trusted Gym Logger HTTPS build.”
 ## Current result
 
 - replacement helper import/install: **PASS** — helper launches in LiveContainer;
-- production PWA availability on target iPhone: **BLOCKED — no current usable PWA build/URL was provided**;
+- production PWA availability on target iPhone: **READY FOR HUMAN RETEST** — current LAN HTTPS URL is `https://192.168.1.49:4173/`;
 - real Tuesday production-session handoff: **NOT RUN**;
 - Notes paste result for M03-T09: **NOT RUN**.
 
 Do not infer the Notes result from source, desktop tests, or the earlier B2
-fixture proof. Resume only after a current reachable PWA build is supplied to
-the product owner.
+fixture proof. The current reachable PWA only resolves the access blocker; the
+real Tuesday handoff and Notes result remain pending physical verification.
