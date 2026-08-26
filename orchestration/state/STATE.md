@@ -1,18 +1,18 @@
 # Gym Logger orchestration state
 
-Updated: 2026-08-26
+Updated: 2026-08-27
 
 ## Current status
 
 - Project: Gym Logger
 - Control mode: Codex orchestrator → Codex fallback/subagents → Codex verification
 - Current milestone: M03 — one-app iOS productization
-- Current task: M03-T10 one-app Gym Logger IPA productization
-- Status: HUMAN_REVIEW_REQUIRED — CORRECTED HOSTED ALL-IN-ONE IPA READY
+- Current task: M03-T11 final one-app IPA UX cleanup
+- Status: HUMAN_REVIEW_REQUIRED — HOSTED BUILD PENDING
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: install the single `GymLogger-unsigned.ipa` artifact from hosted run `32986140862` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.
-- Latest bounded task: M03-T10 one-app IPA productization; M03-T09 native manual-paste proof remains the implementation baseline.
+- Human review gate: after the fresh hosted build, install its single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.
+- Latest bounded task: M03-T11 final one-app IPA UX cleanup; M03-T10 one-app IPA productization remains the implementation baseline.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -31,6 +31,7 @@ Updated: 2026-08-26
 - M03-T09 PWA access checkpoint: current production build is served at `https://192.168.1.49:4173/` over LAN HTTPS with the Tuesday migration and production handoff action present
 - M03-T10 one-app IPA checkpoint: `dc228e6` source plus hosted macOS/Xcode run `32982786740` produced and independently inspected `GymLogger-unsigned.ipa`; package identity, executable, bundled web app, and icon assets passed.
 - M03-T10 corrected one-app IPA checkpoint: `96579d0` source plus hosted macOS/Xcode run `32986140862` produced and independently inspected `GymLogger-unsigned.ipa`; native completion/manual-open reporting, package identity, executable, bundled web app, and icon assets passed.
+- M03-T11 source checkpoint: `fbcb062` implements the authorized two-action session UI and direct native Photos Compact snapshot bridge; Codex independently verified 410/410 tests, build, 27/27 one-app checks, native checks, and diff hygiene. Hosted IPA packaging and the physical iPhone gate remain open.
 
 ## Completed
 
@@ -91,6 +92,7 @@ Updated: 2026-08-26
 - The temporary PWA-access blocker is resolved for this workstation session: `https://192.168.1.49:4173/` returns the current production app shell, manifest, and M03-T09 handoff action over LAN HTTPS. The server must remain running while the iPhone test is performed; this is a reachable LAN test deployment, not a public hosting claim.
 - M03-T10 one-app IPA productization is implemented in the Codex fallback after a concrete DSH packaged-loader infrastructure failure. The existing React/TypeScript app is bundled in a local WKWebView shell, the proven native flat-RTFD generator is wired through an in-process bridge, and the Tuesday migration remains in the web bundle.
 - M03-T10 independent verification is green locally and in hosted run `32986140862`: 416/416 PWA tests, production build, 20/20 one-app static contract, 55/55 native E-004 harness, diff hygiene, macOS/Xcode compilation, and packaged IPA assertions. The embedded handoff waits for Swift completion and reports manual-open fallback truthfully; target-iPhone installation and behavior remain human-gated.
+- M03-T11 final IPA UX cleanup is implemented at `fbcb062`: only the coloured Notes action and direct Photos snapshot action remain in the session UI; the native bridge uses add-only Photos authorization and reports truthful completion states. Codex local verification is 410/410 tests, build PASS, 27/27 one-app checks, native checks PASS, and diff hygiene PASS. Awaiting hosted macOS/Xcode artifact and one consolidated iPhone gate.
 
 ## Final disposition
 
