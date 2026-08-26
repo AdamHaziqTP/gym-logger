@@ -3,6 +3,11 @@
   "activeBuilder": "openrouter-free",
   "events": [
     {
+      "name": "m03-t11-hosted-ipa-ready",
+      "summary": "Hosted all-in-one IPA run 32990579200 passed after the Photos API correction; only the consolidated iPhone 14 Pro Max gate remains.",
+      "at": "2026-08-26T16:51:46.696Z"
+    },
+    {
       "name": "m03-t11-ux-cleanup-implemented",
       "summary": "M03-T11 implemented and independently verified locally; fresh hosted all-in-one IPA build is required before the consolidated iPhone 14 Pro Max gate.",
       "at": "2026-08-26T16:47:05.146Z"
@@ -56,11 +61,6 @@
       "name": "m03-t09-final-helper-build-ready",
       "summary": "Final M03-T09 helper build 32972780014 is packaged from 08f894b and product-sync is ready for one real Tuesday production-session manual-paste proof.",
       "at": "2026-08-26T13:13:06.615Z"
-    },
-    {
-      "name": "m03-t09-final-device-gate",
-      "summary": "M03-T09 native helper is built and independently verified; only one real Tuesday production-session iPhone paste remains before accepting the optional colour-preserving manual workflow.",
-      "at": "2026-08-26T13:10:55.648Z"
     }
   ],
   "builderChanges": [
@@ -71,13 +71,13 @@
       "reason": "Product owner disabled OX Alpha for remaining Gym Logger work; use Codex subagents/fallback for any follow-up instead."
     }
   ],
-  "lastPublishedAt": "2026-08-26T16:47:05.147Z",
+  "lastPublishedAt": "2026-08-26T16:51:46.697Z",
   "lastEvent": {
-    "name": "m03-t11-ux-cleanup-implemented",
-    "summary": "M03-T11 implemented and independently verified locally; fresh hosted all-in-one IPA build is required before the consolidated iPhone 14 Pro Max gate.",
-    "at": "2026-08-26T16:47:05.146Z"
+    "name": "m03-t11-hosted-ipa-ready",
+    "summary": "Hosted all-in-one IPA run 32990579200 passed after the Photos API correction; only the consolidated iPhone 14 Pro Max gate remains.",
+    "at": "2026-08-26T16:51:46.696Z"
   },
-  "syncRevision": 116,
+  "syncRevision": 117,
   "openEscalations": [],
   "chatNotifications": [
     {

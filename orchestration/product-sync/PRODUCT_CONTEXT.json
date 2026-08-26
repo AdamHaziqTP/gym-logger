@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T16:47:05.204Z",
+  "generatedAt": "2026-08-26T16:51:46.750Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -37,9 +37,9 @@
   "current": {
     "milestone": "M03 — one-app iOS productization",
     "task": "M03-T11 final one-app IPA UX cleanup",
-    "status": "HUMAN_REVIEW_REQUIRED — HOSTED BUILD PENDING",
-    "humanReviewGate": "after the fresh hosted build, install its single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.",
-    "nextAction": "after the fresh hosted build, install its single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate."
+    "status": "HUMAN_REVIEW_REQUIRED — HOSTED ALL-IN-ONE IPA READY",
+    "humanReviewGate": "install the single `GymLogger-unsigned.ipa` artifact from hosted run `32990579200` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.",
+    "nextAction": "install the single `GymLogger-unsigned.ipa` artifact from hosted run `32990579200` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "0a38596 docs: open M03-T11 iPhone acceptance gate",
+    "76a32c5 fix: use current Photos asset creation API",
+    "2af5d41 docs: publish M03-T11 product context",
     "6a62d28 docs: record M03-T11 IPA UX checkpoint",
-    "fbcb062 feat: save compact snapshots directly to Photos",
-    "0dee821 docs: authorize final IPA UX cleanup",
-    "49cf7e9 docs: record one-app Notes pass and image delivery feedback",
-    "72703bc chore: sync corrected IPA device gate"
+    "fbcb062 feat: save compact snapshots directly to Photos"
   ],
   "codexVerification": [
     {
@@ -95,7 +95,6 @@
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md",
       "result": [
-        "Status: `HUMAN_REVIEW_REQUIRED — HOSTED IPA PENDING`",
         "Result: `PENDING`",
         "Failures/screenshots/notes: _____________________________________________",
         "If any item fails, record the exact symptom and stop that branch; do not infer"
@@ -180,10 +179,10 @@
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
     "E-004 Phase A/A2, B2, and M03-T09 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss. The one-app IPA authorization supersedes the PWA-only delivery constraint for M03-T10; no paid Developer dependency is authorized, and the single-app target-iPhone gate remains open until the device checklist is complete.",
-    "after the fresh hosted build, install its single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate."
+    "install the single `GymLogger-unsigned.ipa` artifact from hosted run `32990579200` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate."
   ],
   "decisionsMadeSinceLastSync": [
-    "M03-T11 implemented and independently verified locally; fresh hosted all-in-one IPA build is required before the consolidated iPhone 14 Pro Max gate."
+    "Hosted all-in-one IPA run 32990579200 passed after the Photos API correction; only the consolidated iPhone 14 Pro Max gate remains."
   ],
   "recordedDecisions": [
     {
@@ -235,9 +234,9 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "6a62d28920fc6f034be5589a01ee0dd641869064",
+    "commit": "0a38596ef990498f4364ff3f5e1f68b1a1a2d371",
     "branch": "main",
-    "workingTree": "## main...origin/main [ahead 2]\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
+    "workingTree": "## main...origin/main [ahead 1]\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
       "orchestration/product-orchestrator/bootstrap.mjs"
@@ -260,11 +259,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t11-ux-cleanup-implemented",
-      "summary": "M03-T11 implemented and independently verified locally; fresh hosted all-in-one IPA build is required before the consolidated iPhone 14 Pro Max gate.",
-      "at": "2026-08-26T16:47:05.146Z"
+      "name": "m03-t11-hosted-ipa-ready",
+      "summary": "Hosted all-in-one IPA run 32990579200 passed after the Photos API correction; only the consolidated iPhone 14 Pro Max gate remains.",
+      "at": "2026-08-26T16:51:46.696Z"
     },
-    "contextRevision": 116,
+    "contextRevision": 117,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
