@@ -152,27 +152,41 @@ enum NativePayloadBuilder {
         return "\\red\((value >> 16) & 255)\\green\((value >> 8) & 255)\\blue\(value & 255)"
     }
 
+    private static func notesHighlightPrefix(for highlight: String) -> String {
+        switch highlight {
+        case "orange": return "\\cf3 \\AppleHighlight-1 \\AppleHilightClrSch-3 "
+        case "blue": return "\\cf4 \\AppleHighlight-1 \\AppleHilightClrSch-5 "
+        case "mint": return "\\cf5 \\AppleHighlight-1 \\AppleHilightClrSch-4 "
+        case "purple": return "\\cf6 \\AppleHighlight-1 \\AppleHilightClrSch-1 "
+        case "pink": return "\\cf7 \\AppleHighlight-1 \\AppleHilightClrSch-2 "
+        default: return "\\cf2 \\AppleHighlight0 \\AppleHilightClrSch0 "
+        }
+    }
+
+    private static let notesHighlightReset = "\\AppleHighlight0 \\AppleHilightClrSch0"
+
     private static func makeRTF(session: FixtureSession, rows: [FixtureRow], summary: String) -> String {
-        let colours = [foreground["orange"]!, foreground["purple"]!, foreground["mint"]!, foreground["blue"]!, foreground["pink"]!, "#261802", "#1f0e27", "#0f201f", "#021529", "#260809"]
+        // These indices and Apple-specific controls mirror the RTF semantics
+        // observed in a Notes-origin flat-RTFD capture. The session values
+        // themselves are always generated from the Gym Logger fixture.
+        let colours = [
+            "#000000", "#ffffff", "#ff9230", "#0091ff", "#00dac3",
+            "#db34f2", "#ff375f",
+        ]
         let colourTable = "{\\colortbl;\(colours.map(rgb).joined(separator: ";"));}"
-        let bounds = "\\trowd\\trgaph80\\trleft0\\cellx1100\\cellx2600\\cellx3900\\cellx5400\\cellx7000"
-        let header = ["Exercise", "Sets", "Reps", "Weight", "Skip"].map { "\\intbl{\\b \(rtfEscape($0))}\\cell" }.joined()
+        let expandedColourTable = "{\\*\\expandedcolortbl;\\cssrgb\\c0\\c0\\c0;\\cssrgb\\c100000\\c100000\\c100000;\\cssrgb\\c100000\\c57255\\c18824;\\cssrgb\\c0\\c56863\\c100000;\\cssrgb\\c0\\c85490\\c76471;\\cssrgb\\c85882\\c20392\\c94902;\\cssrgb\\c100000\\c21569\\c37255;}"
+        let fontTable = "{\\fonttbl\\f0\\fswiss\\fcharset0 Helvetica;\\f1\\fnil\\fcharset0 UICTFontTextStyleBody;}"
+        let bounds = "\\trowd\\itap1\\trgaph80\\trleft0\\clvertalt\\cellx1100\\cellx2600\\cellx3900\\cellx5400\\cellx7000"
+        let header = ["Exercise", "Sets", "Reps", "Weight", "Skip"].map {
+            "\\intbl{\\f1\\fs28\\cf2 \\AppleHighlight0 \\AppleHilightClrSch0\\b \(rtfEscape($0))\\b0 \(notesHighlightReset)}\\cell"
+        }.joined()
         let body = rows.map { row in
-            let indices: (Int, Int)
-            switch row.highlight {
-            case "orange": indices = (1, 6)
-            case "purple": indices = (2, 7)
-            case "mint": indices = (3, 8)
-            case "blue": indices = (4, 9)
-            case "pink": indices = (5, 10)
-            default: indices = (0, 0)
-            }
             let cells = [row.exercise, row.sets, row.reps, row.weight, row.skip]
-                .map { "\\intbl{\\cf\(indices.0)\\highlight\(indices.1)\\chcbpat\(indices.1) \(rtfEscape($0))}\\cell" }
+                .map { "\\intbl{\\f1\\fs28\(notesHighlightPrefix(for: row.highlight))\(rtfEscape($0)) \(notesHighlightReset)}\\cell" }
                 .joined()
             return "\(bounds)\(cells)\\row"
         }.joined(separator: "\n")
-        return "{\\rtf1\\ansi\\ansicpg1252\\deff0\(colourTable)\\pard\\fs28\\b \(rtfEscape(session.displayDate))\\b0\\fs22\\par\\pard \(rtfEscape(categories.joined(separator: " ")))\\par\\pard \(rtfEscape(summary))\\par\(bounds)\(header)\\row\n\(body)\\pard\\b Notes\\b0\\par\(rtfEscape(session.notes))}"
+        return "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2865\\cocoatextscaling0\\cocoaplatform0\\deff0\(fontTable)\(colourTable)\(expandedColourTable)\\margl720\\margr720\\vieww12000\\viewh16000\\pard\\itap0\\f1\\fs28\\cf2 \\AppleHighlight0 \\AppleHilightClrSch0\\b \(rtfEscape(session.displayDate))\\b0\\par\\pard \(rtfEscape(categories.joined(separator: " ")))\\par\\pard \(rtfEscape(summary))\\par\(bounds)\(header)\\row\n\(body)\\pard\\itap0\\f1\\fs28\\cf2 \\AppleHighlight0 \\AppleHilightClrSch0\\b Notes\\b0\\par\(rtfEscape(session.notes))}"
     }
 
     private static func makeFlatRTFD(rtf: String) throws -> Data {

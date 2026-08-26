@@ -1,6 +1,6 @@
 # M03-T07-B — Generated Gym Logger flat-RTFD payload
 
-Status: `HUMAN_REVIEW_REQUIRED — GENERATED HELPER BUILD READY`
+Status: `CLOSED — PHASE B COLOUR FAILURE; B2 QUEUED`
 Owner: OX Alpha builder, Codex acceptance
 Scope: isolated E-004 native helper proof; no PWA/native rewrite
 
@@ -33,3 +33,10 @@ captured Notes payload is read or transformed by the generated action.
 - Codex independently verifies helper contracts, full PWA tests, build, and
   diff hygiene;
 - Phase C Shortcut append remains blocked until this physical result passes.
+
+## Disposition
+
+The target-iPhone result recorded at `934ddd7` passed editable table/content
+delivery but stripped every category colour. This task is closed as failed for
+colour fidelity. Do not advance to Phase C; the bounded follow-up is
+`M03-T07-B2-APPLE-NOTES-SHAPED-FLAT-RTFD.md`.

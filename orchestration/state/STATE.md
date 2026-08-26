@@ -7,12 +7,12 @@ Updated: 2026-08-26
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
-- Current task: M03-T07-B generated Gym Logger flat-RTFD payload proof
-- Status: HUMAN_REVIEW_REQUIRED — GENERATED FLAT-RTFD DEVICE PROOF READY
+- Current task: M03-T07-B2 generated Apple Notes-shaped flat-RTFD proof
+- Status: HUMAN_REVIEW_REQUIRED — B2 HELPER BUILD REQUIRED
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: E-004 Phase B generated Gym Logger flat-RTFD proof on the iPhone 14 Pro Max. A2 proved captured `com.apple.flat-rtfd` alone is sufficient; now paste the newly generated fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C.
-- Latest bounded task: M03-T07-B generated native handoff; production PWA and normal Copy to Notes remain unchanged.
+- Human review gate: E-004 Phase B2 generated Apple Notes-shaped flat-RTFD proof on the iPhone 14 Pro Max. Phase B passed table/content but failed all colours; now paste the newly generated B2 fixture payload and verify editable table, all five colours, content/order/notes, and Unicode before Phase C.
+- Latest bounded task: M03-T07-B2 generated Apple Notes-shaped native handoff; production PWA and normal Copy to Notes remain unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -72,6 +72,8 @@ Updated: 2026-08-26
 - M06-T06 actual Tuesday session migration is independently accepted: exact 40-row source, transactional once-only marker, Sunday/unrelated-data preservation, Wednesday safety, next-session cloning, supplied icon assets, 365/365 full tests, build, HTTPS runtime, certificate endpoint, and diff audit pass. Physical IndexedDB/Home Screen verification remains deferred.
 - Product-sync later recorded a genuine M06-T05 export geometry defect: Canvg now produces visible Faithful/Compact PNGs on the target iPhone, but both are framed too small in the top-left with large unused black space. Route a bounded framing/crop correction only; preserve the working Canvg rasterizer, visible pixels, colours, preview, and save/share path.
 - M06-T05 framing correction is independently accepted for automated scope: the delivery canvas now applies the selected raster scale before Canvg renders; focused PNG/migration coverage is 27/27, full suite is 374/374, build/runtime/certificate/diff checks pass, and the target-iPhone saved-image framing result remains open.
+- Phase B physical evidence at `934ddd7` passed the newly generated flat-RTFD table/content structure but failed all five category colours. Phase C remains blocked; B2 is the bounded Apple Notes-shaped RTF correction.
+- B2 Apple Notes-shaped helper correction is independently green for automated scope: native contract checks pass, the full PWA suite is 410/410, build and diff hygiene pass, and production `src/`/`public/` remain unchanged. Target-iPhone colour fidelity is unproven.
 
 ## Final disposition
 
@@ -384,3 +386,34 @@ Updated: 2026-08-26
 - The generated Phase B helper build is ready from hosted macOS/Xcode workflow
   `32956758287`; Codex verified the unsigned IPA contents. This does not claim
   installation or Apple Notes behavior.
+
+## M03-T07-B2 Apple Notes-shaped generated flat-RTFD proof — 2026-08-26
+
+- The Phase B target-iPhone result was recorded at `934ddd7`: the generated
+  flat-RTFD pasted as an editable table with correct content but stripped all
+  five category colours. Phase C Shortcut append is not authorized.
+- B2 is a bounded generated-payload correction. It uses the canonical Gym
+  Logger fixture for all values and replaces generic `\\highlightN` /
+  `\\chcbpatN` controls with the recorded Apple Notes-shaped controls:
+  `\\cf3`/scheme `3` orange, `\\cf4`/scheme `5` blue,
+  `\\cf5`/scheme `4` mint, `\\cf6`/scheme `1` purple, and
+  `\\cf7`/scheme `2` pink, plus explicit Apple highlight resets.
+- The generated RTF also includes Cocoa/Apple header metadata, an expanded
+  colour table, font metadata, and table nesting metadata. It is packaged as
+  a fresh `TXT.rtf` in a flat-RTFD container; it does not replay or patch
+  captured Notes bytes and still places only `com.apple.flat-rtfd` on the
+  proof pasteboard.
+- The correctly patched DSH/OX Alpha B2 task produced no output or delta in
+  the bounded approximately 150-second window. A prior fresh OX smoke task
+  returned `OX_SMOKE_OK`, so this is recorded as a task-level worker timeout,
+  not OX unavailability. Codex fallback implementation and report are
+  preserved in `orchestration/reports/M03-T07-B2-APPLE-NOTES-SHAPED-FLAT-RTFD-OX-ALPHA-REPORT.md`.
+- Independent Codex verification is green: native harness PASS, full PWA
+  suite 410/410, production build PASS, `git diff --check` PASS, and no
+  production `src/` or `public/` changes.
+- Current human gate: after the new hosted macOS/Xcode helper build is ready,
+  install it on the iPhone 14 Pro Max, tap `Copy Generated Gym Session
+  (flat-RTFD only)`, paste into a temporary Apple Notes note, and verify an
+  editable table, all five colours, content/order/summary/notes, and Unicode.
+  No device PASS is inferred from desktop/source evidence.
+- Phase C remains blocked until the B2 generated-workout result passes.

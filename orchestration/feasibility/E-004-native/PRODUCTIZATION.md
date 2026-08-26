@@ -2,7 +2,7 @@
 
 Updated: 2026-08-26
 
-Status: `PHASE B READY — GENERATED FLAT-RTFD DEVICE PROOF REQUIRED`
+Status: `PHASE B2 READY — APPLE NOTES-SHAPED GENERATED FLAT-RTFD DEVICE PROOF REQUIRED`
 
 ## Verified capability
 
@@ -58,6 +58,44 @@ This is still an isolated feasibility helper. It does not change the PWA or
 claim that generated Gym Logger data works until the target iPhone paste proves
 an editable table, all five colours, correct content/order/notes, and Unicode.
 Phase C Shortcut append remains blocked until that generated payload passes.
+
+## Phase B2 — Apple Notes-shaped generated RTF
+
+The target-iPhone Phase B result at `934ddd7` passed the newly generated
+editable table/content structure but stripped all five category colours. This
+closes the generic generated-RTF attempt without changing the production PWA.
+
+B2 is one bounded correction based on the observed structural difference in
+the successful Notes-origin `TXT.rtf`. It generates a fresh RTF from the
+bundled Gym Logger fixture and uses the recorded Apple Notes-shaped controls:
+
+- Arms/orange: `\\cf3 \\AppleHighlight-1 \\AppleHilightClrSch-3`;
+- Delts/blue: `\\cf4 \\AppleHighlight-1 \\AppleHilightClrSch-5`;
+- Chest/mint: `\\cf5 \\AppleHighlight-1 \\AppleHilightClrSch-4`;
+- Back/purple: `\\cf6 \\AppleHighlight-1 \\AppleHilightClrSch-1`;
+- Legs/pink: `\\cf7 \\AppleHighlight-1 \\AppleHilightClrSch-2`;
+- reset: `\\AppleHighlight0 \\AppleHilightClrSch0`.
+
+The generated text also includes Cocoa/Apple header metadata, an expanded
+colour table, font metadata, and Apple table nesting metadata. It is packaged
+as a new `TXT.rtf` in a flat-RTFD container and the proof action still places
+only `com.apple.flat-rtfd` on the pasteboard. The raw Notes capture is not
+present and is not replayed or patched.
+
+Codex independently verified the B2 source contract, full PWA suite/build,
+diff hygiene, and no production `src/`/`public/` changes. Physical Notes colour
+fidelity remains unproven; use the dedicated B2 checklist before any Phase C
+Shortcut investigation.
+
+## Current B2 gate
+
+Build the helper through the hosted macOS/Xcode workflow, then run one target
+iPhone 14 Pro Max test from
+`orchestration/evidence/HUMAN-VERIFICATION-E-004-PHASE-B2-APPLE-NOTES-SHAPED-FLAT-RTFD.md`.
+If the generated workout still loses colour, close generated colour recovery
+without further HTML/RTF permutations and preserve the working uncoloured
+editable-table PWA path. If it passes, only then evaluate Phase C Shortcut
+append as a separate bounded proof.
 
 ## Boundary that remains unproven
 

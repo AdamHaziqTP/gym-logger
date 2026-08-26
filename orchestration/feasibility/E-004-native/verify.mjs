@@ -27,6 +27,15 @@ const onlyRequestedType = sampleItems.map((representations) =>
   representations.filter(({ typeIdentifier }) => typeIdentifier === requestedType),
 );
 
+const sourceSlash = String.fromCharCode(92).repeat(2);
+const appleHighlightSchemes = [
+  `${sourceSlash}cf3 ${sourceSlash}AppleHighlight-1 ${sourceSlash}AppleHilightClrSch-3`,
+  `${sourceSlash}cf4 ${sourceSlash}AppleHighlight-1 ${sourceSlash}AppleHilightClrSch-5`,
+  `${sourceSlash}cf5 ${sourceSlash}AppleHighlight-1 ${sourceSlash}AppleHilightClrSch-4`,
+  `${sourceSlash}cf6 ${sourceSlash}AppleHighlight-1 ${sourceSlash}AppleHilightClrSch-1`,
+  `${sourceSlash}cf7 ${sourceSlash}AppleHighlight-1 ${sourceSlash}AppleHilightClrSch-2`,
+];
+
 const checks = [
   ["bundled fixture matches canonical fixture", JSON.stringify(fixture) === JSON.stringify(bundled)],
   ["fixture retains 40 rows", fixture.session.rows.length === 40],
@@ -40,6 +49,12 @@ const checks = [
   ["generated flat-RTFD uses Foundation FileWrapper", source.includes("FileWrapper") && source.includes("serializedRepresentation") && source.includes("TXT.rtf")],
   ["generated flat-RTFD comes from the fixture", source.includes("loadFixture") && source.includes("makeFlatRTFD(rtf:") && source.includes("Data(rtf.utf8)")],
   ["generated payload keeps exact Notes colour tokens", ["#ff9230", "#db34f2", "#00dac3", "#0091ff", "#ff375f"].every((value) => source.includes(value))],
+  ["generated RTF uses Apple Notes Cocoa metadata", source.includes("\\cocoartf2865") && source.includes("\\cocoatextscaling0") && source.includes("\\cocoaplatform0") && source.includes("\\fonttbl")],
+  ["generated RTF uses expanded Apple colour table", source.includes("\\expandedcolortbl") && source.includes("\\cssrgb")],
+  ["generated RTF uses all five Apple highlight schemes", appleHighlightSchemes.every((value) => source.includes(value))],
+  ["generated RTF resets Apple highlight state", source.includes(`${sourceSlash}AppleHighlight0 ${sourceSlash}AppleHilightClrSch0`)],
+  ["generated RTF has Apple table nesting metadata", source.includes("\\itap1") && source.includes("\\trowd")],
+  ["generated RTF removes generic highlight controls", !source.includes("\\highlight") && !source.includes("\\chcbpat")],
   ["generated payload keeps Unicode", source.includes("·") && source.includes("rtfEscape")],
   ["one flat-RTFD pasteboard item", app.includes("UIPasteboard.general.setItems") && app.includes("payload.flatRTFDPasteboardItem")],
   ["flat-RTFD proof action is user initiated", app.includes("Button(\"Copy Generated Gym Session (flat-RTFD only)\")") && app.includes("payload.flatRTFDPasteboardItem")],
