@@ -1,6 +1,6 @@
 # E-004 native Apple Notes clipboard inspection/replay
 
-Status: `BLOCKED/DEFERRED — HOSTED IOS BUILD PENDING`
+Status: `HUMAN_REVIEW_REQUIRED — SIGNING/INSTALLATION AND DEVICE PASTE PENDING`
 
 This is the single physical gate for the bounded E-004 colour-recovery proof.
 No Apple Notes result is claimed from the Swift source, desktop harness, or a
@@ -42,5 +42,15 @@ payload before that result exists.
 The repository contains `.github/workflows/e004-native-helper.yml`, which
 builds the isolated Xcode project on a hosted macOS runner with signing
 disabled and uploads an unsigned/resignable artifact when compilation
-succeeds. A hosted build does not prove installation or Notes behavior. No paid
-Apple Developer membership is required or authorized by this proof.
+succeeds. A hosted build does not prove installation or Notes behavior. The
+artifact is unsigned, so it still needs a legitimate iOS test-signing/install
+route such as a configured free-account device-test flow. No paid Apple
+Developer membership is required or authorized by this proof.
+
+The successful hosted build is run `32925095555`:
+https://github.com/AdamHaziqTP/gym-logger/actions/runs/32925095555
+
+Download the `GymLoggerPasteboardHelper-unsigned` artifact from that run. The
+repository-side check confirmed the IPA contains the helper app and bundled
+fixture. This is the only remaining human/toolchain gate for E-004; the hosted
+build itself is not a colour result.

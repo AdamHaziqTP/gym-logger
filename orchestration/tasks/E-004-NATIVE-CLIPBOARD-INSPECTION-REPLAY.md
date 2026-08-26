@@ -77,3 +77,13 @@ Return an honest `READY_FOR_TARGET_IPHONE_PROOF` only when the isolated helper
 and build route are independently verified. If hosted compilation or signing
 is unavailable, record the exact infrastructure blocker and leave the proof
 ready for that route; do not close E-004 or infer colour support.
+
+## Codex checkpoint — 2026-08-26
+
+The fresh OX Alpha dispatch timed out without output or delta; the result is
+recorded in `orchestration/reports/E-004-NATIVE-CLIPBOARD-INSPECTION-OX-ALPHA-REPORT.md`.
+Codex fallback implemented and independently verified the isolated inspection
+and replay flow. Hosted run `32925095555` compiled and packaged the unsigned
+IPA successfully. The task is now `READY_FOR_TARGET_IPHONE_PROOF`; the only
+remaining action is legitimate iOS installation followed by the single
+physical Notes copy/inspect/replay/paste result.

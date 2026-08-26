@@ -55,3 +55,11 @@ then failed only in packaging because this target build writes to the
 repository-local `build/Release-iphoneos` directory rather than the global
 DerivedData path used by the workflow lookup. The lookup now checks both
 locations; a fifth run is required to verify artifact packaging and upload.
+
+The fifth hosted run (`32925095555`) passed the Xcode build, unsigned IPA
+packaging, and artifact upload. Codex downloaded the `GymLoggerPasteboardHelper-
+unsigned` artifact and verified that the IPA is a valid ZIP containing
+`Payload/GymLoggerPasteboardHelper.app`, its bundled fixture, and `Info.plist`.
+The artifact is intentionally unsigned: this establishes a build artifact for
+a legitimate iOS test-signing route but does not establish installation,
+execution, or Apple Notes behavior.

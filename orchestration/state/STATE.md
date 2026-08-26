@@ -8,10 +8,10 @@ Updated: 2026-08-26
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
 - Current milestone: M03 — Apple Notes colour-recovery feasibility
 - Current task: E-004 native Apple Notes pasteboard inspection and exact replay
-- Status: READY_FOR_OX (M03-T06 closed after target-iPhone colour failure; normal Copy to Notes unchanged)
+- Status: HUMAN_REVIEW_REQUIRED (E-004 helper artifact ready; native Notes inspection/replay pending)
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: after the isolated native helper is independently verified and an iOS build/install route is available, copy a small five-colour table in Apple Notes, inspect/replay the native pasteboard, then report editable table structure, colours, Unicode, and data fidelity. Do not claim success from desktop or hosted build evidence.
+- Human review gate: obtain the unsigned helper artifact from the successful hosted build, sign/install it through a legitimate iOS test route, then copy a small five-colour table in Apple Notes, inspect/replay the native pasteboard, and report editable table structure, colours, Unicode, and data fidelity. Do not claim success from desktop or hosted build evidence.
 - Latest bounded task: E-004 native clipboard inspection/replay plus GitHub-hosted macOS/Xcode build preparation; production PWA and normal Copy to Notes remain unchanged.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
@@ -262,6 +262,14 @@ Updated: 2026-08-26
   this target writes to the repository-local `build/Release-iphoneos` path.
   The lookup now checks both locations; rerun is required to verify artifact
   packaging and upload.
+- Hosted workflow run `32925095555` passed compilation, unsigned IPA packaging,
+  and artifact upload. Codex downloaded the artifact and independently verified
+  the IPA ZIP contains `Payload/GymLoggerPasteboardHelper.app`, the bundled
+  `latest-session.example.json`, and `Info.plist`. This proves the hosted build
+  route, not iPhone installation or Apple Notes behavior.
+- E-004 is now `READY_FOR_TARGET_IPHONE_PROOF` with signing/install still a
+  human/toolchain step. The artifact run is available at
+  `https://github.com/AdamHaziqTP/gym-logger/actions/runs/32925095555`.
 - Current E-004 gate:
   `orchestration/evidence/HUMAN-VERIFICATION-E-004-NATIVE-CLIPBOARD-INSPECTION.md`.
   It remains `BLOCKED/DEFERRED — HOSTED IOS BUILD PENDING`; after a truthful
