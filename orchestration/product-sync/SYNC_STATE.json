@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t09-pwa-access-ready",
+      "summary": "Current Gym Logger PWA is reachable at https://192.168.1.49:4173/ over LAN HTTPS with Tuesday actual-session migration and Prepare Coloured Notes Copy; the native helper remains installed separately.",
+      "at": "2026-08-26T14:02:55.098Z"
+    },
+    {
       "name": "m03-t09-replacement-ipa-context-finalized",
       "summary": "Product context finalized at the pushed replacement-helper checkpoint; only the single target-iPhone M03-T09 production-session manual-paste proof remains.",
       "at": "2026-08-26T13:34:17.130Z"
@@ -56,21 +61,16 @@
       "name": "m03-t07-b2-device-gate-ready",
       "summary": "B2 generated Apple Notes-shaped flat-RTFD helper is independently verified and packaged; target-iPhone generated-workout paste is the only open gate.",
       "at": "2026-08-26T10:40:00.534Z"
-    },
-    {
-      "name": "checkpoint-accepted",
-      "summary": "Phase B generated flat-RTFD helper and device gate are current at the latest main checkpoint.",
-      "at": "2026-08-26T10:10:43.995Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T13:34:17.131Z",
+  "lastPublishedAt": "2026-08-26T14:02:55.099Z",
   "lastEvent": {
-    "name": "m03-t09-replacement-ipa-context-finalized",
-    "summary": "Product context finalized at the pushed replacement-helper checkpoint; only the single target-iPhone M03-T09 production-session manual-paste proof remains.",
-    "at": "2026-08-26T13:34:17.130Z"
+    "name": "m03-t09-pwa-access-ready",
+    "summary": "Current Gym Logger PWA is reachable at https://192.168.1.49:4173/ over LAN HTTPS with Tuesday actual-session migration and Prepare Coloured Notes Copy; the native helper remains installed separately.",
+    "at": "2026-08-26T14:02:55.098Z"
   },
-  "syncRevision": 108,
+  "syncRevision": 109,
   "openEscalations": [],
   "chatNotifications": [
     {

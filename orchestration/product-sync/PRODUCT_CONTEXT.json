@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T13:34:17.179Z",
+  "generatedAt": "2026-08-26T14:02:55.151Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -38,8 +38,8 @@
     "milestone": "M03 — Apple Notes colour-recovery feasibility",
     "task": "M03-T09 real production-session native manual-paste handoff",
     "status": "HUMAN_REVIEW_REQUIRED — M03-T09 REPLACEMENT HELPER DEVICE PROOF READY",
-    "humanReviewGate": "install the replacement helper from hosted run `32974624451`, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact.",
-    "nextAction": "install the replacement helper from hosted run `32974624451`, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact."
+    "humanReviewGate": "with the replacement helper from hosted run `32974624451` installed, open the current PWA at `https://192.168.1.49:4173/`, open the real Tuesday `actual-2026-08-25` session, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact.",
+    "nextAction": "with the replacement helper from hosted run `32974624451` installed, open the current PWA at `https://192.168.1.49:4173/`, open the real Tuesday `actual-2026-08-25` session, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "4ce779e docs: publish current PWA test endpoint",
+    "b9c2cd5 docs: record M03-T09 missing PWA access blocker",
+    "d8272ae docs: finalize replacement helper context",
     "d4e8b3d docs: sync product context for replacement helper",
-    "177c76a docs: reopen M03-T09 with verified helper IPA",
-    "040fbb2 fix: preserve native helper bundle metadata",
-    "4867728 docs: record M03-T09 LiveContainer install blocker",
-    "8565975 docs: publish final M03-T09 helper checkpoint"
+    "177c76a docs: reopen M03-T09 with verified helper IPA"
   ],
   "codexVerification": [
     {
@@ -95,10 +95,10 @@
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md",
       "result": [
-        "Status: `READY FOR RETEST — REPLACEMENT HELPER IPA PACKAGING VERIFIED`",
-        "LiveContainer failed before the Notes handoff could be tested, reporting:",
-        "`Failed to map /var/mobile/Containers/Data/Application/.../Documents/Applications/Unknown.app/(null): Bad file descriptor.`",
-        "Therefore this is an artifact-packaging defect, not a failed Apple Notes colour"
+        "fields and passed hosted IPA metadata assertions including:",
+        "This is not a native helper failure and not an Apple Notes handoff result. The",
+        "Workstation verification passed:",
+        "replacement helper import/install: **PASS** — helper launches in LiveContainer;"
       ]
     },
     {
@@ -177,11 +177,11 @@
     "E-001 historical DSH rate-limit condition is no longer the current blocker.",
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
-    "E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss; M03-T09 native manual-paste proof is the active gate and no paid Developer dependency is authorized.",
-    "install the replacement helper from hosted run `32974624451`, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact."
+    "E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss; M03-T09 native manual-paste proof is the active gate and no paid Developer dependency is authorized. The production Gym Logger remains a PWA; the native IPA is only the pasteboard helper.",
+    "with the replacement helper from hosted run `32974624451` installed, open the current PWA at `https://192.168.1.49:4173/`, open the real Tuesday `actual-2026-08-25` session, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact."
   ],
   "decisionsMadeSinceLastSync": [
-    "Product context finalized at the pushed replacement-helper checkpoint; only the single target-iPhone M03-T09 production-session manual-paste proof remains."
+    "Current Gym Logger PWA is reachable at https://192.168.1.49:4173/ over LAN HTTPS with Tuesday actual-session migration and Prepare Coloured Notes Copy; the native helper remains installed separately."
   ],
   "recordedDecisions": [
     {
@@ -233,7 +233,7 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "d4e8b3d84c3cd3e642dcf7cf5e5f09af5daa290a",
+    "commit": "4ce779eacd10e4c041be91c3874e9788852a2653",
     "branch": "main",
     "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
@@ -258,11 +258,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t09-replacement-ipa-context-finalized",
-      "summary": "Product context finalized at the pushed replacement-helper checkpoint; only the single target-iPhone M03-T09 production-session manual-paste proof remains.",
-      "at": "2026-08-26T13:34:17.130Z"
+      "name": "m03-t09-pwa-access-ready",
+      "summary": "Current Gym Logger PWA is reachable at https://192.168.1.49:4173/ over LAN HTTPS with Tuesday actual-session migration and Prepare Coloured Notes Copy; the native helper remains installed separately.",
+      "at": "2026-08-26T14:02:55.098Z"
     },
-    "contextRevision": 108,
+    "contextRevision": 109,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {
