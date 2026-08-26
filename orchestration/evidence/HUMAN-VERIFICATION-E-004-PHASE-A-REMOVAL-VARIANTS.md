@@ -1,9 +1,10 @@
 # E-004 Phase A — native representation-removal variants
 
-Status: `PHASE A2 PARTIAL — PUBLIC SINGLE-TYPE FORMATS DO NOT PRESERVE COLOUR; PRIVATE/FLAT-RTFD RESULTS STILL NEEDED`
+Status: `PASS — PHASE A2 IDENTIFIES TWO INDIVIDUALLY SUFFICIENT COLOUR-PRESERVING TYPES`
 Device: iPhone 14 Pro Max
 Purpose: identify whether one captured native pasteboard representation is
-necessary for Apple Notes to preserve an editable coloured table.
+necessary or individually sufficient for Apple Notes to preserve an editable
+coloured table.
 
 ## Updated helper build
 
@@ -20,9 +21,11 @@ iPhone installation or Apple Notes behavior.
 
 ## Important boundary
 
-This test uses a fresh capture made from Apple Notes on the device. It does not
-claim that Gym Logger can yet generate the colour-bearing representation. Do
-not change the production PWA `Copy to Notes` path while this proof is open.
+These tests use fresh captures made from Apple Notes on the device. They prove
+fidelity of captured native representations, not yet that Gym Logger can
+synthesize an equivalent colour-bearing representation from generated workout
+data. Do not treat generated Gym Logger colour export as passed until a
+separate generated-payload device test succeeds.
 
 ## Human device result — Phase A removal variants — 2026-08-26
 
@@ -43,46 +46,12 @@ Recorded results:
 No single non-empty representation is therefore individually necessary when
 all of the other captured representations remain present.
 
-This result does **not** identify the minimum sufficient representation or set.
-The remaining representations are redundant enough that removing any one of
-them still leaves Apple Notes with a fidelity-preserving alternative.
-
-## Original test procedure
-
-1. Install and open the newly rebuilt **Gym Logger Pasteboard Proof** helper.
-2. In Apple Notes, copy a small editable table containing Arms, Back, Chest,
-   Delts, and Legs. Include one uncoloured row and values such as `30°`, `8,6`,
-   curly punctuation, and a multiline note.
-3. Return to the helper and tap **Inspect Notes Clipboard**. Do not copy or
-   paste anything else before inspecting.
-4. Note the displayed `Replay without <type>` buttons. Each button is one
-   separate test; the helper omits zero-byte/unreadable representations.
-5. For each displayed button, tap it once, open the temporary/test Gym note,
-   and paste once. Record the result before running the next button.
-6. For every variant, record separately:
-   - editable table structure;
-   - all five category colours;
-   - date, row order, values, summary, and notes;
-   - Unicode such as `30°` and `8,6`, with no mojibake.
-7. If convenient, use **Replay Captured Clipboard** once at the end to confirm
-   the complete captured replay still behaves as before. This is a control,
-   not a replacement for the removal variants.
-
 ## Phase A2 gate — single-representation sufficiency
 
 The updated helper provides one `Replay ONLY <type>` button for each unique
 readable, non-empty type from the fresh capture. Each single-type result is
 judged on editable table structure, all five colours, values/order/notes, and
 Unicode.
-
-Prioritized identifiers:
-
-- `public.rtf`
-- `com.apple.flat-rtfd`
-- `public.html`
-- `com.apple.webarchive`
-- `com.apple.notes.richtext`
-- `public.utf8-plain-text` as a negative control
 
 ## Phase A2 helper build
 
@@ -96,26 +65,43 @@ macOS/Xcode:
 
 This build result proves compilation and packaging only.
 
-## Human device result — Phase A2 partial — 2026-08-26
+## Human device result — Phase A2 complete — 2026-08-26
 
-The product owner reported these physical `Replay ONLY <type>` results:
+The product owner physically tested every displayed `Replay ONLY <type>`
+variant on the target iPhone.
 
-- ONLY `public.html`: **table survives; colour does not survive**.
-- ONLY `com.apple.webarchive`: **table survives; colour does not survive**.
-- ONLY `public.rtf`: **table survives; colour does not survive**.
-- ONLY `public.utf8-plain-text`: **no table; no colour**.
+Recorded results:
 
-These results show that none of the reported public/common representations is
-individually sufficient for the fully coloured editable Apple Notes table.
-They also reproduce the earlier boundary that rich/public representations can
-carry table structure without yielding Notes colour fidelity when isolated.
+- ONLY `com.apple.notes.richtext`: **PASS — editable table and colours are perfect**.
+- ONLY `com.apple.flat-rtfd`: **PASS — editable table and colours are perfect**.
+- ONLY `public.html`: **PARTIAL — table survives; colour does not survive**.
+- ONLY `com.apple.webarchive`: **PARTIAL — table survives; colour does not survive**.
+- ONLY `public.rtf`: **PARTIAL — table survives; colour does not survive**.
+- ONLY `public.utf8-plain-text`: **FAIL — no table; no colour**.
 
-The user has not yet reported the Phase A2 outcomes for:
+The full-fidelity result therefore has two individually sufficient captured
+representations:
 
-- ONLY `com.apple.notes.richtext`
-- ONLY `com.apple.flat-rtfd`
+1. `com.apple.notes.richtext`
+2. `com.apple.flat-rtfd`
 
-Do not infer either result. Phase B generated Gym Logger payload and Phase C
-Shortcut append remain blocked until those two remaining single-type outcomes
-are known or an equivalent minimum sufficient native representation set is
-identified.
+The private Notes representation is **not required for Phase B to proceed**,
+because captured `com.apple.flat-rtfd` alone independently preserves the
+editable table and all five category colours on the target iPhone.
+
+## Disposition
+
+Phase A/A2 native representation discovery is complete.
+
+Phase B may now begin with a bounded generated-payload proof targeting
+`com.apple.flat-rtfd` as the preferred first candidate, because it preserves
+full fidelity by itself without relying on the Notes-private
+`com.apple.notes.richtext` type. The implementation must generate the payload
+from Gym Logger workout data rather than replaying captured Notes bytes.
+
+Acceptance for Phase B remains physical target-iPhone paste into Apple Notes:
+editable table, all five category colours, correct values/order/notes, and
+Unicode fidelity. Production PWA `Copy to Notes` must remain unchanged until
+that generated-payload proof passes.
+
+Phase C Shortcut append remains blocked until Phase B generated payload passes.
