@@ -3,6 +3,16 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "checkpoint-accepted",
+      "summary": "Phase A native pasteboard removal harness independently verified; target iPhone removal-variant proof is the next gate.",
+      "at": "2026-08-26T08:08:14.740Z"
+    },
+    {
+      "name": "state-changed",
+      "summary": "M03-T07 Phase A native removal harness ready; target iPhone proof required.",
+      "at": "2026-08-26T08:07:23.182Z"
+    },
+    {
       "name": "checkpoint-pushed",
       "summary": "Pushed 3c08b33. E-004 exact native Notes capture/replay is reported PASS; generated Gym Logger coloured Notes export remains unproven and is not productized; v1 PWA production path is unchanged.",
       "at": "2026-08-26T07:09:56.939Z"
@@ -51,26 +61,16 @@
       "name": "proof-route-retest-ready",
       "summary": "Retired SPA-shell proof route recorded as blocked; native-copy proof now verified over LAN HTTPS with service-worker bypass and is ready for one iPhone retest.",
       "at": "2026-08-25T22:36:23.986Z"
-    },
-    {
-      "name": "proof-served-body-corrected",
-      "summary": "M03-T04 proof now serves as standalone native-copy page over LAN HTTPS; /feasibility service-worker bypass added; 398/398 tests and build pass.",
-      "at": "2026-08-25T22:35:31.047Z"
-    },
-    {
-      "name": "worker-timeout-and-proof-ready",
-      "summary": "M03-T04 WebKit native-selection-copy proof is ready for one target-iPhone paste; M06-T07 polish remains automated-green and colour recovery is reopened.",
-      "at": "2026-08-25T17:49:29.197Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T07:09:56.939Z",
+  "lastPublishedAt": "2026-08-26T08:08:14.740Z",
   "lastEvent": {
-    "name": "checkpoint-pushed",
-    "summary": "Pushed 3c08b33. E-004 exact native Notes capture/replay is reported PASS; generated Gym Logger coloured Notes export remains unproven and is not productized; v1 PWA production path is unchanged.",
-    "at": "2026-08-26T07:09:56.939Z"
+    "name": "checkpoint-accepted",
+    "summary": "Phase A native pasteboard removal harness independently verified; target iPhone removal-variant proof is the next gate.",
+    "at": "2026-08-26T08:08:14.740Z"
   },
-  "syncRevision": 89,
+  "syncRevision": 91,
   "openEscalations": [],
   "chatNotifications": [
     {
