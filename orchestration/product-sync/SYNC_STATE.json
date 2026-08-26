@@ -4,6 +4,11 @@
   "events": [
     {
       "name": "m03-t07-b2-device-gate-ready",
+      "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742 at checkpoint 6ef703c; target-iPhone generated-workout paste is the only open gate.",
+      "at": "2026-08-26T10:42:50.996Z"
+    },
+    {
+      "name": "m03-t07-b2-device-gate-ready",
       "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742; target-iPhone generated-workout paste is the only open gate.",
       "at": "2026-08-26T10:42:22.041Z"
     },
@@ -56,21 +61,16 @@
       "name": "checkpoint-pushed",
       "summary": "Pushed 3c08b33. E-004 exact native Notes capture/replay is reported PASS; generated Gym Logger coloured Notes export remains unproven and is not productized; v1 PWA production path is unchanged.",
       "at": "2026-08-26T07:09:56.939Z"
-    },
-    {
-      "name": "m03-t07-closed",
-      "summary": "M03-T07 closed after Codex review: exact native Notes capture/replay is proven, but generated Gym Logger coloured export is not safely productizable from the available evidence; keep v1 production unchanged.",
-      "at": "2026-08-26T07:09:39.853Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T10:42:22.042Z",
+  "lastPublishedAt": "2026-08-26T10:42:50.997Z",
   "lastEvent": {
     "name": "m03-t07-b2-device-gate-ready",
-    "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742; target-iPhone generated-workout paste is the only open gate.",
-    "at": "2026-08-26T10:42:22.041Z"
+    "summary": "B2 Apple Notes-shaped generated flat-RTFD helper is packaged in hosted run 32959270742 at checkpoint 6ef703c; target-iPhone generated-workout paste is the only open gate.",
+    "at": "2026-08-26T10:42:50.996Z"
   },
-  "syncRevision": 99,
+  "syncRevision": 100,
   "openEscalations": [],
   "chatNotifications": [
     {
