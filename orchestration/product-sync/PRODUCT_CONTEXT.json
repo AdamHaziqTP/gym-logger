@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T15:30:12.314Z",
+  "generatedAt": "2026-08-26T15:51:12.011Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -37,9 +37,9 @@
   "current": {
     "milestone": "M03 — one-app iOS productization",
     "task": "M03-T10 one-app Gym Logger IPA productization",
-    "status": "CODEX_VERIFIED — HOSTED REBUILD REQUIRED BEFORE DEVICE GATE",
-    "humanReviewGate": "after the fresh hosted rebuild, install the single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.",
-    "nextAction": "M01/FIX-05 automated verification remains the engineering baseline for continuation; its deferred physical-iPhone checks are not reclassified as PASS."
+    "status": "HUMAN_REVIEW_REQUIRED — CORRECTED HOSTED ALL-IN-ONE IPA READY",
+    "humanReviewGate": "install the single `GymLogger-unsigned.ipa` artifact from hosted run `32986140862` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.",
+    "nextAction": "install the single `GymLogger-unsigned.ipa` artifact from hosted run `32986140862` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "96579d0 fix: report one-app native handoff completion",
     "70da01a docs: open one-app IPA device gate",
     "dc228e6 fix: correct one-app iOS source paths",
     "cbbbf1f fix: stage bundled web app at iOS project root",
-    "da21c90 feat: add all-in-one Gym Logger iOS shell",
-    "7ae228b docs: authorize one-app Gym Logger IPA"
+    "da21c90 feat: add all-in-one Gym Logger iOS shell"
   ],
   "codexVerification": [
     {
@@ -174,10 +174,10 @@
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
     "E-004 Phase A/A2, B2, and M03-T09 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss. The one-app IPA authorization supersedes the PWA-only delivery constraint for M03-T10; no paid Developer dependency is authorized, and the single-app target-iPhone gate remains open until the device checklist is complete.",
-    "after the fresh hosted rebuild, install the single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate."
+    "install the single `GymLogger-unsigned.ipa` artifact from hosted run `32986140862` and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate."
   ],
   "decisionsMadeSinceLastSync": [
-    "Codex corrected native handoff completion reporting; local verification is green and a fresh hosted IPA rebuild is required before the consolidated iPhone gate."
+    "Corrected all-in-one IPA from hosted run 32986140862 passed independent package inspection; consolidated iPhone 14 Pro Max gate is open."
   ],
   "recordedDecisions": [
     {
@@ -229,26 +229,16 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "70da01a9983605f99000d45dafd4e932ea07a4f7",
+    "commit": "96579d043418ed3d97161b7b7670a12ca9f380cd",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md\n M orchestration/ios/GymLogger/GymLogger/GymLoggerWebView.swift\n M orchestration/ios/verify-one-app.mjs\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json\n M orchestration/product-sync/generated/active-worker.patch.yml\n M orchestration/reviews/M03-T10-ONE-APP-IPA-CODEX-REVIEW.md\n M orchestration/state/STATE.md\n M orchestration/tasks/M03-T10-ONE-APP-IPA-PRODUCTIZATION.md\n M src/components/SessionView.tsx\n M src/domain/embeddedNativeBridge.ts\n M src/tests/embeddedNativeBridge.test.ts\n?? orchestration/product-sync/PUBLICATION_HISTORY.jsonl",
+    "workingTree": "## main...origin/main\n M orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/reviews/M03-T10-ONE-APP-IPA-CODEX-REVIEW.md\n M orchestration/state/STATE.md\n M orchestration/tasks/M03-T10-ONE-APP-IPA-PRODUCTIZATION.md",
     "changedFiles": [
       "orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md",
-      "orchestration/ios/GymLogger/GymLogger/GymLoggerWebView.swift",
-      "orchestration/ios/verify-one-app.mjs",
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
       "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json",
-      "orchestration/product-sync/generated/active-worker.patch.yml",
       "orchestration/reviews/M03-T10-ONE-APP-IPA-CODEX-REVIEW.md",
       "orchestration/state/STATE.md",
-      "orchestration/tasks/M03-T10-ONE-APP-IPA-PRODUCTIZATION.md",
-      "src/components/SessionView.tsx",
-      "src/domain/embeddedNativeBridge.ts",
-      "src/tests/embeddedNativeBridge.test.ts",
-      "orchestration/product-sync/PUBLICATION_HISTORY.jsonl"
+      "orchestration/tasks/M03-T10-ONE-APP-IPA-PRODUCTIZATION.md"
     ]
   },
   "builder": {
@@ -268,11 +258,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t10-codex-correction-hosted-rebuild-pending",
-      "summary": "Codex corrected native handoff completion reporting; local verification is green and a fresh hosted IPA rebuild is required before the consolidated iPhone gate.",
-      "at": "2026-08-26T15:30:12.259Z"
+      "name": "m03-t10-corrected-hosted-ipa-ready",
+      "summary": "Corrected all-in-one IPA from hosted run 32986140862 passed independent package inspection; consolidated iPhone 14 Pro Max gate is open.",
+      "at": "2026-08-26T15:51:11.950Z"
     },
-    "contextRevision": 113,
+    "contextRevision": 114,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

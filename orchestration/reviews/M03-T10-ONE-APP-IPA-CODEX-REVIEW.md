@@ -31,15 +31,15 @@ Updated: 2026-08-26
   result and reports a truthful manual-open fallback when Notes cannot be
   opened. The static contract and bridge unit coverage now assert this.
 - Hosted macOS/Xcode compilation and packaged IPA assertions: **PASS** in the
-  prior run
-  [`32982786740`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32982786740);
-  a fresh hosted rebuild is required to publish this final source correction.
-  The artifact has `CFBundleExecutable=GymLogger`, bundle ID
+  corrected run
+  [`32986140862`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32986140862).
+  Codex independently downloaded and inspected that exact artifact. It has
+  `CFBundleExecutable=GymLogger`, bundle ID
   `com.gymlogger.app`, package type `APPL`, name/display/version metadata,
   the executable, `WebApp/index.html`, and both deliberate icon assets.
 
 ## Acceptance boundary
 
-This review accepts the source contract and hosted IPA packaging for the next
-device gate. It does not claim IPA installation, iOS persistence, or Apple
+This review accepts the source contract and corrected hosted IPA packaging for
+the device gate. It does not claim IPA installation, iOS persistence, or Apple
 Notes behavior until the target-iPhone checklist is completed.

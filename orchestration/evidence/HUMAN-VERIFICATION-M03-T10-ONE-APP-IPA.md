@@ -1,14 +1,13 @@
 # Human verification — M03-T10 one-app Gym Logger IPA
 
-Status: `HUMAN_REVIEW_REQUIRED — WAITING FOR FRESH HOSTED IPA AFTER CODEX CORRECTION`
+Status: `HUMAN_REVIEW_REQUIRED — CORRECTED HOSTED IPA READY`
 
-Previous hosted artifact: `GymLogger-unsigned.ipa` from workflow run
-[`32982786740`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32982786740).
+Hosted artifact: `GymLogger-unsigned.ipa` from corrected workflow run
+[`32986140862`](https://github.com/AdamHaziqTP/gym-logger/actions/runs/32986140862).
 
-That artifact predates a Codex correction to wait for native clipboard/Notes
-completion and to report a manual-open fallback truthfully. Do not install the
-previous artifact for this gate; use the fresh hosted artifact recorded here
-after the rebuild.
+This artifact includes the Codex correction that waits for native
+clipboard/Notes completion and reports a manual-open fallback truthfully.
+Do not install the older `32982786740` artifact for this gate.
 
 This is the single consolidated device gate for the one-app productization.
 Do not infer any item from desktop tests, source review, or IPA metadata.
