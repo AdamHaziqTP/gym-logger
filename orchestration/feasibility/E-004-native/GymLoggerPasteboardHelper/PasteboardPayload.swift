@@ -18,7 +18,12 @@ struct NativeHandoffSession: Decodable {
     let dateLocal: String
     let rows: [FixtureRow]
     let notes: String
-    let summaryOverride: FixtureSummary?
+    let summaryOverride: NativeHandoffSummaryOverride?
+}
+
+struct NativeHandoffSummaryOverride: Decodable {
+    let sets: String?
+    let exercises: String?
 }
 
 struct FixtureSession: Decodable {
@@ -129,9 +134,9 @@ enum NativePayloadBuilder {
         return FixtureSession(
             dateLocal: envelope.session.dateLocal,
             displayDate: envelope.displayDate,
-            summary: envelope.session.summaryOverride ?? FixtureSummary(
-                setsDisplayOverride: nil,
-                exercisesDisplayOverride: nil
+            summary: FixtureSummary(
+                setsDisplayOverride: envelope.session.summaryOverride?.sets,
+                exercisesDisplayOverride: envelope.session.summaryOverride?.exercises
             ),
             rows: envelope.session.rows,
             notes: envelope.session.notes

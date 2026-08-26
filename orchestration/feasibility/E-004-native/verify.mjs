@@ -66,7 +66,7 @@ const checks = [
   ["production handoff has a versioned schema", source.includes("NativeHandoffEnvelope") && source.includes("handoffSchemaVersion") && source.includes("handoffSource")],
   ["production handoff validates source and version", source.includes("envelope.schemaVersion == handoffSchemaVersion") && source.includes("envelope.source == handoffSource")],
   ["production handoff reads JSON from the system clipboard", source.includes("loadHandoffFromPasteboard") && source.includes("UIPasteboard.general.string") && source.includes("decodeHandoff")],
-  ["production handoff preserves summary override and session values", source.includes("envelope.session.summaryOverride") && source.includes("envelope.session.rows") && source.includes("envelope.session.notes")],
+  ["production handoff preserves summary override and session values", source.includes("NativeHandoffSummaryOverride") && source.includes("envelope.session.summaryOverride?.sets") && source.includes("envelope.session.summaryOverride?.exercises") && source.includes("envelope.session.rows") && source.includes("envelope.session.notes")],
   ["one flat-RTFD pasteboard item", app.includes("UIPasteboard.general.setItems") && app.includes("payload.flatRTFDPasteboardItem")],
   ["flat-RTFD proof action is user initiated", app.includes("Button(\"Copy Generated Gym Session (flat-RTFD only)\")") && app.includes("payload.flatRTFDPasteboardItem")],
   ["real-session action is distinct from fixture proof", app.includes("Production Gym Logger handoff") && app.includes("Isolated fixture proof") && app.includes("prepareHandoffSession")],
