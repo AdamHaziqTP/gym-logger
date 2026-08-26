@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T08:08:14.802Z",
+  "generatedAt": "2026-08-26T08:10:16.089Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -56,16 +56,17 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
+    "7224089 docs: publish Phase A helper build gate",
+    "3564769 chore: publish native removal gate context",
     "6cb1cc3 feat: prepare native pasteboard removal variants",
     "f4b7b3f chore: refresh product sync after handoff review",
-    "3c08b33 docs: close native Notes handoff productization",
-    "fc0fcdb docs: record native Notes replay proof and queue handoff",
-    "92f104c chore: refresh E-004 device gate context"
+    "3c08b33 docs: close native Notes handoff productization"
   ],
   "codexVerification": [
     {
       "path": "orchestration/reviews/M03-T07-NATIVE-COLOUR-HANDOFF-codex-review.md",
       "result": [
+        "updated helper; Codex verified the IPA contains the helper app and",
         "The current gate is the target-iPhone Phase A removal-variant pass documented"
       ]
     },
@@ -177,7 +178,7 @@
     "E-004 Phase A removal-variant proof on the iPhone 14 Pro Max. The product owner reported exact native Notes capture/replay PASS; do not infer generated Gym Logger export success from that captured-payload replay. Use the fresh helper build and record each non-empty captured representation variant before Phase B/C."
   ],
   "decisionsMadeSinceLastSync": [
-    "Phase A native pasteboard removal harness independently verified; target iPhone removal-variant proof is the next gate."
+    "Hosted Phase A helper build 32946246114 is ready; one target-iPhone removal-variant gate remains."
   ],
   "recordedDecisions": [
     {
@@ -229,15 +230,12 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "6cb1cc3da89d09e35a11bbc8bc008de57874f299",
+    "commit": "7224089ca904561d78873e202339ce3e1c37a82e",
     "branch": "main",
-    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs\n M orchestration/product-sync/PRODUCT_CONTEXT.json\n M orchestration/product-sync/PRODUCT_CONTEXT.md\n M orchestration/product-sync/SYNC_STATE.json",
+    "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
       "orchestration/product-orchestrator/WORKFLOW_SPEC.md",
-      "orchestration/product-orchestrator/bootstrap.mjs",
-      "orchestration/product-sync/PRODUCT_CONTEXT.json",
-      "orchestration/product-sync/PRODUCT_CONTEXT.md",
-      "orchestration/product-sync/SYNC_STATE.json"
+      "orchestration/product-orchestrator/bootstrap.mjs"
     ]
   },
   "builder": {
@@ -257,11 +255,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "checkpoint-accepted",
-      "summary": "Phase A native pasteboard removal harness independently verified; target iPhone removal-variant proof is the next gate.",
-      "at": "2026-08-26T08:08:14.740Z"
+      "name": "worker-ready",
+      "summary": "Hosted Phase A helper build 32946246114 is ready; one target-iPhone removal-variant gate remains.",
+      "at": "2026-08-26T08:10:16.030Z"
     },
-    "contextRevision": 91,
+    "contextRevision": 92,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

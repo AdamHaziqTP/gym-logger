@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "worker-ready",
+      "summary": "Hosted Phase A helper build 32946246114 is ready; one target-iPhone removal-variant gate remains.",
+      "at": "2026-08-26T08:10:16.030Z"
+    },
+    {
       "name": "checkpoint-accepted",
       "summary": "Phase A native pasteboard removal harness independently verified; target iPhone removal-variant proof is the next gate.",
       "at": "2026-08-26T08:08:14.740Z"
@@ -56,21 +61,16 @@
       "name": "m03-t05-fingerprint-ready",
       "summary": "M03-T05 standalone Notes clipboard fingerprint is independently verified and ready for one target-iPhone capture; M03-T04 native selection-copy colour failure is closed and E-004 native inspection remains staged behind the result.",
       "at": "2026-08-25T22:52:45.308Z"
-    },
-    {
-      "name": "proof-route-retest-ready",
-      "summary": "Retired SPA-shell proof route recorded as blocked; native-copy proof now verified over LAN HTTPS with service-worker bypass and is ready for one iPhone retest.",
-      "at": "2026-08-25T22:36:23.986Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T08:08:14.740Z",
+  "lastPublishedAt": "2026-08-26T08:10:16.031Z",
   "lastEvent": {
-    "name": "checkpoint-accepted",
-    "summary": "Phase A native pasteboard removal harness independently verified; target iPhone removal-variant proof is the next gate.",
-    "at": "2026-08-26T08:08:14.740Z"
+    "name": "worker-ready",
+    "summary": "Hosted Phase A helper build 32946246114 is ready; one target-iPhone removal-variant gate remains.",
+    "at": "2026-08-26T08:10:16.030Z"
   },
-  "syncRevision": 91,
+  "syncRevision": 92,
   "openEscalations": [],
   "chatNotifications": [
     {
