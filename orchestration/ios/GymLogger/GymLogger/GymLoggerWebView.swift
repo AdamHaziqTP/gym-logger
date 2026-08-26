@@ -107,7 +107,7 @@ struct GymLoggerWebView: UIViewRepresentable {
             notify(action: "saveColourSnapshot", status: "saving")
             let save: () -> Void = { [weak self] in
                 PHPhotoLibrary.shared().performChanges({
-                    let request = PHAssetCreationRequest.creationRequestForAsset()
+                    let request = PHAssetCreationRequest.forAsset()
                     let options = PHAssetResourceCreationOptions()
                     options.originalFilename = filename ?? "Gym-Colour-Snapshot.png"
                     request.addResource(with: .photo, data: pngData, options: options)

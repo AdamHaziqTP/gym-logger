@@ -8,10 +8,10 @@ Updated: 2026-08-27
 - Control mode: Codex orchestrator → Codex fallback/subagents → Codex verification
 - Current milestone: M03 — one-app iOS productization
 - Current task: M03-T11 final one-app IPA UX cleanup
-- Status: HUMAN_REVIEW_REQUIRED — HOSTED BUILD PENDING
+- Status: IMPLEMENTATION_CORRECTION_REQUIRED — HOSTED BUILD PENDING
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: after the fresh hosted build, install its single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.
+- Human review gate: after the corrected fresh hosted build, install its single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T11-FINAL-IPHONE14-PROMAX.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.
 - Latest bounded task: M03-T11 final one-app IPA UX cleanup; M03-T10 one-app IPA productization remains the implementation baseline.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
@@ -32,6 +32,7 @@ Updated: 2026-08-27
 - M03-T10 one-app IPA checkpoint: `dc228e6` source plus hosted macOS/Xcode run `32982786740` produced and independently inspected `GymLogger-unsigned.ipa`; package identity, executable, bundled web app, and icon assets passed.
 - M03-T10 corrected one-app IPA checkpoint: `96579d0` source plus hosted macOS/Xcode run `32986140862` produced and independently inspected `GymLogger-unsigned.ipa`; native completion/manual-open reporting, package identity, executable, bundled web app, and icon assets passed.
 - M03-T11 source checkpoint: `fbcb062` implements the authorized two-action session UI and direct native Photos Compact snapshot bridge; Codex independently verified 410/410 tests, build, 27/27 one-app checks, native checks, and diff hygiene. Hosted IPA packaging and the physical iPhone gate remain open.
+- Hosted run `32990405957` exposed an Xcode 15.4 Swift API rename in the new Photos asset creation call. Codex corrected it to `PHAssetCreationRequest.forAsset()` and reran local tests/build/static/native checks successfully; a replacement hosted run is required.
 
 ## Completed
 

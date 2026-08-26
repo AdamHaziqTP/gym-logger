@@ -1,6 +1,6 @@
 # M03-T11 — Final one-app IPA UX cleanup
 
-Status: `IMPLEMENTED — HOSTED BUILD PENDING`
+Status: `IMPLEMENTED — HOSTED CORRECTION PENDING`
 
 ## Authority
 
@@ -26,6 +26,11 @@ operations.
   offline bundle, settings, migration, and core editor behavior intact.
 - Keep the native helper and E-004 feasibility sources available; no OX Alpha
   dispatch is authorized for this task.
+
+The first hosted attempt (`32990405957`) exposed one Xcode 15.4 Swift API
+compatibility issue in the new Photos write call. Codex corrected it to the
+Swift-imported `PHAssetCreationRequest.forAsset()` API; the replacement
+hosted build is required.
 
 ## Acceptance
 

@@ -22,7 +22,7 @@ const checks = [
   ["native ordinary Notes fallback", native.includes("copyNotesPayload") && native.includes("UTType.html.identifier")],
   ["native direct Photos bridge", native.includes("saveColourSnapshot") && native.includes("import Photos")],
   ["native add-only Photos permission", native.includes("PHPhotoLibrary.requestAuthorization(for: .addOnly)") && native.includes("PHPhotoLibrary.authorizationStatus(for: .addOnly)")],
-  ["native Photos asset write", native.includes("PHAssetCreationRequest.creationRequestForAsset()") && native.includes("request.addResource(with: .photo, data: pngData")],
+  ["native Photos asset write", native.includes("PHAssetCreationRequest.forAsset()") && native.includes("request.addResource(with: .photo, data: pngData")],
   ["native Photos status reporting", native.includes('"saving"') && native.includes('"saved"') && native.includes('"denied"') && native.includes('"failed"')],
   ["local bundled web transport", native.includes("WKURLSchemeHandler") && native.includes("gymlogger://app/") && native.includes("WebApp")],
   ["Gym Logger SwiftUI shell", app.includes("struct GymLoggerApp") && app.includes("GymLoggerWebView()")],

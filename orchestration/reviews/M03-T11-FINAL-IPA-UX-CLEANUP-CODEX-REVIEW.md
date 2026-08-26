@@ -26,6 +26,11 @@ and waits for its asynchronous completion event before claiming success.
 - `node orchestration/feasibility/E-004-native/verify.mjs`: **PASS**
 - `git diff --check`: **PASS**
 
+The first hosted attempt (`32990405957`) reached Swift compilation but exposed
+an Xcode 15.4 API rename for `PHAssetCreationRequest`. Codex corrected the
+call to `PHAssetCreationRequest.forAsset()` and reran the local checks above;
+a replacement hosted build is required before claiming the IPA is ready.
+
 No physical iPhone behavior is inferred from these checks. Hosted
 macOS/Xcode compilation, IPA inspection, installation, Photos delivery, and
 the final Notes paste remain separate gates.
