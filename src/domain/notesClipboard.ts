@@ -1,4 +1,5 @@
 import type { NotesPayload } from "./notesExport";
+import { writeNotesPayloadToEmbeddedNative } from "./embeddedNativeBridge";
 
 /**
  * Local clipboard writer for the Copy-to-Notes spike (spec §15; task
@@ -125,6 +126,8 @@ export function copyTextViaSelection(text: string): boolean {
 export async function writeNotesPayloadToClipboard(
   payload: NotesPayload,
 ): Promise<ClipboardCopyOutcome> {
+  if (writeNotesPayloadToEmbeddedNative(payload)) return "copied-rich";
+
   if (supportsCombinedClipboardWrite()) {
     try {
       const item = new ClipboardItem({

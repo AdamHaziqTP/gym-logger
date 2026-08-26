@@ -6,13 +6,13 @@ Updated: 2026-08-26
 
 - Project: Gym Logger
 - Control mode: Codex orchestrator → DSH/OX Alpha builder → Codex verification
-- Current milestone: M03 — Apple Notes colour-recovery feasibility
-- Current task: M03-T09 real production-session native manual-paste handoff
-- Status: HUMAN_REVIEW_REQUIRED — M03-T09 REPLACEMENT HELPER DEVICE PROOF READY
+- Current milestone: M03 — one-app iOS productization
+- Current task: M03-T10 one-app Gym Logger IPA productization
+- Status: IN_PROGRESS — CODEX FALLBACK IMPLEMENTATION; HOSTED IPA BUILD PENDING
 - Automatic correction attempts used: 2 / 2 for M01
 - Infrastructure retry: completed; FIX-02 was dispatched after rate-limit recovery and did not consume an M01 implementation correction attempt
-- Human review gate: with the replacement helper from hosted run `32974624451` installed, open the current PWA at `https://192.168.1.49:4173/`, open the real Tuesday `actual-2026-08-25` session, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact.
-- Latest bounded task: M03-T09 real-session native manual-paste handoff; production PWA ordinary Copy to Notes remains unchanged.
+- Human review gate: after hosted packaging passes, install the single `GymLogger-unsigned.ipa` artifact and complete `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md` on the iPhone 14 Pro Max. Desktop/source evidence must not close this gate.
+- Latest bounded task: M03-T10 one-app IPA productization; M03-T09 native manual-paste proof remains the implementation baseline.
 - Human-gate correction cycle: M01 FIX-05 independently green in automated verification; M03-T01 FIX-01 independently green for automated/plain-fallback scope
 - Commissioning report: `orchestration/reports/M01-commissioning-report.md`
 
@@ -87,6 +87,8 @@ Updated: 2026-08-26
 - M03-T09 is independently green for the PWA/native contract: 412/412 PWA tests, production build, native static contract, and handoff-specific review. Hosted macOS/Xcode run `32974624451` compiled, packaged, and verified the replacement helper IPA; the target iPhone result remains open.
 - The target iPhone blocked M03-T09 before launch because the `32972780014` IPA had a malformed packaged `Info.plist`. Packaging correction `040fbb2` restored the complete bundle identity and added IPA-level CI assertions; the replacement artifact is ready for the same single physical proof.
 - The temporary PWA-access blocker is resolved for this workstation session: `https://192.168.1.49:4173/` returns the current production app shell, manifest, and M03-T09 handoff action over LAN HTTPS. The server must remain running while the iPhone test is performed; this is a reachable LAN test deployment, not a public hosting claim.
+- M03-T10 one-app IPA productization is implemented in the Codex fallback after a concrete DSH packaged-loader infrastructure failure. The existing React/TypeScript app is bundled in a local WKWebView shell, the proven native flat-RTFD generator is wired through an in-process bridge, and the Tuesday migration remains in the web bundle.
+- M03-T10 Windows-side independent verification is green: 415/415 PWA tests, production build, one-app static contract, native E-004 harness, and diff hygiene. Hosted macOS/Xcode compilation and IPA assertions are the next checkpoint; target-iPhone installation and behavior remain human-gated.
 
 ## Final disposition
 
@@ -119,13 +121,14 @@ Updated: 2026-08-26
 - M03-T03 Shortcuts share, one-time setup, and colour-recovery proof are closed as a physical failure; the ordinary uncoloured Copy to Notes baseline remains accepted.
 - E-004 B2 generated Gym Logger fixture payload passed at `d0544c5`; Phase C Shortcut append failed at `cda3a58` and is closed. The current gate is the real-session native manual-paste handoff; preserve the helper and do not infer production fidelity from fixture or captured-payload replay.
 - The post-`0cb9b46` saved-image retest found fully transparent Faithful and Compact PNGs. The active correction is `orchestration/tasks/M06-T05-FIX-EXPORT-TRANSPARENT.md`; do not mark PNG delivery passed from desktop evidence.
+- M03-T10 one-app IPA installation, offline launch, Tuesday bootstrap, persistence, native coloured handoff, one-paste Notes fidelity, icon, and core-regression checks are deferred to the consolidated target-iPhone gate in `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md`.
 
 ## Escalations
 
 - E-001 historical DSH rate-limit condition is no longer the current blocker.
 - E-002 is RESOLVED: trusted HTTPS verification completed.
 - E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.
-- E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss; M03-T09 native manual-paste proof is the active gate and no paid Developer dependency is authorized. The production Gym Logger remains a PWA; the native IPA is only the pasteboard helper.
+- E-004 Phase A/A2, B2, and M03-T09 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss. The one-app IPA authorization now supersedes the PWA-only delivery constraint for M03-T10; no paid Developer dependency is authorized, and the single-app target-iPhone gate remains open until hosted packaging is complete.
 
 ## Active task checkpoint
 
@@ -470,3 +473,10 @@ Updated: 2026-08-26
   session in the PWA, tap `Prepare Coloured Notes Copy`, paste once into the
   existing `Gym` note, and record the checklist in
   `orchestration/evidence/HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`.
+
+## M03-T10 one-app Gym Logger IPA productization — 2026-08-26
+
+- Product authorization at `orchestration/state/ONE-APP-IPA-AUTHORIZATION-2026-08-26.md` explicitly combines the existing React/TypeScript UI and the proven native flat-RTFD generator in one IPA.
+- OX Alpha was attempted through the DSH Desktop wrapper and failed before worker start because the packaged DSH plugin tree could not apply the `cordis:include` loader entry. This is recorded as infrastructure failure in `orchestration/reports/M03-T10-ONE-APP-IPA-OX-ALPHA-REPORT.md`; Codex fallback is in scope.
+- Codex added an in-process WebKit bridge, a bundled offline WKWebView shell, the existing Tuesday migration in the web bundle, and hosted macOS/Xcode IPA packaging with artifact assertions. The source review is `orchestration/reviews/M03-T10-ONE-APP-IPA-CODEX-REVIEW.md`.
+- Current acceptance gate: hosted workflow `.github/workflows/gym-logger-ipa.yml` must produce a valid IPA. Then the product owner completes the single device checklist in `orchestration/evidence/HUMAN-VERIFICATION-M03-T10-ONE-APP-IPA.md`. No iPhone behavior is inferred from these source/desktop checks.

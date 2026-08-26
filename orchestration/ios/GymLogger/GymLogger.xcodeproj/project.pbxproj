@@ -1,0 +1,67 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10100010000000000000001 /* GymLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10200010000000000000001 /* GymLoggerApp.swift */; };
+		A10100020000000000000002 /* GymLoggerWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10200020000000000000002 /* GymLoggerWebView.swift */; };
+		A10100030000000000000003 /* PasteboardPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10200030000000000000003 /* PasteboardPayload.swift */; };
+		A10100040000000000000004 /* WebApp in Resources */ = {isa = PBXBuildFile; fileRef = A10200040000000000000004 /* WebApp */; };
+		A10100050000000000000005 /* GymLoggerIcon-192.png in Resources */ = {isa = PBXBuildFile; fileRef = A10200050000000000000005 /* GymLoggerIcon-192.png */; };
+		A10100060000000000000006 /* GymLoggerIcon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = A10200060000000000000006 /* GymLoggerIcon-512.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A10200010000000000000001 /* GymLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLoggerApp.swift; sourceTree = "<group>"; };
+		A10200020000000000000002 /* GymLoggerWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymLoggerWebView.swift; sourceTree = "<group>"; };
+		A10200030000000000000003 /* PasteboardPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../../E-004-native/GymLoggerPasteboardHelper/PasteboardPayload.swift; sourceTree = "<group>"; };
+		A10200040000000000000004 /* WebApp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebApp; sourceTree = "<group>"; };
+		A10200050000000000000005 /* GymLoggerIcon-192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GymLoggerIcon-192.png; sourceTree = "<group>"; };
+		A10200060000000000000006 /* GymLoggerIcon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GymLoggerIcon-512.png; sourceTree = "<group>"; };
+		A10200070000000000000007 /* GymLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10200080000000000000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A10300010000000000000001 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = ( ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A10400010000000000000001 = {isa = PBXGroup; children = ( A10200010000000000000001, A10200020000000000000002, A10200030000000000000003, A10200040000000000000004, A10200050000000000000005, A10200060000000000000006, A10200080000000000000008, ); sourceTree = "<group>"; };
+		A10400020000000000000002 /* Products */ = {isa = PBXGroup; children = ( A10200070000000000000007, ); name = Products; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10500010000000000000001 /* GymLogger */ = {isa = PBXNativeTarget; buildConfigurationList = A10600020000000000000002 /* Build configuration list for PBXNativeTarget "GymLogger" */; buildPhases = ( A10300020000000000000002 /* Sources */, A10300010000000000000001 /* Frameworks */, A10300030000000000000003 /* Resources */, ); buildRules = ( ); dependencies = ( ); name = GymLogger; productName = GymLogger; productReference = A10200070000000000000007 /* GymLogger.app */; productType = "com.apple.product-type.application"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A10700010000000000000001 /* Project object */ = {isa = PBXProject; attributes = { LastUpgradeCheck = 1600; TargetAttributes = { A10500010000000000000001 = { CreatedOnToolsVersion = 16.0; }; }; }; buildConfigurationList = A10600010000000000000001 /* Build configuration list for PBXProject "GymLogger" */; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = ( en, Base, ); mainGroup = A10400010000000000000001; productRefGroup = A10400020000000000000002 /* Products */; projectDirPath = ""; projectRoot = ""; targets = ( A10500010000000000000001 /* GymLogger */, ); };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A10300030000000000000003 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = ( A10100040000000000000004 /* WebApp in Resources */, A10100050000000000000005 /* GymLoggerIcon-192.png in Resources */, A10100060000000000000006 /* GymLoggerIcon-512.png in Resources */, ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A10300020000000000000002 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = ( A10100010000000000000001 /* GymLoggerApp.swift in Sources */, A10100020000000000000002 /* GymLoggerWebView.swift in Sources */, A10100030000000000000003 /* PasteboardPayload.swift in Sources */, ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A10800010000000000000001 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SWIFT_VERSION = 5.0; }; name = Debug; };
+		A10800020000000000000002 /* Release */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SWIFT_VERSION = 5.0; }; name = Release; };
+		A10800030000000000000003 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = GymLogger/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.gymlogger.app; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1"; }; name = Debug; };
+		A10800040000000000000004 /* Release */ = {isa = XCBuildConfiguration; buildSettings = { CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = GymLogger/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.gymlogger.app; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1"; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A10600010000000000000001 /* Build configuration list for PBXProject "GymLogger" */ = {isa = XCConfigurationList; buildConfigurations = ( A10800010000000000000001 /* Debug */, A10800020000000000000002 /* Release */, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A10600020000000000000002 /* Build configuration list for PBXNativeTarget "GymLogger" */ = {isa = XCConfigurationList; buildConfigurations = ( A10800030000000000000003 /* Debug */, A10800040000000000000004 /* Release */, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = A10700010000000000000001 /* Project object */;
+}

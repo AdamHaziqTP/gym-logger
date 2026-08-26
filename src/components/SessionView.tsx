@@ -38,6 +38,7 @@ import {
   launchNativeHelper,
   writeNativeHelperHandoffToClipboard,
 } from "../domain/nativeHelperHandoff";
+import { sendNativeHandoffToEmbeddedBridge } from "../domain/embeddedNativeBridge";
 import { CompactSnapshotShare, ImageExportPanel } from "./ImageExport";
 import type { ImageExportStyle } from "../domain/imageExport";
 import { orderedRows } from "../domain/rows";
@@ -616,6 +617,15 @@ export function SessionView({
     // unsaved free-form edits. Saving is allowed to converge independently;
     // the handoff payload is captured before any await.
     void flushSaves();
+
+    // The bundled all-in-one iOS app handles this synchronously in-process.
+    // Keeping this before the browser clipboard fallback avoids requiring a
+    // secure web origin or a second helper app inside the native shell.
+    if (sendNativeHandoffToEmbeddedBridge(visibleSession)) {
+      setNativeHandoffState("prepared");
+      return;
+    }
+
     void writeNativeHelperHandoffToClipboard(visibleSession)
       .then((copied) => {
         if (!copied) {

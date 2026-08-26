@@ -1,0 +1,115 @@
+name: Gym Logger all-in-one IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-gym-logger:
+    runs-on: macos-14
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Build bundled web app
+        run: |
+          npm ci
+          npm run build
+
+      - name: Stage bundled web app and icon assets
+        shell: bash
+        working-directory: orchestration/ios/GymLogger
+        run: |
+          set -euo pipefail
+          rm -rf GymLogger/WebApp
+          mkdir -p GymLogger/WebApp
+          cp -R ../../../dist/. GymLogger/WebApp/
+          cp ../../../public/icons/icon-192.png GymLogger/GymLoggerIcon-192.png
+          cp ../../../public/icons/icon-512.png GymLogger/GymLoggerIcon-512.png
+          test -s GymLogger/WebApp/index.html
+          test "$(find GymLogger/WebApp/assets -type f -name '*.js' | wc -l)" -gt 0
+          test -s GymLogger/GymLoggerIcon-192.png
+          test -s GymLogger/GymLoggerIcon-512.png
+
+      - name: Show Xcode toolchain
+        run: xcodebuild -version
+
+      - name: Build unsigned all-in-one iOS app
+        working-directory: orchestration/ios/GymLogger
+        run: >-
+          xcodebuild
+          -project GymLogger.xcodeproj
+          -target GymLogger
+          -configuration Release
+          -sdk iphoneos
+          -destination 'generic/platform=iOS'
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+          DEVELOPMENT_TEAM=
+
+      - name: Package unsigned IPA
+        shell: bash
+        working-directory: orchestration/ios/GymLogger
+        run: |
+          set -euo pipefail
+          app_path="$(find build "$HOME/Library/Developer/Xcode/DerivedData" -type d -path '*/GymLogger.app' -print -quit 2>/dev/null)"
+          test -n "$app_path"
+          mkdir -p artifacts/Payload
+          cp -R "$app_path" artifacts/Payload/
+          (cd artifacts && zip -qry ../GymLogger-unsigned.ipa Payload)
+
+      - name: Verify packaged IPA
+        shell: bash
+        working-directory: orchestration/ios/GymLogger
+        run: |
+          set -euo pipefail
+          ipa_path="GymLogger-unsigned.ipa"
+          plist_path="$(mktemp)"
+          cleanup() { rm -f "$plist_path"; }
+          trap cleanup EXIT
+
+          unzip -p "$ipa_path" Payload/GymLogger.app/Info.plist > "$plist_path"
+          /usr/bin/plutil -lint "$plist_path"
+
+          plist_value() {
+            /usr/bin/plutil -extract "$1" raw -o - "$plist_path"
+          }
+
+          executable="$(plist_value CFBundleExecutable)"
+          bundle_identifier="$(plist_value CFBundleIdentifier)"
+          package_type="$(plist_value CFBundlePackageType)"
+          bundle_name="$(plist_value CFBundleName)"
+          display_name="$(plist_value CFBundleDisplayName)"
+          short_version="$(plist_value CFBundleShortVersionString)"
+          bundle_version="$(plist_value CFBundleVersion)"
+
+          test "$executable" = "GymLogger"
+          test -n "$bundle_identifier"
+          test "$package_type" = "APPL"
+          test "$bundle_name" = "GymLogger"
+          test "$display_name" = "Gym Logger"
+          test -n "$short_version"
+          test -n "$bundle_version"
+          /usr/bin/plutil -convert xml1 -o - "$plist_path" | grep -Fq 'GymLoggerIcon-512'
+          unzip -Z1 "$ipa_path" | grep -Fxq "Payload/GymLogger.app/$executable"
+          unzip -Z1 "$ipa_path" | grep -Fxq "Payload/GymLogger.app/WebApp/index.html"
+          unzip -Z1 "$ipa_path" | grep -Fxq "Payload/GymLogger.app/GymLoggerIcon-192.png"
+          unzip -Z1 "$ipa_path" | grep -Fxq "Payload/GymLogger.app/GymLoggerIcon-512.png"
+
+          echo "IPA metadata PASS: executable=$executable bundle_id=$bundle_identifier package_type=$package_type name=$bundle_name display_name=$display_name version=$short_version ($bundle_version)"
+          echo "IPA web bundle PASS: Payload/GymLogger.app/WebApp/index.html"
+          echo "IPA icon assets PASS: GymLoggerIcon-192.png, GymLoggerIcon-512.png"
+
+      - name: Upload unsigned all-in-one IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: GymLogger-unsigned
+          path: |
+            orchestration/ios/GymLogger/GymLogger-unsigned.ipa
+            orchestration/ios/GymLogger/artifacts/
