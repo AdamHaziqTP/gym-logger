@@ -27,15 +27,15 @@ jobs:
         working-directory: orchestration/ios/GymLogger
         run: |
           set -euo pipefail
-          rm -rf GymLogger/WebApp
-          mkdir -p GymLogger/WebApp
-          cp -R ../../../dist/. GymLogger/WebApp/
-          cp ../../../public/icons/icon-192.png GymLogger/GymLoggerIcon-192.png
-          cp ../../../public/icons/icon-512.png GymLogger/GymLoggerIcon-512.png
-          test -s GymLogger/WebApp/index.html
-          test "$(find GymLogger/WebApp/assets -type f -name '*.js' | wc -l)" -gt 0
-          test -s GymLogger/GymLoggerIcon-192.png
-          test -s GymLogger/GymLoggerIcon-512.png
+          rm -rf WebApp
+          mkdir -p WebApp
+          cp -R ../../../dist/. WebApp/
+          cp ../../../public/icons/icon-192.png GymLoggerIcon-192.png
+          cp ../../../public/icons/icon-512.png GymLoggerIcon-512.png
+          test -s WebApp/index.html
+          test "$(find WebApp/assets -type f -name '*.js' | wc -l)" -gt 0
+          test -s GymLoggerIcon-192.png
+          test -s GymLoggerIcon-512.png
 
       - name: Show Xcode toolchain
         run: xcodebuild -version
