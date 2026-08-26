@@ -257,6 +257,11 @@ Updated: 2026-08-26
   expose a Swift actor-isolation error in the replay action. The helper view is
   now explicitly main-actor isolated; rerun is required to verify compile and
   packaging.
+- Hosted workflow run `32924992866` successfully compiled the Swift helper but
+  failed in packaging because the workflow searched only global DerivedData;
+  this target writes to the repository-local `build/Release-iphoneos` path.
+  The lookup now checks both locations; rerun is required to verify artifact
+  packaging and upload.
 - Current E-004 gate:
   `orchestration/evidence/HUMAN-VERIFICATION-E-004-NATIVE-CLIPBOARD-INSPECTION.md`.
   It remains `BLOCKED/DEFERRED — HOSTED IOS BUILD PENDING`; after a truthful

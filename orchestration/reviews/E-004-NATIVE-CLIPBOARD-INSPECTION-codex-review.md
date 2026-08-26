@@ -32,6 +32,8 @@ the PWA production path.
 - [x] Third hosted workflow invocation compiled the project sources far enough
       to expose an actor-isolation error in the replay action; the view is now
       explicitly main-actor isolated.
+- [x] Fourth hosted workflow invocation compiled the Swift helper successfully;
+      its remaining failure was limited to the workflow's artifact lookup.
 - [x] PWA regression suite: 410/410 tests pass.
 - [x] PWA production build passes.
 - [x] Native platform-neutral harness: 18/18 checks pass.
@@ -40,7 +42,9 @@ the PWA production path.
 - [ ] Swift/Xcode compilation: not run on this Windows workstation.
 - [ ] Hosted macOS/Xcode compilation: first run failed at workflow argument
       validation, second run failed at nested project paths, and third run
-      exposed Swift actor isolation; corrected source requires a fourth run.
+      exposed Swift actor isolation. The fourth run compiled successfully but
+      packaging could not find the repository-local build output; corrected
+      lookup requires a fifth run.
 - [ ] iOS installation: not run.
 - [ ] Apple Notes editable-table, Unicode, or five-colour result: not run.
 

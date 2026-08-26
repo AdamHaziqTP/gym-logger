@@ -32,7 +32,7 @@ jobs:
         working-directory: orchestration/feasibility/E-004-native
         run: |
           set -euo pipefail
-          app_path="$(find "$HOME/Library/Developer/Xcode/DerivedData" -type d -path '*/Build/Products/*/GymLoggerPasteboardHelper.app' -print -quit)"
+          app_path="$(find build "$HOME/Library/Developer/Xcode/DerivedData" -type d -path '*/GymLoggerPasteboardHelper.app' -print -quit 2>/dev/null)"
           test -n "$app_path"
           mkdir -p artifacts/Payload
           cp -R "$app_path" artifacts/Payload/

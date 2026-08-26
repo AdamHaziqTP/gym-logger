@@ -49,3 +49,9 @@ The third hosted run (`32924910818`) compiled the project sources and exposed
 one Swift actor-isolation error in the replay button path. The helper view now
 explicitly runs on the main actor, matching `UIPasteboard` access; a fourth run
 is required to verify the corrected compile and packaging steps.
+
+The fourth hosted run (`32924992866`) successfully compiled the Swift helper,
+then failed only in packaging because this target build writes to the
+repository-local `build/Release-iphoneos` directory rather than the global
+DerivedData path used by the workflow lookup. The lookup now checks both
+locations; a fifth run is required to verify artifact packaging and upload.
