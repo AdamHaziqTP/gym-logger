@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "packetType": "product-context",
-  "generatedAt": "2026-08-26T13:13:06.667Z",
+  "generatedAt": "2026-08-26T13:33:54.515Z",
   "project": {
     "id": "gym-logger",
     "name": "Gym Logger",
@@ -37,9 +37,9 @@
   "current": {
     "milestone": "M03 — Apple Notes colour-recovery feasibility",
     "task": "M03-T09 real production-session native manual-paste handoff",
-    "status": "HUMAN_REVIEW_REQUIRED — M03-T09 NATIVE HELPER DEVICE PROOF READY",
-    "humanReviewGate": "install the newest hosted helper, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`.",
-    "nextAction": "install the newest hosted helper, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`."
+    "status": "HUMAN_REVIEW_REQUIRED — M03-T09 REPLACEMENT HELPER DEVICE PROOF READY",
+    "humanReviewGate": "install the replacement helper from hosted run `32974624451`, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact.",
+    "nextAction": "install the replacement helper from hosted run `32974624451`, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact."
   },
   "completedMilestonesAndWork": [
     "Read the full finalized `GYM_LOGGER_SPEC.md`.",
@@ -56,11 +56,11 @@
     "Accepted M03-T01 engineering clipboard spike automatically."
   ],
   "recentImplementationChanges": [
-    "89955d7 docs: point M03-T09 at final helper build",
-    "08f894b fix: preserve production handoff summary overrides",
-    "55d1904 docs: sync final M03-T09 checkpoint",
-    "6b944e1 docs: finalize native handoff verification gate",
-    "99f336c docs: publish M03-T09 device proof gate"
+    "177c76a docs: reopen M03-T09 with verified helper IPA",
+    "040fbb2 fix: preserve native helper bundle metadata",
+    "4867728 docs: record M03-T09 LiveContainer install blocker",
+    "8565975 docs: publish final M03-T09 helper checkpoint",
+    "89955d7 docs: point M03-T09 at final helper build"
   ],
   "codexVerification": [
     {
@@ -95,10 +95,10 @@
     {
       "path": "orchestration/evidence/HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md",
       "result": [
-        "Set each item to `PASS`, `FAIL`, or `BLOCKED` and add screenshots for any",
-        "failure. Record whether the helper opened Notes automatically; automatic",
-        "B2 fixture proof. If this test passes, the productized native manual-paste",
-        "route is accepted. If it fails, keep ordinary uncoloured `Copy to Notes` as the"
+        "Status: `READY FOR RETEST — REPLACEMENT HELPER IPA PACKAGING VERIFIED`",
+        "LiveContainer failed before the Notes handoff could be tested, reporting:",
+        "`Failed to map /var/mobile/Containers/Data/Application/.../Documents/Applications/Unknown.app/(null): Bad file descriptor.`",
+        "Therefore this is an artifact-packaging defect, not a failed Apple Notes colour"
       ]
     },
     {
@@ -177,11 +177,11 @@
     "E-001 historical DSH rate-limit condition is no longer the current blocker.",
     "E-002 is RESOLVED: trusted HTTPS verification completed.",
     "E-003 is RESOLVED/CLOSED as the historical uncoloured-baseline decision; its Shortcuts branch is now physically failed and closed.",
-    "E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is the active bounded proof; no paid Developer dependency is authorized.",
-    "install the newest hosted helper, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`."
+    "E-004 Phase A/A2 and B2 generated-payload proof are complete. Phase C Shortcut append is closed after physical colour loss; M03-T09 native manual-paste proof is the active gate and no paid Developer dependency is authorized.",
+    "install the replacement helper from hosted run `32974624451`, open the real Tuesday `actual-2026-08-25` session from the PWA, use **Prepare Coloured Notes Copy**, then paste once into the existing `Gym` note and complete `HUMAN-VERIFICATION-M03-T09-NATIVE-MANUAL-PASTE-HANDOFF.md`. Do not retry the malformed run `32972780014` artifact."
   ],
   "decisionsMadeSinceLastSync": [
-    "Final M03-T09 helper build 32972780014 is packaged from 08f894b and product-sync is ready for one real Tuesday production-session manual-paste proof."
+    "Replacement helper IPA 32974624451 passed packaged metadata assertions after 4867728 LiveContainer import blocker; M03-T09 is ready for one real Tuesday production-session manual-paste proof."
   ],
   "recordedDecisions": [
     {
@@ -233,7 +233,7 @@
     "references/IMG_5551.png"
   ],
   "gitCheckpoint": {
-    "commit": "89955d7e1193c0d1b839d51d6f92652508045b3f",
+    "commit": "177c76a0e5a753e26a8687fee202c3a59ddb7b41",
     "branch": "main",
     "workingTree": "## main...origin/main\n M orchestration/product-orchestrator/WORKFLOW_SPEC.md\n M orchestration/product-orchestrator/bootstrap.mjs",
     "changedFiles": [
@@ -258,11 +258,11 @@
   },
   "synchronization": {
     "lastEvent": {
-      "name": "m03-t09-final-helper-build-ready",
-      "summary": "Final M03-T09 helper build 32972780014 is packaged from 08f894b and product-sync is ready for one real Tuesday production-session manual-paste proof.",
-      "at": "2026-08-26T13:13:06.615Z"
+      "name": "m03-t09-replacement-ipa-ready",
+      "summary": "Replacement helper IPA 32974624451 passed packaged metadata assertions after 4867728 LiveContainer import blocker; M03-T09 is ready for one real Tuesday production-session manual-paste proof.",
+      "at": "2026-08-26T13:33:54.465Z"
     },
-    "contextRevision": 106,
+    "contextRevision": 107,
     "openEscalations": [],
     "detailedLogs": "orchestration/reports/ and orchestration/reviews/ remain the detailed machine/reviewer record; this packet is a compact product-facing summary.",
     "bridge": {

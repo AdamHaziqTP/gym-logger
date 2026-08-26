@@ -3,6 +3,11 @@
   "activeBuilder": "ox-alpha",
   "events": [
     {
+      "name": "m03-t09-replacement-ipa-ready",
+      "summary": "Replacement helper IPA 32974624451 passed packaged metadata assertions after 4867728 LiveContainer import blocker; M03-T09 is ready for one real Tuesday production-session manual-paste proof.",
+      "at": "2026-08-26T13:33:54.465Z"
+    },
+    {
       "name": "m03-t09-final-helper-build-ready",
       "summary": "Final M03-T09 helper build 32972780014 is packaged from 08f894b and product-sync is ready for one real Tuesday production-session manual-paste proof.",
       "at": "2026-08-26T13:13:06.615Z"
@@ -56,21 +61,16 @@
       "name": "worker-ready",
       "summary": "Phase B generated flat-RTFD helper build 32956758287 is ready; target-iPhone generated workout paste is the next gate.",
       "at": "2026-08-26T10:10:30.810Z"
-    },
-    {
-      "name": "checkpoint-accepted",
-      "summary": "A2 helper build 32952585740 is ready; single-representation iPhone sufficiency is the sole next gate.",
-      "at": "2026-08-26T09:24:17.725Z"
     }
   ],
   "builderChanges": [],
-  "lastPublishedAt": "2026-08-26T13:13:06.616Z",
+  "lastPublishedAt": "2026-08-26T13:33:54.466Z",
   "lastEvent": {
-    "name": "m03-t09-final-helper-build-ready",
-    "summary": "Final M03-T09 helper build 32972780014 is packaged from 08f894b and product-sync is ready for one real Tuesday production-session manual-paste proof.",
-    "at": "2026-08-26T13:13:06.615Z"
+    "name": "m03-t09-replacement-ipa-ready",
+    "summary": "Replacement helper IPA 32974624451 passed packaged metadata assertions after 4867728 LiveContainer import blocker; M03-T09 is ready for one real Tuesday production-session manual-paste proof.",
+    "at": "2026-08-26T13:33:54.465Z"
   },
-  "syncRevision": 106,
+  "syncRevision": 107,
   "openEscalations": [],
   "chatNotifications": [
     {
