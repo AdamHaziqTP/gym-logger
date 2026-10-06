@@ -58,8 +58,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -d '' adhan_sources < <(find Vendor/adhan-swift/Sources -name '*.swift' -print0)
-          swiftc "${adhan_sources[@]}" Sources/Models.swift Validation/main.swift -framework CoreLocation -o /tmp/qibla-validation
+          adhan_sources="$(find Vendor/adhan-swift/Sources -name '*.swift' -print)"
+          swiftc $adhan_sources Sources/Models.swift Validation/main.swift -framework CoreLocation -o /tmp/qibla-validation
           /tmp/qibla-validation
 
       - name: Compile simulator build
