@@ -1,0 +1,143 @@
+name: Qibla iOS IPA
+
+on:
+  push:
+    branches:
+      - qibla-app
+    paths:
+      - 'qibla-ios/**'
+      - '.github/workflows/qibla-ipa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-qibla:
+    runs-on: macos-15
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out qibla branch
+        uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+          ruby --version
+
+      - name: Vendor pinned Adhan Swift 1.5.0
+        working-directory: qibla-ios
+        run: |
+          set -euo pipefail
+          rm -rf Vendor/adhan-swift
+          mkdir -p Vendor
+          git clone --depth 1 --branch 1.5.0 https://github.com/batoulapps/adhan-swift.git Vendor/adhan-swift
+          test -f Vendor/adhan-swift/LICENSE
+          test -f Vendor/adhan-swift/Sources/PrayerTimes.swift
+          cp Vendor/adhan-swift/LICENSE ADHAN_LICENSE.txt
+
+      - name: Generate app icon
+        working-directory: qibla-ios
+        run: |
+          set -euo pipefail
+          swift generate_icon.swift Resources/Assets.xcassets/AppIcon.appiconset/QiblaIcon.png
+          test -s Resources/Assets.xcassets/AppIcon.appiconset/QiblaIcon.png
+
+      - name: Generate Xcode project
+        working-directory: qibla-ios
+        run: |
+          set -euo pipefail
+          gem install xcodeproj --no-document
+          ruby generate_project.rb
+          test -f Qibla.xcodeproj/project.pbxproj
+
+      - name: Validate Qibla math and prayer engine
+        working-directory: qibla-ios
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' adhan_sources < <(find Vendor/adhan-swift/Sources -name '*.swift' -print0)
+          swiftc "${adhan_sources[@]}" Sources/Models.swift Validation/main.swift -framework CoreLocation -o /tmp/qibla-validation
+          /tmp/qibla-validation
+
+      - name: Compile simulator build
+        working-directory: qibla-ios
+        run: >-
+          xcodebuild
+          -project Qibla.xcodeproj
+          -target Qibla
+          -configuration Debug
+          -sdk iphonesimulator
+          -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+          DEVELOPMENT_TEAM=
+
+      - name: Build unsigned Release app
+        working-directory: qibla-ios
+        run: >-
+          xcodebuild
+          -project Qibla.xcodeproj
+          -target Qibla
+          -configuration Release
+          -sdk iphoneos
+          -destination 'generic/platform=iOS'
+          CONFIGURATION_BUILD_DIR="$PWD/build"
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+          DEVELOPMENT_TEAM=
+
+      - name: Package unsigned IPA
+        working-directory: qibla-ios
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d build/Qibla.app
+          rm -rf artifacts Qibla-unsigned.ipa
+          mkdir -p artifacts/Payload
+          cp -R build/Qibla.app artifacts/Payload/
+          (cd artifacts && zip -qry ../Qibla-unsigned.ipa Payload)
+          test -s Qibla-unsigned.ipa
+
+      - name: Verify IPA
+        working-directory: qibla-ios
+        shell: bash
+        run: |
+          set -euo pipefail
+          plist="$(mktemp)"
+          trap 'rm -f "$plist"' EXIT
+          unzip -p Qibla-unsigned.ipa Payload/Qibla.app/Info.plist > "$plist"
+          /usr/bin/plutil -lint "$plist"
+          bundle_id="$(/usr/bin/plutil -extract CFBundleIdentifier raw -o - "$plist")"
+          display_name="$(/usr/bin/plutil -extract CFBundleDisplayName raw -o - "$plist")"
+          location_usage="$(/usr/bin/plutil -extract NSLocationWhenInUseUsageDescription raw -o - "$plist")"
+          test "$bundle_id" = "com.adamhaziq.qibla"
+          test "$display_name" = "Qibla"
+          test -n "$location_usage"
+          unzip -Z1 Qibla-unsigned.ipa | grep -Fxq "Payload/Qibla.app/Qibla"
+          unzip -Z1 Qibla-unsigned.ipa | grep -q "Assets.car"
+          echo "IPA verification PASS: $bundle_id / $display_name"
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Qibla-unsigned
+          path: qibla-ios/Qibla-unsigned.ipa
+          if-no-files-found: error
+
+      - name: Publish IPA back to branch
+        working-directory: qibla-ios
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f Qibla-unsigned.ipa
+          if git diff --cached --quiet; then
+            echo "IPA unchanged; nothing to commit."
+          else
+            git commit -m "build: publish Qibla unsigned IPA [skip ci]"
+            git push origin HEAD:qibla-app
+          fi
