@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require "fileutils"
 require "xcodeproj"
 
 root = File.expand_path(__dir__)
@@ -53,7 +54,7 @@ target.build_configurations.each do |config|
   settings["CODE_SIGN_STYLE"] = "Automatic"
   settings["SWIFT_EMIT_LOC_STRINGS"] = "NO"
   settings["ENABLE_USER_SCRIPT_SANDBOXING"] = "YES"
-}
+end
 
 project.save
 puts "Generated #{project_path}"
